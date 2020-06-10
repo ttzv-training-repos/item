@@ -32,7 +32,7 @@
 
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <form autocomplete="off" action="/action_page.php">
+        <form autocomplete="off" action="#">
           <div class="autocomplete" style="width:auto;">
           <input id="myInput" type="text" name="search" placeholder="Type here">  <!-- temporary placeholder for search engine-->
           </div>
@@ -58,6 +58,9 @@
               }
           }
     </script>
-    <%= yield %>
+    <div id="main"> <!-- this div must stay in order for sidenav to be able to push website contents -->
+      <%= yield %>
+    </div>
+    <%= javascript_include_tag 'application' %>
   </body>
 </html>
