@@ -29,6 +29,24 @@
         <i class="fa fa-bars"></i>
       </a>
     </div>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <form autocomplete="off" action="/action_page.php">
+          <div class="autocomplete" style="width:auto;">
+          <input id="myInput" type="text" name="search" placeholder="Type here">  <!-- temporary placeholder for search engine-->
+          </div>
+          <input type="submit">
+        </form>
+        <div>
+          <input type="button" value="Generate a table." onclick="generate_table()"> <!-- placeholder for JSON reading for now it just creates table via button-->
+          <table id="myTable">
+          </table>
+        </div>
+        <div id="mySidenavbtn">
+          <a id="open" onclick="openNav()">Users&nbsp;&#x21E8;</a>
+        </div>
+    </div>
     <script>
         /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
           function myFunction() {
