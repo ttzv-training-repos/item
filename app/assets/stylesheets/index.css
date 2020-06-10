@@ -3,11 +3,11 @@
   }
   body{
     font-family: Arial,Tahoma;
-    padding: 10px;
+    margin: 0;
     background-color: #f1f1f1;
   }
- /* This is done on floats can be further improved with flex */
-/* Left column */
+ 
+
 .leftcolumn {   
     float: left;
     width: 75%;
@@ -33,6 +33,7 @@
     background-color: white;
     padding: 20px;
     margin-top: 20px;
+    border-radius:  5px 5px 5px 5px;
   }
   
   /* Clear floats after the columns */
@@ -49,3 +50,17 @@
     background: #ddd;
     margin-top: 20px;
   }
+
+  @media screen and (max-width: 800px) {
+    .leftcolumn, .rightcolumn {   
+      width: 100%;
+      padding: 0;
+    }
+  }
+  
+  
+  @media screen and (max-width: 400px) {
+    .topnav a {
+      float: none;
+      width: 100%;
+    }
