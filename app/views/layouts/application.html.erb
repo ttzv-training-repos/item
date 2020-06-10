@@ -29,16 +29,17 @@
         <i class="fa fa-bars"></i>
       </a>
     </div>
+
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <form autocomplete="off" action="/action_page.php">
           <div class="autocomplete" style="width:auto;">
-          <input id="myInput" type="text" name="search" placeholder="Type here">
+          <input id="myInput" type="text" name="search" placeholder="Type here">  <!-- temporary placeholder for search engine-->
           </div>
           <input type="submit">
         </form>
         <div>
-          <input type="button" value="Generate a table." onclick="generate_table()">
+          <input type="button" value="Generate a table." onclick="generate_table()"> <!-- placeholder for JSON reading for now it just creates table via button-->
           <table id="myTable">
           </table>
         </div>
