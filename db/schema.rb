@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_16_074433) do
+ActiveRecord::Schema.define(version: 2020_06_18_081008) do
+
+  create_table "ad_user_headers", force: :cascade do |t|
+    t.string "name"
+    t.string "name_en"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "ad_users", force: :cascade do |t|
     t.string "dn"
@@ -50,6 +57,11 @@ ActiveRecord::Schema.define(version: 2020_06_16_074433) do
     t.string "msds-supportedencryptiontypes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "sn"
+    t.string "givenname"
+    t.string "displayname"
+    t.string "mail"
+    t.string "userprincipalname"
   end
 
 end

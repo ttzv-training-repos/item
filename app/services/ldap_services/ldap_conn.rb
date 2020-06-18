@@ -1,4 +1,3 @@
-
 module LdapServices
   class LdapConn
 

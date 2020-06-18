@@ -1,14 +1,17 @@
 module LdapServices
   class LdapUser
-    @ldap_attr = [
+    @@attr = [
       :dn,
       :objectclass,
       :cn,
+      :sn,
+      :givenname,
       :description,
       :distinguishedname,
       :instancetype,
       :whencreated,
       :whenchanged,
+      :displayname,
       :usncreated,
       #:memberof, #not needed for now
       :usnchanged,
@@ -35,9 +38,11 @@ module LdapServices
       :iscriticalsystemobject,
       #:dscorepropagationdata, #is an array
       :lastlogontimestamp,
-      :"msds-supportedencryptiontypes"]
+      :"msds-supportedencryptiontypes",
+      :mail,
+      :userprincipalname]
 
-      @ldap_utc_date_attr = [
+      @utc_date_attr = [
         :badpasswordtime, 
         :lastlogoff, 
         :lastlogon, 
@@ -46,27 +51,27 @@ module LdapServices
         :lockouttime, 
         :lastlogontimestamp]
 
-      @ldap_ymd_date_attr = [
+      @ymd_date_attr = [
         :whencreated,
         :whenchanged]
 
-      @ldap_sid_attr = :objectsid
+      @sid_attr = :objectsid
 
-      @ldap_guid_attr = :objectguid
+      @guid_attr = :objectguid
 
     def self.tohash(user)
       hash = Hash.new
-      @ldap_attr.each do |key|  
+      @@attr.each do |key|  
 
         value = user[key]
 
-        if @ldap_utc_date_attr.include?(key)
+        if @utc_date_attr.include?(key)
           value = self.reformat_utc_date!(user[key])
-        elsif @ldap_ymd_date_attr.include?(key)
+        elsif @ymd_date_attr.include?(key)
           value = self.reformat_ymd_date!(user[key])
-        elsif key == @ldap_sid_attr
+        elsif key == @sid_attr
           value = self.reformat_sid!(user)
-        elsif key == @ldap_guid_attr
+        elsif key == @guid_attr
           value = self.reformat_guid!(user[key])
         end
 

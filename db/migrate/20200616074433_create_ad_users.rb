@@ -4,11 +4,14 @@ class CreateAdUsers < ActiveRecord::Migration[6.0]
       t.string :dn 
       t.string :objectclass 
       t.string :cn
+      t.string :sn
+      t.string :givenname
       t.text :description
       t.string :distinguishedname
       t.string :instancetype
       t.date :whencreated
       t.date :whenchanged
+      t.string :displayname
       t.string :usncreated
       t.string :memberof
       t.string :usnchanged
@@ -36,6 +39,8 @@ class CreateAdUsers < ActiveRecord::Migration[6.0]
       t.string :dscorepropagationdata
       t.date :lastlogontimestamp
       t.string :"msds-supportedencryptiontypes"
+      t.string :mail
+      t.string :userprincipalname
       t.timestamps
     end
   end

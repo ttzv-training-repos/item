@@ -58,3 +58,6 @@ gem 'uuidtools', '~> 2.1', '>= 2.1.5'
 
 #ActiveDirectory gem
 gem 'active_directory'
+
+#cross-origin api requests
+gem 'rack-cors'
