@@ -52,3 +52,12 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+#parsing UUID's to human-readable format
+gem 'uuidtools', '~> 2.1', '>= 2.1.5'
+
+#ActiveDirectory gem
+gem 'active_directory'
+
+#cross-origin api requests
+gem 'rack-cors'
