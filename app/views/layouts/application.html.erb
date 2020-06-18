@@ -25,28 +25,31 @@
       <a href="#CBox">CBox</a>
       <a href="#settings">Settings</a>
       <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-      <a href="#sign_in" class="sign_in">Sign in</a>
         <i class="fa fa-bars"></i>
       </a>
+      <a href="#sign_in" class="sign_in">Sign in</a>
     </div>
-
     <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <form autocomplete="off" action="/action_page.php">
-          <div class="autocomplete" style="width:auto;">
-          <input id="myInput" type="text" name="search" placeholder="Type here">  <!-- temporary placeholder for search engine-->
-          </div>
-          <input type="submit">
-        </form>
-        <div>
-          <input type="button" value="Generate a table." onclick="generate_table()"> <!-- placeholder for JSON reading for now it just creates table via button-->
-          <table id="myTable">
-          </table>
+            
+           
+            <div class="left">
+                <div class="search">
+                    <input type="text" class="text" placeholder="Search...">
+                    <input type="button" class="searchBtn fa" value="&#xf002;">   
+                </div>
+                <div>
+                    <input type="button" onclick="requestUserData()" value="Request data"> <!-- this is a placeholder button -->
+                    <table id="myTable" class="table">
+                        <!-- here we'll put the values from json -->
+                    </table>
+                </div>
+
+            </div>
+            <div class="right" onclick="openNav()">                 <!-- Button is added to the sidenav itself to make it look nicer -->
+               <div id="icon" class="fa sidebtn">&#xf067;</div>     <!-- We are using the same button to open and close the sidenav -->
+            </div>
         </div>
-        <div id="mySidenavbtn">
-          <a id="open" onclick="openNav()">Users&nbsp;&#x21E8;</a>
-        </div>
-    </div>
+    
     <script>
         /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
           function myFunction() {
