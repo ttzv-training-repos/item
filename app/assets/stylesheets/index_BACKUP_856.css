@@ -51,4 +51,15 @@ body {
   .row, .navbar {   
     flex-direction: column;
   }
+<<<<<<< HEAD
 }
+=======
+  
+  
+  @media screen and (max-width: 400px) {
+    .topnav a {
+      float: none;
+      width: 100%;
+    }
+  }
+>>>>>>> master
