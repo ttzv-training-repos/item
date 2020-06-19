@@ -18,12 +18,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
   <body>
     <div class="topnav" id="myTopnav">
-      <a href="#home" class="active">Home</a>
+      <%= link_to 'Home', item_path %>
       <a href="#mailing">Mailing</a>
       <a href="#signatures">Signatures</a>
       <a href="#sms">SMS</a>
       <a href="#CBox">CBox</a>
       <a href="#settings">Settings</a>
+      <%= link_to 'Users', item_ad_users_path %>
       <a href="javascript:void(0);" class="icon" onclick="myFunction()">
       <a href="#sign_in" class="sign_in">Sign in</a>
         <i class="fa fa-bars"></i>
