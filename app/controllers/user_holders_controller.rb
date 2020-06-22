@@ -6,9 +6,9 @@ class UserHoldersController < ApplicationController
 
   def select
     user_id = session[:user_id]
-    p user_id
     if user_id.nil?
-      user_id = UserHolder.order(:user_id).first.user_id
+      first = UserHolder.order(user_id: :desc).first
+      user_id = first.user_id unless first.nil? 
       if user_id.nil? 
         user_id = 1
       else
@@ -24,8 +24,8 @@ class UserHoldersController < ApplicationController
     end
   end
 
-  def show
-    
+  def clear
+
   end
 
 end
