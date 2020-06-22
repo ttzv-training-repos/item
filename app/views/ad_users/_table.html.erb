@@ -4,6 +4,7 @@
     <thead>
         <tr>
             <% header_hash = AdUserHeader.en_headers %>
+            <th><%= header_hash["objectguid"] %></th>
             <th><%= header_hash["samaccountname"] %></th>
             <th><%= header_hash["givenname"] %></th>
             <th><%= header_hash["sn"] %></th>
@@ -15,6 +16,7 @@
         <tbody>
             <% AdUser.all.each do |user| %>
             <tr>
+                <td><%= user.objectguid%></td>
                 <td><%= user.samaccountname%></td>
                 <td><%= user.givenname%></td>
                 <td><%= user.sn%></td>
@@ -25,8 +27,36 @@
             <% end %>        
         </tbody>
 </table>
+<button id="devtest-selection">Test Selection</button>
 <script>
     $(document).ready( function () {
-        $('#ad_users').DataTable();
+        const dataTable = $('#ad_users').DataTable( {
+            "columnDefs": [
+                { "visible": false, "targets": 0 }
+            ]
+        } );
+        $('#ad_users').on( 'click', 'tr', function () {
+            $(this).toggleClass('selected');
+        } );
+        $('#devtest-selection').click( function () {
+            let data = dataTable.rows('.selected').data()
+            console.log(data);
+            let ids = [];
+            dataTable.rows('.selected').data().map( d => {
+                ids.push(d[0][0]);
+            })
+            if (ids.length > 0){
+                console.log({data: ids});
+                $.post("/item/ad_users/select", {users: ids}, function (data) {
+                    console.log("posted");
+                },
+                "json");
+            } else {
+                alert("No user selected");
+            }
+        } );
+
     } );
+
+
 </script>
