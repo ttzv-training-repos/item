@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'item/ad_users/all', to: 'item#all_users'
   get 'item/ad_users/reload', to: 'ad_users#reload'
   post 'item/ad_users/all', to: 'item#all_users_filtered'
-  post 'item/ad_users/select', to: 'user_holders#select'
+  post 'item/user_holders/select', to: 'user_holders#select'
+  post 'item/user_holders/clear', to: 'user_holders#clear'
   get 'item/user_holders', to: 'user_holders#index'
 end
