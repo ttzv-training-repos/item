@@ -7,22 +7,27 @@
     postPath - specify post path for AJAX post request, if not specified buttons for sending request wont be added, optional 
     -->
 <table id=<%=id%>>
-    <thead>
-        <tr>
-            <% headers.each do |k, v| %>
-            <th><%= v %></th>
-            <% end %>
-        </tr>
+    <%unless headers.empty?%>
+        <thead>
+            <tr>
+                <% headers.each do |k, v| %>
+                <th><%= v %></th>
+                <% end %>
+            </tr>
         </thead>
         <tbody>
-            <% content.each do |content_row| %>
-            <tr>
-                <% headers.each_key do |k| %>
-                <td><%= content_row[k] %></td>
-                <% end %>  
-            </tr>
-            <% end %>        
+            <% unless content.empty? %>
+                <% content = [content] %>
+                <% content.each do |content_row| %>
+                <tr>
+                    <% headers.each_key do |k| %>
+                    <td><%= content_row[k] %></td>
+                    <% end %>  
+                </tr>
+                <% end %>    
+            <% end %>    
         </tbody>
+    <% end %>
 </table>
 <% unless local_assigns[:postPath].nil? %>
     <%select_path = postPath + "/select"%>
