@@ -3,8 +3,8 @@
     headers - array of headers, also defines number of columns in table, required
     content - collection of content that should be rendered in table, required
     hidden - array of headers that should be present in table but hidden, optional
-    idKey - specifies key (that should be unique) which will be sent to backend to identify selected rows, if not present DataTable selection feature is turned off, optional
-    postPath - specify post path for AJAX post request, optional 
+    idKey - specifies key (that should be unique) which will be sent to backend to identify selected rows, if not specified first column will be treated as idKey, optional
+    postPath - specify post path for AJAX post request, if not specified buttons for sending request wont be added, optional 
     -->
 <table id=<%=id%>>
     <thead>
@@ -24,34 +24,53 @@
             <% end %>        
         </tbody>
 </table>
-<button id="devtest-selection">Test Selection</button>
+<% unless local_assigns[:postPath].nil? %>
+    <%select_path = postPath + "/select"%>
+    <%clear_path = postPath + "/clear"%>
+    <%btn_select_id = id + "-select"%>
+    <%btn_clear_id = id + "-clear"%>
+    <button id="<%=btn_select_id%>">Select</button>
+    <button id="<%=btn_clear_id%>">Clear</button>
+<% end %>
 <script>
+    <% unless local_assigns[:hidden].nil? %>
+       var colsToHide = <%= hidden.collect { |h| headers.keys.index(h) } %>
+    <% end %>
+
+    var dataTable;
     $(document).ready( function () {
-        const dataTable = $( <%=id%> ).DataTable( {
-            "columnDefs": [
-                { "visible": false, "targets": 0 }
-            ]
-        } );
-        $( <%=id%> ).on( 'click', 'tr', function () {
-            $(this).toggleClass('selected');
-        } );
-        $('#devtest-selection').click( function () {
-            let data = dataTable.rows('.selected').data()
-            console.log(data);
-            let ids = [];
-            dataTable.rows('.selected').data().map( d => {
-                ids.push(d[0]);
-            })
-            console.log(ids)
-            if (ids.length > 0){
-                console.log({data: ids});
-                $.post("/item/ad_users/select", {users: ids}, function (data) {
-                    console.log("posted");
-                },
-                "json");
-            } else {
-                alert("No user selected");
-            }
-        } );
+        dataTable = $( "#<%=id%>" ).DataTable();
+        dataTable.columns(colsToHide).visible(false);
+    });
+
+    $( "#<%=id%>" ).on( 'click', 'tr', function () {
+        $(this).toggleClass('selected');
+    });
+    
+    $("#<%=btn_select_id%>").click( function () {
+        let data = dataTable.rows('.selected').data()
+        console.log(data);
+        let id_index = 0;
+        <% unless local_assigns[:idKey].nil? %>
+            id_index = <%= headers.keys.index(idKey) %>
+        <% end %>
+        let ids = [];
+        dataTable.rows('.selected').data().map( d => {
+           ids.push(d[id_index]);
+        })
+        console.log(ids)
+        if (ids.length > 0){
+            console.log({data: ids});
+            $.post("<%=select_path%>", {users: ids}, function (data) {
+                console.log("posted");
+            },
+            "json");
+        } else {
+            alert("No user selected");
+        }
+    } );
+
+    $("#<%=btn_clear_id%>").click( function () {
+        $.post("<%=clear_path%>")
     } );
 </script>

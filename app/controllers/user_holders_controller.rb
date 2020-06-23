@@ -25,7 +25,8 @@ class UserHoldersController < ApplicationController
   end
 
   def clear
-
+    user_id = session[:user_id]
+    UserHolder.where(user_id: user_id).destroy_all
   end
 
 end
