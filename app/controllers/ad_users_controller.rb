@@ -3,6 +3,7 @@ class AdUsersController < ApplicationController
   def index
     @headers = AdUserHeader.en_headers
     @users = AdUser.all.limit(10)
+    @users = [@users] unless @users.is_a?(ActiveRecord::Relation)
     @hidden_ad_headers = AdUserHeader.hidden_ad_headers
   end
 

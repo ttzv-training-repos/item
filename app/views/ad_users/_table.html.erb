@@ -16,12 +16,11 @@
             </tr>
         </thead>
         <tbody>
-            <% unless content.empty? %>
-                <% content = [content] %>
+            <% unless content.empty? or content[0].nil? %>
                 <% content.each do |content_row| %>
                 <tr>
                     <% headers.each_key do |k| %>
-                    <td><%= content_row[k] %></td>
+                        <td><%= content_row[k] %></td>
                     <% end %>  
                 </tr>
                 <% end %>    
