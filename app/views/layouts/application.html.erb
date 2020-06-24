@@ -32,18 +32,8 @@
 
         <div id="mySidenav" class="sidenav">
             
-            <div class="left">
-                <div class="search">
-                    <input type="text" class="text" placeholder="Search...">
-                    <input type="button" class="searchBtn fa" value="&#xf002;">   
-                </div>
-                <div>
-                    <input type="button" onclick="requestUserData()" value="Request data"> <!-- this is a placeholder button -->
-                    <table id="myTable" class="table">
-                        <!-- here we'll put the values from json -->
-                    </table>
-                </div>
-
+            <div class="left"> 
+                <%= render partial: 'global_partials/table', :locals =>{id: "sidebar-min-table", :headers => AdUserHeader.minimized_headers, :content => AdUser.select(:displayname, :whencreated, :mail)} %>
             </div>
             <div class="right" onclick="navHandler()">                 <!-- Button is added to the sidenav itself to make it look nicer -->
                <div id="icon" class="fa sidebtn">&#xf067;</div>     <!-- We are using the same button to open and close the sidenav -->

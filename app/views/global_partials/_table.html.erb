@@ -37,44 +37,50 @@
     <button id="<%=btn_clear_id%>">Clear</button>
 <% end %>
 <script>
-    <% unless local_assigns[:hidden].nil? %>
-       var colsToHide = <%= hidden.collect { |h| headers.keys.index(h) } %>
-    <% end %>
+    function columnsToHide(){
+        let colsToHide = []
+        <% unless local_assigns[:hidden].nil? %>
+            colsToHide = <%= hidden.collect { |h| headers.keys.index(h) } %>
+        <% end %>
+        return colsToHide
+    }
 
-    var dataTable;
     $(document).ready( function () {
-        dataTable = $( "#<%=id%>" ).DataTable();
-        dataTable.columns(colsToHide).visible(false);
+        $( "#<%=id%>" ).DataTable();
     });
 
     $( "#<%=id%>" ).on( 'click', 'tr', function () {
         $(this).toggleClass('selected');
     });
     
-    $("#<%=btn_select_id%>").click( function () {
-        let data = dataTable.rows('.selected').data()
-        console.log(data);
-        let id_index = 0;
-        <% unless local_assigns[:idKey].nil? %>
-            id_index = <%= headers.keys.index(idKey) %>
-        <% end %>
-        let ids = [];
-        dataTable.rows('.selected').data().map( d => {
-           ids.push(d[id_index]);
-        })
-        console.log(ids)
-        if (ids.length > 0){
-            console.log({data: ids});
-            $.post("<%=select_path%>", {users: ids}, function (data) {
-                console.log("posted");
-            },
-            "json");
-        } else {
-            alert("No user selected");
-        }
-    } );
+    if ("<%= btn_select_id %>".length !== 0){
+        $("#<%=btn_select_id%>").click( function () {
+            let data = dataTable.rows('.selected').data()
+            console.log(data);
+            let id_index = 0;
+            <% unless local_assigns[:idKey].nil? %>
+                id_index = <%= headers.keys.index(idKey) %>
+            <% end %>
+            let ids = [];
+            dataTable.rows('.selected').data().map( d => {
+            ids.push(d[id_index]);
+            })
+            console.log(ids)
+            if (ids.length > 0){
+                console.log({data: ids});
+                $.post("<%=select_path%>", {users: ids}, function (data) {
+                    console.log("posted");
+                },
+                "json");
+            } else {
+                alert("No user selected");
+            }
+        } );
+    }
 
-    $("#<%=btn_clear_id%>").click( function () {
-        $.post("<%=clear_path%>")
-    } );
+    if ("<%= btn_clear_id %>".length !== 0 ){
+        $("#<%=btn_clear_id%>").click( function () {
+            $.post("<%=clear_path%>")
+        } );
+    }
 </script>
