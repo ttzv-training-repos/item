@@ -36,7 +36,7 @@
             </a>
         </div>
         <div class="cart-content" id="cart">
-            <%= render partial: 'global_partials/table', :locals =>{id: "sidebar-min-table", :headers => AdUserHeader.minimized_headers, :content => AdUser.select(:displayname, :whencreated, :mail)} %>
+            <%= render partial: 'user_holders/holder' %>
         </div>
 
         <div id="mySidenav" class="sidenav">

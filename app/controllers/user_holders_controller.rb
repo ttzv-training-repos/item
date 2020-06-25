@@ -1,14 +1,12 @@
 class UserHoldersController < ApplicationController
-  def index
+  def index #DRY!!! TEMPORARY
     user_id = session[:user_id]
-    p user_id
     selected_users = UserHolder.where(user_id: user_id).pluck(:objectguid)
-    @users = AdUser.joins("INNER JOIN user_holders ON ad_users.objectguid = user_holders.objectguid AND user_id = #{user_id}").pluck(:displayname)
+    @holder = AdUser.joins("INNER JOIN user_holders ON ad_users.objectguid = user_holders.objectguid AND user_id = #{user_id}").pluck(:displayname)
   end
 
   def select
     user_id = session[:user_id]
-    p user_id
     if user_id.nil?
       first = UserHolder.order(user_id: :desc).first
       user_id = first.user_id unless first.nil? 
