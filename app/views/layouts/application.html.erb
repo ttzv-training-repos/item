@@ -25,9 +25,18 @@
             <%= link_to 'Users', item_ad_users_path %>
             <%= link_to 'Cart(?)', item_user_holders_path %>
             <a href="#settings">Settings</a>
-            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <div class="cart">
+                <a  class="cartBtn" onclick="showCart()">
+                    <i class="fa fa-suitcase"></i>
+                    <span class="badge">1</span>
+                </a>
+            </div>
+            <a href="javascript:void(0);" class="icon" onclick="topbarShow()">
                 <i class="fa fa-bars"></i>
             </a>
+        </div>
+        <div class="cart-content" id="cart">
+            <%= render partial: 'global_partials/table', :locals =>{id: "sidebar-min-table", :headers => AdUserHeader.minimized_headers, :content => AdUser.select(:displayname, :whencreated, :mail)} %>
         </div>
 
         <div id="mySidenav" class="sidenav">
@@ -40,7 +49,6 @@
             </div>
         </div>
         
-        <!-- Use any element to open the sidenav -->
        
         <div id="main">
             <%= yield %>
