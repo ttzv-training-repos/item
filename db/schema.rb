@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2020_06_21_102631) do
     t.string "iscriticalsystemobject"
     t.string "dscorepropagationdata"
     t.date "lastlogontimestamp"
-    t.string "msds-supportedencryptiontypes"
+    t.string "msds-supportedencryptiontypes" 
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "sn"

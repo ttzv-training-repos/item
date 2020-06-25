@@ -25,32 +25,30 @@
             <%= link_to 'Users', item_ad_users_path %>
             <%= link_to 'Cart(?)', item_user_holders_path %>
             <a href="#settings">Settings</a>
-            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <div class="cart">
+                <a  class="cartBtn" onclick="showCart()">
+                    <i class="fa fa-suitcase"></i>
+                    <span class="badge">1</span>
+                </a>
+            </div>
+            <a href="javascript:void(0);" class="icon" onclick="topbarShow()">
                 <i class="fa fa-bars"></i>
             </a>
+        </div>
+        <div class="cart-content" id="cart">
+            <%= render partial: 'global_partials/table', :locals =>{id: "sidebar-min-table", :headers => AdUserHeader.minimized_headers, :content => AdUser.select(:displayname, :whencreated, :mail)} %>
         </div>
 
         <div id="mySidenav" class="sidenav">
             
-            <div class="left">
-                <div class="search">
-                    <input type="text" class="text" placeholder="Search...">
-                    <input type="button" class="searchBtn fa" value="&#xf002;">   
-                </div>
-                <div>
-                    <input type="button" onclick="requestUserData()" value="Request data"> <!-- this is a placeholder button -->
-                    <table id="myTable" class="table">
-                        <!-- here we'll put the values from json -->
-                    </table>
-                </div>
-
+            <div class="left"> 
+                <%= render partial: 'global_partials/table', :locals =>{id: "sidebar-min-table", :headers => AdUserHeader.minimized_headers, :content => AdUser.select(:displayname, :whencreated, :mail)} %>
             </div>
             <div class="right" onclick="navHandler()">                 <!-- Button is added to the sidenav itself to make it look nicer -->
                <div id="icon" class="fa sidebtn">&#xf067;</div>     <!-- We are using the same button to open and close the sidenav -->
             </div>
         </div>
         
-        <!-- Use any element to open the sidenav -->
        
         <div id="main">
             <%= yield %>

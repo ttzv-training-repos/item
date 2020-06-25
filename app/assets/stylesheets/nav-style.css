@@ -2,6 +2,9 @@
 .topnav {
     background-color: #333;
     overflow: hidden;
+    position: sticky;
+    left: 0;
+    top: 0;
   }
   
   /* Style the links inside the navigation bar */
@@ -26,6 +29,42 @@
     background-color: #4CAF50;
     color: white;
   }
+
+  .cart{
+    float: right;
+    overflow: hidden;
+  }
+
+  .cart .cartBtn{
+    border: 1px solid black;
+  }
+  .cart .badge {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    padding: 2px 5px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+  }
+
+  .cart-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 25%;
+    max-width: 750px;
+    max-height: 700px;
+    right: 0;
+    top: 49px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 2;
+    overflow-y: auto;
+  }
+
+
+  .show {display:block;}
+  
   
   /* Hide the link that should open and close the topnav on small screens */
   .topnav .icon {

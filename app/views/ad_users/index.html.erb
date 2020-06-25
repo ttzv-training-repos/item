@@ -1,2 +1,2 @@
-<%= render partial: 'table', :locals =>{id: "ad_users", :headers => @headers, :content => @users, :hidden => ""} %>
+<%= render partial: 'global_partials/table', :locals =>{id: "ad_users", :headers => @headers, :content => @users, :postPath => "user_holders", :idKey => "objectguid", :hidden => @hidden_ad_headers} %>
 <%= link_to 'Sync with LDAP', item_ad_users_reload_path %>
