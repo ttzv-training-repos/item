@@ -2,7 +2,8 @@ class UserHoldersController < ApplicationController
   def index
     user_id = session[:user_id]
     p user_id
-    @users = UserHolder.where(user_id: user_id).pluck(:content)
+    selected_users = UserHolder.where(user_id: user_id).pluck(:objectguid)
+    @users = AdUser.joins("INNER JOIN user_holders ON ad_users.objectguid = user_holders.objectguid AND user_id = #{user_id}").pluck(:displayname)
   end
 
   def select
@@ -19,10 +20,10 @@ class UserHoldersController < ApplicationController
       session[:user_id] = user_id
     end
     users = params[:users]
-    selected = UserHolder.where(user_id: user_id).pluck(:content)
+    selected = UserHolder.where(user_id: user_id).pluck(:objectguid)
     users.filter! { |u| !selected.include?(u) }
     if users.length > 0
-      users.each { |u| UserHolder.create({user_id: user_id, content: u}) }
+      users.each { |u| UserHolder.create({user_id: user_id, objectguid: u}) }
     end
   end
 
@@ -33,7 +34,7 @@ class UserHoldersController < ApplicationController
 
   def qty
     user_id = session[:user_id]
-    users = UserHolder.where(user_id: user_id).pluck(:content)
+    users = UserHolder.where(user_id: user_id).pluck(:objectguid)
     render :json => {qty: users.length}
   end
 

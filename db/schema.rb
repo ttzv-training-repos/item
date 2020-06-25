@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_21_102631) do
+ActiveRecord::Schema.define(version: 2020_06_25_125717) do
 
   create_table "ad_user_headers", force: :cascade do |t|
     t.string "name"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2020_06_21_102631) do
     t.string "iscriticalsystemobject"
     t.string "dscorepropagationdata"
     t.date "lastlogontimestamp"
-    t.string "msds-supportedencryptiontypes" 
+    t.string "msds-supportedencryptiontypes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "sn"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2020_06_21_102631) do
 
   create_table "user_holders", force: :cascade do |t|
     t.integer "user_id"
-    t.text "content"
+    t.text "objectguid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
