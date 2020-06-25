@@ -36,6 +36,7 @@
     <button id="<%=btn_select_id%>">Select</button>
     <button id="<%=btn_clear_id%>">Clear</button>
 <% end %>
+<%= javascript_include_tag 'user_holder' %>
 <script>
     function columnsToHide(){
         let colsToHide = []
@@ -70,18 +71,19 @@
             if (ids.length > 0){
                 console.log({data: ids});
                 $.post("<%=select_path%>", {users: ids}, function (data) {
-                    console.log("posted");
                 },
                 "json");
             } else {
                 alert("No user selected");
             }
+            reloadHolder();
         } );
     }
 
     if ("<%= btn_clear_id %>".length !== 0 ){
         $("#<%=btn_clear_id%>").click( function () {
             $.post("<%=clear_path%>")
+            reloadHolder();
         } );
     }
 

@@ -1,1 +1,10 @@
-<%= render partial: 'holder' %>
+<h1>Selected Users</h1>
+<ul id="entries">
+  <% unless @holder.nil? %>
+    <% @holder.each do |user| %>
+      <li>
+        <%= user %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

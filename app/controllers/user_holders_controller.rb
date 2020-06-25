@@ -1,6 +1,8 @@
 class UserHoldersController < ApplicationController
+
   def index #DRY!!! TEMPORARY
     user_id = session[:user_id]
+    user_id = 0 if user_id.nil?
     selected_users = UserHolder.where(user_id: user_id).pluck(:objectguid)
     @holder = AdUser.joins("INNER JOIN user_holders ON ad_users.objectguid = user_holders.objectguid AND user_id = #{user_id}").pluck(:displayname)
   end
@@ -34,6 +36,14 @@ class UserHoldersController < ApplicationController
     user_id = session[:user_id]
     users = UserHolder.where(user_id: user_id).pluck(:objectguid)
     render :json => {qty: users.length}
+  end
+
+  def content
+    user_id = session[:user_id]
+    user_id = 0 if user_id.nil?
+    selected_users = UserHolder.where(user_id: user_id).pluck(:objectguid)
+    holder = AdUser.joins("INNER JOIN user_holders ON ad_users.objectguid = user_holders.objectguid AND user_id = #{user_id}").pluck(:displayname)
+    render :json => {holder: holder}
   end
 
 end
