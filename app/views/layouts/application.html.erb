@@ -26,26 +26,24 @@
             <%= link_to 'Cart(?)', item_user_holders_path %>
             <a href="#settings">Settings</a>
             <div class="cart">
-                <a  class="cartBtn" onclick="showCart()">
+                <a class="cartBtn" onclick="showCart()">
                     <i class="fa fa-suitcase"></i>
                     <span class="badge">1</span>
                 </a>
             </div>
-            <a href="javascript:void(0);" class="icon" onclick="topbarShow()">
-                <i class="fa fa-bars"></i>
-            </a>
+
         </div>
         <div class="cart-content" id="cart">
-            <%= render partial: 'global_partials/table', :locals =>{id: "sidebar-min-table", :headers => AdUserHeader.minimized_headers, :content => AdUser.select(:displayname, :whencreated, :mail)} %>
+            <p>Some text</p>
         </div>
-
+        
         <div id="mySidenav" class="sidenav">
             
             <div class="left"> 
                 <%= render partial: 'global_partials/table', :locals =>{id: "sidebar-min-table", :headers => AdUserHeader.minimized_headers, :content => AdUser.select(:displayname, :whencreated, :mail)} %>
             </div>
-            <div class="right" onclick="navHandler()">                 <!-- Button is added to the sidenav itself to make it look nicer -->
-               <div id="icon" class="fa sidebtn">&#xf067;</div>     <!-- We are using the same button to open and close the sidenav -->
+            <div class="right" onclick="navHandler()">                 
+               <div id="icon" class="fa sidebtn">&#xf067;</div>     
             </div>
         </div>
         
