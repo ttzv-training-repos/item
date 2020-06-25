@@ -44,9 +44,10 @@
         <% end %>
         return colsToHide
     }
-
+    
+    var dataTable;
     $(document).ready( function () {
-        $( "#<%=id%>" ).DataTable();
+       dataTable = $( "#<%=id%>" ).DataTable();
     });
 
     $( "#<%=id%>" ).on( 'click', 'tr', function () {
