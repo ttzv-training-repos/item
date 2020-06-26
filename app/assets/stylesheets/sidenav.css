@@ -7,7 +7,7 @@
     left: -23%;
     position: fixed;
     z-index: 1;
-    top: 49px;
+    top: 48px;
     color: white;
     background-color: #333;
     transition: 0.5s;
@@ -24,7 +24,7 @@
 
   .sidenav .right{
     
-    flex: 5%;
+    flex: 6%;
     height: 100%;
     cursor: pointer;
     display: flex;
@@ -43,7 +43,7 @@
 
    .right .sidebtn {
     font-size: 200%;
-    color: #4CAF50;  
+    color: #ddd;  
   }
 
 
@@ -86,7 +86,7 @@
   #main {
     transition: margin-left .5s;
     margin-left: 2%;
-
+    overflow-x: auto;
   }
   
   /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
