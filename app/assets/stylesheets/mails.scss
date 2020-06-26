@@ -1,0 +1,36 @@
+// Place all the styles related to the mails controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.send-btn{
+    height: 40px;
+    width: 40px;
+}
+
+.message-control .static{
+    display: flex;
+    flex-direction: column;
+}
+
+.vars{
+    display: flex;
+    flex-direction: column;
+    background-color:rgb(184, 184, 184);
+    padding: 10px;
+}
+
+input[type=text]{
+    width: 150px;
+    height: 15px;
+    margin: 10px;
+}
+
+.mails-main{
+    margin: 20px;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgray;
+}
+

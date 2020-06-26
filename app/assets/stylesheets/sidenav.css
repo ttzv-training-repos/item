@@ -11,6 +11,7 @@
     color: rgb(114, 114, 114);
     background-color: #333;
     transition: 0.5s;
+    font-size: 10px;
   }
   
   .sidenav .left{
@@ -23,7 +24,6 @@
   }
 
   .sidenav .right{
-    
     flex: 5%;
     height: 100%;
     cursor: pointer;
