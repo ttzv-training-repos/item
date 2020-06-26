@@ -28,19 +28,19 @@
             <div class="cart">
                 <a class="cartBtn" onclick="showCart()">
                     <i class="fa fa-suitcase"></i>
-                    <span class="badge">1</span>
+                    <span class="badge"></span>
                 </a>
             </div>
 
         </div>
         <div class="cart-content" id="cart">
-            <p>Some text</p>
+            <%= render partial: 'global_partials/holder' %>
         </div>
         
         <div id="mySidenav" class="sidenav">
             
             <div class="left"> 
-                <%= render partial: 'global_partials/table', :locals =>{id: "sidebar-min-table", :headers => AdUserHeader.minimized_headers, :content => AdUser.select(:displayname, :whencreated, :mail)} %>
+                <%= render partial: 'global_partials/table', :locals =>{id: "sidebar-min-table", :headers => AdUserHeader.minimized_headers, :content => AdUser.select(:objectguid, :displayname, :whencreated, :mail), :hidden => Array.new.push("objectguid"), :postPath => "/item/user_holders", :idKey => "objectguid", :classes => "display compact"} %>
             </div>
             <div class="right" onclick="navHandler()">                 
                <div id="icon" class="fa sidebtn">&#xf067;</div>     

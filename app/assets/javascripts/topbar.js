@@ -8,7 +8,8 @@ function topbarShow() {
   }
 
 function showCart() {
-  document.getElementById("cart").classList.toggle("show");
+  let cart = document.getElementById("cart");
+  cart.classList.toggle("show");
 }
 
 // Close the dropdown menu if the user clicks outside of it

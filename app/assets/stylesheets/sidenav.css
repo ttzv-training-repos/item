@@ -7,8 +7,8 @@
     left: -23%;
     position: fixed;
     z-index: 1;
-    top: 48px;
-    color: white;
+    top: 49px;
+    color: rgb(114, 114, 114);
     background-color: #333;
     transition: 0.5s;
   }
