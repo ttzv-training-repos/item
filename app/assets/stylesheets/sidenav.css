@@ -8,7 +8,7 @@
     position: fixed;
     z-index: 1;
     top: 49px;
-    color: white;
+    color: rgb(114, 114, 114);
     background-color: #333;
     transition: 0.5s;
   }

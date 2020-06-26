@@ -42,7 +42,7 @@
         <div id="mySidenav" class="sidenav">
             
             <div class="left"> 
-                <%= render partial: 'global_partials/table', :locals =>{id: "sidebar-min-table", :headers => AdUserHeader.minimized_headers, :content => AdUser.select(:displayname, :whencreated, :mail)} %>
+                <%= render partial: 'global_partials/table', :locals =>{id: "sidebar-min-table", :headers => AdUserHeader.minimized_headers, :content => AdUser.select(:objectguid, :displayname, :whencreated, :mail), :hidden => Array.new.push("objectguid"), :postPath => "/item/user_holders", :idKey => "objectguid", :classes => "display compact"} %>
             </div>
             <div class="right" onclick="navHandler()">                 <!-- Button is added to the sidenav itself to make it look nicer -->
                <div id="icon" class="fa sidebtn">&#xf067;</div>     <!-- We are using the same button to open and close the sidenav -->

@@ -1,10 +1,10 @@
 class AdUsersController < ApplicationController
 
   def index
-    @headers = AdUserHeader.en_headers
-    @users = AdUser.all.limit(10)
+    @headers = AdUserHeader.en_headers.filter { |k, v| AdUserHeader.default_headers.include?(k) }
+    @users = AdUser.select(AdUserHeader.default_headers).limit(10)
     @users = [@users] unless @users.is_a?(ActiveRecord::Relation)
-    @hidden_ad_headers = AdUserHeader.hidden_ad_headers
+    @hidden_ad_headers = ["objectguid"]
   end
 
   def reload

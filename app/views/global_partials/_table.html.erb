@@ -5,8 +5,11 @@
     hidden - array of headers that should be present in table but hidden, optional
     idKey - specifies key (that should be unique) which will be sent to backend to identify selected rows, if not specified first column will be treated as idKey, optional
     postPath - specify post path for AJAX post request, if not specified buttons for sending request wont be added, optional 
+    classes - specify styling classes for this DataTable, optional
     -->
-<table id=<%=id%>>
+<% classes = "" if local_assigns[:classes].nil? %>
+
+<table id=<%=id%> class="<%=classes%>">
     <%unless headers.empty?%>
         <thead>
             <tr>
@@ -48,7 +51,15 @@
     
     var dataTable;
     $(document).ready( function () {
-       dataTable = $( "#<%=id%>" ).DataTable();
+       dataTable = $( "#<%=id%>" ).DataTable({
+           "columnDefs": [
+               {
+                   "targets": columnsToHide(),
+                   "visible": false,
+                   "searchable": true
+               }
+           ]
+       });
     });
 
     $( "#<%=id%>" ).on( 'click', 'tr', function () {

@@ -38,8 +38,20 @@ class AdUserHeader < ApplicationRecord
     ]
   end
 
+  def self.default_headers
+    [
+      "objectguid",
+      "displayname",
+      "samaccountname",
+      "mail",
+      "objectsid",
+      "whencreated"
+    ]
+  end
+
   def self.minimized_header_keys
-    min_arr = [
+    [
+      "objectguid",
       "whencreated",
       "displayname",
       "mail"
