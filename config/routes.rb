@@ -6,6 +6,11 @@ Rails.application.routes.draw do
   scope '/item' do
     resources :ad_users, only: [:index]
     resources :user_holders, only: [:index]
+    resources :signatures, only: [:index]
+    resources :sms_gateway, only: [:index]
+    resources :offices, only: [:index]
+    resources :c_box, only: [:index]
+    resources :settings, only: [:index]
     get '/ad_users/reload', to: 'ad_users#reload'
   end
 

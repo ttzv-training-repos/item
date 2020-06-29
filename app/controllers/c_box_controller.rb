@@ -1,0 +1,2 @@
+class CBoxController < ApplicationController
+end

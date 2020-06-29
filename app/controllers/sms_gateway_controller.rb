@@ -1,0 +1,2 @@
+class SmsGatewayController < ApplicationController
+end
