@@ -1,6 +1,6 @@
 module LdapServices
   class LdapHeaderSync
-    #this functionality will be moved to db/seeds.rb file later. It is used to define default translation tabel for all User LDAP values.
+    #this functionality will be moved to db/seeds.rb file later. It is used to define default translation table for all User LDAP values.
     def initialize
       @translation_en_hash = {
         dn: "Distinguished Name",

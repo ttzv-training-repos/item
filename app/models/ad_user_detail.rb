@@ -1,0 +1,2 @@
+class AdUserDetail < ApplicationRecord
+end

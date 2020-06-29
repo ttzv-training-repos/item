@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_25_125717) do
+ActiveRecord::Schema.define(version: 2020_06_29_100153) do
+
+  create_table "ad_user_details", force: :cascade do |t|
+    t.integer "office_id"
+    t.string "position"
+    t.integer "ad_user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ad_user_id"], name: "index_ad_user_details_on_ad_user_id"
+  end
 
   create_table "ad_user_headers", force: :cascade do |t|
     t.string "name"
@@ -23,14 +32,11 @@ ActiveRecord::Schema.define(version: 2020_06_25_125717) do
     t.string "dn"
     t.string "objectclass"
     t.string "cn"
-    t.string "sn"
-    t.string "givenname"
     t.text "description"
     t.string "distinguishedname"
     t.string "instancetype"
     t.date "whencreated"
     t.date "whenchanged"
-    t.string "displayname"
     t.string "usncreated"
     t.string "memberof"
     t.string "usnchanged"
@@ -58,8 +64,24 @@ ActiveRecord::Schema.define(version: 2020_06_25_125717) do
     t.string "dscorepropagationdata"
     t.date "lastlogontimestamp"
     t.string "msds-supportedencryptiontypes"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "sn"
+    t.string "givenname"
+    t.string "displayname"
     t.string "mail"
     t.string "userprincipalname"
+    t.index ["objectguid"], name: "index_ad_users_on_objectguid", unique: true
+  end
+
+  create_table "offices", force: :cascade do |t|
+    t.string "name"
+    t.string "name_2"
+    t.string "postalcode"
+    t.string "phonenumber"
+    t.string "phonenumber_2"
+    t.string "opt_info"
+    t.string "opt_info_2"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -71,4 +93,5 @@ ActiveRecord::Schema.define(version: 2020_06_25_125717) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "ad_user_details", "offices"
 end

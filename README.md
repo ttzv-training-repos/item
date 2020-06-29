@@ -4,13 +4,13 @@ By design all modules are backed by data from LDAP storage.
 
 Functionality:
 1)  Manage AD Users info
-        * Add optional info such as:
-            * Office location
-                * Office locations and their data can be entered from application interface independently from Users
-                * If LDAP field "cn" contains <b>name</b> of existing <b>office location</b> it can be bound automatically to User
+    * Add optional info such as:
+        * Office location
+            * Office locations and their data can be entered from application interface independently from Users
+            * If LDAP field "cn" contains <b>name</b> of existing <b>office location</b> it can be bound automatically to User
                     * Such synchronization is possible from Settings menu after initial sync with LDAP
-            * Phone number
-                * Allow multiple phone numbers
+        * Phone number
+            * Allow multiple phone numbers
 2)  Mailing
     * Allows sending mails to one or more selected Users
     * Allows configuration and selection of sender account and name

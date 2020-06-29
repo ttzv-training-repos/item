@@ -51,6 +51,7 @@ class AdUserHeader < ApplicationRecord
 
   def self.minimized_header_keys
     [
+      "id",
       "objectguid",
       "whencreated",
       "displayname",
