@@ -3,8 +3,9 @@
     background-color: #333;
     overflow: hidden;
     position: sticky;
-    left: 0;
     top: 0;
+    z-index: 2;
+    user-select: none;
   }
   
   /* Style the links inside the navigation bar */
@@ -26,7 +27,7 @@
   
   /* Add an active class to highlight the current page */
   .topnav a.active {
-    background-color: #4CAF50;
+    border-bottom:2px solid #4CAF50;
     color: white;
   }
 
@@ -36,13 +37,14 @@
   }
 
   .cart .cartBtn{
-    border: 1px solid black;
+    cursor: pointer;
   }
+  
   .cart .badge {
     position: absolute;
     bottom: 0px;
     right: 0px;
-    padding: 2px 5px;
+    padding: 0px 5px;
     border-radius: 50%;
     background: red;
     color: white;
@@ -52,16 +54,16 @@
     display: none;
     position: absolute;
     background-color: #f9f9f9;
+    border: 3px solid #333;
     width: 25%;
     max-width: 750px;
     max-height: 700px;
-    right: 0;
-    top: 49px;
+    right: 0px;
+    top: 48px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 2;
     overflow-y: auto;
   }
-
 
   .show {display:block;}
   
@@ -71,7 +73,6 @@
     display: none;
   }
 
-
   /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
 @media screen and (max-width: 600px) {
     .topnav a:not(:first-child) {display: none;}
@@ -79,6 +80,7 @@
       float: right;
       display: block;
     }
+    .topnav a.cart{display: none;}
   }
   
   /* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
@@ -86,12 +88,15 @@
     .topnav.responsive {position: relative;}
     .topnav.responsive a.icon {
       position: absolute;
-      right: 0;
-      top: 0;
+      right: 50px;
+      bottom: 0;
     }
     .topnav.responsive a {
       float: none;
       display: block;
       text-align: left;
+    }
+    .cart-content{
+      top: 500px;
     }
   }

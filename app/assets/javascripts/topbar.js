@@ -1,28 +1,22 @@
 function topbarShow() {
-    var x = document.getElementById("icon");
-    if (x.style.display === "block") {
-      x.style.display = "none";
-    } else {
-      x.style.display = "block";
-    }
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
   }
-function popupCart(){
-    var a = document.getElementById("cart");
-    if (a.style.display === "block") {
-        a.style.display = "none";
-      } else {
-        a.style.display = "block";
-      }
 }
+
 function showCart() {
   let cart = document.getElementById("cart");
   cart.classList.toggle("show");
 }
 
 // Close the dropdown menu if the user clicks outside of it
+/*
 window.onclick = function(event) {
   if (!event.target.matches('.cartBtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var dropdowns = document.getElementsByClassName("cart-content");
     var i;
     for (i = 0; i < dropdowns.length; i++) {
       var openDropdown = dropdowns[i];
@@ -32,3 +26,4 @@ window.onclick = function(event) {
     }
   }
 }
+*/
