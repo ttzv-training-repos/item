@@ -18,7 +18,7 @@
     <body>
         <div class="topnav" id="myTopnav">
             <%= link_to 'Home', item_path %>
-            <a href="#mailing">Mailing</a>
+            <%= link_to 'Mailing', item_mails_path %>
             <a href="#signatures">Signatures</a>
             <a href="#sms">SMS</a>
             <a href="#CBox">CBox</a>
@@ -28,7 +28,7 @@
             <div class="cart">
                 <a class="cartBtn" onclick="showCart()">
                     <i class="fa fa-suitcase"></i>
-                    <span class="badge">1</span>
+                    <span class="badge"></span>
                 </a>
             </div>
             <a class="icon fa fa-bars" onclick="topbarShow()"></a>
@@ -41,7 +41,7 @@
         <div id="mySidenav" class="sidenav">
             
             <div class="left"> 
-                <%= render partial: 'global_partials/table', :locals =>{id: "sidebar-min-table", :headers => AdUserHeader.minimized_headers, :content => AdUser.select(:displayname, :whencreated, :mail)} %>
+                <%= render partial: 'global_partials/table', :locals =>{id: "sidebar-min-table", :headers => AdUserHeader.minimized_headers, :content => AdUser.select(:objectguid, :displayname, :whencreated, :mail), :hidden => Array.new.push("objectguid"), :postPath => "/item/user_holders", :idKey => "objectguid", :classes => "display compact"} %>
             </div>
             <div class="right" onclick="navHandler()">                 
                <div id="icon" class="fa sidebtn">&#xf067;</div>     
@@ -49,7 +49,7 @@
         </div>
         
        
-        <div id="main">
+        <div id="main" class="main">
             <%= yield %>
         </div>
         

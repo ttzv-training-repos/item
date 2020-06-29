@@ -1,0 +1,67 @@
+<div class="mailing-page-content">
+    <div class="mails-main sub-fcn-block">
+        <div class="message-control">
+            <div class="static">
+                <label for="recipients">
+                    <div class="labeled-input normalized-transition">
+                        <div class="labeled-input-title">
+                            Recipients
+                        </div>
+                        <input type="text" name="" id="recipients">
+                    </div>
+                </label>
+                <div class="labeled-input normalized-transition">
+                    <label for="sender">Sender</label>
+                    <input type="text" name="" id="sender">
+                </div>
+                <button class="send-btn"><i class="fa fa-envelope" aria-hidden="true"></i></button>
+            </div>
+            <div class="variables">
+                This div should scroll if list is too big
+                <div class="labeled-input normalized-transition">
+                    <label for="var1">var1</label>
+                    <input type="text" name="var1" id="var1">
+                </div>   
+            </div>
+        </div>
+        <div class="message-content">
+            <div class="mail-topic sub-fcn-block-title">
+                <span>
+                    TOPIC
+                </span>
+            </div>
+            <div class="mail-text">
+                Long text going all the way to the bottom of the page, slightly lighter bg than surroundings
+            </div>
+        </div>
+    </div>
+    <div class="templates sub-fcn-block">
+        <div class="templates-title sub-fcn-block-title">
+            <span>
+                TEMPLATES
+            </span>
+        </div>
+        list with checkboxes, should scroll if too long, maybe a form?
+        <div class="template-list">
+            <div class="template-entry" id="">
+                <label for="t1">
+                    <div class="template-entry-content">
+                        <input type="checkbox" name="t1" id="t1">
+                        <div>Template1</div>
+                    </div>
+                </label>
+                <div class="template-controls">
+                    <div class="template-control-edit template-control normalized-transition">Edit</div>
+                    <div class="template-control-delete template-control normalized-transition">Delete</div>
+                </div>
+            </div>
+        </div>
+        <div class="templates-footer flex-center-column">
+            <span>Add new template</span>
+            <div class="flex-center-row full-height templates-footer-controls">
+                <div class="normalized-transition normalized-transition normalized-button full-hw flex-center-column">From file</div>
+                <div class="normalized-transition normalized-transition normalized-button full-hw flex-center-column">Create</div>
+            </div>
+        </div>
+    </div>
+</div>
