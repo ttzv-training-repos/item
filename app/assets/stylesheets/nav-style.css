@@ -27,7 +27,7 @@
   
   /* Add an active class to highlight the current page */
   .topnav a.active {
-    background-color: #4CAF50;
+    border-bottom:2px solid #4CAF50;
     color: white;
   }
 
@@ -59,7 +59,7 @@
     max-width: 750px;
     max-height: 700px;
     right: 0px;
-    top: 49px;
+    top: 48px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 2;
     overflow-y: auto;
@@ -80,6 +80,7 @@
       float: right;
       display: block;
     }
+    .topnav a.cart{display: none;}
   }
   
   /* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
@@ -87,12 +88,15 @@
     .topnav.responsive {position: relative;}
     .topnav.responsive a.icon {
       position: absolute;
-      right: 0;
-      top: 0;
+      right: 50px;
+      bottom: 0;
     }
     .topnav.responsive a {
       float: none;
       display: block;
       text-align: left;
+    }
+    .cart-content{
+      top: 500px;
     }
   }

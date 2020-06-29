@@ -1,11 +1,11 @@
 function topbarShow() {
-    var x = document.getElementById("icon");
-    if (x.style.display === "block") {
-      x.style.display = "none";
-    } else {
-      x.style.display = "block";
-    }
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
   }
+}
 
 function showCart() {
   document.getElementById("cart").classList.toggle("show");
