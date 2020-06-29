@@ -1,0 +1,201 @@
+// Place all the styles related to the mails controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.mailing-page-content{
+    margin: 20px;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightgray;
+    height: 89vh;
+}
+
+.send-btn{
+    height: 40px;
+    width: 40px;
+}
+
+.message-control{
+    height: 99%;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.message-control .static{
+    height: 20%;
+}
+
+.variables{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color:rgb(184, 184, 184);
+    padding: 10px;
+    overflow: hidden;
+    height: 80%;
+}
+
+input[type=text]:focus{
+    outline: none;
+}
+
+input[type=text]{
+    height: 15px;
+    background-color: whitesmoke;
+}
+
+.mails-main{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.message-content{
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.sub-fcn-block{
+    height: 100%;
+    padding: 10px;
+    border:5px solid rgb(184, 184, 184);
+}
+
+.sub-fcn-block-title{
+    border: 2px solid rgb(184, 184, 184);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
+.labeled-input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    padding: 2px;
+    border: 1px solid rgb(158, 158, 158);
+    font-size: small; 
+}
+
+.labeled-input:hover{
+    -webkit-box-shadow: -2px 3px 10px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: -2px 3px 10px 0px rgba(0,0,0,0.5);
+    box-shadow: -2px 3px 10px 0px rgba(0,0,0,0.5);
+}
+
+.mail-text{
+    background-color: whitesmoke;
+    padding: 2%;
+    height: 96%;
+    border: groove;
+}
+
+.template-list{
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+}
+
+.template-entry{
+    display: inline;
+    margin-bottom: 5px;
+    border: 1px solid rgb(184, 184, 184);
+    width: 100%;
+}
+
+
+.template-entry-content{
+    display: flex;
+    padding: 5px;
+}
+
+.template-entry-content:hover{
+    cursor: pointer;
+}
+
+.template-controls{
+    display: flex;
+    flex-direction: row;
+}
+
+.template-control-edit{
+    width: 80%;
+    text-align: center;
+    border: 1px solid green;
+    background-color: rgb(3, 250, 3);
+    opacity: 50%;
+}
+
+.template-control-delete{
+    width: 20%;
+    text-align: center;
+    border: 1px solid red;
+    background-color: rgb(255, 125, 125);
+    opacity: 50%;
+}
+
+.template-control:hover{
+    opacity: 100%;
+    cursor: pointer;
+}
+
+.normalized-transition{
+    transition: all ease-in-out, 0.25s;
+}
+
+
+.flex-center-row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-center-column{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.templates-footer{
+    height: 10%;
+    background-color: rgb(184, 184, 184);
+    justify-content: flex-start;
+    padding: 5px;
+}
+
+.full-height{
+    height: 100%;
+}
+
+.full-width{
+    width: 100%;
+}
+
+.full-hw{
+    height: 100%;
+    width: 100%;
+}
+
+.templates-footer-controls{
+    flex-grow: 1;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.normalized-button{
+    border: 1px solid black;
+    margin: 2px;
+    opacity: 50%;
+}
+
+.normalized-button:hover{
+    opacity: 100%;
+    cursor: pointer;
+}

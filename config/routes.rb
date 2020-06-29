@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   get 'item/user_holders/qty', to: 'user_holders#qty'
   get 'item/user_holders/content', to: 'user_holders#content'
   get 'item/user_holders', to: 'user_holders#index'
+  get 'item/mails', to: 'mails#index'
 end
