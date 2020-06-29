@@ -1,0 +1,11 @@
+<h1>All Offices</h1>
+
+<ul id="offices">
+  <% @offices.each do |office| %>
+    <li>
+      <%= office.name + " " + office.name_2 %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Add new office', new_office_path %>

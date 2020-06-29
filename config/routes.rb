@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :user_holders, only: [:index]
     resources :signatures, only: [:index]
     resources :sms_gateway, only: [:index]
-    resources :offices, only: [:index]
+    resources :offices, only: [:index, :new, :create, :edit, :update, :destroy]
     resources :c_box, only: [:index]
     resources :settings, only: [:index]
     get '/ad_users/reload', to: 'ad_users#reload'

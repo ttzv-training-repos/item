@@ -1,0 +1,41 @@
+<h1>Add new Office entry</h1>
+
+<%= form_for(@office) do |o| %>
+  <ul>
+  <% @office.errors.full_messages.each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+  </ul>
+  <p>
+    <%= o.label :name %><br />
+    <%= o.text_field :name %>
+  </p>
+  <p>
+    <%= o.label :name_2 %><br />
+    <%= o.text_field :name_2 %>
+  </p>
+  <p>
+    <%= o.label :postalcode %><br />
+    <%= o.text_field :postalcode %>
+  </p>
+  <p>
+    <%= o.label :phonenumber %><br />
+    <%= o.text_field :phonenumber %>
+  </p><p>
+    <%= o.label :phonenumber_2 %><br />
+    <%= o.text_field :phonenumber_2 %>
+  </p>
+  <p>
+    <%= o.label :opt_info %><br />
+    <%= o.text_field :opt_info %>
+  </p>
+  <p>
+    <%= o.label :opt_info_2 %><br />
+    <%= o.text_field :opt_info_2 %>
+  </p>
+  <p>
+    <%= o.submit %>
+  </p>
+<% end %>
+
+<%= link_to 'Back to Offices list', offices_path %>
