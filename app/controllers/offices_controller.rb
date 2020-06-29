@@ -9,7 +9,7 @@ class OfficesController < ApplicationController
   end
 
   def create
-    @office = Office.new(params(:office))
+    @office = Office.new(office_params)
     @office.save
     redirect_to offices_path
   end
