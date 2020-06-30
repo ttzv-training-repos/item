@@ -1,0 +1,24 @@
+<table id="ad_users" class="display compact">
+    <%unless @headers.empty?%>
+        <thead>
+            <tr>
+                <% @headers.each do |k, v| %>
+                    <th><%= v %></th>
+                <% end %>
+            </tr>
+        </thead>
+        <tbody>
+            <% @users.each do |user| %>
+                <tr>
+                    <% @headers.each_key do |k| %>
+                        <% if k == 'displayname'%>
+                            <td><%= link_to user[k], edit_ad_user_ad_user_details_path(user) %></td>
+                        <% else %>
+                            <td><%= user[k] %></td>
+                        <% end %>
+                    <% end %>  
+                </tr>
+            <% end %>      
+        </tbody>
+    <% end %>
+</table>

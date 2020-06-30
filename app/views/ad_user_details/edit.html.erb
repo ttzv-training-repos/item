@@ -1,0 +1,22 @@
+<h1>Edit User Details</h1>
+<%= render partial: 'ad_users/view_user' %>
+<%= form_for [@ad_user, @ad_user_detail], :url => ad_user_ad_user_details_path do |detail| %>
+  <ul>
+  <% @ad_user_detail.errors.full_messages.each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+  </ul>
+  <p>
+    <%= detail.label :office_id %><br />
+    <%= detail.text_field :office_id %>
+  </p>
+  <p>
+    <%= detail.label :position %><br />
+    <%= detail.text_field :position %>
+  </p>
+  <p>
+  <%= detail.submit %>
+  </p>
+<% end %>
+
+<br /><%= link_to 'Return', ad_users_path %>

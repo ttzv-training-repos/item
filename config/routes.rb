@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   get 'item', to: 'item#index'
   scope '/item' do
-    resources :ad_users, only: [:index]
+    resources :ad_users, only: [:index] do
+      resource :ad_user_details
+    end
     resources :user_holders, only: [:index]
     resources :signatures, only: [:index]
     resources :sms_gateway, only: [:index]
