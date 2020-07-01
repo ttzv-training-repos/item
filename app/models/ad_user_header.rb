@@ -40,7 +40,6 @@ class AdUserHeader < ApplicationRecord
 
   def self.default_headers
     [
-      ""
       "dn",
       "objectguid",
       "displayname",
