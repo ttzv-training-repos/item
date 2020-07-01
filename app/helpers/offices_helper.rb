@@ -4,6 +4,8 @@ module OfficesHelper
     params.require(:office)
     .permit(:name,
             :name_2,
+            :location,
+            :location_2,
             :postalcode,
             :phonenumber,
             :phonenumber_2,

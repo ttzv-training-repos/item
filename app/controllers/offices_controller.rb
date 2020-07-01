@@ -14,4 +14,17 @@ class OfficesController < ApplicationController
     redirect_to offices_path
   end
 
+  def edit
+    @office = Office.find(params[:id])
+  end
+
+  def update
+    @office = Office.find(params[:id]).update(office_params)
+    redirect_to offices_path
+  end
+
+  def destroy
+    Office.find(params[:id]).destroy
+  end
+
 end

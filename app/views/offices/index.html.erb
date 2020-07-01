@@ -3,7 +3,9 @@
 <ul id="offices">
   <% @offices.each do |office| %>
     <li>
-      <%= office.name + " " + office.name_2 %>
+      <%=office.values_to_s %>
+      <%= link_to 'Edit', edit_office_path(office) %>
+      <%= link_to 'Delete', office_path(office), method: :delete, data: {confirm: 'Are you sure you want to delete this record?'} %>
     </li>
   <% end %>
 </ul>
