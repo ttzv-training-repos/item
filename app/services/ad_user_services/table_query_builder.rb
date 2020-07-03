@@ -1,10 +1,6 @@
 module AdUserServices
-  class TableHeaderBuilder
-    #In future this class will allow to customize headers of a table visible in AdUsers index view and optimize SQL used
-    #to select data.
-    #Additionaly it will provide an easy way to change language of headers to different localization.
-    attr_accessor :headers, :alias_hash
-
+  class TableQueryBuilder
+    
     def initialize(columns_and_tables_hash)
       @tables_columns_hash = columns_and_tables_hash
       database_tables = ActiveRecord::Base.connection.tables
@@ -12,8 +8,11 @@ module AdUserServices
         raise Exception.new "Table #{table} does not exist" unless database_tables.include?(table.to_s)
         all_given_columns_exist_in_table?(table)
       end
+      @localized = Hash.new
     end
     
+    public
+
     def selected_data
       @headers = Array.new
       @alias_hash = Hash.new
@@ -30,11 +29,23 @@ module AdUserServices
       selection
     end
 
+    def localized_hash(lang)
+      if lang == :en
+        @tables_columns_hash.keys.each do |table|
+          headers_model = "#{ActiveSupport::Inflector.singularize(table)}_headers".classify.constantize
+          @localized = find_translations_for_headers(headers_model, table)
+        end
+      end
+      @localized
+    end
+    
+    private
+
     def build_with_alias(table, column)
       col_alias = create_alias(table, column)
       @headers << col_alias
-      @alias_hash.merge!( {table: table, column: column, alias: col_alias} )
-      selection = "#{table}.#{column} as #{col_alias}"
+      @alias_hash.merge!( {table => {col_alias => column}} )
+      "#{table}.#{column} as #{col_alias}"
     end
 
     def build_as_is(table, column)
@@ -49,25 +60,26 @@ module AdUserServices
     end
 
     def all_given_columns_exist_in_table?(table)
-      result = @tables_columns_hash[table] - ActiveRecord::Base.connection.columns(table).collect {|c| c.name}
-      unless result.empty?
-        raise Exception.new "Columns #{result} are not present in table #{table}"
+      columns = @tables_columns_hash[table] - ActiveRecord::Base.connection.columns(table).collect {|c| c.name}
+      unless columns.empty?
+        raise Exception.new "Columns #{columns} are not present in table #{table}"
       end
     end
-
-    def localized_hash(lang)
-      localized = Hash.new
-      if lang == :en
-        @tables_columns_hash.keys.each do |table|
-          table = ActiveSupport::Inflector.singularize(table)
-          headers_model = "#{table}_headers".classify.constantize
-          @headers.each do |entry|
-            translation = headers_model.find_by(name: entry)
-            localized.merge!({ entry => translation.name_en }) unless translation.nil?
-          end
+    
+    def find_translations_for_headers(headers_model, fallback_table)
+      found_translations = []
+      @headers.each do |entry|
+        translation = headers_model.find_by(name: entry)
+        if translation.nil?  
+          translation = headers_model.find_by(name: @alias_hash[fallback_table][entry]) unless @alias_hash[fallback_table].nil?
+        end
+        unless translation.nil?
+          @localized.merge!({ entry => translation.name_en }) 
+          found_translations << entry
         end
       end
-      localized
+      @headers -= found_translations
+      @localized
     end
 
   end
