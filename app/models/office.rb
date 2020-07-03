@@ -6,5 +6,9 @@ class Office < ApplicationRecord
     self.as_json.values.join(", ")
   end
 
+  def display_office_info
+    values_to_s
+  end
+
 
 end

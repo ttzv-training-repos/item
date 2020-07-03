@@ -1,0 +1,3 @@
+class OfficeHeader < ApplicationRecord
+
+end

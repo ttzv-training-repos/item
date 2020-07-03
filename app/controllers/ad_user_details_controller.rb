@@ -14,5 +14,12 @@ class AdUserDetailsController < ApplicationController
     @ad_user_detail.update(ad_user_detail_params)
     redirect_to ad_users_path
   end
+  
+  def create
+    @ad_user_detail = AdUserDetail.create(ad_user_id: params[:ad_user_id])
+    @ad_user_detail.update(ad_user_detail_params)
+    @ad_user_detail.save
+    redirect_to ad_users_path
+  end
 
 end

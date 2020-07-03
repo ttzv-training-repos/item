@@ -1,5 +1,4 @@
 class AdUserHeader < ApplicationRecord
-
   def self.en_headers
     headers = Hash.new
     AdUserHeader.pluck(:name, :name_en).each { |entry| headers.merge!(entry.first => entry.last) }
@@ -46,7 +45,10 @@ class AdUserHeader < ApplicationRecord
       "samaccountname",
       "mail",
       "objectsid",
-      "whencreated"
+      "whencreated",
+      "position",
+      "cityname",
+      "cityname_2"
     ]
   end
 

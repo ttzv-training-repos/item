@@ -23,5 +23,9 @@ Rails.application.routes.draw do
     get '/content', to: 'user_holders#content'
   end
 
+  scope 'item/settings' do
+    get '/autobind', to: 'settings#run_autobinder', as: 'autobind'
+  end
+
   resources :mails, only: [:index]
 end
