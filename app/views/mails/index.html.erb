@@ -43,22 +43,19 @@
         </div>
         list with checkboxes, should scroll if too long, maybe a form?
         <div class="template-list">
-            <div class="template-entry" id="">
-                <label for="t1">
-                    <div class="template-entry-content">
-                        <input type="checkbox" name="t1" id="t1">
-                        <div>Template1</div>
-                    </div>
-                </label>
-                <div class="template-controls">
-                    <div class="template-control-edit template-control normalized-transition">Edit</div>
-                    <div class="template-control-delete template-control normalized-transition">Delete</div>
-                </div>
-            </div>
+            <% unless @templates.empty? %>
+                <% @templates.each do |template| %>
+                    <%= render partial: 'template_entry', locals: {id: template.name} %>
+                <% end %>
+            <% end %>    
         </div>
         <div class="templates-footer flex-center-column">
             <span>Add new template</span>
             <div class="flex-center-row full-height templates-footer-controls">
+            <%= form_with(url: {action: :upload}, multipart: true) do %>
+                <%= file_field_tag 'templates[]', multiple: true %>
+                <%= submit_tag %>
+            <% end %>
                 <div class="normalized-transition normalized-transition normalized-button full-hw flex-center-column">From file</div>
                 <div class="normalized-transition normalized-transition normalized-button full-hw flex-center-column">Create</div>
             </div>

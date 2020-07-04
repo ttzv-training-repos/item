@@ -28,4 +28,8 @@ Rails.application.routes.draw do
   end
 
   resources :mails, only: [:index]
+
+  scope 'item/mails' do
+    post '/upload', to: 'mails#upload', as: 'mails_upload'
+  end
 end
