@@ -58,8 +58,8 @@ ad_user_detail_header_seed_hash = {
 }
 
 office_header_seed_hash = {
-  name: "Name",
-  name_2: "Name cont.",
+  name: "Office Name",
+  name_2: "Office Name cont.",
   location: "Location",
   location_2: "Location cont.",
   postalcode: "Postal code",
@@ -83,3 +83,10 @@ localized_headers(ad_user_header_seed_hash).each { |entry| AdUserHeader.create(e
 localized_headers(ad_user_detail_header_seed_hash).each { |entry| AdUserDetailHeader.create(entry)}
 localized_headers(office_header_seed_hash).each { |entry| OfficeHeader.create(entry)}
 
+default_template_tag_seed = [
+  [name: "mailtag-topic"],
+  [name: "mailtag-login"],
+  [name: "mailtag-password"]
+]
+
+default_template_tag_seed.each { |entry| TemplateTag.create(entry) }
