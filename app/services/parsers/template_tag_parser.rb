@@ -26,6 +26,11 @@ module Parsers
         raise "No such tag exists: #{name}"
       end
     end
+
+    def find_tags
+      matches = @template.scan(/(?:<|<\/)mailtag-\w+>/)
+      validate(matches).collect { |m| strip(m) }
+    end
     
     private
     
@@ -35,5 +40,28 @@ module Parsers
       {begin: tag_begin, end: tag_end}
     end
 
+    def validate(tags)
+      tags.filter.with_index do |t, i|
+        if i.even?
+          is_a_pair?(tags[i], tags[i+1])
+        end
+      end
+    end
+
+    def is_opening_tag?(tag)
+      !tag.include?('/') and tag[0] == '<'
+    end
+
+    def is_closing_tag?(tag)
+      tag[0..1] == '</'
+    end
+
+    def is_a_pair?(tag_open, tag_end)
+      is_opening_tag?(tag_open) and is_closing_tag?(tag_end) and strip(tag_open) == strip(tag_end)
+    end
+
+    def strip(tag)
+      tag.gsub(/[<\/>]/, '')
+    end
   end
 end
