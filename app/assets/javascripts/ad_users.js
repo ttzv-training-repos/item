@@ -3,10 +3,7 @@ $(document).ready( function () {
     dataTable = $( "#ad_users" ).DataTable({
         select: true
     });
-    
 });
-
-
 
 $('#users-select').click(handleSelection)
 $('#users-clear').click(handleDeselection)
