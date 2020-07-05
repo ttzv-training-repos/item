@@ -1,5 +1,5 @@
+let templateData = null
 $(document).ready( function () {
-    let templateData = null
     $.get("/item/mails/templates_data", function (data) {
         console.log("response")
         console.log(data)
@@ -7,12 +7,9 @@ $(document).ready( function () {
     });
     $('.template-entry-content').click(function (entry) {
         let selectedTemplate = this.getAttribute('data-template-id');
-        console.log(selectedTemplate);
-        templateContent = templateData[selectedTemplate].content;
-        templateTags = templateData[selectedTemplate].tags;
-        setMessageContent(templateContent);
-        renderInputsForTemplateTags(templateTags);
+        changeToTemplateView(selectedTemplate);
     });
+
 });
 
 function setMessageContent(content) {
@@ -21,10 +18,10 @@ function setMessageContent(content) {
 }
 
 function renderInputsForTemplateTags(tags){
-    let varialbeInputList = document.querySelector('.variables')
-    varialbeInputList.innerHTML = ''
+    let variableInputList = document.querySelector('.variables')
+    variableInputList.innerHTML = ''
     tags.forEach(tag => {
-        varialbeInputList.innerHTML += variableInputHtml(tag)
+        variableInputList.innerHTML += variableInputHtml(tag)
     })
 }
 
@@ -35,5 +32,22 @@ function variableInputHtml(id){
                 <input type="text" name="${id}" id="${id}">
             </div>
         `;
+}
+
+function changeToTemplateView(selectedTemplate) {
+    console.log(selectedTemplate);
+    templateContent = templateData[selectedTemplate].content;
+    templateTags = templateData[selectedTemplate].tags;
+    setMessageContent(templateContent);
+    renderInputsForTemplateTags(templateTags);
+    templateTags.forEach(tag => { attachListenerToInput(tag) });
+}
+
+function attachListenerToInput(inputIdTag) {
+    let $input = $(`#${inputIdTag}`)
+    $input.on('input', function() {
+        var $str = $input.val()
+        $(inputIdTag).text($str)
+    });
 }
 

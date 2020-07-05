@@ -46,15 +46,15 @@
             <% end %>    
         </div>
         <div class="templates-footer flex-center-column">
-            <span>Add new template</span>
-            <div class="flex-center-row full-height templates-footer-controls">
-            <%= form_with(url: {action: :upload}, multipart: true) do %>
-                <%= file_field_tag 'templates[]', multiple: true %>
-                <%= submit_tag %>
-            <% end %>
-                <div class="normalized-transition normalized-transition normalized-button full-hw flex-center-column">From file</div>
-                <div class="normalized-transition normalized-transition normalized-button full-hw flex-center-column">Create</div>
-            </div>
+            <fieldset>
+                <legend>Add templates</legend>
+                <div class="flex-center-row full-height templates-footer-controls">
+                    <%= form_with(url: {action: :upload}, multipart: true) do %>
+                        <%= file_field_tag 'templates[]', multiple: true %>
+                        <%= submit_tag %>
+                    <% end %>
+                </div>
+            </fieldset>
         </div>
     </div>
 </div>
