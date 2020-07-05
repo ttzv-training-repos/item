@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :offices, only: [:index, :new, :create, :edit, :update, :destroy]
     resources :c_box, only: [:index]
     resources :settings, only: [:index]
+    resources :mails, only: [:index]
     get '/ad_users/reload', to: 'ad_users#reload'
   end
 
@@ -27,9 +28,8 @@ Rails.application.routes.draw do
     get '/autobind', to: 'settings#run_autobinder', as: 'autobind'
   end
 
-  resources :mails, only: [:index]
-
   scope 'item/mails' do
     post '/upload', to: 'mails#upload', as: 'mails_upload'
+    get '/templates_data', to: 'mails#templates_data'
   end
 end

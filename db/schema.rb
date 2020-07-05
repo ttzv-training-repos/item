@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_04_125313) do
+ActiveRecord::Schema.define(version: 2020_07_05_093559) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -125,6 +125,15 @@ ActiveRecord::Schema.define(version: 2020_07_04_125313) do
     t.string "location_2"
   end
 
+  create_table "template_taggings", force: :cascade do |t|
+    t.integer "template_id", null: false
+    t.integer "template_tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["template_id"], name: "index_template_taggings_on_template_id"
+    t.index ["template_tag_id"], name: "index_template_taggings_on_template_tag_id"
+  end
+
   create_table "template_tags", force: :cascade do |t|
     t.string "name"
     t.string "bound_field"
@@ -139,6 +148,7 @@ ActiveRecord::Schema.define(version: 2020_07_04_125313) do
     t.string "applies_to"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_templates_on_name", unique: true
   end
 
   create_table "user_holders", force: :cascade do |t|
@@ -150,4 +160,6 @@ ActiveRecord::Schema.define(version: 2020_07_04_125313) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "ad_user_details", "offices"
+  add_foreign_key "template_taggings", "template_tags"
+  add_foreign_key "template_taggings", "templates"
 end
