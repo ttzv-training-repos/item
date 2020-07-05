@@ -38,6 +38,8 @@ function changeToTemplateView(selectedTemplate) {
     console.log(selectedTemplate);
     templateContent = templateData[selectedTemplate].content;
     templateTags = templateData[selectedTemplate].tags;
+    templateTitle = templateData[selectedTemplate].title;
+    setTitle(templateTitle);
     setMessageContent(templateContent);
     renderInputsForTemplateTags(templateTags);
     templateTags.forEach(tag => { attachListenerToInput(tag) });
@@ -49,5 +51,9 @@ function attachListenerToInput(inputIdTag) {
         var $str = $input.val()
         $(inputIdTag).text($str)
     });
+}
+
+function setTitle(title) {
+    $('#topic').text(title)
 }
 

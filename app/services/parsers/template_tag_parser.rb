@@ -1,13 +1,16 @@
 module Parsers
   class TemplateTagParser
-
     attr_accessor :template
 
     def initialize(template)
+      
       @tags = TemplateTag.pluck(:name)
       @template = template
     end
-    
+
+    def self.MAIL_TOPIC_TAG
+      "mailtag-topic"
+    end
 
     def swap(name, value)
       if @tags.include?(name)
@@ -23,13 +26,18 @@ module Parsers
         tag = as_tag(name)
         return @template.scan(/(?<=#{tag[:begin]})(.*?)(?=#{tag[:end]})/)
       else
-        raise "No such tag exists: #{name}"
+        return ''
       end
     end
 
     def find_tags
       matches = @template.scan(/(?:<|<\/)mailtag-\w+>/)
       validate(matches).collect { |m| strip(m) }
+    end
+
+    def destroy_tag_with_content(name)
+      tag = as_tag(name)
+      @template.gsub!(/#{tag[:begin]}(.*?)#{tag[:end]}/, '')
     end
     
     private
