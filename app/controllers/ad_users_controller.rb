@@ -9,7 +9,8 @@ class AdUsersController < ApplicationController
         "objectguid",
         "samaccountname",
         "mail",
-        "dn"
+        "dn",
+        "whencreated"
       ],
       ad_user_details: [
         "position"
