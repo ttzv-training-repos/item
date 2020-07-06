@@ -4,11 +4,7 @@ class MailsController < ApplicationController
   def upload
     uploaded_files = params[:templates]
     uploaded_files.each do |file|
-      template = Template.find_or_create_by(name: strip_extension(file.original_filename))
-      template.update(process_template(file))
-      template.template_file.purge if template.template_file.attached?
-      template.template_file.attach(file)
-      associate_tags(template)
+      process_template(file)
     end
     respond_to do |format|
       format.js {render inline: "location.reload();" }

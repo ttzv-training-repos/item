@@ -9,7 +9,7 @@ module Parsers
     end
 
     def self.MAIL_TOPIC_TAG
-      "mailtag-topic"
+      "itemtag-mail-topic"
     end
 
     def swap(name, value)
@@ -31,13 +31,17 @@ module Parsers
     end
 
     def find_tags
-      matches = @template.scan(/(?:<|<\/)mailtag-\w+>/)
+      matches = @template.scan(/(?:<|<\/)itemtag-\w+-\w+>/)
       validate(matches).collect { |m| strip(m) }
     end
 
     def destroy_tag_with_content(name)
       tag = as_tag(name)
       @template.gsub!(/#{tag[:begin]}(.*?)#{tag[:end]}/, '')
+    end
+
+    def tag_type(name)
+      name.scan(/(?<=-)(.*?)(?=-)/).flatten[0]
     end
     
     private

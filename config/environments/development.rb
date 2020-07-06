@@ -60,5 +60,6 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  #Helps with SQLite being locked on multiple async ActiveJobs (related with ActiveStorage)
   config.active_job.queue_adapter = :inline
 end

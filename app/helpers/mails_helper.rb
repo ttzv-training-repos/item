@@ -9,18 +9,23 @@ module MailsHelper
   end
 
   def process_template(file)
+    template = Template.find_or_create_by(name: strip_extension(file.original_filename))
+
     parser = Parsers::TemplateTagParser.new(File.read(file))
     title = parser.value(Parsers::TemplateTagParser.MAIL_TOPIC_TAG)
     title = title[0][0] unless title.empty?
-    parser.destroy_tag_with_content("mailtag-topic")
+    parser.destroy_tag_with_content(Parsers::TemplateTagParser.MAIL_TOPIC_TAG)
     File.open(file.tempfile, 'w') { |f| f.write(parser.template) }
-    {title: title}
+    template.update(title: title)
+    template.template_file.purge if template.template_file.attached?
+    template.template_file.attach(file)
+    associate_tags(template, parser)
   end
 
-  def associate_tags(template)
-    parser = Parsers::TemplateTagParser.new(template.template_file.open { |f| File.read(f) })
+  def associate_tags(template, parser)
     parser.find_tags.each do |tag|
-      template_tag = TemplateTag.find_by(name: tag)
+      type = parser.tag_type(tag)
+      template_tag = TemplateTag.find_or_create_by(name: tag, tagtype: type)
       TemplateTagging.upsert(template_id: template.id, template_tag_id: template_tag.id)
     end
   end
