@@ -6,10 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-AdUserHeader.destroy_all
-AdUserDetailHeader.destroy_all
-OfficeHeader.destroy_all
-
 ad_user_header_seed_hash = {
   dn: "Distinguished Name",
   objectclass: "Object Class",
@@ -79,14 +75,19 @@ def localized_headers(header_hash)
   data
 end
 
+AdUserHeader.destroy_all
+AdUserDetailHeader.destroy_all
+OfficeHeader.destroy_all
+
 localized_headers(ad_user_header_seed_hash).each { |entry| AdUserHeader.create(entry)}
 localized_headers(ad_user_detail_header_seed_hash).each { |entry| AdUserDetailHeader.create(entry)}
 localized_headers(office_header_seed_hash).each { |entry| OfficeHeader.create(entry)}
 
 default_template_tag_seed = [
-  [name: "mailtag-topic"],
-  [name: "mailtag-login"],
-  [name: "mailtag-password"]
+  [name: "itemtag-mail-topic", tagtype: "mail"],
+  [name: "itemtag-mail-login", tagtype: "mail"],
+  [name: "itemtag-mail-password", tagtype: "mail"]
 ]
 
+TemplateTag.destroy_all
 default_template_tag_seed.each { |entry| TemplateTag.create(entry) }
