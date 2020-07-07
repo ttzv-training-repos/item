@@ -4,11 +4,5 @@
     <%= render partial: 'ad_users_table' %>
 </div>
 
-<% if false %>
-<%= render partial: 'global_partials/table', :locals =>{id: "ad_users", :headers => @headers, :content => @users, :postPath => "user_holders", :idKey => "objectguid", :hidden => @hidden_ad_headers, :classes => "display" } %>
-<%= link_to 'Rebuild Users table', ad_users_reload_path, data: {confirm: 'Are you sure you want to rebuild whole Users table?'} %>
-<% end %>
-
-
 <button class="submit-button" id="users-select">Select Users</button>
 <button class="submit-button" id="users-clear">Deselect all Users</button>
