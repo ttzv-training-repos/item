@@ -17,12 +17,14 @@ Rails.application.routes.draw do
     get '/ad_users/reload', to: 'ad_users#reload'
   end
 
-  scope '/item/user_holders' do
-    post '/select', to: 'user_holders#select'
-    post '/clear', to: 'user_holders#clear'
-    get '/qty', to: 'user_holders#qty'
-    get '/content', to: 'user_holders#content'
-  end
+
+  post '/item/user_holders', to: 'user_holders#process_request'
+  # scope '/item/user_holders' do
+  #   # post '/select', to: 'user_holders#select'
+  #   # post '/clear', to: 'user_holders#clear'
+  #   # get '/qty', to: 'user_holders#qty'
+  #   # get '/content', to: 'user_holders#content'
+  # end
 
   scope 'item/settings' do
     get '/autobind', to: 'settings#run_autobinder', as: 'autobind'
