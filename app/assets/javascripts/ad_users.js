@@ -9,8 +9,44 @@ $('#users-select').click(handleSelection)
 $('#users-clear').click(handleDeselection)
 
 function handleSelection(params) {
-    console.log(dataTable.rows({selected: true}).data());
+    let selectedData = dataTable.rows({selected: true}).data();
+    action = "select"
+    data = {
+        cart_request: {
+            action: action,
+            data: guids(selectedData)
+        }
+    };
+    sendCartRequest(data);
 }
 function handleDeselection(params) {
-    console.log(dataTable.rows({selected: true}).data());
+    action = "clear"
+    data = {
+        cart_request: {
+            action: action,
+            data: null
+        }
+    };
+    sendCartRequest(data);
+}
+
+function sendCartRequest(data){
+    $.post("/item/user_holders", data,
+        function (data, textStatus, jqXHR) {
+        handleResponse(data);
+        },
+        "json"
+    );
+}
+
+function guids(selectedData){
+    const GUID_INDEX = 0;
+    let guidsAry = [];
+    selectedData.each(d => guidsAry.push(d[GUID_INDEX]))
+    return guidsAry;
+}
+
+function handleResponse(response){
+    console.log(response);
+    updateHolder(response.data);
 }

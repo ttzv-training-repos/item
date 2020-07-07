@@ -4,9 +4,9 @@ class AdUsersController < ApplicationController
     builder = AdUserServices::TableQueryBuilder.new({
       ad_users: [
         "id",
+        "objectguid",
         "name",
         "displayname",
-        "objectguid",
         "samaccountname",
         "mail",
         "dn",
@@ -20,7 +20,7 @@ class AdUsersController < ApplicationController
         "name_2"
       ]
     })
-    @users = AdUser.joins(:office).select(builder.selected_data).limit(50)
+    @users = AdUser.joins(:office).select(builder.selected_data)
     @users = [@users] unless @users.is_a?(ActiveRecord::Relation)
     @headers = builder.localized_hash(:en)
   end

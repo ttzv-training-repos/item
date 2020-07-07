@@ -1,5 +1,5 @@
 class UserHoldersController < ApplicationController
-
+  include UserHoldersHelper
   def index #DRY!!! TEMPORARY
     user_id = session[:user_id]
     user_id = 0 if user_id.nil?
@@ -11,7 +11,7 @@ class UserHoldersController < ApplicationController
     user_id = session[:user_id]
     req_proc = AdUserServices::UserHolderRequestProcessor.new(user_id)
     session[:user_id] = req_proc.session_id if user_id.nil?
-    req_proc.process(params[:cart_request])
+    status = req_proc.process(params[:cart_request])
     # incoming requests contain name of the action and array of objects to perform this action on
     # available requests: 
     # select: clears previous content and adds array of users to cart
@@ -20,6 +20,11 @@ class UserHoldersController < ApplicationController
     # clear: empty cart
     # content: returns currently selected users
     # JSON format: cart_request: {action: actionname, data: [user1, user2, user3]}
+    render :json => {
+      action: req_proc.action,
+      status: status,
+      data: users_from_guids(req_proc.response_data).as_json
+    }
   end
 
 end

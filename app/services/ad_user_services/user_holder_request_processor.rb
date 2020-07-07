@@ -1,7 +1,7 @@
 module AdUserServices
   class UserHolderRequestProcessor
     
-    attr_accessor :session_id
+    attr_accessor :session_id, :response_data, :action
 
     def initialize(session_id)
       @session_id = session_id
@@ -11,9 +11,9 @@ module AdUserServices
     public
 
     def process(request)
-      action = request[:action]
+      @action = request[:action]
       data = request[:data]
-      self.__send__(action, data)
+      self.__send__(@action, data)
     end
 
     def next_id
@@ -29,13 +29,14 @@ module AdUserServices
     private
 
     def select(data)
-      data = filter_unique(data)
+      clear
       if data.length > 0
-        clear
         UserHolder.transaction do
           data.each { |entry| UserHolder.create(user_id: @session_id, objectguid: entry) }
         end
       end
+      content
+      "OK"
     end
 
     def add(data)
@@ -45,20 +46,27 @@ module AdUserServices
           data.each { |entry| UserHolder.create(user_id: @session_id, objectguid: entry) }
         end
       end
+      content
+      "OK"
     end
 
     def delete(data)
       UserHolder.transaction do
         data.each { |entry| UserHolder.where(user_id: @session_id, objectguid: entry).destroy_all }
       end
+      content
+      "OK"
     end
 
     def clear(data=nil)
       UserHolder.where(user_id: @session_id).destroy_all
+      content
+      "OK"
     end
 
     def content(data=nil)
-      UserHolder.where(user_id: @session_id)
+      @response_data = UserHolder.where(user_id: @session_id).pluck(:objectguid)
+      "OK"
     end
 
     def filter_unique(data)
