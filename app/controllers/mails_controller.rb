@@ -23,7 +23,7 @@ class MailsController < ApplicationController
         t.name => {
           title: t.title,
           content: template_content(t),
-          tags: t.template_tags.pluck(:name)
+          tags: t.template_tags.select(:name, :bound_attr).as_json
         }
       })
     end

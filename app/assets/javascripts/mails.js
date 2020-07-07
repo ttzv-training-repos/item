@@ -21,7 +21,7 @@ function renderInputsForTemplateTags(tags){
     let variableInputList = document.querySelector('.variables')
     variableInputList.innerHTML = ''
     tags.forEach(tag => {
-        variableInputList.innerHTML += variableInputHtml(tag)
+        variableInputList.innerHTML += variableInputHtml(tag.name)
     })
 }
 
@@ -42,7 +42,7 @@ function changeToTemplateView(selectedTemplate) {
     setTitle(templateTitle);
     setMessageContent(templateContent);
     renderInputsForTemplateTags(templateTags);
-    templateTags.forEach(tag => { attachListenerToInput(tag) });
+    templateTags.forEach(tag => { attachListenerToInput(tag.name) });
 }
 
 function attachListenerToInput(inputIdTag) {
