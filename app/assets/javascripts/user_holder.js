@@ -7,11 +7,10 @@ function updateHolder(data){
             let entry = document.createElement('li')
             entry.addEventListener('click',() => {
                 User.current = data[index];
-                updateInputValues()
+                updateInputValues();
             })
             entry.textContent = `${element.displayname},${element.name},${element.name_2}`
             $("#holder-entries-popup").append(entry);
-            
         }
     }
     else {

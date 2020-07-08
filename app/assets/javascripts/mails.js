@@ -4,13 +4,12 @@ $(document).ready( function () {
         console.log("response");
         console.log(data);
         templateData = data.template_data;
-        Template.current = templateData[0];
     });
     $('.template-entry-content').click(function (entry) {
-        let selectedTemplate = this.getAttribute('data-template-id');
+        let selectedTemplate = this.getAttribute('data-index');
+        console.log(selectedTemplate);
         changeToTemplateView(selectedTemplate);
     });
-
 });
 
 function setMessageContent(content) {
