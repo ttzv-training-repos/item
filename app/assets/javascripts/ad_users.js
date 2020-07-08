@@ -48,5 +48,6 @@ function guids(selectedData){
 
 function handleResponse(response){
     console.log(response);
+    User.current = response.data[0];
     updateHolder(response.data);
 }
