@@ -64,4 +64,8 @@ gem 'rack-cors'
 
 #Google Api Gem
 gem 'google-api-client', '~> 0.34'
+gem 'googleauth', '~> 0.13.0'
+
+#Redis for Google auth
+gem 'redis', '~> 4.2', '>= 4.2.1'
 
