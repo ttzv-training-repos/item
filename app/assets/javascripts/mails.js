@@ -12,6 +12,14 @@ $(document).ready( function () {
         changeToTemplateView(selectedTemplate);
     });
     attachListenersToCheckboxes();
+    $('#send-request').click(function () {
+        $.post("/item/mails/send_request", messageContainer.getJson(),
+            function (data, textStatus, jqXHR) {
+                console.log("mailreq")
+            },
+            "json"
+        );
+    });
 });
 
 function setMessageContent(content) {
@@ -127,5 +135,6 @@ function updatePreparedMessageParam(tag, value){
 function getCurrentMessage(){
     return messageContainer.getMessage(Template.current, User.current);
 }
+
 
 

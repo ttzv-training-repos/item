@@ -30,4 +30,8 @@ class MailsController < ApplicationController
       render :json => {template_data: json_data}
   end
 
+  def send_request
+    
+  end
+
 end

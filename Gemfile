@@ -62,3 +62,6 @@ gem 'active_directory'
 #cross-origin api requests
 gem 'rack-cors'
 
+#Google Api Gem
+gem 'google-api-client', '~> 0.34'
+
