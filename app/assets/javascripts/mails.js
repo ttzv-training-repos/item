@@ -1,4 +1,5 @@
-let templateData = null
+let templateData = null;
+let messageContainer = new PreparedMessageContainer('helpdesk@atal.local');
 $(document).ready( function () {
     $.get("/item/mails/templates_data", function (data) {
         console.log("response");
@@ -10,6 +11,7 @@ $(document).ready( function () {
         console.log(selectedTemplate);
         changeToTemplateView(selectedTemplate);
     });
+    attachListenersToCheckboxes();
 });
 
 function setMessageContent(content) {
@@ -51,6 +53,7 @@ function attachListenerToInput(inputIdTag) {
     $input.on('input change paste keyup', function() {
         var $str = $input.val();
         $(inputIdTag).text($str);
+        updatePreparedMessageParam(inputIdTag, $str)
     });
 }
 
@@ -62,13 +65,67 @@ function updateInputValues(){
     let varInputs = document.querySelectorAll('.varinp');
     varInputs.forEach(input => {
         let inputId = input.getAttribute('id')
-        Template.current.tags.forEach(tag => {
-            if (tag.name === inputId && tag.bound_attr != null){
-                let attr = tag.bound_attr.split('.')[1];
-                input.value = User.current[attr];
-                $(tag.name).text(input.value);
-            }
-        });
+        let value = getCustomInputValue(inputId);
+        if (value === 'default'){
+            value = getDefaultInputValue(inputId);
+        }
+        input.value = value;
+        $(inputId).text(value);
     });
 }
+
+function attachListenersToCheckboxes(){
+    let checkboxes = document.querySelectorAll("[data-type='template-checkbox']");
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('click',function() {
+            let selectedTemplate = checkbox.getAttribute('id');
+            let template = templateData[selectedTemplate];
+            if(checkbox.checked){
+                addMessagesToContainer(template)
+            } else {
+                removeMessagesFromContainer(template)
+            }
+        })
+    })
+}
+
+function getCustomInputValue(inputId){
+    let message = getCurrentMessage();
+    return message.getTagValue(inputId);
+}
+
+function getDefaultInputValue(inputId){
+    let attributeValue = null;
+    Template.current.tags.forEach(tag => {
+        if (tag.name === inputId && tag.bound_attr != null){
+            let attr = tag.bound_attr.split('.')[1];
+            attributeValue = User.current[attr];
+        }
+    });
+    return attributeValue
+}
+
+function addMessagesToContainer(template){
+    User.all.forEach(user => {
+        let mail = new Mail(template, user);
+        messageContainer.addMessage(mail);
+    });
+}
+
+function removeMessagesFromContainer(template){
+    User.all.forEach(user => {
+        let mail = new Mail(template, user);
+        messageContainer.removeMessage(mail);
+    });
+}
+
+function updatePreparedMessageParam(tag, value){
+    let message = getCurrentMessage();
+    message.setTagValue(tag, value);
+}
+
+function getCurrentMessage(){
+    return messageContainer.getMessage(Template.current, User.current);
+}
+
 

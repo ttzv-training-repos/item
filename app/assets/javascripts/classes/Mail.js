@@ -4,10 +4,10 @@ class Mail{
         this.template = template
         this.user = user
         this.tagParams = this.tagParams();
-        this.hash = this.getHash();
+        this.hash = this.getJson();
     }
 
-    getHash(){
+    getJson(){
         this.hash = {
             recipient: this.user.mail,
             template: this.template,
@@ -32,6 +32,18 @@ class Mail{
 
     setTagValue(tagName, value){
         this.hash.params[tagName] = value
+    }
+
+    getTagValue(tagName){
+        return this.hash.params[tagName];
+    }
+    
+    equals(other){
+        if (this.template === other.template && this.user === other.user){
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 
