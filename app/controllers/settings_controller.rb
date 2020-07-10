@@ -21,7 +21,7 @@ class SettingsController < ApplicationController
   end
 
   def authorize
-    client_secret = JSON.parse(File.read('client_secret.json'), symbolize_names: true)
+    client_secret = JSON.parse(File.read('client_secrets.json'), symbolize_names: true)
     client_secret = client_secret[:web]
     client = Signet::OAuth2::Client.new(
       :authorization_uri => client_secret[:auth_uri],
@@ -29,7 +29,7 @@ class SettingsController < ApplicationController
       :client_id => client_secret[:client_id],
       :client_secret => client_secret[:client_secret],
       :scope => 'email profile',
-      :redirect_uri => client_secret[:redirect_uris]
+      :redirect_uri => client_secret[:redirect_uris][0]
     )
     redirect_to(client.authorization_uri.to_s)
     puts "request"

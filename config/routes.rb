@@ -15,16 +15,11 @@ Rails.application.routes.draw do
     resources :settings, only: [:index]
     resources :mails, only: [:index]
     get '/ad_users/reload', to: 'ad_users#reload'
+    get '/oauth2login', to: 'item#oauth2login'
   end
 
 
   post '/item/user_holders', to: 'user_holders#process_request'
-  # scope '/item/user_holders' do
-  #   # post '/select', to: 'user_holders#select'
-  #   # post '/clear', to: 'user_holders#clear'
-  #   # get '/qty', to: 'user_holders#qty'
-  #   # get '/content', to: 'user_holders#content'
-  # end
 
   scope 'item/settings' do
     get '/autobind', to: 'settings#run_autobinder', as: 'autobind'
