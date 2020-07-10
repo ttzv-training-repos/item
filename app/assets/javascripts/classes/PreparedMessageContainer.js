@@ -1,14 +1,14 @@
 class PreparedMessageContainer{
 
     constructor(sender){
-        this.preparedMessages = new Array()
-        this.sender = sender
+        this.preparedMessages = new Array();
+        this.sender = sender;
         this.requestHash = this.updateRequestJson();
     }
 
     addMessage(mail){
         if(!this.includes(mail)){
-            this.preparedMessages.push(mail)
+            this.preparedMessages.push(mail);
         }
     }
 
@@ -19,17 +19,17 @@ class PreparedMessageContainer{
     }
 
     removeMessage(message){
-        this.preparedMessages = this.preparedMessages.filter( msg => !msg.equals(message))
+        this.preparedMessages = this.preparedMessages.filter( msg => !msg.equals(message));
         this.updateRequestJson();
     }
 
     setSender(sender){
-        this.requestHash.sender = sender
+        this.requestHash.sender = sender;
     }
 
     getJson(){
         this.updateRequestJson();
-        return {message_request: this.requestHash}
+        return {message_request: this.requestHash};
     }
 
     getMessage(template, user){
@@ -45,7 +45,7 @@ class PreparedMessageContainer{
     }
 
     includes(object){
-        return this.indexOf(object) !== -1
+        return this.indexOf(object) !== -1;
     }
 
     indexOf(object){
@@ -63,7 +63,7 @@ class PreparedMessageContainer{
     }
 
     getMessageHashArray(){
-        return this.preparedMessages.map(msg => msg.getJson())
+        return this.preparedMessages.map(msg => msg.getJson());
     }
 
 }
