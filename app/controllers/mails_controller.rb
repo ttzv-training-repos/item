@@ -30,8 +30,24 @@ class MailsController < ApplicationController
       render :json => {template_data: json_data}
   end
 
+  # JSON name - message_request
+  # Keys:
+  # sender
+  # messages => recipient
+  #             custom
+  #             params => ...
+  #             template => title
+  #                         content
+  #                         tags (unneeded)
   def send_request
+    message_request = mail_params
+    sender = message_request[:sender]
+    messages = message_request[:messages]
+    msgs = messages.keys.map { |key| messages[key]}
     
+    puts "msgs"
+    p msgs
+
   end
 
 end

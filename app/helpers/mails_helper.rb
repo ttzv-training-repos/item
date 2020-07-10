@@ -30,4 +30,8 @@ module MailsHelper
     end
   end
 
+  def mail_params
+    params.require(:message_request).permit(:sender, :messages)
+  end
+
 end
