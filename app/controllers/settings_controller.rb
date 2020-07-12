@@ -28,7 +28,7 @@ class SettingsController < ApplicationController
       :token_credential_uri =>  client_secret[:token_uri],
       :client_id => client_secret[:client_id],
       :client_secret => client_secret[:client_secret],
-      :scope => 'email profile',
+      :scope => 'email profile openid https://www.googleapis.com/auth/gmail.send',
       :redirect_uri => client_secret[:redirect_uris][0]
     )
     redirect_to(client.authorization_uri.to_s)

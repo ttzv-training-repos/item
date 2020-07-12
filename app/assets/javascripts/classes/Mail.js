@@ -3,7 +3,7 @@ class Mail{
     constructor(template, user){
         this.template = template
         this.user = user
-        this.tagParams = this.tagParams();
+        this.tagParams = this.genTagParams();
         this.hash = this.getJson();
     }
 
@@ -17,7 +17,7 @@ class Mail{
         return this.hash;
     }
 
-    tagParams(){
+    genTagParams(){
         let tags = this.template.tags
         let hash = {}
         tags.map(tag => {
