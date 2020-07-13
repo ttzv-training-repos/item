@@ -1,8 +1,5 @@
 class ItemController < ApplicationController
-  #https://www.rubydoc.info/github/google/google-api-ruby-client
-  require 'google/apis/options'
-  require 'google/apis/gmail_v1'
-  require 'google/apis/oauth2_v2'
+  #  https://googleapis.dev/ruby/google-api-client/latest
   def index
   end
 
@@ -20,10 +17,7 @@ class ItemController < ApplicationController
 
     client.code = params[:code]
     client.fetch_access_token!
-    Google::Apis::RequestOptions.default.authorization = client
-
-    profile = Google::Apis::Oauth2V2::Userinfo.new
-    p profile.email
+    session[:oauth] = client.access_token
   end
   
 end
