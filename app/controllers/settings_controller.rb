@@ -26,37 +26,24 @@ class SettingsController < ApplicationController
   end
 
   def authorize
-    #this below obviously needs better organization.. stays only for testing
-    client_secret = JSON.parse(File.read('client_secrets.json'), symbolize_names: true)
-    client_secret = client_secret[:web]
-    client = Signet::OAuth2::Client.new(
-      :authorization_uri => client_secret[:auth_uri],
-      :token_credential_uri =>  client_secret[:token_uri],
-      :client_id => client_secret[:client_id],
-      :client_secret => client_secret[:client_secret],
-      :scope => 'email profile openid https://www.googleapis.com/auth/gmail.send',
-      :redirect_uri => client_secret[:redirect_uris][0]
-    )
-    redirect_to(client.authorization_uri.to_s)
-    puts "request"
-    
+    user_id = UserServices::UserAuthenticator.get_id(session[:user_id])
+    session[:user_id] = user_id if session[:user_id].nil?
+
+    client = UserServices::UserAuthorizer.load_client(user_id)
+    if client.expired?
+      client.refresh! 
+      UserServices::UserAuthorizer.store_client(user_id: user_id, client: client)
+    end
+    if client.nil?
+      client = UserServices::UserAuthorizer.new_client(user_id) 
+      redirect_to(client.authorization_uri.to_s)
+    end
   end
 
   def check_auth
-    client_secret = JSON.parse(File.read('client_secrets.json'), symbolize_names: true)
-    client_secret = client_secret[:web]
-    client = Signet::OAuth2::Client.new(
-      :authorization_uri => client_secret[:auth_uri],
-      :token_credential_uri =>  client_secret[:token_uri],
-      :client_id => client_secret[:client_id],
-      :client_secret => client_secret[:client_secret],
-      :scope => 'email profile openid https://www.googleapis.com/auth/gmail.send',
-      :redirect_uri => client_secret[:redirect_uris][0]
-    )
+    client = UserServices::UserAuthorizer.load_client(session[:user_id])
 
-    client.access_token= session[:oauth]
-
-    @data = {expired: client.expired?, expiresin: client.expires_in, issuedat: client.issued_at, state: client.state, issuer: client.issuer, expiry: client.expiry}
+    @data = {expired: client.expired?, expiresin: client.expires_in, issuedat: client.issued_at, state: client.state, issuer: client.issuer, expiry: client.expiry, expires_at: client.expires_at}
 
     Google::Apis::RequestOptions.default.authorization = client
 
@@ -64,7 +51,6 @@ class SettingsController < ApplicationController
     @apidata = profile.get_userinfo.to_json
 
     gmail = Google::Apis::GmailV1::GmailService.new
-    gmail.send_user_message('me', )
   end
 
 end

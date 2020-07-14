@@ -34,8 +34,4 @@ Rails.application.routes.draw do
     get '/templates_data', to: 'mails#templates_data'
   end
 
-  match '/oauth2callback',
-      to: Google::Auth::WebUserAuthorizer::CallbackApp,
-      via: :all
-
 end

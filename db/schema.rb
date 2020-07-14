@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_07_133804) do
+ActiveRecord::Schema.define(version: 2020_07_14_132702) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -60,14 +60,11 @@ ActiveRecord::Schema.define(version: 2020_07_07_133804) do
     t.string "dn"
     t.string "objectclass"
     t.string "cn"
-    t.string "sn"
-    t.string "givenname"
     t.text "description"
     t.string "distinguishedname"
     t.string "instancetype"
     t.date "whencreated"
     t.date "whenchanged"
-    t.string "displayname"
     t.string "usncreated"
     t.string "memberof"
     t.string "usnchanged"
@@ -95,10 +92,13 @@ ActiveRecord::Schema.define(version: 2020_07_07_133804) do
     t.string "dscorepropagationdata"
     t.date "lastlogontimestamp"
     t.string "msds-supportedencryptiontypes"
-    t.string "mail"
-    t.string "userprincipalname"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "sn"
+    t.string "givenname"
+    t.string "displayname"
+    t.string "mail"
+    t.string "userprincipalname"
     t.index ["objectguid"], name: "index_ad_users_on_objectguid", unique: true
   end
 
@@ -157,6 +157,13 @@ ActiveRecord::Schema.define(version: 2020_07_07_133804) do
     t.text "objectguid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "session_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
