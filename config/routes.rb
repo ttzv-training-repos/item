@@ -24,7 +24,6 @@ Rails.application.routes.draw do
   scope 'item/settings' do
     get '/autobind', to: 'settings#run_autobinder', as: 'autobind'
     post '/',  to: 'settings#process_request'
-    get '/authorize', to: 'settings#authorize', as: 'authorize'
     get '/check_auth', to: 'settings#check_auth', as: 'check_auth'
   end
 

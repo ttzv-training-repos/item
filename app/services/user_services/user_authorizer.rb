@@ -1,10 +1,29 @@
 module UserServices
   class UserAuthorizer
 
+    def self.client(user_id)
+      raise "User ID cannot be a NULL value" if user_id.nil?
+      client = self.load_client(user_id)
+      if client.nil?
+        client = self.new_client(user_id)
+        self.store_client(user_id: user_id, client: client)
+        return client
+      else
+        begin
+          client.refresh! if client.expired?
+        rescue
+          return client
+        end
+        self.store_client(user_id: user_id, client: client)
+        return client
+      end
+    end
+
     def self.load_client(user_id)
       raise "User ID cannot be a NULL value" if user_id.nil?
       redis = Redis.new
       return nil if redis.get("oauth:#{user_id}").nil?
+      puts "oauth:#{user_id}"
       Signet::OAuth2::Client.new(JSON.parse(Redis.new.get("oauth:#{user_id}"), symbolize_names: true))
     end
 
@@ -18,9 +37,9 @@ module UserServices
         :client_id => client_secret[:client_id],
         :client_secret => client_secret[:client_secret],
         :scope => 'email profile openid https://www.googleapis.com/auth/gmail.send',
-        :redirect_uri => client_secret[:redirect_uris][0]
+        :redirect_uri => client_secret[:redirect_uris][0],
+        :additional_parameters => {"access_type" => "offline"}
       )
-      self.store_client(user_id: user_id, client: client.to_json)
       client
     end
 

@@ -1,17 +1,24 @@
 class ItemController < ApplicationController
-  #  https://googleapis.dev/ruby/google-api-client/latest
+  require 'google/apis/options'
   include ItemHelper
+  
   def index
+    client = google_auth_client
+    if client.access_token.nil?
+      picture_url = ""
+    else
+      profile = GoogleApiServices::ProfileService.new(client)
+      picture_url = profile.picture
+    end
+    @google_profile_img = picture_url
   end
 
   def oauth2login
-    client = UserServices::UserAuthorizer.new_client(session[:user_id])
+    user_id = session[:user_id]
+    client = UserServices::UserAuthorizer.client(user_id)
     client.code= params[:code]
     client.fetch_access_token!
-    p client
-    session[:user_id] = User.authenticate_new.session_id if session[:user_id].nil?
-    user_id = session[:user_id]
-    p user_id
+    raise "For some reason User ID is null" if user_id.nil?
     UserServices::UserAuthorizer.store_client(user_id: user_id, client: client)
   end
   
