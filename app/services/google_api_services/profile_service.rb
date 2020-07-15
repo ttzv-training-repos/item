@@ -3,12 +3,12 @@ module GoogleApiServices
   class ProfileService
   
     def initialize(client)
-      @profile = Google::Apis::Oauth2V2::Oauth2Service.new
-      @profile.authorization = client
+      @service = Google::Apis::Oauth2V2::Oauth2Service.new
+      @service.authorization = client
     end
 
     def userinfo
-      @userinfo = @profile.get_userinfo
+      @userinfo = @service.get_userinfo
     end
 
     def picture

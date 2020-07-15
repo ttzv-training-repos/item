@@ -46,7 +46,12 @@ class MailsController < ApplicationController
     msgs = messages.keys.map { |key| messages[key]}
     
     puts "msgs"
-    p msgs
+    p msgs[0].as_json
+
+    sender = GoogleApiServices::MailingService.new(google_auth_client)
+    sender.send("test")
+
+    https://blog.mailtrap.io/send-emails-with-gmail-api
 
   end
 
