@@ -14,7 +14,7 @@ class ItemController < ApplicationController
   end
 
   def oauth2login
-    user_id = session[:user_id]
+    user_id = current_user
     client = UserServices::UserAuthorizer.client(user_id)
     client.code= params[:code]
     client.fetch_access_token!

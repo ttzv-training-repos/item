@@ -5,7 +5,6 @@ module AdUserServices
 
     def initialize(session_id)
       @session_id = session_id
-      @session_id = User.authenticate_new.session_id if @session_id.nil?
     end
 
     public
