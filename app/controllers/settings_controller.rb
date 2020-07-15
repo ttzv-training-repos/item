@@ -26,8 +26,8 @@ class SettingsController < ApplicationController
   end
 
   def authorize
-    user_id = UserServices::UserAuthenticator.get_id(session[:user_id])
-    session[:user_id] = user_id if session[:user_id].nil?
+    session[:user_id] = User.authenticate_new.session_id if session[:user_id].nil?
+    user_id = session[:user_id]
 
     client = UserServices::UserAuthorizer.load_client(user_id)
     if client.expired?
@@ -48,7 +48,7 @@ class SettingsController < ApplicationController
     Google::Apis::RequestOptions.default.authorization = client
 
     profile = Google::Apis::Oauth2V2::Oauth2Service.new
-    @apidata = profile.get_userinfo.to_json
+    @apidata# = profile.get_userinfo.to_json
 
     gmail = Google::Apis::GmailV1::GmailService.new
   end

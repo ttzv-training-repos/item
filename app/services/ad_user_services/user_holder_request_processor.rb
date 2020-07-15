@@ -5,7 +5,7 @@ module AdUserServices
 
     def initialize(session_id)
       @session_id = session_id
-      @session_id = next_id if @session_id.nil?
+      @session_id = User.authenticate_new.session_id if @session_id.nil?
     end
 
     public
@@ -14,16 +14,6 @@ module AdUserServices
       @action = request[:action]
       data = request[:data]
       self.__send__(@action, data)
-    end
-
-    def next_id
-      first = UserHolder.order(user_id: :desc).first
-      if first.nil? 
-        next_id = 1
-      else
-        next_id = first.user_id + 1
-      end
-      next_id
     end
 
     private
