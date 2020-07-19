@@ -15,14 +15,27 @@ module GoogleApiServices
 
     end
 
-    def send(message)
-      builder = GoogleApiServices::MessageBuilder.new
-      message = builder.to("tomasz.zwak@atal.pl")
-        .from("JO")
-        .subject(message)
-        .body("Hello world!").message
+    def send(mail_request={})
+      raise "Sender address is required" if mail_request[:sender].nil?
+      raise "Messages are required" if mail_request[:messages].nil?
 
-      @service.send_user_message('me', message)
+      sender =  mail_request[:sender]
+      messages = mail_request[:messages]
+
+      messages.each do |m|
+        mail = Mail.new do
+          from sender
+          to 'tomasz.zwak@gmail.com'
+          subject m["template"]["title"]
+          html_part do
+            content_type 'text/html; charset=UTF-8'
+            body m["template"]["content"]
+          end
+        end
+        message = Google::Apis::GmailV1::Message.new
+        message.raw = mail.to_s
+        @service.send_user_message('me', message)
+      end
     end
 
     private

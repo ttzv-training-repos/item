@@ -5,6 +5,7 @@ module UserServices
       raise "User ID cannot be a NULL value" if user_id.nil?
       client = self.load_client(user_id)
       if client.nil?
+        puts "Client is null, creating new..."
         client = self.new_client(user_id)
         self.store_client(user_id: user_id, client: client)
         return client
@@ -12,7 +13,7 @@ module UserServices
         begin
           client.refresh! if client.expired?
         rescue
-          return client
+          return client #implement a fallback that deletes stored client and forces re-authorization with forced prompt if refresh token is missing
         end
         self.store_client(user_id: user_id, client: client)
         return client
@@ -38,7 +39,7 @@ module UserServices
         :client_secret => client_secret[:client_secret],
         :scope => 'email profile openid https://www.googleapis.com/auth/gmail.send',
         :redirect_uri => client_secret[:redirect_uris][0],
-        :additional_parameters => {"access_type" => "offline"}
+        :additional_parameters => {'access_type' => 'offline', 'approval_prompt' => 'force'}
       )
       client
     end

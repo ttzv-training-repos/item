@@ -41,17 +41,16 @@ class MailsController < ApplicationController
   #                         tags (unneeded)
   def send_request
     message_request = mail_params
+    puts "#############################################"
+    p message_request[:messages].values
     sender = message_request[:sender]
     messages = message_request[:messages]
-    msgs = messages.keys.map { |key| messages[key]}
-    
-    puts "msgs"
-    p msgs[0].as_json
+    messages = messages.to_hash.map { |m| m[1] }
 
-    sender = GoogleApiServices::MailingService.new(google_auth_client)
-    sender.send("test")
+    #p messages
 
-    https://blog.mailtrap.io/send-emails-with-gmail-api
+    #sender = GoogleApiServices::MailingService.new(google_auth_client)
+    #sender.send(sender: sender, messages: messages)
 
   end
 
