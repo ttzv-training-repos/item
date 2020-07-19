@@ -13,12 +13,13 @@ $(document).ready( function () {
     });
     attachListenersToCheckboxes();
     $('#send-request').click(function () {
-        $.post("/item/mails/send_request", messageContainer.getJson(),
-            function (data, textStatus, jqXHR) {
-                console.log("mailreq")
-            },
-            "json"
-        );
+        // $.post("/item/mails/send_request", messageContainer.getJson(),
+        //     function (data, textStatus, jqXHR) {
+        //         console.log("mailreq")
+        //     },
+        //     "json"
+        // );
+        console.error("AJAX POST invoked by this button was disabled, check mails.js file line 15")
     });
 });
 
@@ -73,10 +74,7 @@ function updateInputValues(){
     let varInputs = document.querySelectorAll('.varinp');
     varInputs.forEach(input => {
         let inputId = input.getAttribute('id')
-        let value = getCustomInputValue(inputId);
-        if (value === 'default'){
-            value = getDefaultInputValue(inputId);
-        }
+        let value = getInputValue(inputId);
         input.value = value;
         $(inputId).text(value);
     });
@@ -97,17 +95,25 @@ function attachListenersToCheckboxes(){
     })
 }
 
+function getInputValue(inputId){
+    let value = getCustomInputValue(inputId);
+    if (value === 'default'){
+        value = getDefaultInputValue(inputId, Template.current, User.current);
+    }
+    return value;
+}
+
 function getCustomInputValue(inputId){
     let message = getCurrentMessage();
     return message.getTagValue(inputId);
 }
 
-function getDefaultInputValue(inputId){
+function getDefaultInputValue(inputId, template, user){
     let attributeValue = null;
-    Template.current.tags.forEach(tag => {
+    template.tags.forEach(tag => {
         if (tag.name === inputId && tag.bound_attr != null){
             let attr = tag.bound_attr.split('.')[1];
-            attributeValue = User.current[attr];
+            attributeValue = user[attr];
         }
     });
     return attributeValue

@@ -19,11 +19,11 @@ class Mail{
 
     genTagParams(){
         let tags = this.template.tags
-        let hash = {}
+        let tagHash = {}
         tags.map(tag => {
-            hash[tag.name] = "default"
+            tagHash[tag.name] = "default"
         });
-        return hash;
+        return tagHash;
     }
 
     setRecipientAddress(address){
@@ -37,6 +37,22 @@ class Mail{
     getTagValue(tagName){
         return this.hash.params[tagName];
     }
+
+    updateTemplateContent(){
+        let element = this.DOMElement(this.template.content);
+        let tagMap = new Map(Object.entries(this.tagParams))
+        tagMap.forEach((value, key) => {
+            let content = value;
+            if (content === "default"){
+                content = getDefaultInputValue(key, this.template, this.user)
+            }
+            console.log(content)
+            let tag = element.querySelector(key)
+            $(tag).text(content);
+        });
+        console.log(element)
+        this.template.content = element.innerHTML;
+    }
     
     equals(other){
         if (this.template === other.template && this.user === other.user){
@@ -44,6 +60,12 @@ class Mail{
         } else {
             return false;
         }
+    }
+
+    DOMElement(content){
+        let element = document.createElement('element');
+        element.innerHTML = content
+        return element;
     }
 }
 
