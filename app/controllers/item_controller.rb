@@ -3,6 +3,7 @@ class ItemController < ApplicationController
   include ItemHelper
   
   def index
+
     client = google_auth_client
     if client.access_token.nil?
       picture_url = ""
@@ -11,6 +12,8 @@ class ItemController < ApplicationController
       picture_url = profile.picture
     end
     @google_profile_img = picture_url
+    @user_id = current_user
+
   end
 
   def oauth2login
