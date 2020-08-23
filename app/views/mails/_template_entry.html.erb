@@ -1,9 +1,9 @@
 <div class="template-entry">
     <div class="template-entry-content" data-index=<%=id%>>
-        <label for="<%=id%>">
-            <input type="checkbox" name="<%=id%>" id="<%=id%>" data-type="template-checkbox">
+        <label for="<%=id%>" data-index=<%=id%>>
+            <input type="checkbox" name="<%=id%>" id="<%=id%>" data-type="template-checkbox" data-index=<%=id%>>
         </label>
-        <div><%=id%></div>
+        <div data-index=<%=id%>><%=id%></div>
     </div>
     <div class="template-controls" data-template-id="<%=id%>">
         <div class="template-control-edit template-control normalized-transition">Edit</div>

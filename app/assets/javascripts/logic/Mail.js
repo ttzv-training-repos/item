@@ -1,37 +1,44 @@
-class Mail{
+class Mail extends Message{
 
     constructor(template, user){
-        this.template = template
-        this.user = user
-        this.tagParams = this.genTagParams();
+        super(template, user);
+        this.template = template;
+        this.content = template.content;
+        this.user = user;
+        this.tagMap = new Map();
+        this.assignTagBindings();
     }
 
     getJson(){
         return {
-            recipient: this.user.mail,
+            recipient: this.user.ad_users_mail,
             template: this.template.content
         }
     }
 
-    genTagParams(){
-        let tags = this.template.tags
-        let tagHash = {}
-        tags.map(tag => {
-            tagHash[tag.name] = "default"
+    assignTagBindings(){
+        let tags = this.template.tags;
+        tags.forEach(tag => {
+            let value = this.user[tag.bound_attr] ?? "NOTFOUND" 
+            this.setTagValue(tag.name, value)
         });
-        return tagHash;
-    }
-
-    setRecipientAddress(address){
-        this.hash.recipient = address;
+        this.updateContent();
     }
 
     setTagValue(tagName, value){
-        this.tagParams[tagName] = value
+        this.tagMap.set(tagName, value);
+        this.updateContent();
     }
 
     getTagValue(tagName){
-        return this.tagParams[tagName];
+        return this.tagMap.get(tagName);
+    }
+
+    updateContent(){
+        this.tagMap.forEach((tagValue, tagKey) => {
+            let regexp = new RegExp(`(?<=<${tagKey}>)(.*?)(?=<\/${tagKey}>)`, 'g');
+            this.content = this.content.replace(regexp, tagValue);
+        });
     }
     
     equals(other){

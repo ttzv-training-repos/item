@@ -7,9 +7,9 @@ function updateHolder(data){
             let entry = document.createElement('li')
             entry.addEventListener('click',() => {
                 User.current = data[index];
-                updateInputValues();
+                templateViewBuilder.updateInputValues();
             })
-            entry.textContent = `${element.displayname},${element.name},${element.name_2}`
+            entry.textContent = `${element.ad_users_displayname}`
             $("#holder-entries-popup").append(entry);
         }
     }
