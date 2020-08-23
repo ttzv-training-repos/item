@@ -16,7 +16,7 @@ module UserHoldersHelper
         "name",
         "name_2"
       ]
-    })
+    }, explicit: true)
     found_users = AdUser.where(objectguid: guids)
     found_users.joins(:office).select(builder.selected_data)
   end

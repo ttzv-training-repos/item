@@ -1,7 +1,10 @@
 module AdUserServices
   class TableQueryBuilder
     
-    def initialize(columns_and_tables_hash)
+    def initialize(columns_and_tables_hash, options=nil)
+      unless options.nil?
+        @explicit = options[:explicit] unless options[:explicit].nil?
+      end
       @tables_columns_hash = columns_and_tables_hash
       database_tables = ActiveRecord::Base.connection.tables
       @tables_columns_hash.keys.each do |table| 
@@ -13,13 +16,13 @@ module AdUserServices
     
     public
 
-    def selected_data
+    def selected_data()
       @headers = Array.new
       @alias_hash = Hash.new
       selection = Array.new
       @tables_columns_hash.keys.each do |table|
         @tables_columns_hash[table].each do |column|
-          if @headers.include?(column)
+          if @headers.include?(column) or @explicit
             selection.push(build_with_alias(table, column))
           else
             selection.push(build_as_is(table, column))
