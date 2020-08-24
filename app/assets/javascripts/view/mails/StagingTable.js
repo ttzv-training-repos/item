@@ -68,4 +68,8 @@ class StagingTable{
         let stagingContent = this.getStagingContent();
         return this.renderStagingAreaTable(stagingContent);
     }
+
+    empty(){
+        return this._content.length <= 0;
+    }
 }

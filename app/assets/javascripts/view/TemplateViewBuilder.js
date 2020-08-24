@@ -68,10 +68,11 @@ class TemplateViewBuilder {
     }
 
     variableInputHtml(id){
+        let label = id.split('-')[2];
         return `
-                <div class="labeled-input normalized-transition">
-                    <label for="${id}">${id}</label>
-                    <input type="text" name="${id}" id="${id}" data-input="varinp">
+                <div class="form__group field">
+                    <input type="input" class="form__field" name="${id}" id="${id}" data-input="varinp" placeholder="${label}" required>
+                    <label for="${id}" class="form__label">${label}</label>
                 </div>
             `;
     }
