@@ -2,8 +2,7 @@ class PreparedMessageContainer{
 
     constructor(sender){
         this.preparedMessages = new Array();
-        this.sender = sender;
-        this.requestHash = this.updateRequestJson();
+        this._sender = sender;
     }
 
     addMessage(mail){
@@ -23,25 +22,21 @@ class PreparedMessageContainer{
         this.updateRequestJson();
     }
 
-    setSender(sender){
-        this.requestHash.sender = sender;
+    set sender(sender){
+        this._sender = sender;
     }
 
     getJson(){
-        this.updateRequestJson();
-        return {message_request: this.requestHash};
+        return {message_request: {
+            sender: this._sender,
+            messages: this.getMessageHashArray()
+            }
+        };
     }
 
     getMessage(template, user){
         let mail = new Mail(template, user)
         return this.preparedMessages.filter( msg => msg.equals(mail))[0]; //should ever be only one unless something goes horribly wrong
-    }
-
-    updateRequestJson(){
-        this.requestHash = {
-            sender: this.sender,
-            messages: this.getMessageHashArray()
-        }
     }
 
     includes(object){
