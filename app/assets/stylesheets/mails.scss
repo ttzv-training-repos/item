@@ -38,15 +38,6 @@
     height: 80%;
 }
 
-input[type=text]:focus{
-    outline: none;
-}
-
-input[type=text]{
-    height: 15px;
-    background-color: whitesmoke;
-}
-
 .mails-main{
     display: flex;
     justify-content: center;
@@ -71,23 +62,72 @@ input[type=text]{
     align-items: center;
     padding: 5px;
 }
-
-.labeled-input{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 5px;
-    background-color: whitesmoke;
-    padding: 2px;
-    border: 1px solid rgb(158, 158, 158);
-    font-size: small; 
+/* INPUT STYLING */
+$primary: #11998e;
+$secondary: #38ef7d;
+$white: #fff;
+$gray: #9b9b9b;
+.form__group {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+  width: 50%;
 }
 
-.labeled-input:hover{
-    -webkit-box-shadow: -2px 3px 10px 0px rgba(0,0,0,0.5);
-    -moz-box-shadow: -2px 3px 10px 0px rgba(0,0,0,0.5);
-    box-shadow: -2px 3px 10px 0px rgba(0,0,0,0.5);
+.form__field {
+  font-family: inherit;
+  //width: 100%;
+  border: 0;
+  border-bottom: 2px solid $gray;
+  outline: 0;
+  font-size: 1.3rem;
+  color: $white;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:placeholder-shown ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+  }
 }
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: $gray;
+}
+
+.form__field:focus {
+  ~ .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: $primary;
+    font-weight:700;    
+  }
+  padding-bottom: 6px;  
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, $primary,$secondary);
+  border-image-slice: 1;
+}
+/* reset input */
+.form__field{
+  &:required,&:invalid { box-shadow:none; }
+}
+
+/* INPUT STYLING */
 
 .mail-text{
     background-color: whitesmoke;
@@ -224,3 +264,4 @@ itemtag-mail-login{
 itemtag-mail-password{
     background-color: lightgrey;
 }
+

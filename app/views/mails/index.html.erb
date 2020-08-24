@@ -3,19 +3,15 @@
     <div class="mails-main sub-fcn-block">
         <div class="message-control">
             <div class="static">
-                <label for="recipients">
-                    <div class="labeled-input normalized-transition">
-                        <div class="labeled-input-title">
-                            Recipients
-                        </div>
-                        <input type="text" name="" id="recipients">
-                    </div>
-                </label>
-                <div class="labeled-input normalized-transition">
-                    <label for="sender">Sender</label>
-                    <input type="text" name="" id="sender">
+                <div class="form__group field">
+                    <input type="input" name="sender" id="sender"  class="form__field" placeholder="Sender" required>
+                    <label for="sender" class="form__label">Sender</label>
                 </div>
-                <button class="send-btn btn btn-primary" id="send-request" data-toggle="modal" data-target="#stagingModal"><i class="fa fa-envelope" aria-hidden="true"></i></button>
+                <div class="form__group field">
+                    <input type="input" name="recipients" id="recipients"  class="form__field" placeholder="Recipients" required>
+                    <label for="sender" class="form__label">Recipients</label>
+                </div>
+                <button class="send-btn btn btn-primary" data-toggle="modal" data-target="#stagingModal"><i class="fa fa-envelope" aria-hidden="true"></i></button>
             </div>
             <div class="variables">
                 This div should scroll if list is too big
