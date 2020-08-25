@@ -12,6 +12,7 @@ class Mail extends Message{
     getJson(){
         return {
             recipient: this.user.ad_users_mail,
+            subject: this.template.title,
             content: this.content
         }
     }
@@ -19,7 +20,7 @@ class Mail extends Message{
     assignTagBindings(){
         let tags = this.template.tags;
         tags.forEach(tag => {
-            let value = this.user[tag.bound_attr] ?? "NOTFOUND" 
+            let value = this.user[tag.bound_attr] ?? "" 
             this.setTagValue(tag.name, value)
         });
         this.updateContent();

@@ -2,10 +2,20 @@ class TemplateViewBuilder {
 
     constructor(jsonTemplateData=null){
         this._templateData = jsonTemplateData;
+        this._recipients = new Array();
+    }
+
+    inputSenderHandler(){
+        $("input[data-event]").on('input change paste keyup', (e) => {
+            messageContainer.sender = $("input[data-event]").val();
+        });
     }
 
     set templateData(data){
-        this._templateData = data
+        this._templateData = data;
+    }
+    get recipients(){
+        return this._recipients;
     }
     
     templateSelectionHandler(){
@@ -97,7 +107,7 @@ class TemplateViewBuilder {
                 let selectedTemplate = checkbox.getAttribute('id');
                 let template = this._templateData[selectedTemplate];
                 if(checkbox.checked){
-                    this.addMessagesToContainer(template)
+                    this.addMessagesToContainer(template, User.all)
                 } else {
                     this.removeMessagesFromContainer(template)
                 }
@@ -105,8 +115,8 @@ class TemplateViewBuilder {
         })
     }
 
-    addMessagesToContainer(template){
-        User.all.forEach(user => {
+    addMessagesToContainer(template, users){
+        users.forEach(user => {
             let mail = new Mail(template, user);
             messageContainer.addMessage(mail);
         });
@@ -119,8 +129,53 @@ class TemplateViewBuilder {
         });
     }
 
+    updateRecipientsDropdown(){
+        User.all.forEach(user => {
+            let mail = user.ad_users_mail;
+            this.addNewRecipient(mail);
+        });
+    }
+
+    buildNewRecipientHandler(){
+        let emailInput = document.querySelector('#emailAddress');
+        $('button[data-jsevent]').click(() => {
+            if (emailInput.checkValidity() ){
+                let mail = emailInput.value;
+                this.addNewRecipient(mail);
+            }
+        });
+    }
+
+    addNewRecipient(mail){
+        if(!this._recipients.includes(mail) && mail.length > 0){
+            if (!User.all.map(u => u.ad_users_mail).includes(mail)){
+                let user = {ad_users_mail: mail}
+                User.all.push(user)
+                if (Template.current) this.addMessagesToContainer(Template.current, [user])
+            }
+            this._recipients.push(mail);
+            $('.dropdown-menu').prepend(this.buildDropdownItem(mail));
+            $('#recipients-no').text(this._recipients.length);
+        }
+    }
+
+    buildDropdownItem(content){
+        let dropdownItem = document.createElement('div');
+        dropdownItem.classList.add("dropdown-item");
+        dropdownItem.textContent = content;
+        dropdownItem.addEventListener('click', () => {
+            User.current = User.all.filter(u => u.ad_users_mail == content)[0];
+            this.updateInputValues();
+        })
+        return dropdownItem;
+    }
+
+
     build(){
+        this.inputSenderHandler();
         this.templateSelectionHandler();
         this.attachListenersToCheckboxes();
+        this.buildNewRecipientHandler();
     }
+
 }

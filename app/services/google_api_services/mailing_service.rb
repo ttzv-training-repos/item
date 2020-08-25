@@ -17,7 +17,7 @@ module GoogleApiServices
       messages.each do |m|
         mail = Mail.new do
           from sender
-          to 'tomasz.zwak@atal.pl'
+          to m[]
           subject m["subject"]
           html_part do
             content_type 'text/html; charset=UTF-8'

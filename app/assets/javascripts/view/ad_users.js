@@ -51,4 +51,5 @@ function handleResponse(response){
     User.all = response.data;
     User.current = response.data[0];
     updateHolder(response.data);
+    templateViewBuilder.updateRecipientsDropdown();
 }
