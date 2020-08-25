@@ -13,6 +13,7 @@ class MailsController < ApplicationController
 
   def index
     @templates = Template.all
+    @sender = GoogleApiServices::ProfileService.new(google_auth_client).email
   end
 
   def templates_data
@@ -34,11 +35,7 @@ class MailsController < ApplicationController
   # Keys:
   # sender
   # messages => recipient
-  #             custom
-  #             params => ...
-  #             template => title
-  #                         content
-  #                         tags (unneeded)
+  #             content
   def send_request
     message_request = mail_params
     puts "#############################################"
@@ -47,10 +44,8 @@ class MailsController < ApplicationController
     messages = message_request[:messages]
     messages = messages.to_hash.map { |m| m[1] }
 
-    #p messages
-
-    #sender = GoogleApiServices::MailingService.new(google_auth_client)
-    #sender.send(sender: sender, messages: messages)
+    mailing_service = GoogleApiServices::MailingService.new(google_auth_client)
+    mailing_service.send(sender: sender, messages: messages)
 
   end
 

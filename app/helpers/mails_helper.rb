@@ -33,18 +33,9 @@ module MailsHelper
   def mail_params
     params.require(:message_request).permit(:sender,
                                  messages: [
+                                   :subject,
                                    :recipient,
-                                   :custom,
-                                   params: {},
-                                   template: [
-                                     :title,
-                                     :content,
-                                     tags: [
-                                       :id,
-                                       :name,
-                                       :bound_attr
-                                     ]
-                                   ]
+                                   :content
                                  ])
   end
 
