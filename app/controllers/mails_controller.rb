@@ -13,7 +13,7 @@ class MailsController < ApplicationController
 
   def index
     @templates = Template.all
-    @sender = GoogleApiServices::ProfileService.new(google_auth_client).email
+    #@sender = GoogleApiServices::ProfileService.new(google_auth_client).email
   end
 
   def templates_data

@@ -5,25 +5,30 @@ module GoogleApiServices
     def initialize(client)
       @service = Google::Apis::Oauth2V2::Oauth2Service.new
       @service.authorization = client
+      @userinfo = nil
     end
 
     def userinfo
-      @userinfo = @service.get_userinfo
+      begin
+        @userinfo = @service.get_userinfo
+      rescue Signet::AuthorizationError
+        @userinfo = ""
+      end
     end
 
     def picture
       userinfo if @userinfo.nil?
-      @userinfo.picture
+      @userinfo.empty? ? "" : @userinfo.picture
     end
 
     def email
       userinfo if @userinfo.nil?
-      @userinfo.email
+      @userinfo.empty? ? "" : @userinfo.email
     end
 
     def name
       userinfo if @userinfo.nil?
-      @userinfo.name
+      @userinfo.empty? ? "" : @userinfo.name
     end
 
   end
