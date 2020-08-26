@@ -154,7 +154,7 @@ class TemplateViewBuilder {
                 if (Template.current) this.addMessagesToContainer(Template.current, [user])
             }
             this._recipients.push(mail);
-            $('.dropdown-menu').prepend(this.buildDropdownItem(mail));
+            $('#recipientsDropdown').prepend(this.buildDropdownItem(mail));
             $('#recipients-no').text(this._recipients.length);
         }
     }

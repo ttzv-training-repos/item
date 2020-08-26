@@ -22,45 +22,41 @@
     </head>
 
     <body>
-        <div class="topnav" id="myTopnav">
-            <%= link_to 'Home', item_path %>
-            <%= link_to 'Mailing', mails_path %>
-            <%= link_to 'Signatures', signatures_path %>
-            <%= link_to 'SMS Gateway', sms_gateway_index_path %>  
-            <%= link_to 'CBox', c_box_index_path %>
-            <%= link_to 'Users', ad_users_path %>
-            <%= link_to 'Offices', offices_path %>
-            <%= link_to 'Cart(?)', user_holders_path %>
-            <%= link_to 'Settings', settings_path %>
-            <div class="cart">
-                <a class="cartBtn" onclick="showCart()">
-                    <i class="fa fa-suitcase"></i>
-                    <span class="badge"></span>
-                </a>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top ">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="navbar-nav mr-auto">
+                    <%= link_to 'Home', item_path, :class => 'nav-item nav-link' %>
+                    <%= link_to 'Mailing', mails_path, :class => 'nav-item nav-link' %>
+                    <%= link_to 'Signatures', signatures_path, :class => 'nav-item nav-link' %>
+                    <%= link_to 'SMS Gateway', sms_gateway_index_path, :class => 'nav-item nav-link' %>  
+                    <%= link_to 'CBox', c_box_index_path, :class => 'nav-item nav-link' %>
+                    <%= link_to 'Users', ad_users_path, :class => 'nav-item nav-link' %>
+                    <%= link_to 'Offices', offices_path, :class => 'nav-item nav-link' %>
+                    <%= link_to 'Cart(?)', user_holders_path, :class => 'nav-item nav-link' %>
+                    <%= link_to 'Settings', settings_path, :class => 'nav-item nav-link' %>
+                </div>
             </div>
-            <a class="icon fa fa-bars" onclick="topbarShow()"></a>
-
-        </div>
-        <div class="cart-content" id="cart">
-            <%= render partial: 'global_partials/holder' %>
-        </div>
-        
-        <div id="mySidenav" class="sidenav">
-            
-            <div class="left"> 
-                There will be a table someday
-            </div>
-            <div class="right" onclick="navHandler()">                 
-               <div id="icon" class="fa sidebtn">&#xf067;</div>     
-            </div>
-        </div>
-        
-       
-        <div id="main" class="main">
+            <ul class="navbar-nav">
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-suitcase"></i>
+                        <span class="badge badge-primary badge-pill" id="cartQty"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="navbarDropdown">
+                        <%= render partial: 'global_partials/holder' %>
+                    </div>
+                </div>
+            </ul>
+        </nav>
+        <div class="container-fluid">
+            <main>
+            </main>            
             <%= yield %>
+            <%= javascript_include_tag 'application' %>
         </div>
-        
-        <%= javascript_include_tag 'application' %>
     </body>
     <script>
         var token = $('meta[name="csrf-token"]').attr('content');

@@ -1,5 +1,5 @@
 function updateHolder(data){
-    let badge = document.querySelector('.badge');
+    let badge = document.querySelector('#cartQty');
     badge.textContent = data.length;
     if (data.length > 0){
         let entries = new Array();
@@ -16,6 +16,7 @@ function updateHolder(data){
             entry.textContent = `${element.ad_users_displayname}`
             $("#holder-entries-popup").append(entry);
         }
+        entries[0].classList.toggle('active')
     }
     else {
         $("#holder-entries-popup").empty();
