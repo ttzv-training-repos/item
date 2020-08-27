@@ -10,4 +10,15 @@ class MailingAJAXRequest {
         //console.error("AJAX POST invoked by this button was disabled, check mails.js file line 22")
     }
 
+    static progress(){
+        return $.ajax({
+                type: "POST",
+                url: "/item/mails/progress",
+                data: {},
+                success: function(data){
+                    
+                }
+            });
+    }
+
 }

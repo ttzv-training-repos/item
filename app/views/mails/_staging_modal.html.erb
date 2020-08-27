@@ -9,14 +9,14 @@
       </div>
       <div class="modal-body">
         <div id="staging-table-area">
-          <%= render partial: 'progress_bar' %>  
         </div>
-        <div id="staging-preview-area"></div>
+        <div id="staging-preview-area">
+        </div>
+        <%= render partial: 'progress_bar' %>
       </div>
       <div class="modal-footer d-flex">
-        
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" id="send-request">Send</button>
+        <button type="button" class="btn btn-primary" id="send-request">Send</button>
       </div>
     </div>
   </div>

@@ -72,4 +72,6 @@ class StagingTable{
     empty(){
         return this._content.length <= 0;
     }
+
+    
 }

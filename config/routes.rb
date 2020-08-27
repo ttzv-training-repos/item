@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     post '/upload', to: 'mails#upload', as: 'mails_upload'
     post '/send_request', to: 'mails#send_request'
     get '/templates_data', to: 'mails#templates_data'
+    post '/progress', to: 'mails#progress'
   end
 
 end

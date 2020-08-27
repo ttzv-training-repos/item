@@ -170,6 +170,10 @@ class TemplateViewBuilder {
         return dropdownItem;
     }
 
+    setProgress(progress){
+        $('#progressBar').attr('style', `width: ${progress}%;`)
+    }
+
 
     build(){
         this.inputSenderHandler();

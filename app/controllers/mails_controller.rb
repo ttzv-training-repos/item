@@ -1,5 +1,6 @@
 class MailsController < ApplicationController
   include MailsHelper
+  include ActionController::Live
   
   def upload
     uploaded_files = params[:templates]
@@ -13,7 +14,7 @@ class MailsController < ApplicationController
 
   def index
     @templates = Template.all
-    #@sender = GoogleApiServices::ProfileService.new(google_auth_client).email
+    @sender = get_user_profile[:email]
   end
 
   def templates_data
@@ -46,7 +47,10 @@ class MailsController < ApplicationController
 
     mailing_service = GoogleApiServices::MailingService.new(google_auth_client)
     mailing_service.send(sender: sender, messages: messages)
+  end
 
+  def progress
+    render :json => {progress: Redis.new.get("mprg")}
   end
 
 end
