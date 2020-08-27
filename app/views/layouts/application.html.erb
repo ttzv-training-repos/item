@@ -40,15 +40,32 @@
                 </div>
             </div>
             <ul class="navbar-nav">
-                <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <li class="nav-item dropdown mr-10">
+                    <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="accountDropdown">
+                        <div class="dropdown-item">
+                            <i class="fa fa-google"></i>
+                            <% if @user_profile.valid %>
+                                <img src="<%= @user_profile.picture %>" alt="" srcset="" class="profile-img">
+                                <span><%= @user_profile.name %></span>
+                                <%= link_to 'Log out', google_logout_path %>
+                            <% else %>
+                                <%= link_to 'Log in', google_login_path %> 
+                            <% end %>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="cartDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-suitcase"></i>
                         <span class="badge badge-primary badge-pill" id="cartQty"></span>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="cartDropdown">
                         <%= render partial: 'global_partials/holder' %>
                     </div>
-                </div>
+                </li>
             </ul>
         </nav>
         <div class="container-fluid">

@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     resources :mails, only: [:index]
     get '/ad_users/reload', to: 'ad_users#reload'
     get '/oauth2login', to: 'item#oauth2login'
+    get '/google_login', to: 'item#google_login'
+    get '/google_logout', to: 'item#google_logout'
   end
 
 
