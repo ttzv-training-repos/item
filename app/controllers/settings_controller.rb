@@ -20,19 +20,4 @@ class SettingsController < ApplicationController
     end
   end
 
-  def check_auth
-    client = google_auth_client
-    if client.access_token.nil?
-      redirect_to client.authorization_uri.to_s
-    else
-      @data = {expired: client.expired?, expiresin: client.expires_in, issuedat: client.issued_at, state: client.state, issuer: client.issuer, expiry: client.expiry, expires_at: client.expires_at}
-
-      profile = Google::Apis::Oauth2V2::Oauth2Service.new
-      profile.authorization = client
-      @apidata = profile.get_userinfo.to_json
-
-      gmail = Google::Apis::GmailV1::GmailService.new
-    end
-  end
-
 end

@@ -5,12 +5,13 @@ module GoogleApiServices
     attr_reader :valid
   
     def initialize(client)
-      service = Google::Apis::Oauth2V2::Oauth2Service.new
-      service.authorization = client
-      begin
-        @userinfo = service.get_userinfo
-      rescue Signet::AuthorizationError, Google::Apis::AuthorizationError
+      @client = client
+      if @client.nil?
         @userinfo = nil
+      else
+        service = Google::Apis::Oauth2V2::Oauth2Service.new
+        service.authorization = @client
+        @userinfo = service.get_userinfo
       end
     end
 
