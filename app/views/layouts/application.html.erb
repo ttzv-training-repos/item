@@ -47,9 +47,9 @@
                     <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="accountDropdown">
                         <div class="dropdown-item">
                             <i class="fa fa-google"></i>
-                            <% if @user_profile.valid %>
-                                <img src="<%= @user_profile.picture %>" alt="" srcset="" class="profile-img">
-                                <span><%= @user_profile.name %></span>
+                            <% if @google_logged_in %>
+                                <img src="<%= @user_profile[:picture] %>" alt="" srcset="" class="profile-img">
+                                <span><%= @user_profile[:name] %></span>
                                 <%= link_to 'Log out', google_logout_path %>
                             <% else %>
                                 <%= link_to 'Log in', google_login_path %> 

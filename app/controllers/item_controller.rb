@@ -3,14 +3,6 @@ class ItemController < ApplicationController
   include ItemHelper
   
   def index
-    client = google_auth_client
-    if client.nil?
-      picture_url = ""
-    else
-      profile = GoogleApiServices::ProfileService.new(client)
-      picture_url = profile.picture
-    end
-    @google_profile_img = picture_url
     @user_id = current_user
   end
 

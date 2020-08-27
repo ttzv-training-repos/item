@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_user_profile
+    @google_logged_in = !google_auth_client.nil?
     @user_profile = GoogleApiServices::ProfileService.new(google_auth_client)
   end
 

@@ -14,22 +14,26 @@ module GoogleApiServices
         @userinfo = service.get_userinfo
       end
     end
+    
+    def [](attribute)
+      return "" if @userinfo.nil?
+      return self.__send__(attribute)
+    end
+
+    private
 
     def picture
-      @userinfo.picture unless @userinfo.nil?
+      @userinfo.picture
     end
 
     def email
-      @userinfo.email unless @userinfo.nil?
+      @userinfo.email
     end
 
     def name
-      @userinfo.name unless @userinfo.nil?
+      @userinfo.name
     end
 
-    def valid
-      return !@userinfo.nil?
-    end
 
   end
 end
