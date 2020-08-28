@@ -36,6 +36,12 @@ class TemplateViewBuilder {
         let templateTitle = this._templateData[selectedTemplate].title;
         this.setTitle(templateTitle);
         this.setMessageContent(templateContent);
+        if(User.all.length !== 0){
+            this.buildInputs(templateTags);
+        }
+    }
+
+    buildInputs(templateTags){
         this.renderInputsForTemplateTags(templateTags);
         templateTags.forEach(tag => { this.attachListenerToInput(tag.name) });
         this.updateInputValues();
@@ -142,6 +148,7 @@ class TemplateViewBuilder {
             if (emailInput.checkValidity() ){
                 let mail = emailInput.value;
                 this.addNewRecipient(mail);
+                emailInput.value = '';
             }
         });
     }
@@ -151,6 +158,7 @@ class TemplateViewBuilder {
             if (!User.all.map(u => u.ad_users_mail).includes(mail)){
                 let user = {ad_users_mail: mail}
                 User.all.push(user)
+                User.current = user
                 if (Template.current) this.addMessagesToContainer(Template.current, [user])
             }
             this._recipients.push(mail);
@@ -165,6 +173,7 @@ class TemplateViewBuilder {
         dropdownItem.textContent = content;
         dropdownItem.addEventListener('click', () => {
             User.current = User.all.filter(u => u.ad_users_mail == content)[0];
+            if (Template.current) this.buildInputs(Template.current.tags)
             this.updateInputValues();
         })
         return dropdownItem;

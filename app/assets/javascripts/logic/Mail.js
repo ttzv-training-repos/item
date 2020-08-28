@@ -20,7 +20,8 @@ class Mail extends Message{
     assignTagBindings(){
         let tags = this.template.tags;
         tags.forEach(tag => {
-            let value = this.user[tag.bound_attr] ?? "" 
+            let value = "" 
+            if (this.user) value = this.user[tag.bound_attr] ?? "" 
             this.setTagValue(tag.name, value)
         });
         this.updateContent();
