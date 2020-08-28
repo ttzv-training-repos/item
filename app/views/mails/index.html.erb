@@ -8,34 +8,35 @@
                     <label for="sender" class="form__label">Sender</label>
                 </div>
                 <div class="dropdown d-flex justify-content-between align-items-center px-1 py-1" >
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="buttonDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Recipients 
                         <span class="badge badge-primary badge-pill" id="recipients-no">0</span>
                     </button>
-                    <div class="dropdown-menu" id="recipientsDropdown" aria-labelledby="dropdownMenuButton">
+                    <div class="dropdown-menu" id="recipientsDropdown" aria-labelledby="buttonDropdownMenu">
                         <div class="dropdown-divider"></div>
                         <div class="form-group">
                             <form class="px-4 py-3" onsubmit="return false">
                                 <label for="emailAddress">New recipient</label>
-                                <input type="email" class="form-control" id="emailAddress" placeholder="email@example.com" aria-describedby="emailHelp">
-                                <button type="submit" data-jsevent="add-recipient" class="btn btn-primary my-1">Add</button>
+                                <input type="email" class="form-control" id="inputEmailAddress" placeholder="email@example.com" aria-describedby="emailHelp">
+                                <button type="submit" id="buttonAddRecipient" data-jsevent="add-recipient" class="btn btn-primary my-1">Add</button>
                             </form>
                         </div>
                     </div>
                 </div>
                 <button class="send-btn btn btn-primary" data-toggle="modal" data-target="#stagingModal"><i class="fa fa-envelope" aria-hidden="true"></i></button>
             </div>
-            <div class="variables">
-                This div should scroll if list is too big
+            <div class="variables" id="vInputs">
+                Select recipient and template to show available fields.
+                (This div should scroll if list is too big)
             </div>
         </div>
         <div class="message-content">
             <div class="mail-topic sub-fcn-block-title">
-                <span id="topic">
+                <span id="title">
                     TOPIC
                 </span>
             </div>
-            <div class="mail-text">
+            <div class="mail-text" id="content">
                 Long text going all the way to the bottom of the page, slightly lighter bg than surroundings
             </div>
         </div>
