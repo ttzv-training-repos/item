@@ -7,6 +7,7 @@ class SettingsController < ApplicationController
     @attrs << ActiveRecord::Base.connection.columns(:ad_user_details).collect {|c| "ad_user_details_" + c.name}
     @attrs << ActiveRecord::Base.connection.columns(:offices).collect {|c| "offices_" + c.name}
     @attrs.flatten!
+    @sent_items = SentItem.all
   end
 
   def run_autobinder

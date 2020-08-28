@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :get_user_profile
+  before_action :get_user_profile, except: [:progress, :send_request]
   def index
   end
 

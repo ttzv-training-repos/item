@@ -27,8 +27,10 @@ module GoogleApiServices
         message = Google::Apis::GmailV1::Message.new
         message.raw = mail.to_s
         @service.send_user_message('me', message)
+        SentItem.create(title: mail.to, content: mail.html_part.body, item_type: "Mail", status: true)
         sent += 1
         progress = sent/messages.length * 100
+        puts progress
         Redis.new.set('mprg', progress.to_i)
       end
     end

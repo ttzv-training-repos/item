@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_14_132702) do
+ActiveRecord::Schema.define(version: 2020_08_28_081758) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -60,14 +60,11 @@ ActiveRecord::Schema.define(version: 2020_07_14_132702) do
     t.string "dn"
     t.string "objectclass"
     t.string "cn"
-    t.string "sn"
-    t.string "givenname"
     t.text "description"
     t.string "distinguishedname"
     t.string "instancetype"
     t.date "whencreated"
     t.date "whenchanged"
-    t.string "displayname"
     t.string "usncreated"
     t.string "memberof"
     t.string "usnchanged"
@@ -95,10 +92,13 @@ ActiveRecord::Schema.define(version: 2020_07_14_132702) do
     t.string "dscorepropagationdata"
     t.date "lastlogontimestamp"
     t.string "msds-supportedencryptiontypes"
-    t.string "mail"
-    t.string "userprincipalname"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "sn"
+    t.string "givenname"
+    t.string "displayname"
+    t.string "mail"
+    t.string "userprincipalname"
     t.index ["objectguid"], name: "index_ad_users_on_objectguid", unique: true
   end
 
@@ -123,6 +123,16 @@ ActiveRecord::Schema.define(version: 2020_07_14_132702) do
     t.string "fax_2"
     t.string "location"
     t.string "location_2"
+  end
+
+  create_table "sent_items", force: :cascade do |t|
+    t.string "title"
+    t.string "item_type"
+    t.boolean "status"
+    t.text "content"
+    t.text "status_content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "template_taggings", force: :cascade do |t|
