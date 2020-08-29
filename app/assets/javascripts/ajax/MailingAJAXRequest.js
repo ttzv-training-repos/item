@@ -1,5 +1,11 @@
 class MailingAJAXRequest {
 
+    static templateData(){
+        return $.get("/item/mails/templates_data", function (data) {
+            console.log(data);
+        });
+    }
+
     static sendMails(){
         $.post("/item/mails/send_request", messageContainer.getJson(),
             function (data, textStatus, jqXHR) {
@@ -20,5 +26,6 @@ class MailingAJAXRequest {
                 }
             });
     }
+    
 
 }

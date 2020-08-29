@@ -12,7 +12,8 @@
                         Recipients 
                         <span class="badge badge-primary badge-pill" id="recipients-no">0</span>
                     </button>
-                    <div class="dropdown-menu" id="recipientsDropdown" aria-labelledby="buttonDropdownMenu">
+                    <div class="dropdown-menu" aria-labelledby="buttonDropdownMenu">
+                        <div id="recipientsDropdown"></div>
                         <div class="dropdown-divider"></div>
                         <div class="form-group">
                             <form class="px-4 py-3" onsubmit="return false">
@@ -25,7 +26,7 @@
                 </div>
                 <button class="send-btn btn btn-primary" data-toggle="modal" data-target="#stagingModal"><i class="fa fa-envelope" aria-hidden="true"></i></button>
             </div>
-            <div class="variables" id="vInputs">
+            <div class="variables" id="inputsArea">
                 Select recipient and template to show available fields.
                 (This div should scroll if list is too big)
             </div>

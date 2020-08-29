@@ -11,7 +11,7 @@ function updateHolder(data){
             entry.dataset.toggle = "list"
             entry.addEventListener('click',() => {
                 User.current = data[index];
-                templateViewBuilder.updateInputValues();
+                templateViewBuilder.renderInputsForTemplateTags(Template.current.tags);
             })
             entry.textContent = `${element.ad_users_displayname}`
             $("#holder-entries-popup").append(entry);

@@ -1,12 +1,12 @@
 <div class="template-entry">
-    <div class="template-entry-content" data-index=<%=id%>>
-        <label for="<%=id%>" data-index=<%=id%>>
-            <input type="checkbox" name="<%=id%>" id="<%=id%>" data-type="template-checkbox" data-index=<%=id%>>
+    <div class="template-entry-content" data-entry-area="content" data-entry-area-id="<%= id %>">
+        <label for="<%=id%>">
+            <input type="checkbox" name="<%=id%>" id="<%=id%>" data-entry-area="checkbox">
         </label>
-        <div data-index=<%=id%>><%=id%></div>
+        <div><%=id%></div> <!-- checkbox label -->
     </div>
-    <div class="template-controls" data-template-id="<%=id%>">
-        <div class="template-control-edit template-control normalized-transition">Edit</div>
-        <div class="template-control-delete template-control normalized-transition">Delete</div>
+    <div class="template-controls">
+        <div class="template-control-edit template-control normalized-transition" data-entry-area="edit" data-entry-area-id="<%= id %>">Edit</div>
+        <div class="template-control-delete template-control normalized-transition" data-entry-area="delete" data-entry-area-id="<%= id %>">Delete</div>
     </div>
 </div>

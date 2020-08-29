@@ -1,14 +1,15 @@
-let templateViewBuilder = new TemplateViewBuilder(null);
+$('.template-list').toggleClass('invisible');
+let templateViewBuilder = null;
 let messageContainer = new PreparedMessageContainer('temporary@mail');
 
 $(document).ready( function () {
-    $.get("/item/mails/templates_data", function (data) {
-        console.log(data);
-        templateViewBuilder.templateData = data.template_data;
-    });
+    
+    MailingAJAXRequest.templateData().done(function buildTemplateView(data){
+        templateViewBuilder = new TemplateViewBuilderV2(data.template_data);
+        templateViewBuilder.build();
+        $('.template-list').toggleClass('invisible');
+    })
    
-    templateViewBuilder.build();
-
     $('#send-request').click(() => {
         MailingAJAXRequest.sendMails();
         let progress = 0;

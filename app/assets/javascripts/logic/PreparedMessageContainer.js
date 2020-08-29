@@ -19,7 +19,6 @@ class PreparedMessageContainer{
 
     removeMessage(message){
         this.preparedMessages = this.preparedMessages.filter( msg => !msg.equals(message));
-        this.updateRequestJson();
     }
 
     set sender(sender){
