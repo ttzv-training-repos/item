@@ -1,4 +1,6 @@
 class StagingTable{
+    static SORT_SUBJECT = "subject";
+    static SORT_RECIPIENT = "recipient";
 
     /**
      * Class used to generate "staging" table where all prepared messages can be viewed before sending.
@@ -8,6 +10,7 @@ class StagingTable{
         if (!content) throw new Error("Staging Table cannot be created without Prepared Messages");
         this._content = content.getJson().message_request.messages;
         this._headerRow = null;
+        this._sortingOption = StagingTable.SORT_SUBJECT;
  
         this.buildTableScaffold();
         this.addHtmlAttributes();
@@ -23,6 +26,11 @@ class StagingTable{
         this._table.appendChild(this._tbody);
     }
 
+    clear(){
+        this._theadRow.innerHTML = '';
+        this._tbody.innerHTML = '';
+    }
+
     addHtmlAttributes(){
         this._table.classList.add('table', 'table-striped', 'table-bordered', 'table-hover-cells');
         this._table.setAttribute('id', 'stagingTable');
@@ -33,19 +41,22 @@ class StagingTable{
      * @param  {} option criteria to sort by, use {by: "subject"} or {by: "recipient"}
      */
     sort(option){
+        this.clear();
         let tableMap = new Map();
-        if(option.by === "subject"){
+        if(option.by === StagingTable.SORT_SUBJECT){
             let uniqueSubjects = [...new Set(this._content.map(message => message.subject))];
             uniqueSubjects.forEach(subject => {
                 tableMap.set(subject, this._content.filter(message => message.subject === subject));
             });
+            this._sortingOption = StagingTable.SORT_SUBJECT;
             return tableMap;
         }
-        if(option.by === "recipient"){
+        if(option.by === StagingTable.SORT_RECIPIENT){
             let uniqueRecipients = [...new Set(this._content.map(message => message.recipient))]
             uniqueRecipients.forEach(recipient => {
                 tableMap.set(recipient, this._content.filter(message => message.recipient === recipient));
             });
+            this._sortingOption = StagingTable.SORT_RECIPIENT;
             return tableMap;
         }
     }
@@ -114,9 +125,9 @@ class StagingTable{
     }
 
     buildHeaderContent(tableMap){
-        tableMap.forEach((messages, subject) => {
+        tableMap.forEach((messages, header) => {
             let headerCell = document.createElement('th');
-            let headerCellText = document.createTextNode(subject);
+            let headerCellText = document.createTextNode(header);
             headerCell.appendChild(headerCellText);
             this._theadRow.appendChild(headerCell);
         });
@@ -124,7 +135,11 @@ class StagingTable{
 
     buildCellContentFromMessage(cell, message){
         if(message){
-            cell.appendChild(document.createTextNode(message.recipient));
+            let textNodeContent = message.recipient;
+            if(this._sortingOption === StagingTable.SORT_RECIPIENT){
+                textNodeContent = message.subject;
+            }
+            cell.appendChild(document.createTextNode(textNodeContent));
             this.handleCellClick(cell, message);
             this.handleCellHover(cell, message);
             this.buildCellPopover(cell, message);
