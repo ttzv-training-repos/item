@@ -1,7 +1,10 @@
-<div class="mailing-page-content">
-<%= render partial: 'staging_modal' %>
-    <div class="mails-main sub-fcn-block">
-        <div class="message-control">
+<!-- mailing-page-content -->
+<div class=" row"> 
+    <%= render partial: 'staging_modal' %>
+    <!-- mails-main -->
+    <div class="row">
+        <!-- message controls -->
+        <div class="col-sm">
             <div class="static">
                 <div class="form__group field">
                     <input type="input" name="sender" id="sender"  class="form__field" placeholder="Sender" data-event="setSender" value="<%=@sender%>">
@@ -31,7 +34,8 @@
                 (This div should scroll if list is too big)
             </div>
         </div>
-        <div class="message-content">
+        <!-- message-content -->
+        <div class="col-sm-6">
             <div class="mail-topic sub-fcn-block-title">
                 <span id="title">
                     TOPIC
@@ -41,31 +45,32 @@
                 Long text going all the way to the bottom of the page, slightly lighter bg than surroundings
             </div>
         </div>
-    </div>
-    <div class="templates sub-fcn-block">
-        <div class="templates-title sub-fcn-block-title">
-            <span>
-                TEMPLATES
-            </span>
-        </div>
-        list with checkboxes, should scroll if too long, maybe a form?
-        <div class="template-list">
-            <% unless @templates.empty? %>
-                <% @templates.each do |template| %>
-                    <%= render partial: 'template_entry', locals: {id: template.name} %>
-                <% end %>
-            <% end %>    
-        </div>
-        <div class="templates-footer flex-center-column">
-            <fieldset>
-                <legend>Add templates</legend>
-                <div class="flex-center-row full-height templates-footer-controls">
-                    <%= form_with(url: {action: :upload}, multipart: true) do %>
-                        <%= file_field_tag 'templates[]', multiple: true %>
-                        <%= submit_tag %>
+        <!-- templates -->
+        <div class="col-sm">
+            <div class="templates-title sub-fcn-block-title">
+                <span>
+                    TEMPLATES
+                </span>
+            </div>
+            list with checkboxes, should scroll if too long, maybe a form?
+            <div class="template-list">
+                <% unless @templates.empty? %>
+                    <% @templates.each do |template| %>
+                        <%= render partial: 'template_entry', locals: {id: template.name} %>
                     <% end %>
-                </div>
-            </fieldset>
+                <% end %>    
+            </div>
+            <div class="templates-footer flex-center-column">
+                <fieldset>
+                    <legend>Add templates</legend>
+                    <div class="flex-center-row full-height templates-footer-controls">
+                        <%= form_with(url: {action: :upload}, multipart: true) do %>
+                            <%= file_field_tag 'templates[]', multiple: true %>
+                            <%= submit_tag %>
+                        <% end %>
+                    </div>
+                </fieldset>
+            </div>
         </div>
     </div>
 </div>
