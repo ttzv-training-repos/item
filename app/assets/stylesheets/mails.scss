@@ -2,71 +2,74 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-.mailing-page-content{
-    margin: 20px;
-    padding: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: lightgray;
-    height: 89vh;
+.tmsg-left-panel{
+    background-color:#ffffff;
+    border-left: 1px solid #ced4da;
 }
 
-.send-btn{
-    height: 40px;
-    width: 40px;
+.tmsg-center{
+    background-color:#ffffff;
+    -webkit-box-shadow: inset 2px 0px 25px -11px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 2px 0px 25px -11px rgba(0,0,0,0.75);
+    box-shadow: inset 2px 0px 25px -11px rgba(0,0,0,0.75);
 }
 
-.message-control{
-    height: 99%;
-    margin-right: 10px;
-    margin-bottom: 10px;
+.tmsg-content{
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+.card-header.tmsg{
+    background-color: #e9ecef;
 }
 
-.message-control .static{
-    height: 20%;
+.tmsg-right-panel{
+    background-color: #ffffff;
+    border-right: 1px solid #ced4da;
 }
 
-.variables{
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    background-color:rgb(184, 184, 184);
-    padding: 10px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    height: 80%;
+.t-entry{
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: all 0.2s ease-in-out;
 }
 
-.mails-main{
-    display: flex;
-    justify-content: center;
-    align-items: center; 
+.t-entry-controls{
+    font-size: 1.2rem;
 }
 
-.message-content{
-    height: 100%;
-    box-sizing: border-box;
+.t-entry:hover{
+    background-color: dodgerblue;
+    transform: scale(1.015);
+    color: white;
 }
 
-.sub-fcn-block{
-    height: 100%;
-    padding: 10px;
-    border:5px solid rgb(184, 184, 184);
+.t-entry-edit{
+    transition: all 0.2s ease-in-out ;
+    border-radius: .25rem;
+
 }
 
-.sub-fcn-block-title{
-    border: 2px solid rgb(184, 184, 184);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
+.t-entry-edit:hover{
+    transition: all 0.2s ease-in-out ;
+    background-color: green;
 }
+
+.t-entry-delete{
+    transition: all 0.2s ease-in-out ;
+    border-radius: .25rem;
+
+}
+
+.t-entry-delete:hover{
+    background-color: red;
+}
+
 /* INPUT STYLING */
-$primary: #11998e;
-$secondary: #38ef7d;
-$white: #fff;
-$gray: #9b9b9b;
+$primary: #3d3d3d;
+$secondary: #0059ff;
+$white: rgb(255, 255, 255);
+$black: rgb(0, 0, 0);
+$gray: #666666;
 .form__group {
   position: relative;
   padding: 15px 0 0;
@@ -76,12 +79,12 @@ $gray: #9b9b9b;
 
 .form__field {
   font-family: inherit;
-  //width: 100%;
   border: 0;
+  width: auto;
   border-bottom: 2px solid $gray;
   outline: 0;
   font-size: 1.3rem;
-  color: $white;
+  color: $gray;
   padding: 7px 0;
   background: transparent;
   transition: border-color 0.2s;
@@ -126,120 +129,8 @@ $gray: #9b9b9b;
 .form__field{
   &:required,&:invalid { box-shadow:none; }
 }
-
 /* INPUT STYLING */
 
-.mail-text{
-    background-color: whitesmoke;
-    padding: 2%;
-    height: 96%;
-    border: groove;
-    overflow-y: auto;
-}
-
-.template-list{
-    display: flex;
-    flex-direction: column;
-    height: 80%;
-    overflow-y: auto;
-}
-
-.template-entry{
-    display: inline;
-    margin-bottom: 5px;
-    border: 1px solid rgb(184, 184, 184);
-    width: 100%;
-}
-
-.template-entry-content{
-    display: flex;
-    padding: 5px;
-}
-
-.template-entry-content:hover{
-    cursor: pointer;
-}
-
-.template-controls{
-    display: flex;
-    flex-direction: row;
-}
-
-.template-control-edit{
-    width: 80%;
-    text-align: center;
-    border: 1px solid green;
-    background-color: rgb(3, 250, 3);
-    opacity: 50%;
-}
-
-.template-control-delete{
-    width: 20%;
-    text-align: center;
-    border: 1px solid red;
-    background-color: rgb(255, 125, 125);
-    opacity: 50%;
-}
-
-.template-control:hover{
-    opacity: 100%;
-    cursor: pointer;
-}
-
-.normalized-transition{
-    transition: all ease-in-out, 0.25s;
-}
-
-
-.flex-center-row{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.flex-center-column{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.templates-footer{
-    height: 10%;
-    background-color: rgb(184, 184, 184);
-    justify-content: flex-start;
-    padding: 5px;
-}
-
-.full-height{
-    height: 100%;
-}
-
-.full-width{
-    width: 100%;
-}
-
-.full-hw{
-    height: 100%;
-    width: 100%;
-}
-
-.templates-footer-controls{
-    flex-grow: 1;
-    justify-content: space-evenly;
-    width: 100%;
-}
-
-.normalized-button{
-    border: 1px solid black;
-    margin: 2px;
-    opacity: 50%;
-}
-
-.normalized-button:hover{
-    opacity: 100%;
-    cursor: pointer;
-}
 
 itemtag-mail-login{
     background-color: lightgrey;
@@ -248,4 +139,80 @@ itemtag-mail-login{
 itemtag-mail-password{
     background-color: lightgrey;
 }
+
+.debug-border{
+    border: 1px solid red;
+}
+
+input[type=file]::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+/* ENTRIES checkbox STYLING */
+$green:#00a128;
+.cbx {
+    -webkit-perspective: 20;
+    perspective: 20;
+    border: 2px solid #e8e8eb;
+    background: #e8e8eb;
+    border-radius: 4px;
+    transform: translate3d(0, 0, 0);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 0;
+  }
+  .cbx:hover {
+    border-color: #0b76ef;
+  }
+  .flip {
+    display: block;
+    transition: all 0.4s ease;
+    transform-style: preserve-3d;
+    position: relative;
+    width: 20px;
+    height: 20px;
+  }
+  .t-cbx {
+    display: none;
+  }
+  .t-cbx:checked + .cbx {
+    border-color: $green;
+  }
+  .t-cbx:checked + .cbx .flip {
+    transform: rotateY(180deg);
+  }
+  .front,
+  .back {
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+  }
+  .front {
+    background: #fff;
+    z-index: 1;
+  }
+  .back {
+    transform: rotateY(180deg);
+    background: $green;
+    text-align: center;
+    color: #fff;
+    line-height: 20px;
+    box-shadow: 0 0 0 1px $green;
+  }
+  .back svg {
+    fill: none;
+    margin-bottom: 3px;
+  }
+  .back svg path {
+    stroke: #fff;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* ENTRIES checkbox STYLING END */
 

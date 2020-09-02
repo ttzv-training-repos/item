@@ -47,7 +47,7 @@ class TemplateViewBuilderV2{
             let templateName = templateEntry.dataset.entryAreaId;
             if(this.canChangeCurrentTemplate(templateName)){
                 let template = Template.current;
-                this.$title.text(template.title);
+                this.$title.val(template.title);
                 this.$content.html(template.content);
                 this.renderInputsForTemplateTags(template.tags)
             }

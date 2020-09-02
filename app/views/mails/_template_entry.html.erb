@@ -1,12 +1,20 @@
-<div class="template-entry">
-    <div class="template-entry-content" data-entry-area="content" data-entry-area-id="<%= id %>">
-        <label for="<%=id%>">
-            <input type="checkbox" name="<%=id%>" id="<%=id%>" data-entry-area="checkbox">
+<div class="t-entry row my-1">
+    <div class="col-sm-10 d-flex align-items-center justify-content-between " data-entry-area="content" data-entry-area-id="<%= id %>">
+        <input type="checkbox" class="t-cbx" name="<%=id%>" id="<%=id%>" data-entry-area="checkbox">
+        <label class="cbx" for="<%=id%>">
+            <div class="flip">
+                <div class="front"></div>
+                <div class="back">
+                <svg width="16" height="14" viewBox="0 0 16 14">
+                    <path d="M2 8.5L6 12.5L14 1.5"></path>
+                </svg>
+                </div>
+            </div>
         </label>
         <div><%=id%></div> <!-- checkbox label -->
     </div>
-    <div class="template-controls">
-        <div class="template-control-edit template-control normalized-transition" data-entry-area="edit" data-entry-area-id="<%= id %>">Edit</div>
-        <div class="template-control-delete template-control normalized-transition" data-entry-area="delete" data-entry-area-id="<%= id %>">Delete</div>
+    <div class="col-sm row t-entry-controls">
+        <div class="col-sm-12 t-entry-edit" data-entry-area="edit" data-entry-area-id="<%= id %>"><i class="fa fa-edit"></i></div>
+        <div class="col-sm-12 t-entry-delete" data-entry-area="delete" data-entry-area-id="<%= id %>"><i class="fa fa-trash"></i></i></div>
     </div>
 </div>

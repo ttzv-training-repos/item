@@ -1,13 +1,10 @@
 // Place all the styles related to the item controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
- .submit-button{
-    background-color: DodgerBlue;
-    color: #fff;
-    border: 1px solid transparent;
-    padding: 10px;
-    font-size: 16px;
- }
+html, body{
+    height: 100%; //3% is navbar
+    overflow: hidden;
+}
 
  .dropdown-menu{
      max-height: 50vh;
