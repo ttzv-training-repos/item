@@ -67,13 +67,13 @@
         </div>
     </div>
     <!-- templates -->
-    <div class="col-sm tmsg-right-panel mr-2 py-5">
+    <div class="col-sm tmsg-right-panel mr-2 py-1">
         <div class="card">
             <div class="card-header tmsg">
                 Templates
             </div>
-            <div class="card-body">
-                <div class="template-list px-2">
+            <div class="card-body tmsg-list">
+                <div class="px-2">
                     <% unless @templates.empty? %>
                         <% @templates.each do |template| %>
                             <%= render partial: 'template_entry', locals: {id: template.name} %>
@@ -82,16 +82,28 @@
                 </div>
             </div>
         </div>
-       
-        <div class="templates-footer flex-center-column">
-            <legend>Add templates</legend>
-            <div class="form-group templates-footer-controls">
-                <%= form_with(url: {action: :upload}, multipart: true) do %>
-                    <label for="templateSelect">Example file input</label>
-                    <%= file_field_tag 'templates[]', multiple: true, class: 'form-control-file btn btn-primary', id: 'templateSelect' %>
-                    <%= button_tag 'Upload', type: 'submit', name: 'commit',data: { disable_with: "Please wait..." }, class: 'btn btn-primary' %>
-                <% end %>
-            </div>
+            <div class="card mt-1">
+                <div class="card-header tmsg text-center">
+                    Add templates
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="form-group d-flex justify-items-center">
+                                <%= form_with(url: {action: :upload}, multipart: true) do %>
+                                    <h5>From file</h5>
+                                    <%= file_field_tag 'templates[]', multiple: true, class: "form-control-file", id: "templateSelect" %>
+                                    <button name="commit" type="submit" data-disable-with="Please wait..." class="btn btn-primary my-1"><i class="fa fa-upload"></i></button>
+                                <% end %>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <h5>Create</h5>
+                            <button class="btn btn-primary text-center"><i class="fa fa-edit"></i></button>
+                        </li>
+                    </ul>
+                </div>
+            </div>   
         </div>
     </div>
 </div>

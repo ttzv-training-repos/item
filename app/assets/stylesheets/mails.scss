@@ -27,6 +27,12 @@
     border-right: 1px solid #ced4da;
 }
 
+.tmsg-list{
+  height: 50vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 .t-entry{
     border: 1px solid #ced4da;
     border-radius: .25rem;
@@ -46,7 +52,7 @@
 .t-entry-edit{
     transition: all 0.2s ease-in-out ;
     border-radius: .25rem;
-
+    text-align: center;
 }
 
 .t-entry-edit:hover{
@@ -57,6 +63,7 @@
 .t-entry-delete{
     transition: all 0.2s ease-in-out ;
     border-radius: .25rem;
+    text-align: center;
 
 }
 
@@ -65,8 +72,8 @@
 }
 
 /* INPUT STYLING */
-$primary: #3d3d3d;
-$secondary: #0059ff;
+$primary: #007bff;
+$secondary: #ffffff;
 $white: rgb(255, 255, 255);
 $black: rgb(0, 0, 0);
 $gray: #666666;
@@ -142,10 +149,6 @@ itemtag-mail-password{
 
 .debug-border{
     border: 1px solid red;
-}
-
-input[type=file]::-webkit-file-upload-button {
-    visibility: hidden;
 }
 
 /* ENTRIES checkbox STYLING */
