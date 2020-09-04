@@ -1,15 +1,26 @@
-var dataTable;
+var $dataTable = null;
 $(document).ready( function () {
-    dataTable = $( "#ad_users" ).DataTable({
-        select: true
+    console.log("start drawing table")
+    $dataTable = $( "#ad_users" ).DataTable({
+        select: true,
+        "scrollX": true,
+        "scrollY":        "60vh",
+        "scrollCollapse": true,
+        "paging":         false
     });
 });
+
+$( "#ad_users" ).on('draw.dt', function () {
+    console.log( 'Redraw occurred at: '+new Date().getTime() );
+    $( "#usersTableArea" ).removeClass("opaque");
+    $("#usersTablePrg").remove();
+} );
 
 $('#users-select').click(handleSelection)
 $('#users-clear').click(handleDeselection)
 
 function handleSelection(params) {
-    let selectedData = dataTable.rows({selected: true}).data();
+    let selectedData = $dataTable.rows({selected: true}).data();
     action = "select"
     data = {
         cart_request: {
