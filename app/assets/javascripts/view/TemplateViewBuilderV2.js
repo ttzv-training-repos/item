@@ -5,6 +5,7 @@ class TemplateViewBuilderV2{
         this._recipients = new Array();
         this._selectedTemplates = new Array();
         this.queryTemplateViewElements();
+        this.noSelectedTemplates = 0;
     }
 
     queryTemplateViewElements(){
@@ -15,6 +16,7 @@ class TemplateViewBuilderV2{
         this.$inputsArea = $('#inputsArea')
         this.$title = $('#title');
         this.$content = $('#content')
+        this.$noSelectedTemplates = $('#noSelectedTemplates');
         this.templateEntries = document.querySelectorAll('div[data-entry-area], input[data-entry-area]')
     }
 
@@ -61,11 +63,14 @@ class TemplateViewBuilderV2{
             if(this.canChangeCurrentTemplate(templateName)){
                 if(checkbox.checked){
                     this._selectedTemplates.push(templateName);
-                    this.handleMessageContainer([templateName], User.all, 'add') 
+                    this.handleMessageContainer([templateName], User.all, 'add');
+                    this.noSelectedTemplates += 1;
                 }  else {
                     this.handleMessageContainer([templateName], User.all, 'delete');
                     this._selectedTemplates = this._selectedTemplates.filter(el => el !== templateName);
-                }  
+                    this.noSelectedTemplates -= 1;
+                }
+                this.$noSelectedTemplates.text(this.noSelectedTemplates);  
             }
         });
     }    
