@@ -1,6 +1,6 @@
 # Features (future, not implemented)
 
-By design all modules except CBox are backed by data from LDAP storage.
+By design all modules are backed by data from LDAP storage (ad_users table). It is howewer possible to add new records by-hand. Maybe in the future other ways to import data will be implemented.
 
 Functionality:
 1)  Manage AD Users info
@@ -45,9 +45,3 @@ Functionality:
     * Allows to enqueue SMS for immediate delivery
     * Allows to enqueue SMS for delivery on set date
     * History of sent SMS can be shown
-5)  CBox
-    * A neat way to store (or bookmark) some useful informations
-    * Entries can be sorted or searched by:
-        * Creator
-        * CBox Tag
-        * Date
