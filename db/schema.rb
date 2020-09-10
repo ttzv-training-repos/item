@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_10_134546) do
+ActiveRecord::Schema.define(version: 2020_09_10_185958) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -60,11 +60,14 @@ ActiveRecord::Schema.define(version: 2020_09_10_134546) do
     t.string "dn"
     t.string "objectclass"
     t.string "cn"
+    t.string "sn"
+    t.string "givenname"
     t.text "description"
     t.string "distinguishedname"
     t.string "instancetype"
     t.date "whencreated"
     t.date "whenchanged"
+    t.string "displayname"
     t.string "usncreated"
     t.string "memberof"
     t.string "usnchanged"
@@ -92,13 +95,10 @@ ActiveRecord::Schema.define(version: 2020_09_10_134546) do
     t.string "dscorepropagationdata"
     t.date "lastlogontimestamp"
     t.string "msds-supportedencryptiontypes"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "sn"
-    t.string "givenname"
-    t.string "displayname"
     t.string "mail"
     t.string "userprincipalname"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["objectguid"], name: "index_ad_users_on_objectguid", unique: true
   end
 
@@ -153,11 +153,11 @@ ActiveRecord::Schema.define(version: 2020_09_10_134546) do
 
   create_table "template_tags", force: :cascade do |t|
     t.string "name"
-    t.string "bound_attr"
+    t.string "default_value_mask"
     t.boolean "store_value"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "tagtype"
+    t.string "tag_type"
   end
 
   create_table "templates", force: :cascade do |t|

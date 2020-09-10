@@ -17,7 +17,7 @@ class SettingsController < ApplicationController
   def process_request
     settings_params.each do |entry| 
       tag = TemplateTag.find_by(name: entry.first)
-      tag.update(bound_attr: entry.last) unless entry.last.empty?
+      tag.update(default_value_mask: entry.last) unless entry.last.empty?
     end
   end
 

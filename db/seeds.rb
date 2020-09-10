@@ -84,9 +84,9 @@ localized_headers(ad_user_detail_header_seed_hash).each { |entry| AdUserDetailHe
 localized_headers(office_header_seed_hash).each { |entry| OfficeHeader.create(entry)}
 
 default_template_tag_seed = [
-  [name: "itemtag-mail-topic", tagtype: "mail"],
-  [name: "itemtag-mail-login", tagtype: "mail"],
-  [name: "itemtag-mail-password", tagtype: "mail"]
+  [name: "itemtag-mail-topic", tag_type: "mail"],
+  [name: "itemtag-mail-login", tag_type: "mail"],
+  [name: "itemtag-mail-password", tag_type: "mail"]
 ]
 
 TemplateTag.destroy_all

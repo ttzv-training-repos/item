@@ -21,7 +21,7 @@ class Mail extends Message{
         let tags = this.template.tags;
         tags.forEach(tag => {
             let value = "" 
-            if (this.user) value = this.user[tag.bound_attr] ?? "" 
+            if (this.user) value = this.user[tag.default_value_mask] ?? "" 
             this.setTagValue(tag.name, value)
         });
         this.updateContent();

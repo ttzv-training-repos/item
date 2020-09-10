@@ -26,7 +26,7 @@ class MailsController < ApplicationController
           name: t.name,
           title: t.title,
           content: template_content(t),
-          tags: t.template_tags.select(:name, :bound_attr).as_json
+          tags: t.template_tags.select(:name, :default_value_mask).as_json
         }
       })
     end
