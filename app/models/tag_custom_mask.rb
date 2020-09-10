@@ -1,5 +1,5 @@
 class TagCustomMask < ApplicationRecord
-  has_one :template_tagging
+  belongs_to :template_taggings
 
   def self.get(query_hash)
     template = query_hash[:template]
