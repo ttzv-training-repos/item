@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_28_081758) do
+ActiveRecord::Schema.define(version: 2020_09_10_092052) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -60,14 +60,11 @@ ActiveRecord::Schema.define(version: 2020_08_28_081758) do
     t.string "dn"
     t.string "objectclass"
     t.string "cn"
-    t.string "sn"
-    t.string "givenname"
     t.text "description"
     t.string "distinguishedname"
     t.string "instancetype"
     t.date "whencreated"
     t.date "whenchanged"
-    t.string "displayname"
     t.string "usncreated"
     t.string "memberof"
     t.string "usnchanged"
@@ -95,10 +92,13 @@ ActiveRecord::Schema.define(version: 2020_08_28_081758) do
     t.string "dscorepropagationdata"
     t.date "lastlogontimestamp"
     t.string "msds-supportedencryptiontypes"
-    t.string "mail"
-    t.string "userprincipalname"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "sn"
+    t.string "givenname"
+    t.string "displayname"
+    t.string "mail"
+    t.string "userprincipalname"
     t.index ["objectguid"], name: "index_ad_users_on_objectguid", unique: true
   end
 
@@ -135,11 +135,18 @@ ActiveRecord::Schema.define(version: 2020_08_28_081758) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "tag_custom_masks", force: :cascade do |t|
+    t.string "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "template_taggings", force: :cascade do |t|
     t.integer "template_id", null: false
     t.integer "template_tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "tag_custom_mask_id"
     t.index ["template_id"], name: "index_template_taggings_on_template_id"
     t.index ["template_tag_id"], name: "index_template_taggings_on_template_tag_id"
   end
