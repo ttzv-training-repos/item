@@ -56,21 +56,24 @@
     transition: all 0.2s ease-in-out ;
     border-radius: .25rem;
     text-align: center;
+    color:black;
 }
 
 .t-entry-edit:hover{
-    transition: all 0.2s ease-in-out ;
     background-color: green;
+    color: white;
 }
 
 .t-entry-delete{
     transition: all 0.2s ease-in-out ;
     border-radius: .25rem;
     text-align: center;
+    color:black;
 }
 
 .t-entry-delete:hover{
     background-color: red;
+    color: white;
 }
 
 /* INPUT STYLING */

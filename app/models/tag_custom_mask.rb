@@ -1,28 +1,16 @@
 class TagCustomMask < ApplicationRecord
   belongs_to :template_taggings
 
-  def self.get(query_hash)
-    template = query_hash[:template]
-    tag = query_hash[:tag]
-    raise "Template relation not provided" if template.nil?
-    raise "TemplateTag relation not provided" if tag.nil?
+  def self.upsert(hash)
+    template_tagging_id = hash[:template_tagging_id]
+    value = hash[:value]
+    raise "Missing parameters" if template_tagging_id.nil? or value.nil?
 
-    mask = TemplateTagging.find_by(template_id:template.id, template_tag_id: tag.id)
-    TagCustomMask.find(mask.tag_custom_mask_id) unless mask.nil?
-  end
-
-  def self.upsert(query_hash, mask_value)
-    template = query_hash[:template]
-    tag = query_hash[:tag]
-    raise "Template relation not provided" if template.nil?
-    raise "TemplateTag relation not provided" if tag.nil?
-
-    mask = TemplateTagging.find_by(template_id:template.id, template_tag_id:tag.id)
-    if mask.nil?
-      new_mask = TagCustomMask.create(value: mask_value)
-      TemplateTagging.where(template_id: template.id, template_tag_id: tag.id).update(tag_custom_mask_id: new_mask.id)
+    tag_custom_mask = TagCustomMask.find_by(template_tagging_id: template_tagging_id)
+    if tag_custom_mask.nil?
+      new_mask = TagCustomMask.create(hash)
     else
-      TagCustomMask.find(mask.tag_custom_mask_id).update(value: mask_value)
+      tag_custom_mask.update(value: value)
     end
   end
 

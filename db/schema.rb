@@ -60,14 +60,11 @@ ActiveRecord::Schema.define(version: 2020_09_10_185958) do
     t.string "dn"
     t.string "objectclass"
     t.string "cn"
-    t.string "sn"
-    t.string "givenname"
     t.text "description"
     t.string "distinguishedname"
     t.string "instancetype"
     t.date "whencreated"
     t.date "whenchanged"
-    t.string "displayname"
     t.string "usncreated"
     t.string "memberof"
     t.string "usnchanged"
@@ -95,10 +92,13 @@ ActiveRecord::Schema.define(version: 2020_09_10_185958) do
     t.string "dscorepropagationdata"
     t.date "lastlogontimestamp"
     t.string "msds-supportedencryptiontypes"
-    t.string "mail"
-    t.string "userprincipalname"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "sn"
+    t.string "givenname"
+    t.string "displayname"
+    t.string "mail"
+    t.string "userprincipalname"
     t.index ["objectguid"], name: "index_ad_users_on_objectguid", unique: true
   end
 

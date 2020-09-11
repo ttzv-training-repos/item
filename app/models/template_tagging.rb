@@ -5,7 +5,7 @@ class TemplateTagging < ApplicationRecord
 
   def self.upsert(hash)
     template_tagging = TemplateTagging.find_by(hash)
-    if TemplateTagging.nil?
+    if template_tagging.nil?
       TemplateTagging.create(hash) 
     else
       template_tagging.update(hash)

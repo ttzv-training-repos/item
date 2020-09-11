@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :c_box, only: [:index]
     resources :settings, only: [:index]
     resources :mails, only: [:index]
+    resources :templates
     get '/ad_users/reload', to: 'ad_users#reload'
     get '/oauth2login', to: 'item#oauth2login'
     get '/google_login', to: 'item#google_login'

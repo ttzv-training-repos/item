@@ -22,12 +22,8 @@ module Parsers
     end
     
     def value(name)
-      if @tags.include?(name)
         tag = as_tag(name)
         return @template.scan(/(?<=#{tag[:begin]})(.*?)(?=#{tag[:end]})/)
-      else
-        return ''
-      end
     end
 
     def find_tags

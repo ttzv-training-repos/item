@@ -1,0 +1,32 @@
+<%= form_for(@template) do |t| %>
+  <ul>
+  <% @template.errors.full_messages.each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+  </ul>
+  <p>
+    <%= t.label :title %><br />
+    <%= t.text_field :title %>
+  </p>
+  <p>
+    <%= label_tag(:content, "Content") %>
+    <%= text_area_tag(:content, @template_content) %>
+</p>
+  <p>
+    <%= t.submit %>
+  </p>
+<% end %>
+
+
+<h1>Template</h1>
+<%=@template.as_json%>
+<h1>Content</h1>
+<%=@template_content%>
+<h1>Tags</h1>
+<% @template_tags.each do |tag| %>
+    <%= tag.as_json %>
+    <br> custom mask: <br>
+    <%= @template.template_taggings.find(tag.id).tag_custom_mask%>
+<% end %>
+
+<%= link_to 'Return to index', templates_path %>

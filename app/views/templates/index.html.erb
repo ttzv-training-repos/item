@@ -1,0 +1,13 @@
+All templates
+
+<ul id="templates">
+  <% @templates.each do |template| %>
+    <li>
+      <%=template.name %>
+      <%= link_to 'Edit', edit_template_path(template) %>
+      <%= link_to 'Delete', template_path(template), method: :delete, data: {confirm: 'Are you sure you want to delete this record?'} %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Add new template', new_template_path %>>

@@ -1,7 +1,7 @@
 <div class="t-entry row my-1">
-    <div class="col-sm-10 d-flex align-items-center justify-content-between " data-entry-area="content" data-entry-area-id="<%= id %>">
-        <input type="checkbox" class="t-cbx" name="<%=id%>" id="<%=id%>" data-entry-area="checkbox">
-        <label class="cbx" for="<%=id%>">
+    <div class="col-sm-10 d-flex align-items-center justify-content-between " data-entry-area="content" data-entry-area-id="<%=template.name%>">
+        <input type="checkbox" class="t-cbx" name="<%=template.name%>" id="<%=template.name%>" data-entry-area="checkbox">
+        <label class="cbx" for="<%=template.name%>">
             <div class="flip">
                 <div class="front"></div>
                 <div class="back">
@@ -11,10 +11,10 @@
                 </div>
             </div>
         </label>
-        <div><%=id%></div> <!-- checkbox label -->
+        <div><%=template.name%></div> <!-- checkbox label -->
     </div>
     <div class="col-sm row t-entry-controls">
-        <div class="col-sm-12 t-entry-edit" data-entry-area="edit" data-entry-area-id="<%= id %>"><i class="fa fa-edit"></i></div>
-        <div class="col-sm-12 t-entry-delete" data-entry-area="delete" data-entry-area-id="<%= id %>"><i class="fa fa-trash"></i></i></div>
+        <a href=<%=edit_template_path(template)%> class="col-sm-12 t-entry-edit" data-entry-area="edit" data-entry-area-id="<%=template.name%>"><i class="fa fa-edit"></i></a>
+        <a href=<%=template_path(template)%> data-method="delete" class="col-sm-12 t-entry-delete"  data-entry-area="delete" data-entry-area-id="<%=template.name%>"><i class="fa fa-trash"></i></i></a>
     </div>
 </div>
