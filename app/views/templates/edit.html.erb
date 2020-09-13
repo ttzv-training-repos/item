@@ -1,23 +1,78 @@
-<%= form_for(@template) do |t| %>
+<h1>Edit Template</h1>
+<%= form_with model: @template do |t| %>
   <ul>
   <% @template.errors.full_messages.each do |error| %>
     <li><%= error %></li>
   <% end %>
   </ul>
-  <p>
-    <%= t.label :title %><br />
-    <%= t.text_field :title %>
-  </p>
-  <p>
-    <%= label_tag(:content, "Content") %>
-    <%= text_area_tag(:content, @template_content) %>
-</p>
-  <p>
-    <%= t.submit %>
-  </p>
+  <div class="form-row">
+    <div class="form-group col-sm">
+      <%= label_tag :name, "Name" %>
+      <%= text_field_tag :name, @template.name, class: "form-control" %>
+    </div>
+    <div class="form-group col-sm">
+      <%= label_tag :type, "Type" %>
+      <%= select_tag :type, options_for_select((@template_types), @template.template_type), class: "form-control" %>
+    </div>
+    <div class="form-group col-sm">
+      <%= label_tag :title, "Title" %> <!-- optional -->
+      <%= text_field_tag :title, @template.title, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= label_tag :template_content, "Content" %>
+    <%= text_area_tag :template_content, @template_content, class: "form-control", oninput: 'this.style.height = "";this.style.height = this.scrollHeight + "px"' %>
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-sm">
+      <h1>Tags</h1>
+      <ul class="list-group" id="selectedTags">
+      <% @template_tags.each do |tag| %>
+        <li class="list-group-item d-flex justify-content-between" data-tag="<%= tag.name %>" data-tag-selected="true">
+          <%= tag.name %>
+          <div class="btn btn-primary">-</div>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-sm">
+      <h1>Available Tags</h1>
+      <ul class="list-group" id="availableTags">
+        <% @available_tags.each do |tag| %>
+        <li class="list-group-item d-flex justify-content-between" data-tag="<%= tag.name %>"  data-tag-selected="false">
+          <%= tag.name %>
+          <div class="btn btn-primary">+</div>
+        </li>
+        <% end %>
+        <li class="list-group-item">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">itemtag-<%= @template.template_type %>-</span>
+            </div>
+            <input type="text" class="form-control" placeholder="Tag name" aria-label="Add Tag" aria-describedby="basic-addon1" id="newTag">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button" id="addNewTag">Add</button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+<%= t.submit %>
 <% end %>
+  
 
+  
+<br>
+<br>
+<br>
+<br>
+ <%= render partial: 'tag_edit' %>
 
+<h2>Debug</h2>
 <h1>Template</h1>
 <%=@template.as_json%>
 <h1>Content</h1>
@@ -26,7 +81,7 @@
 <% @template_tags.each do |tag| %>
     <%= tag.as_json %>
     <br> custom mask: <br>
-    <%= @template.template_taggings.find(tag.id).tag_custom_mask%>
+    <%= @template.template_taggings.find_by(template_tag_id: tag.id).tag_custom_mask%>
 <% end %>
 
 <%= link_to 'Return to index', templates_path %>

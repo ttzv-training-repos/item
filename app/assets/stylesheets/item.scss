@@ -21,3 +21,9 @@ html, body{
      cursor: default!important;
  }
 
+ textarea{
+     max-height: 40vh;
+     min-height: 20vh;
+     height: fit-content;
+ }
+
