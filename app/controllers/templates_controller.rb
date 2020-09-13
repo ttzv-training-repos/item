@@ -16,6 +16,9 @@ class TemplatesController < ApplicationController
     @template = Template.find(params[:id])
     @template_content = @template.template_file.open { |f| File.read(f) }
     @template_tags = @template.template_tags
+    @available_tags = TemplateTag.joins(:templates).where(templates:{template_type: @template.template_type}).group(:name)
+    @template_types = Template.type_list
+    p @template_types
   end
 
 end
