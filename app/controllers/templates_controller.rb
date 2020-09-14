@@ -5,11 +5,18 @@ class TemplatesController < ApplicationController
   end
 
   def new
-
+    @template = Template.new
   end
 
   def update
-    puts params
+    @template = Template.find(params[:id])
+    @template.update(name: params[:name], 
+                    title: params[:title], 
+                    template_type: params[:type])
+    filename = @template.template_file.filename.to_s
+    @template.template_file.purge
+    file = File.new(filename, 'w+') { |f| f.write(params[:template_content]) }
+    @template.template_file.attach(io: file, filename: filename)
   end
 
   def edit
