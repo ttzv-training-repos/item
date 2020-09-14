@@ -21,4 +21,8 @@ class TemplatesController < ApplicationController
     p @template_types
   end
 
+  def tag_request
+    p params
+  end
+
 end

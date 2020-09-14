@@ -23,6 +23,8 @@
     <%= label_tag :template_content, "Content" %>
     <%= text_area_tag :template_content, @template_content, class: "form-control", oninput: 'this.style.height = "";this.style.height = this.scrollHeight + "px"' %>
   </div>
+  <%= t.submit %>
+<% end %>
 
 
 
@@ -33,7 +35,8 @@
       <% @template_tags.each do |tag| %>
         <li class="list-group-item d-flex justify-content-between" data-tag="<%= tag.name %>" data-tag-selected="true">
           <%= tag.name %>
-          <div class="btn btn-primary">-</div>
+          <div class="btn btn-primary" data-toggle="modal" data-target="#tagEditModal" data-tag-source=""><i class="fa fa-edit"></i></div>
+          <div class="btn btn-primary" data-tag-action="selector">-</div>
         </li>
         <% end %>
       </ul>
@@ -44,25 +47,19 @@
         <% @available_tags.each do |tag| %>
         <li class="list-group-item d-flex justify-content-between" data-tag="<%= tag.name %>"  data-tag-selected="false">
           <%= tag.name %>
-          <div class="btn btn-primary">+</div>
+          <div class="btn btn-primary" data-toggle="modal" data-target="#tagEditModal" data-tag-source=""><i class="fa fa-edit"></i></div>
+          <div class="btn btn-primary" data-tag-action="selector">+</div>
         </li>
         <% end %>
         <li class="list-group-item">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">itemtag-<%= @template.template_type %>-</span>
-            </div>
-            <input type="text" class="form-control" placeholder="Tag name" aria-label="Add Tag" aria-describedby="basic-addon1" id="newTag">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button" id="addNewTag">Add</button>
-            </div>
+          <div class="btn btn-primary" id="newTagBtn" data-toggle="modal" data-target="#tagEditModal" data-tag-source="">
+            Add new tag
           </div>
         </li>
       </ul>
     </div>
   </div>
-<%= t.submit %>
-<% end %>
+
   
 
   

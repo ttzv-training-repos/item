@@ -15,12 +15,12 @@ Rails.application.routes.draw do
     resources :settings, only: [:index]
     resources :mails, only: [:index]
     resources :templates
+    resources :template_tags
     get '/ad_users/reload', to: 'ad_users#reload'
     get '/oauth2login', to: 'item#oauth2login'
     get '/google_login', to: 'item#google_login'
     get '/google_logout', to: 'item#google_logout'
   end
-
 
   post '/item/user_holders', to: 'user_holders#process_request'
 
