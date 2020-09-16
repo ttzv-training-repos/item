@@ -72,6 +72,7 @@
         </nav>
         <div class="container-fluid h-100">        
             <%= yield %>
+            <div class="alert alert-info fixed-bottom position-absolute" id="flashBanner" style="display: none;"></div>
             <%= javascript_include_tag 'application' %>
         </div>
     </body>

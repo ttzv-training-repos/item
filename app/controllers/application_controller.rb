@@ -21,4 +21,9 @@ class ApplicationController < ActionController::Base
     @user_profile = GoogleApiServices::ProfileService.new(client)
   end
 
+  def flash_ajax_notice(text)
+    flash.now[:notice] = text
+    render "shared/flash"
+  end
+
 end
