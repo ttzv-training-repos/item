@@ -17,7 +17,7 @@ class TemplatesController < ApplicationController
     @template_content = @template.template_file.open { |f| File.read(f) }
     @type_list = Template.type_list
     @template_tags = @template.itemtags
-    @available_tags = Itemtag.all
+    @available_tags = Itemtag.all.filter{ |tag| !@template_tags.include? tag}
   end
   
   def create

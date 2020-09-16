@@ -8,8 +8,6 @@ class TemplateEditor{
         this.selectElements();
         this.handleListsAction();
         this.removeDuplicateSelected();
-        this.modalHandler();
-        this.handleNewTag();
     }
 
     selectElements(){
@@ -103,16 +101,6 @@ class TemplateEditor{
             if(selectedTagsDataArray.includes(item.dataset.tag)){
                 item.remove();
             }
-        })
-    }
-
-    modalHandler(){
-        $('#tagEditModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget) // Button that triggered the modal
-            var tagSource = button.data('tagSource') // Extract info from data-* attributes
-            console.log(tagSource);
-            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
         })
     }
 }
