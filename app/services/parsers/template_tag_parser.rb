@@ -4,7 +4,7 @@ module Parsers
 
     def initialize(template)
       
-      @tags = TemplateTag.pluck(:name)
+      @tags = Itemtag.pluck(:name)
       @template = template
     end
 

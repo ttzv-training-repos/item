@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_14_115221) do
+ActiveRecord::Schema.define(version: 2020_09_15_123128) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -102,6 +102,16 @@ ActiveRecord::Schema.define(version: 2020_09_14_115221) do
     t.index ["objectguid"], name: "index_ad_users_on_objectguid", unique: true
   end
 
+  create_table "itemtags", force: :cascade do |t|
+    t.string "name"
+    t.string "default_value_mask"
+    t.boolean "store_value", default: false
+    t.text "description"
+    t.string "display_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "office_headers", force: :cascade do |t|
     t.string "name"
     t.string "name_en"
@@ -144,11 +154,11 @@ ActiveRecord::Schema.define(version: 2020_09_14_115221) do
 
   create_table "template_taggings", force: :cascade do |t|
     t.integer "template_id", null: false
-    t.integer "template_tag_id", null: false
+    t.integer "itemtag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["itemtag_id"], name: "index_template_taggings_on_itemtag_id"
     t.index ["template_id"], name: "index_template_taggings_on_template_id"
-    t.index ["template_tag_id"], name: "index_template_taggings_on_template_tag_id"
   end
 
   create_table "template_tags", force: :cascade do |t|
@@ -159,11 +169,12 @@ ActiveRecord::Schema.define(version: 2020_09_14_115221) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "description"
     t.string "display_name"
+    t.string "category"
   end
 
   create_table "templates", force: :cascade do |t|
     t.string "name"
-    t.string "template_type"
+    t.string "category"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "title"
@@ -187,6 +198,6 @@ ActiveRecord::Schema.define(version: 2020_09_14_115221) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "ad_user_details", "offices"
   add_foreign_key "tag_custom_masks", "template_taggings"
-  add_foreign_key "template_taggings", "template_tags"
+  add_foreign_key "template_taggings", "template_tags", column: "itemtag_id"
   add_foreign_key "template_taggings", "templates"
 end

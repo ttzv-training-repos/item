@@ -2,12 +2,14 @@
 
 one:
   name: MyString
-  bound_field: MyString
-  autofill: false
+  default_value_mask: MyString
   store_value: false
+  description: MyText
+  display_name: MyString
 
 two:
   name: MyString
-  bound_field: MyString
-  autofill: false
+  default_value_mask: MyString
   store_value: false
+  description: MyText
+  display_name: MyString

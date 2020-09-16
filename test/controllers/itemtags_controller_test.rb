@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TemplateTagTest < ActiveSupport::TestCase
+class ItemtagsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

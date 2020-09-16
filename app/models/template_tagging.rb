@@ -1,6 +1,6 @@
 class TemplateTagging < ApplicationRecord
   belongs_to :template
-  belongs_to :template_tag
+  belongs_to :itemtag
   has_one :tag_custom_mask
 
   def self.upsert(hash)
