@@ -115,18 +115,4 @@ class TemplateEditor{
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
         })
     }
-
-    handleNewTag(){
-        let form = document.getElementById('testformid');
-        form.addEventListener('ajax:success', (event) => {
-            var detail = event.detail;
-            var data = detail[0], status = detail[1], xhr = detail[2];
-            if(data.status === "Created"){
-                this.$availableTagList.prepend(this.listGroupItem(data.tag.display_name))
-            }
-            if(data.status === "Duplicate"){
-                console.log("DUPLICATE");
-            }
-          })
-    }
 }
