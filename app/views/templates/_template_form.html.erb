@@ -23,14 +23,9 @@
     <textarea name="template[content]" id="template_content" class="form-control"><%= @template_content %></textarea>
   </div>
   <%= t.submit %>
-
-  
-  <div class="row">
-    <div class="col-sm" id="selectedTags">
-      <%= render partial: 'itemtags/tag_list_redo', locals: {tags: @template_tags } %>
-    </div>
-    <div class="col-sm" >
-      <%= render partial: 'itemtags/tag_list_redo', locals: {tags: @available_tags } %>
-    </div>
-  </div>
 <% end %>
+
+<div id="tagSelectionArea">
+  <%= render partial: 'itemtags/tag_selection' %>
+</div>
+  

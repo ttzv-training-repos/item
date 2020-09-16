@@ -5,9 +5,10 @@ class TemplateEditor{
     }
 
     build(){
-        this.selectElements();
-        this.handleListsAction();
-        this.removeDuplicateSelected();
+        // this.selectElements();
+        // this.handleListsAction();
+        // this.removeDuplicateSelected();
+        this.handleTagSelection();
     }
 
     selectElements(){
@@ -102,5 +103,14 @@ class TemplateEditor{
                 item.remove();
             }
         })
+    }
+
+    handleTagSelection(){
+        $('#tagSelectionArea').on('ajax:success', function(event) {
+            var detail = event.detail;
+            var data = detail[0], status = detail[1], xhr = detail[2];
+            console.log($(data.body));
+            $('#tagSelectionArea').empty().html($(data.body));
+          });
     }
 }

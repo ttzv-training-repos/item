@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :mails, only: [:index]
     resources :templates do
       resources :itemtags, only: [:index, :edit, :destroy]
+      post '/', to: 'templates#tag_edit'
     end
     resources :itemtags
     get '/ad_users/reload', to: 'ad_users#reload'

@@ -60,9 +60,29 @@ class TemplatesController < ApplicationController
     end
   end
 
+  def tag_edit
+    hash = {
+      template_id: params[:template_id],
+      itemtag_id: params[:tag_id]
+    }
+    if params[:associate] == "true"
+      TemplateTagging.create(hash)
+    else
+      TemplateTagging.find_by(hash).destroy
+    end
 
-  def tag_request
-    p params
+    @template = Template.find(params[:template_id])
+    @template_tags = @template.itemtags
+    @available_tags = Itemtag.all.filter{ |tag| !@template_tags.include? tag}
+    respond_to do |format|
+      format.js do 
+        render :json => {content: "a"} 
+      end
+      format.html do 
+        render partial: 'itemtags/tag_selection', layout: false
+      end
+    end
+    
   end
 
 end
