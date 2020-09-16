@@ -1,32 +1,65 @@
 class TemplatesController < ApplicationController
-
+  include TemplatesHelper
+  
   def index
     @templates = Template.all
   end
-
+  
   def new
     @template = Template.new
+    @type_list = Template.type_list
+    @template_tags = @template.itemtags
+    @available_tags = Itemtag.all
+  end
+  
+  def edit
+    @template = Template.find(params[:id])
+    @template_content = @template.template_file.open { |f| File.read(f) }
+    @type_list = Template.type_list
+    @template_tags = @template.itemtags
+    @available_tags = Itemtag.all
+  end
+  
+  def create
+    @template = Template.new(params_nocontent(template_params))
+    if @template.save
+      @template.template_file.attach(
+        io: StringIO.new(template_params[:content]),
+        filename: template_params[:name] + '.html'
+      )
+      respond_to do |format|
+        format.js { flash_ajax_notice("Template created") }
+      end
+    else
+      
+    end
+  end
+
+  def destroy
+    Template.find(params[:id]).destroy
+    respond_to do |format|
+      format.js { flash_ajax_notice("Template deleted") }
+    end
   end
 
   def update
     @template = Template.find(params[:id])
-    @template.update(name: params[:name], 
-                    title: params[:title], 
-                    template_type: params[:type])
+    @template.update(
+      params_nocontent(template_params)
+      )
+
     filename = @template.template_file.filename.to_s
     @template.template_file.purge
-    file = File.new(filename, 'w+') { |f| f.write(params[:template_content]) }
-    @template.template_file.attach(io: file, filename: filename)
+    @template.template_file.attach(
+      io: StringIO.new(template_params[:content]),
+      filename: filename
+      )
+
+    respond_to do |format|
+      format.js { flash_ajax_notice("Template updated") }
+    end
   end
 
-  def edit
-    @template = Template.find(params[:id])
-    @template_content = @template.template_file.open { |f| File.read(f) }
-    @template_tags = @template.template_tags
-    @available_tags = TemplateTag.joins(:templates).where(templates:{template_type: @template.template_type}).group(:name)
-    @template_types = Template.type_list
-    p @template_types
-  end
 
   def tag_request
     p params

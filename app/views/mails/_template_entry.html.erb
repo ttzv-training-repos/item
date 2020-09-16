@@ -15,6 +15,6 @@
     </div>
     <div class="col-sm row t-entry-controls">
         <a href=<%=edit_template_path(template)%> class="col-sm-12 t-entry-edit" data-entry-area="edit" data-entry-area-id="<%=template.name%>"><i class="fa fa-edit"></i></a>
-        <a href=<%=template_path(template)%> data-method="delete" class="col-sm-12 t-entry-delete"  data-entry-area="delete" data-entry-area-id="<%=template.name%>"><i class="fa fa-trash"></i></i></a>
+        <a href=<%=template_path(template)%> data-method="delete" class="col-sm-12 t-entry-delete"  data-entry-area="delete" data-entry-area-id="<%=template.name%>" data-remote="true"><i class="fa fa-trash"></i></i></a>
     </div>
 </div>

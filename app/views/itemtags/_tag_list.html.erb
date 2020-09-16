@@ -1,0 +1,31 @@
+  <div class="row">
+    <div class="col-sm">
+      <h1>Tags</h1>
+      <ul class="list-group" id="selectedTags">
+      <% @template_tags.each do |tag| %>
+        <li class="list-group-item d-flex justify-content-between" data-tag="<%= tag.name %>" data-tag-selected="true">
+          <%= tag.name %>
+          <div class="btn btn-primary" data-toggle="modal" data-target="#tagEditModal" data-tag-source=""><i class="fa fa-edit"></i></div>
+          <div class="btn btn-primary" data-tag-action="selector">-</div>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-sm">
+      <h1>Available Tags</h1>
+      <ul class="list-group" id="availableTags">
+        <% @available_tags.each do |tag| %>
+        <li class="list-group-item d-flex justify-content-between" data-tag="<%= tag.name %>"  data-tag-selected="false">
+          <%= tag.name %>
+          <a href=<%=edit_itemtag_path(tag)%> class="btn btn-primary" data-tag-source=""><i class="fa fa-edit"></i></a>
+          <div class="btn btn-primary" data-tag-action="selector">+</div>
+        </li>
+        <% end %>
+        <li class="list-group-item">
+          <a href=<%=new_itemtag_path%> class="btn btn-primary" id="newTagBtn" data-tag-source=""> 
+            Add new tag
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>

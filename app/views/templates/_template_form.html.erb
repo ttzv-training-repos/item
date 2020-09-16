@@ -1,0 +1,28 @@
+<%= form_with model: @template, id:"templateEditingForm" do |t| %>
+  <ul>
+  <% @template.errors.full_messages.each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+  </ul>
+  <div class="form-row">
+    <div class="form-group col-sm">
+      <%= t.label :name, "Name" %>
+      <%= t.text_field :name, class: "form-control" %>
+    </div>
+    <div class="form-group col-sm">
+      <%= t.label :category, "Category" %>
+      <%= t.select :category, options_for_select((@type_list), @template.category),{ :include_blank => true }, class: "form-control" %>
+    </div>
+    <div class="form-group col-sm">
+      <%= t.label :title, "Title" %> <!-- optional -->
+      <%= t.text_field :title, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= t.label :template_content, "Content" %>
+    <textarea name="template[content]" id="template_content" class="form-control"><%= @template_content %></textarea>
+  </div>
+  <%= t.submit %>
+
+  <%= render partial: 'itemtags/tag_list' %>
+<% end %>
