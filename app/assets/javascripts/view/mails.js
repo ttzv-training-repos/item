@@ -4,11 +4,13 @@ let messageContainer = new PreparedMessageContainer('temporary@mail');
 
 $(document).ready( function () {
     
-    MailingAJAXRequest.templateData().done(function buildTemplateView(data){
-        templateViewBuilder = new TemplateViewBuilderV2(data.template_data);
-        templateViewBuilder.build();
-        $('.template-list').toggleClass('invisible');
-    })
+    if( $('body').attr('class') == 'mails index'){
+        MailingAJAXRequest.templateData().done(function buildTemplateView(data){
+            templateViewBuilder = new TemplateViewBuilderV2(data.template_data);
+            templateViewBuilder.build();
+            $('.template-list').toggleClass('invisible');
+        })
+    }
    
     $('#send-request').click(() => {
         MailingAJAXRequest.sendMails();
