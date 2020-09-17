@@ -18,6 +18,7 @@ class TemplatesController < ApplicationController
     @type_list = Template.type_list
     @template_tags = @template.itemtags
     @available_tags = Itemtag.all.filter{ |tag| !@template_tags.include? tag}
+    @itemtag = Itemtag.new #to render new tag form
   end
   
   def create
@@ -67,22 +68,23 @@ class TemplatesController < ApplicationController
     }
     if params[:associate] == "true"
       TemplateTagging.create(hash)
+      flash.now[:notice] = "Tag associated with template"
     else
       TemplateTagging.find_by(hash).destroy
+      flash.now[:notice] = "Association removed"
     end
-
     @template = Template.find(params[:template_id])
     @template_tags = @template.itemtags
-    @available_tags = Itemtag.all.filter{ |tag| !@template_tags.include? tag}
-    respond_to do |format|
-      format.js do 
-        render :json => {content: "a"} 
-      end
-      format.html do 
-        render partial: 'itemtags/tag_selection', layout: false
-      end
-    end
+    @available_tags = Itemtag.all.filter{ |tag| !@template_tags.include? tag }
+    
+    # respond_to do |format|
+    #   format.html do 
+    #     render partial: 'itemtags/tag_selection', layout: false
+    #   end
+    #   format.js do
+    #     render 'tag_edit'
+    #   end
+    # end
     
   end
-
 end

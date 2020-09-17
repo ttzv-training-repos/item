@@ -10,11 +10,14 @@
                         <i class="fas fa-mask"></i>
                     </div>
                 <% end %>
+                <%= link_to itemtag_path(tag), data: {remote: true}, method: "delete", class: "btn btn-primary" do %>
+                    <i class="fas fa-trash"></i>
+                <% end %>
             </div>
 
             <%= tag.display_name %>  
 
-            <%= link_to( template_path(@template, tag_id: tag.id, associate: !associated), {data: {remote: true, ajaxaction: "tagEdit", :type => :html}, class: "btn btn-primary", method: "post"} ) do %>  
+            <%= link_to( template_path(@template, tag_id: tag.id, associate: !associated), {data: {remote: true, ajaxaction: "tagEdit"}, class: "btn btn-primary", method: "post"} ) do %>  
                 <% if associated %>
                     <i class="fas fa-minus"></i>
                 <% else %>

@@ -25,7 +25,7 @@ module MailsHelper
 
   def associate_tags(template, parser)
     parser.find_tags.each do |tag|
-      template_tag = Itemtag.find_or_create_by(name: tag)
+      template_tag = Itemtag.find_or_create_by(name: tag, display_name: parser.tag_display_name(tag))
       TemplateTagging.upsert(template_id: template.id, itemtag_id: template_tag.id)
     end
   end

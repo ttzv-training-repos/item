@@ -1,13 +1,26 @@
-<%= form_with model: @itemtag do |i|%>
-    <%= i.label :name %>
-    <%= i.text_field :name %>
-    <%= i.label :display_name %>
-    <%= i.text_field :display_name %>
-    <%= i.label :description %>
-    <%= i.text_field :description %>
-    <%= i.label :default_value_mask %>
-    <%= i.text_field :default_value_mask %>
-    <%= i.label :store_value %>
-    <%= i.check_box :store_value %>
-    <%= i.submit %>
+<%= form_with model: @itemtag, class: "px-4 py-3" do |i|%>
+    <div class="form-group">
+        <div class="form-group">
+            <%= i.label :name %>
+            <%= i.text_field :name, class:"form-control form-control-sm", required: true %>
+        </div>
+        <div class="form-group">
+            <%= i.label :display_name %>
+            <%= i.text_field :display_name, class:"form-control form-control-sm", required: true %>
+        </div>
+        <div class="form-group">
+            <%= i.label :description %>
+            <%= i.text_field :description, class:"form-control form-control-sm" %>
+        </div>
+        <div class="form-group">
+            <%= i.label :default_value_mask %>
+            <%= i.text_field :default_value_mask, class:"form-control form-control-sm" %>
+        </div>
+        <div class="form-check">
+            <%= i.check_box :store_value, class:"form-check-input" %>
+            <%= i.label :store_value, class:"form-check-label" %>
+        </div>
+        <%= i.submit class:"btn btn-primary" do %>
+        <% end %>
+    </div>
 <% end %>

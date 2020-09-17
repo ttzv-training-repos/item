@@ -112,5 +112,8 @@ class TemplateEditor{
             console.log($(data.body));
             $('#tagSelectionArea').empty().html($(data.body));
           });
+        $('#tagNewForm').on('ajax:success', function(event) {
+
+        });
     }
 }

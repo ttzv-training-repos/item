@@ -37,6 +37,12 @@ class ItemtagsController < ApplicationController
   end
 
   def destroy
+    @itemtag = Itemtag.find(params[:id])
+    if @itemtag.destroy
+      respond_to do |format|
+        format.js { flash_ajax_notice("Tag deleted") }
+      end
+    end
   end
 
 

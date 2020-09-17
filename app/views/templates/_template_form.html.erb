@@ -28,4 +28,12 @@
 <div id="tagSelectionArea">
   <%= render partial: 'itemtags/tag_selection' %>
 </div>
+<div class="dropdown py-1">
+  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+    Add new tag
+  </button>
+  <div class="dropdown-menu" id="tagNewForm">
+    <%= render partial: 'itemtags/tag_form' %>
+  </div>
+</div>
   
