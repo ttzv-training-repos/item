@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_15_123128) do
+ActiveRecord::Schema.define(version: 2020_09_17_110334) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -198,6 +198,6 @@ ActiveRecord::Schema.define(version: 2020_09_15_123128) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "ad_user_details", "offices"
   add_foreign_key "tag_custom_masks", "template_taggings"
-  add_foreign_key "template_taggings", "template_tags", column: "itemtag_id"
+  add_foreign_key "template_taggings", "itemtags"
   add_foreign_key "template_taggings", "templates"
 end
