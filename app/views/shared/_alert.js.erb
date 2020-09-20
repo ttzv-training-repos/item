@@ -1,0 +1,5 @@
+$("#flashAlert").show();
+$("#flashAlert").html('<%= flash.now[:alert] %>');
+setTimeout(() => {
+    $("#flashAlert").hide().empty();
+}, 2000);

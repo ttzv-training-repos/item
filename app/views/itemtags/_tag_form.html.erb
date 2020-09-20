@@ -1,4 +1,7 @@
 <%= form_with model: @itemtag, class: "px-4 py-3" do |i|%>
+    <% if @template %>
+        <%= hidden_field_tag :template_id, @template.id %>
+    <% end %>
     <div class="form-group">
         <div class="form-group">
             <%= i.label :name %>

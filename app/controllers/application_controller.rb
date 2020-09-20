@@ -23,7 +23,12 @@ class ApplicationController < ActionController::Base
 
   def flash_ajax_notice(text)
     flash.now[:notice] = text
-    render "shared/flash"
+    render partial: "shared/notice"
+  end
+
+  def flash_ajax_alert(text)
+    flash.now[:alert] = text
+    render partial: "shared/alert"
   end
 
 end

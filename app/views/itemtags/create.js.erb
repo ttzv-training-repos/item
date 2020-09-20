@@ -1,0 +1,9 @@
+
+<% if flash.now[:notice] %>
+    <%= render partial: 'shared/notice' %>
+<% else %>
+    <%= render partial: 'shared/alert' %>
+<% end %>
+
+$('#tagSelectionArea').empty().html("<%= j render partial: 'tag_selection' %>");
+$('#tagNewForm').dropdown('toggle');
