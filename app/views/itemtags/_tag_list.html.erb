@@ -1,6 +1,6 @@
 <ul class="list-group">
     <% tags.each do |tag| %>
-        <li class="list-group-item d-flex justify-content-between align-items-center" data-tag-name="<%= tag.name %>" data-tag-id="<%= tag.id %>" data-toggle="popover" title=<%= tag.display_name %> data-content=<%= tag.description %>>
+        <li class="list-group-item d-flex justify-content-between align-items-center" data-tag-name="<%= tag.name %>" data-tag-id="<%= tag.id %>" data-toggle="popover" title=<%= tag.display_name %> data-content="<%= tag.description %> Inserts: <%= tag.name %>">
             <div class="d-flex">
                 <div class="dropdown">
                     <div class="btn btn-primary mx-1" data-toggle="dropdown">
