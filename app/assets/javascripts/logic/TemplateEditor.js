@@ -7,7 +7,7 @@ class TemplateEditor{
     build(){
         this.selectElements();
         this.handleListsAction();
-        this.clearFormOnSuccess();
+        this.stopDropdownFormPropagation();
     }
 
     selectElements(){
@@ -35,15 +35,8 @@ class TemplateEditor{
         return `<${tagName}></${tagName}>`
     }
 
-    clearFormOnSuccess(){
+    stopDropdownFormPropagation(){
         $('#tagNewForm').on('click', function (event) {
-            event.stopPropagation();
-            console.log(event);
-        });
-        $('#tagNewForm').on('ajax:success', function(event) {
-            console.log(this);
-        });
-        $('.form-group').on('click', function (event) {
             event.stopPropagation();
             console.log(event);
         });

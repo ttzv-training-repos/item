@@ -84,7 +84,7 @@
                 <div class="px-2">
                     <% unless @templates.empty? %>
                         <% @templates.each do |template| %>
-                            <%= render partial: 'template_entry', locals: {template: template} %>
+                            <%= render partial: 'templates/template_entry', locals: {template: template} %>
                         <% end %>
                     <% end %>    
                 </div>

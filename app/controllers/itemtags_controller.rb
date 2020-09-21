@@ -21,7 +21,7 @@ class ItemtagsController < ApplicationController
       if @itemtag.save
         flash.now[:notice] = "Tag created succesfully"
       else
-        flash_ajax_notice(@itemtag.error.full_messages.to_sentence)
+        flash_ajax_alert(@itemtag.error.full_messages.to_sentence)
       end
     rescue ActiveRecord::RecordNotUnique
       respond_to do |format|
@@ -33,20 +33,26 @@ class ItemtagsController < ApplicationController
   end
 
   def update
-   
     @itemtag = Itemtag.find(params[:id])
-    if @itemtag.update(itemtag_params)
-      respond_to do |format|
-        format.js { flash_ajax_notice("Tag updated") }
+    @template = Template.find(params[:template_id])
+    begin
+      if @itemtag.update(itemtag_params)
+        flash.now[:notice] = "Tag updated succesfully"
+      else
+        flash_ajax_alert(@itemtag.error.full_messages.to_sentence)
       end
-    else
-
+    rescue ActiveRecord::RecordNotUnique
+      respond_to do |format|
+        format.js { flash_ajax_alert("Name already used") }
+      end
     end
+    @template_tags = @template.itemtags
+    @available_tags = Itemtag.all.filter{ |tag| !@template_tags.include? tag }
   end
 
   def destroy
-    @template = Template.find(params[:template_id])
     @itemtag = Itemtag.find(params[:id])
+    @template = Template.find(params[:template_id])
     if @itemtag.destroy
       flash.now[:notice] = "Tag deleted"
     end
