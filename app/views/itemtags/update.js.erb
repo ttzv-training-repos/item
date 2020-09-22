@@ -4,5 +4,7 @@
     <%= render partial: 'shared/alert' %>
 <% end %>
 
-$('#tagSelectionArea').empty().html("<%= j render partial: 'tag_selection' %>");
+$('#selectedTags').empty().html("<%= j render partial: 'itemtags/tag_list', locals: {tags: @template_tags, associated: true } %>");
+$('#availableTags').empty().html("<%= j render partial: 'itemtags/tag_list', locals: {tags: @available_tags, associated: false } %>");
+
 initializeTagPopovers();
