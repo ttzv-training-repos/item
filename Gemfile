@@ -63,7 +63,7 @@ gem 'active_directory'
 gem 'rack-cors'
 
 #Google Api Gem
-gem 'google-api-client', '~> 0.34'
+gem 'google-api-client', '~> 0.43.0'
 gem 'googleauth', '~> 0.13.0'
 
 #Redis for Google auth
