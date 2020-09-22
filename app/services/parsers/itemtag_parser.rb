@@ -1,9 +1,8 @@
 module Parsers
-  class TemplateTagParser
+  class ItemtagParser
     attr_accessor :template
 
     def initialize(template)
-      
       @tags = Itemtag.pluck(:name)
       @template = template
     end

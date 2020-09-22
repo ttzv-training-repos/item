@@ -1,3 +1,4 @@
+#todo: add serverside validation
 class ItemtagsController < ApplicationController
   include ItemtagsHelper
 
@@ -15,8 +16,11 @@ class ItemtagsController < ApplicationController
   end
 
   def create
-    @itemtag = Itemtag.new(itemtag_params)
     @template = Template.find(params[:template_id])
+    hash = itemtag_params
+    hash[:name] = generate_tag(@template.category, hash[:display_name])
+    hash[:display_name] = generate_displayname(hash[:display_name])
+    @itemtag = Itemtag.new(hash)
     begin
       if @itemtag.save
         flash.now[:notice] = "Tag created succesfully"
@@ -33,10 +37,13 @@ class ItemtagsController < ApplicationController
   end
 
   def update
-    @itemtag = Itemtag.find(params[:id])
     @template = Template.find(params[:template_id])
+    hash = itemtag_params
+    hash[:name] = generate_tag(@template.category, hash[:display_name])
+    hash[:display_name] = generate_displayname(hash[:display_name])
+    @itemtag = Itemtag.find(params[:id])
     begin
-      if @itemtag.update(itemtag_params)
+      if @itemtag.update(hash)
         flash.now[:notice] = "Tag updated succesfully"
       else
         flash_ajax_alert(@itemtag.error.full_messages.to_sentence)
