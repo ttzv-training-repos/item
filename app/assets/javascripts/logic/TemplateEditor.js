@@ -26,9 +26,8 @@ class TemplateEditor{
     }
 
     handleTagInsert(tagName){
-        let taVal = this.$templateTextArea.val();
-        let curPos = this.$templateTextArea[0].selectionStart;
-        this.$templateTextArea.val( taVal.slice( 0, curPos ) + this.asTag(tagName) + taVal.slice( curPos ) );
+        this.$templateTextArea[0].focus();
+        document.execCommand('insertText', false, this.asTag(tagName));
     }
 
     asTag(tagName){
