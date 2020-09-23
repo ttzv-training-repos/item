@@ -28,6 +28,7 @@ class TemplatesController < ApplicationController
         io: StringIO.new(template_params[:content]),
         filename: template_params[:name] + '.html'
       )
+      create_and_associate_nonexistent_tags(template_params[:content], @template.id)
       respond_to do |format|
         format.js { flash_ajax_notice("Template created") }
       end
@@ -49,13 +50,14 @@ class TemplatesController < ApplicationController
       params_nocontent(template_params)
       )
 
+    create_and_associate_nonexistent_tags(template_params[:content], @template.id)
+
     filename = @template.template_file.filename.to_s
     @template.template_file.purge
     @template.template_file.attach(
       io: StringIO.new(template_params[:content]),
       filename: filename
       )
-
     respond_to do |format|
       format.js { flash_ajax_notice("Template updated") }
     end

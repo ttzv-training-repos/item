@@ -35,12 +35,12 @@ module Parsers
       @template.gsub!(/#{tag[:begin]}(.*?)#{tag[:end]}/, '')
     end
 
-    def tag_type(name)
+    def self.tag_type(name)
       name.scan(/(?<=-)(.*?)(?=-)/).flatten[0]
     end
 
-    def tag_display_name(name)
-      name.gsub!(/itemtag-\w+-/,'').capitalize
+    def self.tag_display_name(name)
+      name.gsub(/itemtag-\w+-/,'').strip.capitalize
     end
     
     private
