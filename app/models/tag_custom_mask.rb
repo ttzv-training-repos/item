@@ -1,5 +1,5 @@
 class TagCustomMask < ApplicationRecord
-  belongs_to :template_taggings
+  belongs_to :template_tagging
 
   def self.upsert(hash)
     template_tagging_id = hash[:template_tagging_id]

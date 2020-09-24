@@ -15,7 +15,9 @@ Rails.application.routes.draw do
     resources :settings, only: [:index]
     resources :mails, only: [:index]
     resources :templates do
-      resources :itemtags, only: [:index, :edit, :destroy]
+      resources :itemtags, only: [:index, :edit, :destroy] do
+        resource :tag_custom_mask
+      end
       post '/', to: 'templates#tag_edit'
     end
     resources :itemtags

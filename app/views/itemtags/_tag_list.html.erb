@@ -11,9 +11,9 @@
                     </div>
                 </div>
                 <% if associated %>
-                    <div class="btn btn-primary mx-1"> 
+                    <%= link_to edit_template_itemtag_tag_custom_mask_path(@template.id, tag.id), class: "btn btn-primary mx-1" do%> 
                         <i class="fas fa-mask"></i>
-                    </div>
+                    <% end %>
                 <% end %>
                 <%= link_to itemtag_path(tag, template_id: @template.id), data: {remote: true, confirm:"Confirm to delete"}, method: "delete", class: "btn btn-primary mx-1" do %>
                     <i class="fas fa-trash"></i>
