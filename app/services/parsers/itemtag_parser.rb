@@ -39,7 +39,7 @@ module Parsers
       name.scan(/(?<=-)(.*?)(?=-)/).flatten[0]
     end
 
-    def self.tag_display_name(name)
+    def tag_display_name(name)
       name.gsub(/itemtag-\w+-/,'').strip.capitalize
     end
     

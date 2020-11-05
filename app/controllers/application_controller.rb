@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
 
   def current_user
     session[:user_id] = User.authenticate_new.session_id if session[:user_id].nil?
+    User.create(name: 'Stranger', session_id: session[:user_id]) if User.find_by(session_id: session[:user_id]).nil?
     user_id = session[:user_id]
   end
 

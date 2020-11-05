@@ -10,7 +10,7 @@ class ItemController < ApplicationController
     return if invalid_query_string
     user_id = current_user
     client = UserServices::UserAuthorizer.load_client(user_id)
-    client.code= params[:code]
+    client.code = params[:code]
     client.fetch_access_token!
     UserServices::UserAuthorizer.store_client(user_id: user_id, client: client)
     redirect_to root_path
@@ -26,6 +26,7 @@ class ItemController < ApplicationController
       UserServices::UserAuthorizer.store_client(user_id: user_id, client: client)
       redirect_to client.authorization_uri.to_s
     end
+    puts "google login end"
   end
 
   def google_logout
