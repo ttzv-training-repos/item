@@ -1,5 +1,7 @@
 class SettingsController < ApplicationController
   include SettingsHelper
+  before_action :authenticate_user!
+
   def index
     @sent_items = SentItem.all
     @smtp_setting = current_user.smtp_setting

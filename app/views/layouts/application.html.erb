@@ -70,12 +70,15 @@
                 </li>
             </ul>
         </nav>
-        <div class="container-fluid h-100">        
+        <div class="container-fluid h-100">
+            <p class="notice"><%= notice %></p>
+            <p class="alert"><%= alert %></p>        
             <%= yield %>
             <div class="alert alert-info fixed-bottom position-absolute" id="flashNotice" style="display: none;"></div>
             <div class="alert alert-warning fixed-bottom position-absolute" id="flashAlert" style="display: none;"></div>
             <%= javascript_include_tag 'application' %>
         </div>
+        
     </body>
     <script>
         var token = $('meta[name="csrf-token"]').attr('content');

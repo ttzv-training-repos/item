@@ -7,7 +7,11 @@ module UserServices
     end
 
     def client
-      @client = load_client(@user.google_client) if @user.google_client
+      if @user
+        @client = load_client(@user.google_client) if @user.google_client
+      else
+        return nil
+      end
       if @client
         begin
           if @client.expired?
