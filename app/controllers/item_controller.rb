@@ -1,36 +1,40 @@
 class ItemController < ApplicationController
-  require 'google/apis/options'
   include ItemHelper
   
   def index
-    @user_id = current_user
+    @user_id = current_user.id
   end
 
   def oauth2login
-    return if invalid_query_string
-    user_id = current_user
-    client = UserServices::UserAuthorizer.load_client(user_id)
+    client = UserServices::UserAuthorizer.new_client
     client.code = params[:code]
     client.fetch_access_token!
-    UserServices::UserAuthorizer.store_client(user_id: user_id, client: client)
+    profile = fetch_google_profile(client)
+    user = User.find_by(email: profile[:email])
+    session[:user_id] = user.id unless user.nil?
+    current_user.update(
+      google_client: client.to_json,
+      name: profile[:name],
+      email: profile[:email],
+      picture_google: profile[:picture],
+      anonymous: false
+    )
     redirect_to root_path
   end
 
   def google_login
-    user_id = current_user
-    client = UserServices::UserAuthorizer.client(user_id)
-    unless client.nil?
+    authorizer = UserServices::UserAuthorizer.new(current_user)
+    client = authorizer.client
+    if client
       redirect_to root_path
     else
-      client = UserServices::UserAuthorizer.new_client
-      UserServices::UserAuthorizer.store_client(user_id: user_id, client: client)
-      redirect_to client.authorization_uri.to_s
+      google_new_authorization
     end
-    puts "google login end"
   end
 
   def google_logout
-    UserServices::UserAuthorizer.remove(current_user)
+    current_user.update(google_client: nil)
+    session[:user_id] = nil
     redirect_to root_path
   end
 

@@ -32,6 +32,8 @@ Rails.application.routes.draw do
   scope 'item/settings' do
     get '/autobind', to: 'settings#run_autobinder', as: 'autobind'
     post '/',  to: 'settings#process_request'
+    post '/update_smtp_settings', to: 'settings#update_smtp_settings'
+    patch '/update_smtp_settings', to: 'settings#update_smtp_settings'
   end
 
   scope 'item/mails' do

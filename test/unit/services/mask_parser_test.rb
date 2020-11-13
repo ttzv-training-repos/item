@@ -5,6 +5,7 @@ class TestMaskParser < Minitest::Test
 
   def test_insert
     assert_equal "nope", @mask_parser.insert
+    assert_equal "test", @mask_parser.text
   end
   
 end

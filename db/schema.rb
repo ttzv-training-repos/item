@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_17_175315) do
+ActiveRecord::Schema.define(version: 2020_11_12_221846) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -146,6 +146,28 @@ ActiveRecord::Schema.define(version: 2020_09_17_175315) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "settings", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "mail_adapter"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "smtp_settings", force: :cascade do |t|
+    t.string "address"
+    t.integer "port"
+    t.string "domain"
+    t.string "user_name"
+    t.string "password"
+    t.string "authentication"
+    t.boolean "tls"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "store_password"
+    t.string "sender"
+  end
+
   create_table "tag_custom_masks", force: :cascade do |t|
     t.string "value"
     t.datetime "created_at", precision: 6, null: false
@@ -194,6 +216,11 @@ ActiveRecord::Schema.define(version: 2020_09_17_175315) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "session_id"
+    t.text "google_client"
+    t.string "email"
+    t.string "picture_google"
+    t.string "picture_local"
+    t.boolean "anonymous", default: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

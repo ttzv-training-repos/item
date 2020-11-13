@@ -72,3 +72,6 @@ gem 'redis', '~> 4.2', '>= 4.2.1'
 #Jquery gem
 gem 'jquery-rails'
 
+#Devise
+gem 'devise'
+

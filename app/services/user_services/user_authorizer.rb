@@ -1,25 +1,24 @@
 module UserServices
   class UserAuthorizer
 
-    def self.client(user_id)
-      raise "User ID cannot be a NULL value" if user_id.nil?
-      client = self.load_client(user_id)
-      return nil if client.nil?
-      return nil if client.access_token.nil?
-      begin
-        client.refresh! if client.expired?
-      rescue
-        return client #implement a fallback that deletes stored client and forces re-authorization with forced prompt if refresh token is missing
-      end
-      self.store_client(user_id: user_id, client: client)
-      return client
+    def initialize(user)
+      @user = user
+      @client = nil
     end
 
-    def self.load_client(user_id)
-      redis = Redis.new
-      stored_client = redis.get("oauth:#{user_id}")
-      return nil if stored_client.nil?
-      Signet::OAuth2::Client.new(JSON.parse(stored_client, symbolize_names: true))
+    def client
+      @client = load_client(@user.google_client) if @user.google_client
+      if @client
+        begin
+          if @client.expired?
+            @client.refresh! 
+            update_user_client
+          end
+        rescue
+          return nil
+        end
+      end
+      @client
     end
 
     def self.new_client
@@ -36,19 +35,15 @@ module UserServices
         :valid => false
       )
     end
+    
+    private
 
-    def self.store_client(options={})
-      user_id = options[:user_id]
-      client = options[:client]
-      raise "Required authenticated User ID" if user_id.nil? 
-      raise "Required Client to store" if client.nil?
-      Redis.new.set("oauth:#{user_id}", client.to_json)
+    def update_user_client
+      @user.update(google_client: @client.to_json)
     end
-
-    def self.remove(user_id)
-      redis = Redis.new
-      stored_client = redis.get("oauth:#{user_id}")
-      redis.del("oauth:#{user_id}") unless stored_client.nil?
+    
+    def load_client(client_json)
+      Signet::OAuth2::Client.new(JSON.parse(client_json, symbolize_names: true))
     end
 
   end

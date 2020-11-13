@@ -14,16 +14,6 @@ $(document).ready( function () {
    
     $('#send-request').click(() => {
         MailingAJAXRequest.sendMails();
-        let progress = 0;
-        let interval = setInterval(() => {
-            MailingAJAXRequest.progress().done(function(data){
-                progress = data.progress;
-                templateViewBuilder.setProgress(data.progress);
-                console.log(data)
-            });
-            if (progress == 100) clearInterval(interval);
-        }, 100);
-
     });
 
 });

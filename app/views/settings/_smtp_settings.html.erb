@@ -1,0 +1,22 @@
+<h1>SMTP Settings</h1>
+<%= form_with(model: @smtp_setting, url: update_smtp_settings_path) do |f| %>
+    <%= f.label :sender %>
+    <%= f.text_field :sender %>
+    <%= f.label :address %>
+    <%= f.text_field :address %>
+    <%= f.label :port %>
+    <%= f.text_field :port %>
+    <%= f.label :domain %>
+    <%= f.text_field :domain %>
+    <%= f.label :user_name %>
+    <%= f.text_field :user_name %>
+    <%= f.label :password %>
+    <%= f.password_field :password, value: @pwd_val %>
+    <%= f.label :store_password %>
+    <%= f.check_box :store_password %>
+    <%= f.label :authentication %>
+    <%= f.text_field :authentication %>
+    <%= f.label :tls %>
+    <%= f.check_box :tls %>
+    <%= f.submit %>
+<% end %>

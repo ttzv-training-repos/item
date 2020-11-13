@@ -1,2 +1,0 @@
-class CBoxController < ApplicationController
-end

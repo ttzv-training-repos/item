@@ -1,25 +1,32 @@
 class ApplicationController < ActionController::Base
-  before_action :get_user_profile, except: [:progress, :send_request]
+  before_action :get_user_profile
   def index
   end
 
   protected
   
   def google_auth_client
-    user_id = current_user
-    UserServices::UserAuthorizer.client(user_id)
+    authorizer = UserServices::UserAuthorizer.new(current_user)
+    client = authorizer.client
+  end
+
+  def google_new_authorization
+    redirect_to UserServices::UserAuthorizer.new_client.authorization_uri.to_s
   end
 
   def current_user
-    session[:user_id] = User.authenticate_new.session_id if session[:user_id].nil?
-    User.create(name: 'Stranger', session_id: session[:user_id]) if User.find_by(session_id: session[:user_id]).nil?
-    user_id = session[:user_id]
+    if session[:user_id]
+      @current_user = User.find(session[:user_id]) 
+    else
+      @current_user = User.authenticate_new
+      session[:user_id] = @current_user.id
+    end
+    @current_user
   end
 
   def get_user_profile
-    client = google_auth_client
-    @google_logged_in = !client.nil?
-    @user_profile = GoogleApiServices::ProfileService.new(client)
+    @google_logged_in = logged_in?
+    @user_profile = current_user
   end
 
   def flash_ajax_notice(text)
@@ -30,6 +37,10 @@ class ApplicationController < ActionController::Base
   def flash_ajax_alert(text)
     flash.now[:alert] = text
     render partial: "shared/alert"
+  end
+
+  def logged_in?
+    !google_auth_client.nil?
   end
 
 end

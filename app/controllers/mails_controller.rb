@@ -14,7 +14,7 @@ class MailsController < ApplicationController
 
   def index
     @templates = Template.all
-    @sender = get_user_profile[:email]
+    @sender = current_user[:email]
   end
 
   def templates_data

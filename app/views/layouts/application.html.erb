@@ -49,8 +49,8 @@
                             </div>
                             <div class="px-1 pr-3 py-1">
                                 <% if @google_logged_in %>
-                                    <img src="<%= @user_profile[:picture] %>" alt="" srcset="" class="profile-img">
-                                    <span><%= @user_profile[:name] %></span>
+                                    <img src="<%= @user_profile.picture %>" alt="" srcset="" class="profile-img">
+                                    <span><%= @user_profile.name %></span>
                                     <%= link_to 'Log out', google_logout_path %>
                                 <% else %>
                                     <%= link_to 'Log in', google_login_path %> 

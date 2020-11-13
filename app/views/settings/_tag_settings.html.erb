@@ -1,8 +1,0 @@
-<h1>Bind tags to attributes</h1>
-<%= form_with do %>
-  <% @tags.each do |tag| %>
-    <%= label_tag(tag.name) %>
-    <%= select_tag "tags[#{tag.name}]", options_for_select(@attrs), :include_blank => true %>
-  <% end %>
-  <%= submit_tag %>
-<% end %>

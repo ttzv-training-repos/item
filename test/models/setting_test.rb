@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CBoxControllerTest < ActionDispatch::IntegrationTest
+class SettingTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

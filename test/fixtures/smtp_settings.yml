@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  address: 
+  port: 
+  domain: 
+  user_name: 
+  password: 
+  authentication: 
+  tls: 
+  user_id: 1
+
+two:
+  address: 
+  port: 
+  domain: 
+  user_name: 
+  password: 
+  authentication: 
+  tls: 
+  user_id: 1

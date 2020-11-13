@@ -2,8 +2,6 @@ module GoogleApiServices
   require 'google/apis/oauth2_v2'
   class ProfileService
 
-    attr_reader :valid
-  
     def initialize(client)
       @client = client
       if @client.nil?
@@ -33,7 +31,6 @@ module GoogleApiServices
     def name
       @userinfo.name
     end
-
 
   end
 end
