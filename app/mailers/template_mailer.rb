@@ -20,12 +20,14 @@ class TemplateMailer < ApplicationMailer
   end
  
   def template_mail(recipients, subject, body_html)
+
     mail_hash = {
       to: recipients,
       subject: subject,
       content_type: 'text/html; charset=UTF-8',
       body: body_html
     }
+    p params[:client]
     if params[:client]
       ActionMailer::Base.gmail_adapter_settings = {
         client: params[:client]

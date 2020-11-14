@@ -7,37 +7,29 @@ module UserServices
     end
 
     def client
-      if @user
-        @client = load_client(@user.google_client) if @user.google_client
-      else
-        return nil
-      end
-      if @client
-        begin
-          if @client.expired?
-            @client.refresh! 
-            update_user_client
-          end
-        rescue
-          return nil
-        end
+      @client = load_client(@user.google_client) if @user.google_client  
+      if @client.expired?
+        set_credentials
+        @client.refresh! 
+        clear_credentials
+        update_user_client
       end
       @client
     end
 
-    def self.new_client
+    def new_client
       client_secret = JSON.parse(File.read('config/secrets/client_secrets.json'), symbolize_names: true)
       client_secret = client_secret[:web]
-      client = Signet::OAuth2::Client.new(
-        :authorization_uri => client_secret[:auth_uri],
-        :token_credential_uri =>  client_secret[:token_uri],
-        :client_id => client_secret[:client_id],
-        :client_secret => client_secret[:client_secret],
-        :scope => 'email profile openid https://www.googleapis.com/auth/gmail.send',
-        :redirect_uri => client_secret[:redirect_uris][0],
-        :additional_parameters => {'access_type' => 'offline', 'approval_prompt' => 'force'},
-        :valid => false
+      Signet::OAuth2::Client.new(
+      :authorization_uri => client_secret[:auth_uri],
+      :token_credential_uri =>  client_secret[:token_uri],
+      #:client_id => client_secret[:client_id],
+      #:client_secret => client_secret[:client_secret],
+      :redirect_uri => client_secret[:redirect_uris][0]
       )
+      # :scope => 'email profile openid https://www.googleapis.com/auth/gmail.send',
+      # :additional_parameters => {'access_type' => 'offline', 'approval_prompt' => 'force'},
+      # :valid => false
     end
     
     private
@@ -47,7 +39,22 @@ module UserServices
     end
     
     def load_client(client_json)
-      Signet::OAuth2::Client.new(JSON.parse(client_json, symbolize_names: true))
+      client = new_client
+      client_hash = JSON.parse(client_json, symbolize_names: true)
+      client.access_token = client_hash[:access_token]
+      client.refresh_token = client_hash[:refresh_token]
+      client.expires_at = client_hash[:expires_at]
+      client
+    end
+
+    def set_credentials
+      @client.client_id = Rails.application.credentials.oauth[:google_id]
+      @client.client_secret = Rails.application.credentials.oauth[:google_secret]
+    end
+
+    def clear_credentials
+      @client.client_id = nil
+      @client.client_secret = nil
     end
 
   end

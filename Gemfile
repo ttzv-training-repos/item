@@ -75,6 +75,11 @@ gem 'jquery-rails'
 #Devise
 gem 'devise'
 
-#Omniauth strategy for google oauth2
+#Google Oauth2 omniauth strategy
 gem 'omniauth-google-oauth2'
+
+#LDAP omniauth strategy
+gem 'omniauth-ldap'
+
+
 

@@ -156,6 +156,11 @@ GEM
       jwt (>= 2.0)
       omniauth (>= 1.1.1)
       omniauth-oauth2 (>= 1.6)
+    omniauth-ldap (1.0.5)
+      net-ldap (~> 0.12)
+      omniauth (~> 1.0)
+      pyu-ruby-sasl (~> 0.0.3.2)
+      rubyntlm (~> 0.3.4)
     omniauth-oauth2 (1.7.0)
       oauth2 (~> 1.4)
       omniauth (~> 1.9)
@@ -164,6 +169,7 @@ GEM
     public_suffix (4.0.6)
     puma (4.3.6)
       nio4r (~> 2.0)
+    pyu-ruby-sasl (0.0.3.3)
     rack (2.2.3)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
@@ -211,6 +217,7 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     retriable (3.1.2)
+    rubyntlm (0.3.4)
     rubyzip (2.3.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -289,6 +296,7 @@ DEPENDENCIES
   jquery-rails
   listen (~> 3.2)
   omniauth-google-oauth2
+  omniauth-ldap
   puma (~> 4.1)
   rack-cors
   rails (~> 6.0.3, >= 6.0.3.1)

@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  before_action :get_user_profile
   def index
   end
 
@@ -10,11 +9,7 @@ class ApplicationController < ActionController::Base
     client = authorizer.client
   end
 
-  def google_new_authorization
-    redirect_to UserServices::UserAuthorizer.new_client.authorization_uri.to_s
-  end
-
-  def current_user
+  def current_user_old
     if session[:user_id]
       @current_user = User.find(session[:user_id]) 
     else
@@ -22,11 +17,6 @@ class ApplicationController < ActionController::Base
       session[:user_id] = @current_user.id
     end
     @current_user
-  end
-
-  def get_user_profile
-    @google_logged_in = logged_in?
-    @user_profile = current_user
   end
 
   def flash_ajax_notice(text)
@@ -37,10 +27,6 @@ class ApplicationController < ActionController::Base
   def flash_ajax_alert(text)
     flash.now[:alert] = text
     render partial: "shared/alert"
-  end
-
-  def logged_in?
-    !google_auth_client.nil?
   end
 
 end

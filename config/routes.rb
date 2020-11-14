@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: 'item#index'
 
@@ -43,5 +43,7 @@ Rails.application.routes.draw do
     get '/templates_data', to: 'mails#templates_data'
     post '/progress', to: 'mails#progress'
   end
+
+  
 
 end

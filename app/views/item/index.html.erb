@@ -1,3 +1,29 @@
 <div>
     <span>Your User ID: <%= @user_id%> (debug info)</span>
 </div>
+
+
+<p>
+    User signed in:
+</p>
+<%= user_signed_in? %>
+
+<p>
+    Current User:
+</p>
+<%= current_user.as_json %>
+
+<p>
+    User_session:
+</p>
+<%= user_session %>
+
+<%= link_to 'Log in', new_user_session_path %>
+
+<%= link_to 'Log out', destroy_user_session_path, :method => :delete %>
+
+<%= link_to 'gmail privileges', user_google_oauth2_omniauth_authorize_path(scope: 'gmail.send', include_granted_scopes: true)%>
+
+<br>
+
+

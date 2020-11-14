@@ -272,6 +272,22 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+  config.omniauth :google_oauth2,
+                  Rails.application.credentials.oauth[:google_id],
+                  Rails.application.credentials.oauth[:google_secret],
+                  access_type: 'offline', 
+                  prompt: 'consent'
+
+  config.omniauth :ldap,
+                  :title => "My LDAP", 
+                  :host => '10.101.10.1',
+                  :port => 389,
+                  :method => :plain,
+                  :base => 'dc=intridea, dc=com',
+                  :uid => 'sAMAccountName',
+                  :name_proc => Proc.new {|name| name.gsub(/@.*$/,'')},
+                  :bind_dn => 'default_bind_dn'
+
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

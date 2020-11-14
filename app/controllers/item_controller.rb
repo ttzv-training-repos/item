@@ -2,40 +2,29 @@ class ItemController < ApplicationController
   include ItemHelper
   
   def index
-    @user_id = current_user.id
+    @user_id = current_user || nil
   end
 
   def oauth2login
-    client = UserServices::UserAuthorizer.new_client
-    client.code = params[:code]
-    client.fetch_access_token!
-    profile = fetch_google_profile(client)
-    user = User.find_by(email: profile[:email])
-    session[:user_id] = user.id unless user.nil?
-    current_user.update(
-      google_client: client.to_json,
-      name: profile[:name],
-      email: profile[:email],
-      picture_google: profile[:picture],
-      anonymous: false
-    )
-    redirect_to root_path
+    # Not used, code moved to Users::OmniauthCallbacksController#google_oauth2
   end
 
   def google_login
-    authorizer = UserServices::UserAuthorizer.new(current_user)
-    client = authorizer.client
-    if client
-      redirect_to root_path
-    else
-      google_new_authorization
-    end
+    # functionality handled by devise
+    # authorizer = UserServices::UserAuthorizer.new(current_user)
+    # client = authorizer.client
+    # if client
+    #   redirect_to root_path
+    # else
+    #   google_new_authorization
+    # end
   end
 
   def google_logout
-    current_user.update(google_client: nil)
-    session[:user_id] = nil
-    redirect_to root_path
+    # functionality handled by devise
+    # current_user.update(google_client: nil)
+    # session[:user_id] = nil
+    # redirect_to root_path
   end
 
   private
