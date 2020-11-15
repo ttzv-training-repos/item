@@ -1,3 +1,12 @@
 <p>New holiday request</p>
 
 <%= render partial: 'holiday_form' %>
+<br>
+Request will be sent to your manager:<br>
+
+<% if @manager %>
+    <%= @manager.user.email %>
+<% else %>
+    <p>You have no manager</p>
+<% end %>
+

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :inboxes
   resources :holidays, only: [:index]
   resources :holiday_requests
   resources :employees

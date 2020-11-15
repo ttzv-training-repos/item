@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col">
         <p>Your holiday requests</p>
-        <table>
+        <table class="table">
             <tr>
                 <td>Since</td>
                 <td>Until</td>
@@ -25,6 +25,27 @@
     </div>
     <div class="col">
         <p>Inbox</p>
+        <table class="table">
+            <tr>
+                <td>Requestor</td>
+                <td>Since</td>
+                <td>Until</td>
+                <td>Status</td>
+                <td></td>
+            </tr>
+            <% @inbox.each do |hr| %>
+                <tr>
+                    <td><%= hr.employee.user.email %></td>
+                    <td><%= hr.since %></td>
+                    <td><%= hr.until %></td>
+                    <td><%= hr.status %></td>
+                    <td>
+                    <%= link_to 'Accept', '#' %>
+                    <%= link_to 'Reject', '#' %>
+                    </td>
+                </tr>
+            <% end %>
+        </table>
     </div>
     <div class="col">
         some other stuff

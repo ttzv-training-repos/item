@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_15_144733) do
+ActiveRecord::Schema.define(version: 2020_11_15_163713) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -117,11 +117,20 @@ ActiveRecord::Schema.define(version: 2020_11_15_144733) do
     t.date "since"
     t.date "until"
     t.integer "employee_id"
+    t.integer "inbox_id"
+    t.index ["inbox_id"], name: "index_holiday_requests_on_inbox_id"
   end
 
   create_table "holidays", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "inboxes", force: :cascade do |t|
+    t.integer "employee_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["employee_id"], name: "index_inboxes_on_employee_id"
   end
 
   create_table "itemtags", force: :cascade do |t|
