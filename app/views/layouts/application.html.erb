@@ -34,6 +34,7 @@
                     <%= link_to 'Users', ad_users_path, :class => 'nav-item nav-link' %>
                     <%= link_to 'Offices', offices_path, :class => 'nav-item nav-link' %>
                     <!-- <%= link_to 'Cart(?)', user_holders_path, :class => 'nav-item nav-link' %> -->
+                    <%= link_to 'Holidays', holidays_path, :class => 'nav-item nav-link holidays-nav' %>
                     <%= link_to 'Settings', settings_path, :class => 'nav-item nav-link' %>
                 </div>
             </div>
@@ -70,12 +71,10 @@
                 </li>
             </ul>
         </nav>
-        <div class="container-fluid h-100">
-            <p class="notice"><%= notice %></p>
-            <p class="alert"><%= alert %></p>        
+        <div class="container-fluid h-100">       
             <%= yield %>
-            <div class="alert alert-info fixed-bottom position-absolute" id="flashNotice" style="display: none;"></div>
-            <div class="alert alert-warning fixed-bottom position-absolute" id="flashAlert" style="display: none;"></div>
+            <div class="notice alert-info fixed-bottom position-absolute" id="flashNotice" style="display: none;"><%= notice %></div>
+            <div class="alert alert-warning fixed-bottom position-absolute" id="flashAlert" style="display: none;"><%= alert %></div>
             <%= javascript_include_tag 'application' %>
         </div>
         

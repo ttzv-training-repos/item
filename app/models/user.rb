@@ -8,6 +8,9 @@ class User < ApplicationRecord
   has_one :setting, dependent: :destroy
   has_one :smtp_setting, dependent: :destroy
   has_many :user_holders, dependent: :destroy
+  has_one :employee
+
+  after_create :create_employee_if_not_exist
 
   def self.authenticate_new
     user = User.create(name: 'Stranger')
@@ -38,6 +41,13 @@ class User < ApplicationRecord
         )
     end
     user
-end
+  end
+
+  private
+
+  def create_employee_if_not_exist
+    self.create_employee if self.employee.nil?
+  end
+
 
 end

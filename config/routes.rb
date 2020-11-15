@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :holidays, only: [:index]
+  resources :holiday_requests
+  resources :employees
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: 'item#index'
@@ -23,9 +26,6 @@ Rails.application.routes.draw do
     end
     resources :itemtags
     get '/ad_users/reload', to: 'ad_users#reload'
-    get '/oauth2login', to: 'item#oauth2login'
-    get '/google_login', to: 'item#google_login'
-    get '/google_logout', to: 'item#google_logout'
   end
 
   post '/item/user_holders', to: 'user_holders#process_request'
@@ -43,6 +43,8 @@ Rails.application.routes.draw do
     get '/templates_data', to: 'mails#templates_data'
     post '/progress', to: 'mails#progress'
   end
+
+get '/user/become/:id', to: 'users#become', as: 'become_user'
 
   
 

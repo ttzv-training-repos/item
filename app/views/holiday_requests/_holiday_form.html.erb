@@ -1,0 +1,8 @@
+<%= form_with(model: @holiday_request, local: true) do |hr| %>
+    <%= hr.label :since %>
+    <%= hr.date_field :since, required: true %>
+    <%= hr.label :until %>
+    <%= hr.date_field :until, required: true %>
+    <%= hr.submit %>
+<% end %>
+  

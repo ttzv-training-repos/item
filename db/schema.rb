@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_13_100315) do
+ActiveRecord::Schema.define(version: 2020_11_15_144733) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -100,6 +100,28 @@ ActiveRecord::Schema.define(version: 2020_11_13_100315) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["objectguid"], name: "index_ad_users_on_objectguid", unique: true
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "manager_id"
+    t.index ["manager_id"], name: "index_employees_on_manager_id"
+  end
+
+  create_table "holiday_requests", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "status", default: "NEW"
+    t.date "since"
+    t.date "until"
+    t.integer "employee_id"
+  end
+
+  create_table "holidays", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "itemtags", force: :cascade do |t|
@@ -231,6 +253,7 @@ ActiveRecord::Schema.define(version: 2020_11_13_100315) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "ad_user_details", "offices"
+  add_foreign_key "holiday_requests", "employees"
   add_foreign_key "tag_custom_masks", "template_taggings"
   add_foreign_key "template_taggings", "itemtags"
   add_foreign_key "template_taggings", "templates"

@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col">
+        <p>Your holiday requests</p>
+        <table>
+            <tr>
+                <td>Since</td>
+                <td>Until</td>
+                <td>Status</td>
+            </tr>
+            <% @holiday_requests.each do |hr| %>
+                <tr>
+                    <td>
+                        <%= hr.since %>
+                    </td>
+                    <td>
+                        <%= hr.until %>
+                    </td>
+                    <td>
+                        <%= hr.status %>
+                    </td>
+                </tr>
+            <% end %>
+        </table>
+        <%= link_to 'New request', new_holiday_request_path %>
+    </div>
+    <div class="col">
+        <p>Inbox</p>
+    </div>
+    <div class="col">
+        some other stuff
+    </div>
+</div>

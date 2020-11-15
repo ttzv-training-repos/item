@@ -1,0 +1,21 @@
+Employee: <%= @employee.user.email %>
+<br>
+<%= form_with(model: @employee, local: true) do |e| %>
+    <%= label_tag :employee, "set manager" %>
+    <%= select(:employee, :manager_id, @employee_options, :include_blank => true, :required => true) %>
+    <%= e.submit %>
+<% end %>
+
+<div class="row">
+    <div class="col">
+        <p>Subordinates</p>
+        <% @subordinates.each do |s| %>
+            <%= s.user.email %> <br>
+        <% end %>
+    </div>
+    <div class="col">
+        <p>Manager</p>
+        <%= @manager.user.email if @manager%>
+    </div>
+</div>
+  
