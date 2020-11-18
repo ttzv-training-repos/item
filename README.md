@@ -1,3 +1,6 @@
+Application for use in IT dept. when sometimes you have to send multiple personalized emails to employees. Allows to create your own templates and define new variables.
+Also allows to create mail signatures on similar terms. More modules are also present in this app but they mainly serve as a learning opportunity for myself.
+
 # This application is a work in progress
 # Features (future, not implemented)
 
