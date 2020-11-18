@@ -1,8 +1,11 @@
+# This application is a work in progress
+
 Application for use in IT dept. when sometimes you have to send multiple personalized emails to employees. Allows to create your own templates and define new variables.
 Also allows to create mail signatures on similar terms. More modules are also present in this app but they mainly serve as a learning opportunity for myself.
 
-# This application is a work in progress
-# Features (future, not implemented)
+<img src="https://tomasz-zwak.github.io/portfolio/asset/portfolio/Item.png" alt="Image not found" srcset="">
+
+# Features (or more likely a list of ideas that I want to work on)
 
 By design all modules are backed by data from LDAP storage (ad_users table). It is howewer possible to add new records by-hand. Maybe in the future other ways to import data will be implemented.
 
