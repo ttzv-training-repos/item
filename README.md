@@ -1,3 +1,4 @@
+# This application is a work in progress
 # Features (future, not implemented)
 
 By design all modules are backed by data from LDAP storage (ad_users table). It is howewer possible to add new records by-hand. Maybe in the future other ways to import data will be implemented.
@@ -45,3 +46,8 @@ Functionality:
     * Allows to enqueue SMS for immediate delivery
     * Allows to enqueue SMS for delivery on set date
     * History of sent SMS can be shown
+5)  Module for holiday requests - new idea
+    * Ability to log-in with google OAuth using business Google account
+    * Optionally can authenticate through LDAP
+    * Support for roles (eg. supervisor can see subordinates' requests, HR Dept. can see all requests, etc)
+    * Mail notifications on request updates (created, accepted, rejected)
