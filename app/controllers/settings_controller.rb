@@ -11,6 +11,7 @@ class SettingsController < ApplicationController
 
   def run_autobinder
     AdUserServices::UserOfficeBinder.new.run
+    redirect_to ad_users_path
   end
 
   def process_request
@@ -58,6 +59,12 @@ class SettingsController < ApplicationController
     .deliver_now
 
     #TemplateMailer.with(user: current_user, password: cookies[:smtp_password], client: google_auth_client).welcome_email('txdxkx@gmail.com','hello world','<p>some testing html</p>').deliver_now
+  end
+
+  def sync_ldap
+    ldap_sync = LdapServices::LdapSync.new(LdapServices::LdapConn.new)
+    ldap_sync.sync
+    redirect_to(ad_users_path)
   end
 
 end

@@ -25,10 +25,6 @@ class AdUsersController < ApplicationController
     @headers = builder.localized_hash(:en)
   end
 
-  def reload
-    ldap_sync = LdapServices::LdapSync.new(LdapServices::LdapConn.new)
-    ldap_sync.sync
-    redirect_to(ad_users_path)
-  end
+  
 
 end

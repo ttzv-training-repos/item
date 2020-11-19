@@ -12,9 +12,9 @@ module LdapServices
 
     def connect
       if @settings.nil?
-        user_config = JSON.parse(File.read("userconfig.json"), {:symbolize_names => true})
+        user_config = JSON.parse(File.read("config/secrets/userconfig.json"), {:symbolize_names => true})
         @settings = {
-          :host => user_config[:host],
+          :host => user_config[:host], #use IP address if name cant be resolved
           :base => user_config[:base],
           :port => user_config[:port],
           :auth => {

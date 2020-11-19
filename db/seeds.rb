@@ -83,11 +83,11 @@ localized_headers(ad_user_header_seed_hash).each { |entry| AdUserHeader.create(e
 localized_headers(ad_user_detail_header_seed_hash).each { |entry| AdUserDetailHeader.create(entry)}
 localized_headers(office_header_seed_hash).each { |entry| OfficeHeader.create(entry)}
 
-default_template_tag_seed = [
-  [name: "itemtag-mail-topic", tag_type: "mail"],
-  [name: "itemtag-mail-login", tag_type: "mail"],
-  [name: "itemtag-mail-password", tag_type: "mail"]
+default_itemtag_seed = [
+  [name: "itemtag-mail-topic", display_name: "Topic", description: "Message topic - applies only to mail"],
+  [name: "itemtag-mail-login", display_name: "Login", description: "Login tag"],
+  [name: "itemtag-mail-password", display_name: "Password", description: "Password tag"],
 ]
 
-TemplateTag.destroy_all
-default_template_tag_seed.each { |entry| TemplateTag.create(entry) }
+Itemtag.destroy_all
+default_itemtag_seed.each { |entry| Itemtag.create(entry) }

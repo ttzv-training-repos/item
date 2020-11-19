@@ -26,13 +26,13 @@ Rails.application.routes.draw do
       post '/', to: 'templates#tag_edit'
     end
     resources :itemtags
-    get '/ad_users/reload', to: 'ad_users#reload'
   end
 
   post '/item/user_holders', to: 'user_holders#process_request'
 
   scope 'item/settings' do
     get '/autobind', to: 'settings#run_autobinder', as: 'autobind'
+    get '/sync_ldap', to: 'settings#sync_ldap', as: 'sync_ldap'
     post '/',  to: 'settings#process_request'
     post '/update_smtp_settings', to: 'settings#update_smtp_settings'
     patch '/update_smtp_settings', to: 'settings#update_smtp_settings'
