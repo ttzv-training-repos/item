@@ -16,7 +16,7 @@ module AdUserServices
     
     public
 
-    def selected_data()
+    def selected_data
       @headers = Array.new
       @alias_hash = Hash.new
       selection = Array.new
