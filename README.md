@@ -1,4 +1,11 @@
-# Features (future, not implemented)
+# This application is a work in progress
+
+Application for use in IT dept. when sometimes you have to send multiple personalized emails to employees. Allows to create your own templates and define new variables.
+Also allows to create mail signatures on similar terms. More modules are also present in this app but they mainly serve as a learning opportunity for myself.
+
+<img src="https://tomasz-zwak.github.io/portfolio/asset/portfolio/Item.png" alt="Image not found" srcset="">
+
+# Features (or more likely a list of ideas that I want to work on)
 
 By design all modules are backed by data from LDAP storage (ad_users table). It is howewer possible to add new records by-hand. Maybe in the future other ways to import data will be implemented.
 
@@ -45,3 +52,8 @@ Functionality:
     * Allows to enqueue SMS for immediate delivery
     * Allows to enqueue SMS for delivery on set date
     * History of sent SMS can be shown
+5)  Module for holiday requests - new idea
+    * Ability to log-in with google OAuth using business Google account
+    * Optionally can authenticate through LDAP
+    * Support for roles (eg. supervisor can see subordinates' requests, HR Dept. can see all requests, etc)
+    * Mail notifications on request updates (created, accepted, rejected)
