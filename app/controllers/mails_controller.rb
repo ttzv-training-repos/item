@@ -13,8 +13,12 @@ class MailsController < ApplicationController
   end
 
   def index
-    @templates = Template.all
-    @sender = current_user[:email]
+    @templates = Template.all 
+    if user_signed_in?
+       @sender = current_user.email
+    else
+      @sender = ''
+    end
   end
 
   def templates_data
