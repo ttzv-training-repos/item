@@ -1,7 +1,34 @@
 <h1>Upcoming mask editing ui</h1>
 
-<%= form_with(model: @tag_custom_mask, url: template_itemtag_tag_custom_mask_path, data:{remote: false}) do |tcm| %>
-    <%= tcm.label :value %>
-    <%= tcm.text_area :value %>
+<%= form_with(model: @tag_custom_mask, url: template_itemtag_tag_custom_mask_path, data:{remote: false}, class: 'form-group') do |tcm| %>
+    <%= tcm.label :value %><br>
+    <%= tcm.text_area :value, style: 'width: 100%' %><br>
     <%= tcm.submit %>
 <% end %>
+<%= label_tag :attribute, "Attribute to begin with" %>
+<%= select_tag( :attribute, options_for_select(available_attributes), data:{'mask-param' => 'attribute'})%>
+
+<p>Insert</p>
+<label for="insertIndex">Index where text should be inserted</label>
+<input type="text" name="" id="insertIndex" data-mask-action='insert' data-mask-param='at'>
+<label for="insertText">Text to insert</label>
+<input type="text" name="" id="insertText" data-mask-action='insert' data-mask-param='text'>
+<label for="insertAttr">Alternatively ActiveDirectory attribute</label>
+<%= select_tag( :insertAttr, options_for_select(available_attributes), data:{'mask-action' => 'insert', 'mask-param' => 'attribute'})%>
+<p>Replace</p>
+<label for="replaceSearch">Text to replace</label>
+<input type="text" name="" id="replaceSearch" data-mask-action='replace' data-mask-param='search'>
+<label for="replaceTo">Replacement text</label>
+<input type="text" name="" id="replaceTo" data-mask-action='replace' data-mask-param='replacement'>
+<p>Remove</p>
+<label for="removeIndex">Index of a character to remove</label>
+<input type="text" name="" id="removeIndex" data-mask-action='remove' data-mask-param='index'>
+
+<p>Preview</p>
+<br>
+<span id="previewArea">
+
+</span>
+<button id="getPreview">Get Preview</button>
+
+<button id="debugRefreshMaskValue"> Refresh </button>
