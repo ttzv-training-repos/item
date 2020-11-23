@@ -3,6 +3,7 @@ module UserHoldersHelper
   def users_from_guids(guids)
     builder = AdUserServices::TableQueryBuilder.new({
       ad_users:[
+      "id",
       "displayname",
       "mail",
       "samaccountname",

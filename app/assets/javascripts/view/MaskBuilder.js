@@ -2,16 +2,12 @@ class MaskBuilder{
 
     constructor(){
         this.queryElements();
-        this.maskHash = {
-            attribute: '',
-            insert: {},
-            replace: {},
-            remove: {}
-        }
-        this.debugHandle();
+        this.prefillMaskValue();
+        //this.debugHandle();
         this.allInputHandler();
-        this.inputValuesToMask();
-        this.updateMaskValue();
+        //this.updateMaskValue();
+        this.updatePreviewRequestParams();
+        this.parseMask();
     }
 
     queryElements(){
@@ -28,6 +24,7 @@ class MaskBuilder{
     }
 
     updateMaskValue(){
+        this.sanitizeHash();
         this.$maskValue.text(JSON.stringify(this.maskHash, undefined, 4));
     }
 
@@ -39,36 +36,64 @@ class MaskBuilder{
 
     inputValuesToMask(){
         $('input, select').each((i, e) => {
-            console.log(i, e)
-            let inputValue = e.value;
-            let action = e.dataset.maskAction;
-            let param = e.dataset.maskParam;
-            if (inputValue.length > 0){
-                if (action){
-                    this.maskHash[action][param] = inputValue;
-                } else if (param) {
-                    this.maskHash[param] = inputValue;
-                }
-            }
-            console.log(action, param);
+            this.setMaskHashParams(e);
         });
         
     }
 
     allInputHandler(){
         $('input, select').change((e) => {
-            let inputValue = e.target.value;
-            let action = e.target.dataset.maskAction;
-            let param = e.target.dataset.maskParam;
-            if (inputValue.length > 0){
-                if (action){
-                    this.maskHash[action][param] = inputValue;
-                } else {
-                    this.maskHash[param] = inputValue;
-                }
+            this.setMaskHashParams(e.target);
+            this.updateMaskValue();
+        });
+    }
+
+    sanitizeHash(){
+        Object.keys(this.maskHash).forEach( k => {
+            if (Object.keys(this.maskHash[k]).length === 0){
+                delete this.maskHash[k];
             }
-            console.log(action, param);
+        });
+    }
+
+    setMaskHashParams(input){
+        let inputValue = input.value;
+        let action = input.dataset.maskAction;
+        let param = input.dataset.maskParam;
+        if (action){
+            if (this.maskHash[action] === undefined) this.maskHash[action] = {};
+            if (inputValue.length === 0){
+                delete this.maskHash[action][param];     
+            } else {
+                this.maskHash[action][param] = inputValue;
+            }
+        } else if (param === "attribute"){
+            this.maskHash[param] = inputValue;
+        }
+    }
+
+    updatePreviewRequestParams(){
+        let remoteLink = $("#getPreview")[0];
+        remoteLink.addEventListener("ajax:before", function () {
+            remoteLink.dataset.params = `ad_users_id=${User.current.ad_users_id}`;
         })
+    }
+
+    parseMask(){
+        this.maskHash = JSON.parse(this.$maskValue.text());
+    }
+
+    prefillMaskValue(){
+        if (this.$maskValue.text().length === 0){
+            this.maskHash = {
+                attribute: '',
+                insert: {},
+                replace: {},
+                remove: {}
+            }
+        } else {
+            this.parseMask();
+        }
     }
 
 }

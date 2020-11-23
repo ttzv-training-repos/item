@@ -19,4 +19,10 @@ module TagCustomMasksHelper
     ad_user_attr + ad_user_detail_attr + office_attr
   end
 
+  def params_for_preview
+    params.permit(:ad_users_id,
+                  :template_id,
+                  :itemtag_id)    
+  end
+
 end

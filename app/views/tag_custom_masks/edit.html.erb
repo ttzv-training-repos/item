@@ -13,8 +13,8 @@
 <input type="text" name="" id="insertIndex" data-mask-action='insert' data-mask-param='at'>
 <label for="insertText">Text to insert</label>
 <input type="text" name="" id="insertText" data-mask-action='insert' data-mask-param='text'>
-<label for="insertAttr">Alternatively ActiveDirectory attribute</label>
-<%= select_tag( :insertAttr, options_for_select(available_attributes), data:{'mask-action' => 'insert', 'mask-param' => 'attribute'})%>
+<%# <label for="insertAttr">Alternatively ActiveDirectory attribute</label>
+<%= select_tag( :insertAttr, options_for_select(available_attributes), data:{'mask-action' => 'insert', 'mask-param' => 'attribute'})%> %>
 <p>Replace</p>
 <label for="replaceSearch">Text to replace</label>
 <input type="text" name="" id="replaceSearch" data-mask-action='replace' data-mask-param='search'>
@@ -28,7 +28,7 @@
 <br>
 <span id="previewArea">
 
-</span>
-<button id="getPreview">Get Preview</button>
+</span> <br>
+<%= link_to 'Get Preview', preview_template_itemtag_tag_custom_mask_path, data:{remote: true, params: ""}, id: "getPreview" %>
 
 <button id="debugRefreshMaskValue"> Refresh </button>
