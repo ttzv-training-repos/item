@@ -8,24 +8,27 @@ module Parsers
     end
 
     def insert(options)
-      options_missing?(options, [:at, :text_to_insert])
+      options_missing?(options, [:at, :text])
       return @text if values_nil? options
-      return @text.insert(options[:at], options[:text_to_insert])
+      return @text.insert(options[:at].to_i, options[:text])
     end
 
     def replace(options)
-      options_missing?(options, [:searched, :replacement])
+      options_missing?(options, [:search, :replacement])
       return @text if values_nil? options
-      return @text.gsub!(options[:searched], options[:replacement])
+      return @text.gsub!(options[:search], options[:replacement])
     end
 
     def remove(options)
       options_missing?(options, [:index])
       return @text if values_nil? options
-      return @text if options[:index] >= @text.length
-      @text[options[:index]] = ''
+      index = options[:index].to_i
+      return @text if index >= @text.length
+      @text[index] = ''
       return @text
     end
+
+    
 
     private
 

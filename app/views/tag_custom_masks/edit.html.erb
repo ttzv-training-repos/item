@@ -1,6 +1,6 @@
 <h1>Upcoming mask editing ui</h1>
 
-<%= form_with(model: @tag_custom_mask, url: template_itemtag_tag_custom_mask_path, data:{remote: false}, class: 'form-group') do |tcm| %>
+<%= form_with(model: @tag_custom_mask, url: template_itemtag_tag_custom_mask_path, class: 'form-group') do |tcm| %>
     <%= tcm.label :value %><br>
     <%= tcm.text_area :value, style: 'width: 100%' %><br>
     <%= tcm.submit %>

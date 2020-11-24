@@ -5,6 +5,7 @@ class AdUsersController < ApplicationController
       ad_users: [
         "id",
         "objectguid",
+        "objectsid",
         "name",
         "displayname",
         "samaccountname",

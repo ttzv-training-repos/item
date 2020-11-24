@@ -3,11 +3,10 @@ class MaskBuilder{
     constructor(){
         this.queryElements();
         this.prefillMaskValue();
+        this.prefillInputValues();
         //this.debugHandle();
         this.allInputHandler();
-        //this.updateMaskValue();
         this.updatePreviewRequestParams();
-        this.parseMask();
     }
 
     queryElements(){
@@ -93,6 +92,19 @@ class MaskBuilder{
             }
         } else {
             this.parseMask();
+        }
+        this.updateMaskValue();
+    }
+
+    prefillInputValues(){
+        if (this.$maskValue.text().length !== 0){
+            $('input').each((i, e) => {
+                let action = e.dataset.maskAction;
+                let param = e.dataset.maskParam;
+                if (action !== undefined && param !== undefined){
+                    e.value = this.maskHash[action][param]
+                }
+            });
         }
     }
 
