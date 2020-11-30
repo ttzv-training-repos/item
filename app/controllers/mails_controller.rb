@@ -27,10 +27,11 @@ class MailsController < ApplicationController
       json_data.merge!(
         {
         t.name => {
+          id: t.id,
           name: t.name,
           title: t.title,
           content: template_content(t),
-          tags: t.itemtags.select(:name, :default_value_mask).as_json
+          tags: t.itemtags.select(:id, :name, :default_value_mask).as_json
         }
       })
     end

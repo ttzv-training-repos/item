@@ -3,8 +3,6 @@ class MaskBuilder{
     constructor(){
         this.queryElements();
         this.prefillMaskValue();
-        this.prefillInputValues();
-        //this.debugHandle();
         this.allInputHandler();
         this.updatePreviewRequestParams();
     }
@@ -80,6 +78,7 @@ class MaskBuilder{
 
     parseMask(){
         this.maskHash = JSON.parse(this.$maskValue.text());
+        this.prefillInputValues();
     }
 
     prefillMaskValue(){
@@ -102,7 +101,7 @@ class MaskBuilder{
                 let action = e.dataset.maskAction;
                 let param = e.dataset.maskParam;
                 if (action !== undefined && param !== undefined){
-                    e.value = this.maskHash[action][param]
+                    if(this.maskHash[action]) e.value = this.maskHash[action][param]
                 }
             });
         }

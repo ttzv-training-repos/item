@@ -151,7 +151,7 @@ class TemplateViewBuilderV2{
     handleTemplateInput($input){
         $input.on('input paste', () => {
             this.updateTemplatePreview($input);
-            this.setCurrentCurrentMessageTagValue($input.attr('id'), $input.val())
+            this.setCurrentMessageTagValue($input.attr('id'), $input.val())
         });
     }
 
@@ -168,7 +168,7 @@ class TemplateViewBuilderV2{
         return currentMessage ? currentMessage.getTagValue(tagName) : ''
     }
 
-    setCurrentCurrentMessageTagValue(tagName, value){
+    setCurrentMessageTagValue(tagName, value){
         let currentMessage = this.currentMessage();
         currentMessage.setTagValue(tagName, value)
     }

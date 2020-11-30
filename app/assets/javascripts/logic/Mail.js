@@ -21,8 +21,8 @@ class Mail extends Message{
         let tags = this.template.tags;
         tags.forEach(tag => {
             let value = "" 
-            if (this.user) value = this.user[tag.default_value_mask] ?? "" 
-            this.setTagValue(tag.name, value)
+            value = this.itemtagValue(tag);
+            this.setTagValue(tag.name, value);
         });
         this.updateContent();
     }
@@ -48,6 +48,12 @@ class Mail extends Message{
             return true;
         } else {
             return false;
+        }
+    }
+
+    itemtagValue(tag){
+        if (this.user) {
+            return this.user[tag.default_value_mask] ?? "" 
         }
     }
 }
