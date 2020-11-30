@@ -15,4 +15,31 @@ class Itemtag < ApplicationRecord
     )
   end
 
+  #if template_id provided applies custom mask instead
+  def apply_mask(user_id, template_id=nil)
+    if template_id
+      tag_mask = TemplateTagging.find_by(
+        template_id: template_id,
+        itemtag_id: self.id
+      ).tag_custom_mask
+    else
+      tag_mask = self.default_value_mask 
+    end
+
+    mask_hash = JSON.parse(tag_mask.value, symbolize_names: true)
+
+    attribute = mask_hash[:attribute].split("#")[1];
+
+    user = AdUser.find(user_id)
+
+    init_val = user[attribute]
+    methods = mask_hash.keys - [:attribute]
+    masked_tag = Parsers::MaskParser.new(init_val)
+      methods.each do |m|
+        options = mask_hash[m]
+        masked_tag.send(m, options)
+      end
+    masked_tag.text
+  end
+
 end
