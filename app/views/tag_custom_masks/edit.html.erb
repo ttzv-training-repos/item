@@ -2,11 +2,15 @@
 
 <%= form_with(model: @tag_custom_mask, url: template_itemtag_tag_custom_mask_path, class: 'form-group') do |tcm| %>
     <%= tcm.label :value %><br>
-    <%= tcm.text_area :value, style: 'width: 100%' %><br>
+    <%= tcm.text_area :value, style: 'width: 100%' %>
+    <%= tcm.label :use, "Override default mask" %>
+    <%= tcm.check_box :use %><br>
     <%= tcm.submit %>
 <% end %>
+
 <%= label_tag :attribute, "Attribute to begin with" %>
 <%= select_tag( :attribute, options_for_select(available_attributes), data:{'mask-param' => 'attribute'})%>
+
 
 <p>Insert</p>
 <label for="insertIndex">Index where text should be inserted</label>

@@ -21,12 +21,16 @@ class Itemtag < ApplicationRecord
       tag_mask = TemplateTagging.find_by(
         template_id: template_id,
         itemtag_id: self.id
-      ).tag_custom_mask
+      )
+      return "" if tag_mask.nil?
+      return "" if tag_mask.tag_custom_mask.nil?
+      tag_mask = tag_mask.tag_custom_mask.value
     else
       tag_mask = self.default_value_mask 
     end
+    return "" if tag_mask.empty?
 
-    mask_hash = JSON.parse(tag_mask.value, symbolize_names: true)
+    mask_hash = JSON.parse(tag_mask, symbolize_names: true)
 
     attribute = mask_hash[:attribute].split("#")[1];
 

@@ -3,7 +3,8 @@ module TagCustomMasksHelper
   TABLE_SEPARATOR = '#'
 
   def mask_params
-    params.require(:tag_custom_mask).permit(:value)
+    params.require(:tag_custom_mask).permit(:value,
+                                            :use)
   end
 
   def available_attributes

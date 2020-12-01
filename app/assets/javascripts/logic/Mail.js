@@ -53,7 +53,11 @@ class Mail extends Message{
 
     itemtagValue(tag){
         if (this.user) {
-            return this.user[tag.default_value_mask] ?? "" 
+            if ( tag.override_default_mask ){
+                return tag.custom_mask_values[this.user.ad_users_id];
+            } else {
+                return tag.default_mask_values[this.user.ad_users_id];
+            }
         }
     }
 }

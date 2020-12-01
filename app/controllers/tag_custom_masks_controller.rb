@@ -20,9 +20,6 @@ class TagCustomMasksController < ApplicationController
       @tag_custom_mask.update(mask_params)
       flash_ajax_notice("Succesfully updated custom mask")
 
-
-    
-
     #redirect_to edit_template_path(params[:template_id])
   end
 
