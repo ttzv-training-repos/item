@@ -31,7 +31,7 @@ class MailsController < ApplicationController
           name: t.name,
           title: t.title,
           content: template_content(t),
-          tags: t.itemtags.select(:id, :name, :default_value_mask).as_json
+          tags: itemtags_hash(t)
         }
       })
     end

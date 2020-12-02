@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_15_163713) do
+ActiveRecord::Schema.define(version: 2020_12_01_104750) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -204,6 +204,7 @@ ActiveRecord::Schema.define(version: 2020_11_15_163713) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "template_tagging_id"
+    t.boolean "use", default: false
   end
 
   create_table "template_taggings", force: :cascade do |t|
