@@ -5,6 +5,8 @@ class MaskBuilder{
         this.prefillMaskValue();
         this.allInputHandler();
         this.updatePreviewRequestParams();
+        this.newMaskGroupHandler();
+        this.start(); //debug
     }
 
     queryElements(){
@@ -105,6 +107,18 @@ class MaskBuilder{
                 }
             });
         }
+    }
+
+    start(){
+        let baseMaskGroup = document.getElementById("maskGroup");
+        let $baseMaskGroup = $("#maskGroup")
+    }
+
+    newMaskGroupHandler(){
+        $("#addMaskGroup").click(() => {
+            let clone = document.getElementById("maskGroup").cloneNode(true);
+            console.log(clone.querySelectorAll("[id]"));
+        })
     }
 
 }

@@ -1,34 +1,120 @@
 <h1>Upcoming mask editing ui</h1>
-
-<%= form_with(model: @tag_custom_mask, url: template_itemtag_tag_custom_mask_path, class: 'form-group') do |tcm| %>
-    <%= tcm.label :value %><br>
-    <%= tcm.text_area :value, style: 'width: 100%' %><br>
-    <%= tcm.submit %>
-<% end %>
-<%= label_tag :attribute, "Attribute to begin with" %>
-<%= select_tag( :attribute, options_for_select(available_attributes), data:{'mask-param' => 'attribute'})%>
-
-<p>Insert</p>
-<label for="insertIndex">Index where text should be inserted</label>
-<input type="text" name="" id="insertIndex" data-mask-action='insert' data-mask-param='at'>
-<label for="insertText">Text to insert</label>
-<input type="text" name="" id="insertText" data-mask-action='insert' data-mask-param='text'>
-<%# <label for="insertAttr">Alternatively ActiveDirectory attribute</label>
-<%= select_tag( :insertAttr, options_for_select(available_attributes), data:{'mask-action' => 'insert', 'mask-param' => 'attribute'})%> %>
-<p>Replace</p>
-<label for="replaceSearch">Text to replace</label>
-<input type="text" name="" id="replaceSearch" data-mask-action='replace' data-mask-param='search'>
-<label for="replaceTo">Replacement text</label>
-<input type="text" name="" id="replaceTo" data-mask-action='replace' data-mask-param='replacement'>
-<p>Remove</p>
-<label for="removeIndex">Index of a character to remove</label>
-<input type="text" name="" id="removeIndex" data-mask-action='remove' data-mask-param='index'>
-
-<p>Preview</p>
-<br>
-<span id="previewArea">
-
-</span> <br>
-<%= link_to 'Get Preview', preview_template_itemtag_tag_custom_mask_path, data:{remote: true, params: ""}, id: "getPreview" %>
-
-<button id="debugRefreshMaskValue"> Refresh </button>
+<div class="row">
+    <div class="col">
+        <div class="accordion" id="accordion">
+            <div class="card" id="maskGroup">
+                <div class="card-header">
+                    <a class="btn collapsed py-0" type="button" data-toggle="collapse" data-target="#collapse1">Group #</a>
+                </div>
+                <div id="collapse1" class="collapse hide">
+                    <div class="card-body">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td class="text-center" colspan="2">Attribute</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center" colspan="2">
+                                        <%= select_tag( :attribute, options_for_select(available_attributes), data:{'mask-param' => 'attribute'}, include_blank: true)%>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center" colspan="2">
+                                        <p>Insert</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="insertText">Text</label>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="" id="insertText" data-mask-action='insert' data-mask-param='text'>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="insertIndex">Index</label>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="" id="insertIndex" data-mask-action='insert' data-mask-param='at'>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-center">
+                                        <p>Replace</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="replaceSearch">Match</label>
+                                    </td>
+                                    <td>
+                                        <label for="replaceRadioMatchText">Text</label>
+                                        <input type="radio" name="replaceRadioMatch" id="replaceRadioMatchText" selected>
+                                        <label for="replaceRadioMatchRegExp">RegExp</label>
+                                        <input type="radio" name="replaceRadioMatch" id="replaceRadioMatchRegExp">
+                                        <input type="text" name="" id="replaceSearch" data-mask-action='replace' data-mask-param='search'>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="replaceTo">Replacement text</label>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="" id="replaceTo" data-mask-action='replace' data-mask-param='replacement'>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-center">
+                                        <p>Remove</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>Match</p>
+                                    </td>
+                                    <td>
+                                        <label for="removeRadioMatchText">Text</label>
+                                        <input type="radio" name="removeRadioMatch" id="removeRadioMatchText">
+                                        <label for="removeRadioMatchRegExp">RegExp</label>
+                                        <input type="radio" name="removeRadioMatch" id="removeRadioMatchRegExp">
+                                        <label for="removeRadioMatchIndex">Index</label>
+                                        <input type="radio" name="removeRadioMatch" id="removeRadioMatchIndex">
+                                        <input type="text" name="" id="removeIndex" data-mask-action='remove' data-mask-param='index'>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary pt-2" id="addMaskGroup">
+            <i class="fas fa-plus" aria-hidden="true"></i>
+            Add group
+        </button>
+        <p>Preview</p>
+        <br>
+        <span id="previewArea">
+        </span> <br>
+        <%= link_to 'Get Preview', preview_template_itemtag_tag_custom_mask_path, data:{remote: true, params: ""}, id: "getPreview" %>
+        <button id="debugRefreshMaskValue"> Refresh </button>
+    </div>
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <a >
+                    Value
+                </a> 
+            </div>
+            <div class="card-body">
+                <%= form_with(model: @tag_custom_mask, url: template_itemtag_tag_custom_mask_path, class: 'form-group') do |tcm| %>
+                    <%= tcm.label :value %><br>
+                    <%= tcm.text_area :value, style: 'width: 100%' %><br>
+                    <%= tcm.submit %>
+                <% end %>
+            </div>
+        </div>
+        
+    </div>
+</div>
