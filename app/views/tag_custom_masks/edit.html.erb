@@ -1,12 +1,12 @@
 <h1>Upcoming mask editing ui</h1>
 <div class="row">
-    <div class="col">
+    <div class="col overflow-auto h-80vh">
         <div class="accordion" id="accordion">
             <div class="card" id="maskGroup">
                 <div class="card-header">
-                    <a class="btn collapsed py-0" type="button" data-toggle="collapse" data-target="#collapse1">Group #</a>
+                    <a class="btn collapsed py-0" type="button" data-toggle="collapse" data-target="#collapse">Group #</a>
                 </div>
-                <div id="collapse1" class="collapse hide">
+                <div id="collapse" class="collapse hide">
                     <div class="card-body">
                         <table class="table">
                             <tbody>
@@ -28,7 +28,7 @@
                                         <label for="insertText">Text</label>
                                     </td>
                                     <td>
-                                        <input type="text" name="" id="insertText" data-mask-action='insert' data-mask-param='text'>
+                                        <input type="text" name="" id="insertText" data-mask-action='insert' data-mask-param='value'>
                                     </td>
                                 </tr>
                                 <tr>
@@ -36,7 +36,7 @@
                                         <label for="insertIndex">Index</label>
                                     </td>
                                     <td>
-                                        <input type="text" name="" id="insertIndex" data-mask-action='insert' data-mask-param='at'>
+                                        <input type="text" name="" id="insertIndex" data-mask-action='insert' data-mask-param='index'>
                                     </td>
                                 </tr>
                                 <tr>
@@ -50,9 +50,10 @@
                                     </td>
                                     <td>
                                         <label for="replaceRadioMatchText">Text</label>
-                                        <input type="radio" name="replaceRadioMatch" id="replaceRadioMatchText" selected>
+                                        <input type="radio" value="text" name="replaceRadioMatch" id="replaceRadioMatchText" data-mask-action="replace" data-mask-param="match" required>
                                         <label for="replaceRadioMatchRegExp">RegExp</label>
-                                        <input type="radio" name="replaceRadioMatch" id="replaceRadioMatchRegExp">
+                                        <input type="radio" value="regexp" name="replaceRadioMatch" id="replaceRadioMatchRegExp" data-mask-action="replace" data-mask-param="match">
+                                        <br>
                                         <input type="text" name="" id="replaceSearch" data-mask-action='replace' data-mask-param='search'>
                                     </td>
                                 </tr>
@@ -61,7 +62,7 @@
                                         <label for="replaceTo">Replacement text</label>
                                     </td>
                                     <td>
-                                        <input type="text" name="" id="replaceTo" data-mask-action='replace' data-mask-param='replacement'>
+                                        <input type="text" name="" id="replaceTo" data-mask-action='replace' data-mask-param='value'>
                                     </td>
                                 </tr>
                                 <tr>
@@ -75,12 +76,26 @@
                                     </td>
                                     <td>
                                         <label for="removeRadioMatchText">Text</label>
-                                        <input type="radio" name="removeRadioMatch" id="removeRadioMatchText">
+                                        <input type="radio" value="text" name="removeRadioMatch" id="removeRadioMatchText" data-mask-action="remove" data-mask-param="match" required>
                                         <label for="removeRadioMatchRegExp">RegExp</label>
-                                        <input type="radio" name="removeRadioMatch" id="removeRadioMatchRegExp">
+                                        <input type="radio" value="regexp" name="removeRadioMatch" id="removeRadioMatchRegExp" data-mask-action="remove" data-mask-param="match">
                                         <label for="removeRadioMatchIndex">Index</label>
-                                        <input type="radio" name="removeRadioMatch" id="removeRadioMatchIndex">
+                                        <input type="radio" value="index" name="removeRadioMatch" id="removeRadioMatchIndex" data-mask-action="remove" data-mask-param="match">
+                                        <br>
                                         <input type="text" name="" id="removeIndex" data-mask-action='remove' data-mask-param='index'>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-center">Other</td>
+                                </tr>
+                                <tr>
+                                    <td  colspan="2" class="text-center">
+                                        <label for="">Upcase</label>
+                                        <input type="checkbox" value="true" name="other" id="otherRadioUpcase" data-mask-action='other' data-mask-param='upcase'>
+                                        <label for="">Downcase</label>
+                                        <input type="checkbox" value="true" name="other" id="otherRadioDowncase" data-mask-action='other' data-mask-param='downcase'>
+                                        <label for="">Capitalize</label>
+                                        <input type="checkbox" value="true" name="other" id="otherCheckboxCapitalize" data-mask-action='other' data-mask-param='capitalize'>
                                     </td>
                                 </tr>
                             </tbody>
@@ -93,12 +108,6 @@
             <i class="fas fa-plus" aria-hidden="true"></i>
             Add group
         </button>
-        <p>Preview</p>
-        <br>
-        <span id="previewArea">
-        </span> <br>
-        <%= link_to 'Get Preview', preview_template_itemtag_tag_custom_mask_path, data:{remote: true, params: ""}, id: "getPreview" %>
-        <button id="debugRefreshMaskValue"> Refresh </button>
     </div>
     <div class="col">
         <div class="card">
@@ -109,10 +118,15 @@
             </div>
             <div class="card-body">
                 <%= form_with(model: @tag_custom_mask, url: template_itemtag_tag_custom_mask_path, class: 'form-group') do |tcm| %>
-                    <%= tcm.label :value %><br>
                     <%= tcm.text_area :value, style: 'width: 100%' %><br>
                     <%= tcm.submit %>
                 <% end %>
+                <span>Preview</span>
+                <br>
+                <span id="previewArea">
+                </span>
+                <br>
+                <%= link_to 'Get Preview', preview_template_itemtag_tag_custom_mask_path, data:{remote: true, params: ""}, id: "getPreview" %>
             </div>
         </div>
         

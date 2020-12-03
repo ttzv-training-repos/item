@@ -6,20 +6,11 @@ class MaskBuilder{
         this.allInputHandler();
         this.updatePreviewRequestParams();
         this.newMaskGroupHandler();
-        this.start(); //debug
+        this.groupCount = this.getGroupCount();
     }
 
     queryElements(){
         this.$maskValue = $('#tag_custom_mask_value');
-        this.$insertIndex = $('#insertIndex');
-        this.$insertText = $('#insertIndex');
-        // this.$insertAttr = $('#insertAttr');
-        this.$replaceSearch = $('#replaceSearch');
-        this.$replaceTo = $('#replaceTo');
-        this.$removeIndex = $('#removeIndex');
-        this.$previewArea = $('#previewArea');
-        this.$getPreview = $('#getPreview');
-        this.$debugRefresh = $('#debugRefreshMaskValue');
     }
 
     updateMaskValue(){
@@ -27,31 +18,20 @@ class MaskBuilder{
         this.$maskValue.text(JSON.stringify(this.maskHash, undefined, 4));
     }
 
-    debugHandle(){
-        this.$debugRefresh.click(() => {
-            this.updateMaskValue();
-        });
-    }
-
-    inputValuesToMask(){
-        $('input, select').each((i, e) => {
-            this.setMaskHashParams(e);
-        });
-        
-    }
-
     allInputHandler(){
-        $('input, select').change((e) => {
+        $("#accordion").change((e) => {
             this.setMaskHashParams(e.target);
             this.updateMaskValue();
         });
     }
 
     sanitizeHash(){
-        Object.keys(this.maskHash).forEach( k => {
-            if (Object.keys(this.maskHash[k]).length === 0){
-                delete this.maskHash[k];
-            }
+        this.maskHash.forEach(h => {
+            Object.keys(h).forEach( k => {
+                if (Object.keys(h[k]).length === 0){
+                    delete h[k];
+                }
+            });
         });
     }
 
@@ -59,15 +39,24 @@ class MaskBuilder{
         let inputValue = input.value;
         let action = input.dataset.maskAction;
         let param = input.dataset.maskParam;
+        let group = this.groupFromId(input);
         if (action){
-            if (this.maskHash[action] === undefined) this.maskHash[action] = {};
-            if (inputValue.length === 0){
-                delete this.maskHash[action][param];     
+            if (this.maskHash[group][action] === undefined) this.maskHash[group][action] = {};
+            if (this.cleared(input)){
+                delete this.maskHash[group][action][param];  
             } else {
-                this.maskHash[action][param] = inputValue;
+                this.maskHash[group][action][param] = inputValue;
             }
         } else if (param === "attribute"){
-            this.maskHash[param] = inputValue;
+            this.maskHash[group][param] = inputValue;
+        }
+    }
+
+    cleared(input){
+        if (["radio", "checkbox"].includes(input.type)){
+            return !input.checked;
+        } else {
+            return input.value.length === 0
         }
     }
 
@@ -85,12 +74,13 @@ class MaskBuilder{
 
     prefillMaskValue(){
         if (this.$maskValue.text().length === 0){
-            this.maskHash = {
+            this.maskHash = [{
                 attribute: '',
                 insert: {},
                 replace: {},
-                remove: {}
-            }
+                remove: {},
+                other: {}
+            }];
         } else {
             this.parseMask();
         }
@@ -98,27 +88,51 @@ class MaskBuilder{
     }
 
     prefillInputValues(){
-        if (this.$maskValue.text().length !== 0){
-            $('input').each((i, e) => {
-                let action = e.dataset.maskAction;
-                let param = e.dataset.maskParam;
-                if (action !== undefined && param !== undefined){
-                    if(this.maskHash[action]) e.value = this.maskHash[action][param]
-                }
-            });
+        let dataActionAttr = "data-mask-action";
+        let dataParamAttr = "data-mask-param";
+        for (let index = 0; index < this.maskHash.length; index++) {
+            //todo
         }
-    }
-
-    start(){
-        let baseMaskGroup = document.getElementById("maskGroup");
-        let $baseMaskGroup = $("#maskGroup")
     }
 
     newMaskGroupHandler(){
         $("#addMaskGroup").click(() => {
-            let clone = document.getElementById("maskGroup").cloneNode(true);
-            console.log(clone.querySelectorAll("[id]"));
-        })
+            let clone = this.cloneMaskGroup();
+            clone.querySelectorAll("input").forEach( input => {
+                input.value='';
+            });
+            $("#accordion").append(clone);
+            this.groupCount += 1;
+            this.maskHash.push({});
+        });
     }
+
+    cloneMaskGroup(){
+        let clone = document.getElementById("maskGroup").cloneNode(true);
+        clone.id = this.newId(clone.id, this.groupCount);
+        clone.querySelectorAll("[id]").forEach(element => {
+            let id = element.id;
+            element.id = this.newId(id, this.groupCount);
+        });
+        clone.querySelector("[data-target]").dataset.target = this.newId("#collapse", this.groupCount);
+        return clone;
+    }
+
+    getGroupCount(){
+        let cards = [...document.getElementById("accordion").childNodes];
+        return cards.filter( c => {
+            return c.classList ? c.className.includes("card") : false
+        }).length
+    }
+
+    newId(orig, iterator){
+        return `${orig}_${iterator}`;
+    }
+
+    groupFromId(input){
+        return input.id.includes("_") ? input.id.split("_")[1] : 0;
+    }
+
+
 
 }
