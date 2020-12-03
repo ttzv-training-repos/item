@@ -1,5 +1,5 @@
 module Parsers
-  class MaskParser
+  class MaskApplier
 
     attr_accessor :text
 
