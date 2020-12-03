@@ -1,4 +1,4 @@
-<h1>Upcoming mask editing ui</h1>
+<h1>Edit mask</h1>
 <div class="row">
     <div class="col overflow-auto h-80vh">
         <div class="accordion" id="accordion">
@@ -11,7 +11,9 @@
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <td class="text-center" colspan="2">Attribute</td>
+                                    <td class="text-center" colspan="2">
+                                        Attribute
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="text-center" colspan="2">
@@ -20,7 +22,7 @@
                                 </tr>
                                 <tr>
                                     <td class="text-center" colspan="2">
-                                        <p>Insert</p>
+                                        Insert
                                     </td>
                                 </tr>
                                 <tr>
@@ -41,7 +43,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="text-center">
-                                        <p>Replace</p>
+                                        Replace
                                     </td>
                                 </tr>
                                 <tr>
@@ -67,12 +69,12 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="text-center">
-                                        <p>Remove</p>
+                                        Remove
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <p>Match</p>
+                                        <label for="removeIndex">Match</label>
                                     </td>
                                     <td>
                                         <label for="removeRadioMatchText">Text</label>
@@ -82,18 +84,20 @@
                                         <label for="removeRadioMatchIndex">Index</label>
                                         <input type="radio" value="index" name="removeRadioMatch" id="removeRadioMatchIndex" data-mask-action="remove" data-mask-param="match">
                                         <br>
-                                        <input type="text" name="" id="removeIndex" data-mask-action='remove' data-mask-param='index'>
+                                        <input type="text" name="" id="removeIndex" data-mask-action='remove' data-mask-param='value'>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="text-center">Other</td>
                                 </tr>
                                 <tr>
-                                    <td  colspan="2" class="text-center">
+                                    <td colspan="2" class="text-center">
                                         <label for="">Upcase</label>
-                                        <input type="checkbox" value="true" name="other" id="otherRadioUpcase" data-mask-action='other' data-mask-param='upcase'>
+                                        <input type="checkbox" value="true" name="other" id="otherCheckboxUpcase" data-mask-action='other' data-mask-param='upcase'>
+                                        <br>
                                         <label for="">Downcase</label>
-                                        <input type="checkbox" value="true" name="other" id="otherRadioDowncase" data-mask-action='other' data-mask-param='downcase'>
+                                        <input type="checkbox" value="true" name="other" id="otherCheckboxDowncase" data-mask-action='other' data-mask-param='downcase'>
+                                        <br>
                                         <label for="">Capitalize</label>
                                         <input type="checkbox" value="true" name="other" id="otherCheckboxCapitalize" data-mask-action='other' data-mask-param='capitalize'>
                                     </td>

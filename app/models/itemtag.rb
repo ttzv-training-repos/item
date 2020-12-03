@@ -31,19 +31,21 @@ class Itemtag < ApplicationRecord
     return "" if tag_mask.empty?
 
     mask_hash = JSON.parse(tag_mask, symbolize_names: true)
-
-    attribute = mask_hash[:attribute].split("#")[1];
-
     user = AdUser.find(user_id)
 
-    init_val = user[attribute]
-    methods = mask_hash.keys - [:attribute]
-    masked_tag = Parsers::MaskParser.new(init_val)
-      methods.each do |m|
-        options = mask_hash[m]
-        masked_tag.send(m, options)
-      end
-    masked_tag.text
+    tag_value = String.new
+    mask_hash.each do |hash|
+      attribute = hash[:attribute].split("#")[1];
+      init_val = user[attribute].to_s
+      methods = hash.keys - [:attribute]
+      masked_tag = Parsers::MaskParser.new(init_val)
+        methods.each do |m|
+          options = hash[m]
+          masked_tag.send(m, options)
+        end
+      tag_value += masked_tag.text  
+    end
+    tag_value
   end
 
 end
