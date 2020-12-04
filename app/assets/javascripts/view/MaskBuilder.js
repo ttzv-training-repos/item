@@ -102,7 +102,6 @@ class MaskBuilder{
                     i.value = this.maskHash[group][maskParam];
                 }
             } else if (this.keyPresent(group, maskAction, maskParam)) {
-                console.log(i)
                 let inputParam = this.maskHash[group][maskAction][maskParam];
                 if (i.type === "text"){
                     i.value = inputParam;
@@ -141,6 +140,7 @@ class MaskBuilder{
             $("#accordion").append(clone);
             this.groupCount += 1;
             this.maskHash.push({});
+            this.updateMaskValue();
         });
     }
 
@@ -153,12 +153,7 @@ class MaskBuilder{
             if (element.name) element.name = this.newId(element.name, this.groupCount)
         });
         clone.querySelector("[data-target]").dataset.target = this.newId("#collapse", this.groupCount);
-        let btnDelete = this.btnDeleteGroup(this.groupCount);
-        clone.append(btnDelete);
-        document.querySelector('[data-mask-action="deleteGroup"]').addEventListener('click', () => {
-            this.deleteGroup(btnDelete);
-        });
-        console.log(btnDelete);
+        clone.querySelector(".card-header").appendChild(this.createGroupDeleteBtn(this.groupCount));
         return clone;
     }
 
@@ -179,18 +174,19 @@ class MaskBuilder{
         }
     }
 
-    deleteGroup(btn){
-        let groupno = this.getGroup(btn);
-        console.log(`#maskGroup_${groupno}`);
-        $(`#maskGroup_${groupno}`).remove();
-        this.maskHash.splice(groupno, 1);
+    deleteGroup(group){
+        $(`#maskGroup_${group}`).remove();
+        this.maskHash.splice(group, 1);
+        this.groupCount -= 1;
         this.updateMaskValue();
     }
 
-    btnDeleteGroup(group){
-        return `<button class="btn" id="deleteGroup_${group}" data-mask-action="deleteGroup">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                </button>`;
+    createGroupDeleteBtn(group){
+        let btn = document.createElement("button");
+        btn.classList = "btn";
+        btn.insertAdjacentHTML('beforeend', '<i class="fa fa-trash" aria-hidden="true"></i>');
+        btn.addEventListener('click', () => this.deleteGroup(group));
+        return btn;
     }
 
 }

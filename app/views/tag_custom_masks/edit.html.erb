@@ -123,6 +123,8 @@
             <div class="card-body">
                 <%= form_with(model: @tag_custom_mask, url: template_itemtag_tag_custom_mask_path, class: 'form-group') do |tcm| %>
                     <%= tcm.text_area :value, style: 'width: 100%' %><br>
+                    <%= tcm.label :use, 'Override default mask' %>
+                    <%= tcm.check_box :use %><br>
                     <%= tcm.submit %>
                 <% end %>
                 <span>Preview</span>

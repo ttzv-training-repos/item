@@ -22,12 +22,12 @@ class Itemtag < ApplicationRecord
         template_id: template_id,
         itemtag_id: self.id
       )
-      return "" if tag_mask.nil?
       return "" if tag_mask.tag_custom_mask.nil?
       tag_mask = tag_mask.tag_custom_mask.value
     else
       tag_mask = self.default_value_mask 
     end
+    return "" if tag_mask.nil?
     return "" if tag_mask.empty?
 
     mask_hash = JSON.parse(tag_mask, symbolize_names: true)

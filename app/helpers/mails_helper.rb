@@ -53,12 +53,14 @@ module MailsHelper
 
   def itemtags_hash(template)
     template.itemtags.map do |itemtag|
-      {id: itemtag.id, 
+      p template, itemtag
+       a = {id: itemtag.id, 
         name: itemtag.name, 
         override_default_mask: override?(template, itemtag),
         default_mask_values: mask_values(itemtag),
         custom_mask_values: mask_values(itemtag, template.id) 
       }
+      p a
     end
   end
 
