@@ -64,7 +64,7 @@ class MaskBuilder{
         let remoteLink = $("#getPreview")[0];
         remoteLink.addEventListener("ajax:before", function () {
             remoteLink.dataset.params = `ad_users_id=${User.current.ad_users_id}`;
-        })
+        });
     }
 
     parseMask(){
@@ -118,7 +118,7 @@ class MaskBuilder{
                     }
                 }
             }
-        })
+        });
     }
 
     keyPresent(group, key1, key2){
@@ -153,6 +153,12 @@ class MaskBuilder{
             if (element.name) element.name = this.newId(element.name, this.groupCount)
         });
         clone.querySelector("[data-target]").dataset.target = this.newId("#collapse", this.groupCount);
+        let btnDelete = this.btnDeleteGroup(this.groupCount);
+        clone.append(btnDelete);
+        document.querySelector('[data-mask-action="deleteGroup"]').addEventListener('click', () => {
+            this.deleteGroup(btnDelete);
+        });
+        console.log(btnDelete);
         return clone;
     }
 
@@ -168,9 +174,23 @@ class MaskBuilder{
     }
 
     getGroup(input){
-        return input.id.includes("_") ? input.id.split("_")[1] : 0;
+        if (input){
+            return input.id.includes("_") ? input.id.split("_")[1] : 0;
+        }
     }
 
+    deleteGroup(btn){
+        let groupno = this.getGroup(btn);
+        console.log(`#maskGroup_${groupno}`);
+        $(`#maskGroup_${groupno}`).remove();
+        this.maskHash.splice(groupno, 1);
+        this.updateMaskValue();
+    }
 
+    btnDeleteGroup(group){
+        return `<button class="btn" id="deleteGroup_${group}" data-mask-action="deleteGroup">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>`;
+    }
 
 }

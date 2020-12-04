@@ -4,7 +4,7 @@ module Parsers
     attr_accessor :text
 
     def initialize(text)
-      @text = text
+      @text = String.new(text)
     end
 
     def insert(options)
@@ -43,9 +43,10 @@ module Parsers
 
     def other(options)
       return @text if values_nil? options
-      @text.upcase if options[:upcase]
-      @text.downcase if options[:downcase]
-      @text.capitalize if options[:capitalize]
+      @text.upcase! if options[:upcase]
+      @text.downcase! if options[:downcase]
+      @text.capitalize! if options[:capitalize]
+      return @text
     end
 
     private
