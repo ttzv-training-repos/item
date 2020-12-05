@@ -45,14 +45,20 @@ class MailsController < ApplicationController
   #             content
   def send_request
     message_request = mail_params
-    puts "#############################################"
-    p message_request[:messages].values
     sender = message_request[:sender]
-    messages = message_request[:messages]
-    messages = messages.to_hash.map { |m| m[1] }
+    messages = message_request[:messages].values
+    messages.each do |m|
+      p m
+      TemplateMailer.with(
+        user: current_user, 
+        password: cookies[:smtp_password],
+        client: google_auth_client
+      ).template_mail(recipients: 'txdxkx@gmail.com',
+                      subject: m["subject"],
+                      body_html: m["content"])
+                      .deliver_now
+    end
 
-    mailing_service = GoogleApiServices::MailingService.new(google_auth_client)
-    mailing_service.send(sender: sender, messages: messages)
   end
 
   def progress

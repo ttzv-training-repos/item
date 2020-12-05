@@ -53,8 +53,8 @@ module UserServices
     end
 
     def clear_credentials
-      @client.client_id = nil
-      @client.client_secret = nil
+      @client.client_id = "nil"
+      @client.client_secret = "nil"
     end
 
   end

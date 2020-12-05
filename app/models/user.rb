@@ -26,19 +26,21 @@ class User < ApplicationRecord
     credentials = access_token.credentials
     data = access_token.info
     user = User.where(email: data['email']).first
+    client = Hash.new
+    client[:access_token] = credentials['token']
+    client[:refresh_token] = credentials['refresh_token']
+    client[:expires_at] = credentials['expires_at']
 
-    unless user
-        client = Hash.new
-        client[:access_token] = credentials['token']
-        client[:refresh_token] = credentials['refresh_token']
-        client[:expires_at] = credentials['expires_at']
-        user = User.create(name: data['name'],
-            email: data['email'],
-            password: Devise.friendly_token[0,20],
-            google_client: client.to_json,
-            picture_google: data['image'],
-            anonymous: false
-        )
+    if user
+      user.update(google_client: client.to_json)
+    else
+      user = User.create(name: data['name'],
+          email: data['email'],
+          password: Devise.friendly_token[0,20],
+          google_client: client.to_json,
+          picture_google: data['image'],
+          anonymous: false
+      )
     end
     user
   end

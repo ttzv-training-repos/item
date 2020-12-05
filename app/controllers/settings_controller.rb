@@ -50,15 +50,6 @@ class SettingsController < ApplicationController
     else
       @smtp_setting = current_user.create_smtp_setting(hash)
     end
-
-    TemplateMailer.with(
-      user: current_user, 
-      password: cookies[:smtp_password],
-      client: google_auth_client
-    ).template_mail('txdxkx@gmail.com','hello world','<p>sent by api</p>')
-    .deliver_now
-
-    #TemplateMailer.with(user: current_user, password: cookies[:smtp_password], client: google_auth_client).welcome_email('txdxkx@gmail.com','hello world','<p>some testing html</p>').deliver_now
   end
 
   def sync_ldap

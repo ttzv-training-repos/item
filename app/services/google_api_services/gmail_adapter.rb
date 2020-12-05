@@ -5,7 +5,7 @@ module GoogleApiServices
     attr_accessor :settings, :client
 
     def initialize(settings)
-      throw "Authorization client required" if settings[:client].nil?
+      raise "Authorization client required" if settings[:client].nil?
       @client = settings[:client]
       @service = Google::Apis::GmailV1::GmailService.new
       @service.authorization = @client

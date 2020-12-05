@@ -19,7 +19,10 @@ class TemplateMailer < ApplicationMailer
     end
   end
  
-  def template_mail(recipients, subject, body_html)
+  def template_mail(options)
+    recipients = options[:recipients]
+    subject = options[:subject]
+    body_html = options[:body_html]
 
     mail_hash = {
       to: recipients,
