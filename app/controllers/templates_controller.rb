@@ -78,6 +78,5 @@ class TemplatesController < ApplicationController
     @template = Template.find(params[:template_id])
     @template_tags = @template.itemtags
     @available_tags = Itemtag.all.filter{ |tag| !@template_tags.include? tag }
-    
   end
 end

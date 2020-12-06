@@ -73,8 +73,10 @@
         </nav>
         <div class="container-fluid h-100">       
             <%= yield %>
-            <div class="notice alert-info fixed-bottom position-absolute" id="flashNotice" style="display: none;"><%= notice %></div>
-            <div class="alert alert-warning fixed-bottom position-absolute" id="flashAlert" style="display: none;"><%= alert %></div>
+            <%= notice %>
+            <%= alert %>
+            <div class="alert alert-info fixed-bottom position-absolute" id="flashNotice" style="display: none;"></div>
+            <div class="alert alert-warning fixed-bottom position-absolute" id="flashAlert" style="display: none;"></div>
             <%= javascript_include_tag 'application' %>
         </div>
         
