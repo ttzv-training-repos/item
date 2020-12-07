@@ -1,0 +1,116 @@
+<!-- mailing-page-content -->
+<div class="row h-100">  
+    <!-- message controls -->
+    <div class="col-sm tmsg-left-panel ml-2">
+        <!-- Sender and recipients -->
+        <div class="row">
+            <!-- Sender -->
+            <div class="col-sm-12">
+                <div class="form__group field">
+                    <input type="input" name="sender" id="sender"  class="form__field" placeholder="Sender" data-event="setSender" value="<%=@sender%>">
+                    <label for="sender" class="form__label">Sender</label>
+                </div>
+            </div>
+            <!-- Recipients -->
+            <div class="col-sm-12">
+                <div class="dropdown d-flex justify-content-between align-items-center py-1" >
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="buttonDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Recipients 
+                        <span class="badge badge-primary badge-pill" id="recipients-no">0</span>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="buttonDropdownMenu">
+                        <div id="recipientsDropdown"></div>
+                        <div class="dropdown-divider"></div>
+                        <div class="form-group">
+                            <form class="px-4 py-3" onsubmit="return false">
+                                <label for="emailAddress">New recipient</label>
+                                <input type="email" class="form-control" id="inputEmailAddress" placeholder="email@example.com" aria-describedby="emailHelp">
+                                <button type="submit" id="buttonAddRecipient" data-jsevent="add-recipient" class="btn btn-primary my-1">Add</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <button class="send-btn btn btn-primary" data-toggle="modal" data-target="#stagingModal"><i class="fa fa-envelope" aria-hidden="true"></i></button>
+            </div>
+        </div>
+        <!-- Template fields -->
+        <div class="card my-2">
+            <div class="card-header tmsg">
+                Template fields
+            </div>
+            <div class="card-body tmsg-fields" id="inputsArea">
+            </div>
+        </div>
+    </div>
+    <!-- message-content -->
+    <div class="col-sm-6 tmsg-center py-5">
+        <div class="tmsg-subject">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Subject</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Subject" aria-label="Username" aria-describedby="basic-addon1" id="title">
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header tmsg">
+                Contents
+            </div>
+            <div class="card-body">
+                <div class="tmsg-content p-3" id="content">
+                    No Template Selected
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- templates -->
+    <div class="col-sm tmsg-right-panel mr-2 py-1">
+        <div class="card">
+            <div class="card-header tmsg d-flex justify-content-between">
+                <div>
+                    Templates
+                </div>
+                <div>
+                    Selected:
+                    <span  class="badge badge-primary badge-pill" id="noSelectedTemplates">
+                        0
+                    </span>
+                </div>
+            </div>
+            <div class="card-body tmsg-list">
+                <div class="px-2">
+                    <% unless @templates.empty? %>
+                        <% @templates.each do |template| %>
+                            <%= render partial: 'templates/template_entry', locals: {template: template} %>
+                        <% end %>
+                    <% end %>    
+                </div>
+            </div>
+        </div>
+            <div class="card mt-1">
+                <div class="card-header tmsg text-center">
+                    Add templates
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="form-group d-flex justify-items-center">
+                                <%= form_with(url: {action: :upload}, multipart: true) do %>
+                                    <h5>From file</h5>
+                                    <%= file_field_tag 'templates[]', multiple: true, class: "form-control-file", id: "templateSelect" %>
+                                    <button name="commit" type="submit" data-disable-with="Please wait..." class="btn btn-primary my-1"><i class="fa fa-upload"></i></button>
+                                <% end %>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <h5>Create</h5>
+                            <a href=<%= new_template_path %> class="btn btn-primary text-center"><i class="fa fa-edit"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>   
+        </div>
+    </div>
+</div>

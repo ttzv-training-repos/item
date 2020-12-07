@@ -13,7 +13,7 @@ class MailsController < ApplicationController
   end
 
   def index
-    @templates = Template.all 
+    @templates = Template.where(category: "mail")
     if user_signed_in?
        @sender = current_user.email
     else

@@ -14,11 +14,14 @@ Rails.application.routes.draw do
     end
     resources :user_holders, only: [:index]
     resources :signatures, only: [:index]
+    post '/upload', to: 'signatures#upload', as: 'signatures_upload'
     resources :sms_gateway, only: [:index]
+    post '/upload', to: 'sms_gateway#upload', as: 'sms_upload'
     resources :offices, only: [:index, :new, :create, :edit, :update, :destroy]
     resources :c_box, only: [:index]
     resources :settings, only: [:index]
     resources :mails, only: [:index]
+    post '/upload', to: 'mails#upload', as: 'mails_upload'
     resources :templates do
       resources :itemtags, only: [:index, :edit, :destroy] do
         resource :tag_custom_mask do
@@ -41,7 +44,6 @@ Rails.application.routes.draw do
   end
 
   scope 'item/mails' do
-    post '/upload', to: 'mails#upload', as: 'mails_upload'
     post '/send_request', to: 'mails#send_request'
     get '/templates_data', to: 'mails#templates_data'
   end
