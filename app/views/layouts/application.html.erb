@@ -27,14 +27,21 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <div class="navbar-nav mr-auto">
                     <%= link_to 'Home', item_path, :class => 'nav-item nav-link' %>
-                    <%= link_to 'Mailing', mails_path, :class => 'nav-item nav-link' %>
-                    <%= link_to 'SMS Gateway', sms_gateway_index_path, :class => 'nav-item nav-link' %>  
-                    <%= link_to 'Signatures', signatures_path, :class => 'nav-item nav-link' %>
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Templating
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <%= link_to 'Mail', mails_path, :class => 'dropdown-item text-center' %>
+                            <%= link_to 'SMS', sms_gateway_index_path, :class => 'dropdown-item text-center' %>
+                            <%= link_to 'Signature', signatures_path, :class => 'dropdown-item text-center' %>
+                        </div>
+                    </div>
                     <!-- <%= link_to 'CBox', c_box_index_path, :class => 'nav-item nav-link' %> -->
                     <%= link_to 'Users', ad_users_path, :class => 'nav-item nav-link' %>
                     <%= link_to 'Offices', offices_path, :class => 'nav-item nav-link' %>
                     <!-- <%= link_to 'Cart(?)', user_holders_path, :class => 'nav-item nav-link' %> -->
-                    <%= link_to 'Holidays', holidays_path, :class => 'nav-item nav-link holidays-nav' %>
+                    <!-- <%= link_to 'Holidays', holidays_path, :class => 'nav-item nav-link holidays-nav' %> -->
                     <%= link_to 'Settings', settings_path, :class => 'nav-item nav-link' %>
                 </div>
             </div>
