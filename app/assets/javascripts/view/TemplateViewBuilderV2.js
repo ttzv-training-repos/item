@@ -218,4 +218,10 @@ class TemplateViewBuilderV2{
         });
     }
 
+    unselectAllTemplates(){
+        document.querySelectorAll('[data-entry-area="checkbox"]').forEach(input => {
+            if( input.checked ) input.click();
+        });
+    }
+
 }

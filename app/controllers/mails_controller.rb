@@ -48,17 +48,18 @@ class MailsController < ApplicationController
     sender = message_request[:sender]
     messages = message_request[:messages].values
     messages.each.with_index do |m, i|
-      TemplateMailer.with(
-        user: current_user, 
-        password: cookies[:smtp_password],
-        client: google_auth_client
-      ).template_mail(recipients: 'txdxkx@gmail.com',
-                      subject: m["subject"],
-                      body_html: m["content"])
-                      .deliver_now
+      # TemplateMailer.with(
+      #   user: current_user, 
+      #   password: cookies[:smtp_password],
+      #   client: google_auth_client
+      # ).template_mail(recipients: '',
+      #                 subject: m["subject"],
+      #                 body_html: m["content"])
+      #                 .deliver_now
       progress = ((i+1) / messages.length.to_f * 100).to_i
       ActionCable.server.broadcast("progress_bar_mails", {progress: progress})
+      sleep 1
     end
-    flash_ajax_notice("Messages sent succesfully")
+    flash.now[:notice] = "All messages sent succesfully"
   end
 end
