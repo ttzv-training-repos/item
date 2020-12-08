@@ -5,8 +5,4 @@ class SmsGatewayController < ApplicationController
     @templates = Template.where(category: "sms")
   end
 
-  def upload
-    
-  end
-
 end

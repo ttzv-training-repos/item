@@ -25,7 +25,7 @@ Rails.application.routes.draw do
           get :preview, on: :member
         end
       end
-      post '/', to: 'templates#tag_edit'
+      post '/tag_edit', to: 'templates#tag_edit', as: 'tag_edit'
     end
     resources :itemtags
   end
@@ -42,17 +42,14 @@ Rails.application.routes.draw do
 
   scope 'item/mails' do
     post '/send_request', to: 'mails#send_request'
-    get '/templates_data', to: 'mails#templates_data'
   end
 
   scope 'item/sms_gateway' do
     post '/send_request', to: 'sms_gateway#send_request'
-    get '/templates_data', to: 'sms_gateway#templates_data'
   end
 
   scope 'item/signatures' do
     post '/send_request', to: 'signatures#send_request'
-    get '/templates_data', to: 'signatures#templates_data'
   end
 
   scope 'item/templates' do

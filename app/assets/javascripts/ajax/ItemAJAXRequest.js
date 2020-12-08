@@ -2,21 +2,21 @@ class ItemAJAXRequest {
 
     static templateData(options){
         if (options.requestFor === "mail"){
-            return $.get("/item/mails/templates_data", function (data) {
+            return $.get("/item/templates?category=mail", function (data) {
                 console.log(data);
-            });
+            }, "json");
         }
         if (options.requestFor === "sms")
         {
-            return $.get("/item/sms_gateway/templates_data", function (data) {
+            return $.get("/item/templates?category=sms", function (data) {
                 console.log(data);
-            });
+            }, "json");
         }
         if (options.requestFor === "signature")
         {
-            return $.get("/item/signatures/templates_data", function (data) {
+            return $.get("/item/templates?category=signature", function (data) {
                 console.log(data);
-            });
+            }, "json");
         }
     }
 

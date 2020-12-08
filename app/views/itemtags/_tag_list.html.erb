@@ -22,7 +22,7 @@
 
             <%= tag.display_name %>  
 
-            <%= link_to( template_path(@template, tag_id: tag.id, associate: !associated), {data: {remote: true}, class: "btn btn-primary", method: "post"} ) do %>  
+            <%= link_to( template_tag_edit_path(@template, tag_id: tag.id, associate: !associated), {data: {remote: true}, class: "btn btn-primary", method: "post"} ) do %>  
                 <% if associated %>
                     <i class="fas fa-minus"></i>
                 <% else %>

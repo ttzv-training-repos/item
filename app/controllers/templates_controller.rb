@@ -3,6 +3,10 @@ class TemplatesController < ApplicationController
   
   def index
     @templates = Template.all
+    respond_to do |format|
+      format.html
+      format.json {render :json => json_data}
+    end
   end
   
   def new
@@ -84,11 +88,13 @@ class TemplatesController < ApplicationController
   def upload
     uploaded_files = params[:templates]
     uploaded_files.each do |file|
-      process_template(file)
+      process_template(file, params[:category])
     end
     respond_to do |format|
       format.js {render inline: "location.reload();" }
     end
   end
+
+  
 
 end

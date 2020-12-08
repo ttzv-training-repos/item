@@ -10,23 +10,6 @@ class MailsController < ApplicationController
     end
   end
 
-  def templates_data
-    json_data = Hash.new
-    Template.all.each do |t|
-      json_data.merge!(
-        {
-        t.name => {
-          id: t.id,
-          name: t.name,
-          title: t.title,
-          content: template_content(t),
-          tags: itemtags_hash(t)
-        }
-      })
-    end
-      render :json => {template_data: json_data}
-  end
-
   # JSON name - message_request
   # Keys:
   # sender
