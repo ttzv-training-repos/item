@@ -1,17 +1,6 @@
 class MailsController < ApplicationController
   include MailsHelper
-  include ActionController::Live
   
-  def upload
-    uploaded_files = params[:templates]
-    uploaded_files.each do |file|
-      process_template(file)
-    end
-    respond_to do |format|
-      format.js {render inline: "location.reload();" }
-    end
-  end
-
   def index
     @templates = Template.where(category: "mail")
     if user_signed_in?

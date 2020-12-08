@@ -1,10 +1,10 @@
+# For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
   resources :inboxes
   resources :holidays, only: [:index]
   resources :holiday_requests
   resources :employees
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: 'item#index'
 
   get 'item', to: 'item#index'
@@ -14,14 +14,11 @@ Rails.application.routes.draw do
     end
     resources :user_holders, only: [:index]
     resources :signatures, only: [:index]
-    post '/upload', to: 'signatures#upload', as: 'signatures_upload'
     resources :sms_gateway, only: [:index]
-    post '/upload', to: 'sms_gateway#upload', as: 'sms_upload'
     resources :offices, only: [:index, :new, :create, :edit, :update, :destroy]
     resources :c_box, only: [:index]
     resources :settings, only: [:index]
     resources :mails, only: [:index]
-    post '/upload', to: 'mails#upload', as: 'mails_upload'
     resources :templates do
       resources :itemtags, only: [:index, :edit, :destroy] do
         resource :tag_custom_mask do
@@ -46,6 +43,20 @@ Rails.application.routes.draw do
   scope 'item/mails' do
     post '/send_request', to: 'mails#send_request'
     get '/templates_data', to: 'mails#templates_data'
+  end
+
+  scope 'item/sms_gateway' do
+    post '/send_request', to: 'sms_gateway#send_request'
+    get '/templates_data', to: 'sms_gateway#templates_data'
+  end
+
+  scope 'item/signatures' do
+    post '/send_request', to: 'signatures#send_request'
+    get '/templates_data', to: 'signatures#templates_data'
+  end
+
+  scope 'item/templates' do
+    post '/upload', to: 'templates#upload', as: 'upload_template'
   end
 
 get '/user/become/:id', to: 'users#become', as: 'become_user'

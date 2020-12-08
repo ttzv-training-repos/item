@@ -7,6 +7,7 @@ class TemplatesController < ApplicationController
   
   def new
     @template = Template.new
+    @template.category = params[:category]
     @type_list = Template.type_list
     @template_tags = @template.itemtags
     @available_tags = Itemtag.all
@@ -79,4 +80,15 @@ class TemplatesController < ApplicationController
     @template_tags = @template.itemtags
     @available_tags = Itemtag.all.filter{ |tag| !@template_tags.include? tag }
   end
+
+  def upload
+    uploaded_files = params[:templates]
+    uploaded_files.each do |file|
+      process_template(file)
+    end
+    respond_to do |format|
+      format.js {render inline: "location.reload();" }
+    end
+  end
+
 end

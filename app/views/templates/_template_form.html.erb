@@ -11,7 +11,7 @@
     </div>
     <div class="form-group col-sm">
       <%= t.label :category, "Category" %>
-      <%= t.select :category, options_for_select((@type_list), @template.category),{ :include_blank => true }, class: "form-control" %>
+      <%= t.select :category, options_for_select((@type_list), @template.category),{ }, class: "form-control" %>
     </div>
     <div class="form-group col-sm">
       <%= t.label :title, "Title" %> <!-- optional -->
