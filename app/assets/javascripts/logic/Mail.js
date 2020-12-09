@@ -12,6 +12,7 @@ class Mail extends Message{
     getJson(){
         return {
             recipient: this.user.ad_users_mail,
+            name: this.template.name,
             subject: this.template.title,
             content: this.content
         }

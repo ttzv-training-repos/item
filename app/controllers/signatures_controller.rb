@@ -5,8 +5,16 @@ class SignaturesController < ApplicationController
   end
 
   def send_request
-    data = "<p>Paraghaph</p><br>test"
-    send_data(data, :filename => "test.htm", disposition: "inline")
+    request_data = params[:request_data]
+    signature_content = request_data[:messages].values.map do |s|
+      { name: s["name"], content: s["content"] }  
+    end 
+    @signature = Signature.create(content: signature_content)
+    
+  end
+
+  def download
+    p params
   end
   
 end

@@ -13,7 +13,9 @@ Rails.application.routes.draw do
       resource :ad_user_details
     end
     resources :user_holders, only: [:index]
-    resources :signatures, only: [:index]
+    resources :signatures, only: [:index] do
+      get :download
+    end
     resources :sms_gateway, only: [:index]
     resources :offices, only: [:index, :new, :create, :edit, :update, :destroy]
     resources :c_box, only: [:index]

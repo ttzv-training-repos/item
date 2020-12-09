@@ -7,7 +7,7 @@
   <div class="form-row">
     <div class="form-group col-sm">
       <%= t.label :name, "Name" %>
-      <%= t.text_field :name, class: "form-control" %>
+      <%= t.text_field :name, class: "form-control", :required => true %>
     </div>
     <div class="form-group col-sm">
       <%= t.label :category, "Category" %>
@@ -20,7 +20,7 @@
   </div>
   <div class="form-group">
     <%= t.label :template_content, "Content" %>
-    <textarea name="template[content]" id="template_content" class="form-control"><%= @template_content %></textarea>
+    <textarea name="template[content]" id="template_content" class="form-control" required><%= @template_content %></textarea>
   </div>
   <%= t.submit %>
 <% end %>
