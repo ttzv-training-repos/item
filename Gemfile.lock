@@ -301,6 +301,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 6.0.3, >= 6.0.3.1)
   redis (~> 4.2, >= 4.2.1)
+  rubyzip
   sass-rails (>= 6)
   selenium-webdriver
   spring

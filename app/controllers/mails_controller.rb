@@ -16,9 +16,9 @@ class MailsController < ApplicationController
   # messages => recipient
   #             content
   def send_request
-    message_request = mail_params
-    sender = message_request[:sender]
-    messages = message_request[:messages].values
+    request_data = mail_params
+    sender = request_data[:sender]
+    messages = request_data[:messages].values
     messages.each.with_index do |m, i|
       # TemplateMailer.with(
       #   user: current_user, 

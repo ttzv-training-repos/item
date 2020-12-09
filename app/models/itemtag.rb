@@ -35,8 +35,8 @@ class Itemtag < ApplicationRecord
 
     tag_value = String.new
     mask_hash.each do |hash|
-      attribute = hash[:attribute].split("#")[1];
-      init_val = user[attribute].to_s
+      table, attribute = hash[:attribute].split("#")
+      init_val = user.get_attr(attribute, table).to_s
       methods = hash.keys - [:attribute]
       masked_tag = Parsers::MaskApplier.new(init_val)
         methods.each do |m|

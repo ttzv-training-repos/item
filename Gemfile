@@ -81,5 +81,9 @@ gem 'omniauth-google-oauth2'
 #LDAP omniauth strategy
 gem 'omniauth-ldap'
 
+#zip gem to pack multiple files before download
+gem 'rubyzip'
+
+
 
 

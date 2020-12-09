@@ -26,7 +26,7 @@ class PreparedMessageContainer{
     }
 
     getJson(){
-        return {message_request: {
+        return {request_data: {
             sender: this._sender,
             messages: this.getMessageHashArray()
             }

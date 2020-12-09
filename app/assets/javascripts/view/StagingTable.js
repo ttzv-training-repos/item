@@ -8,7 +8,7 @@ class StagingTable{
      */
     constructor(content){
         if (!content) throw new Error("Staging Table cannot be created without Prepared Messages");
-        this._content = content.getJson().message_request.messages;
+        this._content = content.getJson().request_data.messages;
         this._headerRow = null;
         this._sortingOption = StagingTable.SORT_SUBJECT;
  
