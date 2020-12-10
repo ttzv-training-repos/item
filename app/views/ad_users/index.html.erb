@@ -1,5 +1,7 @@
 <h1>All Active Directory Users</h1>
 
+<%= render partial: 'ad_user_edit_modal' %>
+
 <progress id="usersTablePrg" class="pure-material-progress-circular"></progress>
 <div id= "usersTableArea" class="opaque">
     <%= render partial: 'ad_users_table' %>
