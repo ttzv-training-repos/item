@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_09_183423) do
+ActiveRecord::Schema.define(version: 2020_12_10_101713) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -188,6 +188,8 @@ ActiveRecord::Schema.define(version: 2020_12_09_183423) do
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_signatures_on_user_id"
   end
 
   create_table "smtp_settings", force: :cascade do |t|
@@ -270,6 +272,7 @@ ActiveRecord::Schema.define(version: 2020_12_09_183423) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "ad_user_details", "offices"
   add_foreign_key "holiday_requests", "employees"
+  add_foreign_key "signatures", "users"
   add_foreign_key "tag_custom_masks", "template_taggings"
   add_foreign_key "template_taggings", "itemtags"
   add_foreign_key "template_taggings", "templates"
