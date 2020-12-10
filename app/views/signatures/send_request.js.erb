@@ -1,2 +1,2 @@
 $(".modal-body").empty()
-                .append(" <%= j link_to "Download", signature_download_path(@signature), data:{remote: true} %>");
+                .append(" <%= j link_to "Download", signature_download_path(@signature.id), class:'btn btn-primary' %>");
