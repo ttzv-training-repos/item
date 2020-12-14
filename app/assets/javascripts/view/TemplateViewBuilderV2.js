@@ -17,7 +17,7 @@ class TemplateViewBuilderV2{
         this.$title = $('#title');
         this.$content = $('#content')
         this.$noSelectedTemplates = $('#noSelectedTemplates');
-        this.templateEntries = document.querySelectorAll('div[data-entry-area], input[data-entry-area]')
+        this.templateEntries = document.querySelectorAll('[data-entry-area]')
     }
 
     build(){
@@ -34,12 +34,6 @@ class TemplateViewBuilderV2{
             }
             if(templateEntry.dataset.entryArea === "checkbox"){
                 this.handleTemplateSelection(templateEntry);
-            }
-            if(templateEntry.dataset.entryArea === "edit"){
-                this.handleTemplateEdit(templateEntry);
-            }
-            if(templateEntry.dataset.entryArea === "delete"){
-                this.handleTemplateDelete(templateEntry);
             }
         });
     }
@@ -74,12 +68,6 @@ class TemplateViewBuilderV2{
             }
         });
     }    
-
-    handleTemplateEdit(templateEntry){
-    }
-
-    handleTemplateDelete(templateEntry){
-    }
 
     handleMessageContainer(templateNames, users, action){
         if (!users) throw new Error("Users null")

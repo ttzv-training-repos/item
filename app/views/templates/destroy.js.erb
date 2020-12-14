@@ -1,0 +1,9 @@
+<% if @template %>
+<%# convoluted a bit but I don't have a better idea right now %>
+    $("#<%= @template.name %>").parent().parent().remove(); 
+    <%= render partial: 'shared/notice' %>    
+<% else %>
+    <%= render partial: 'shared/alert' %>
+<% end %>
+
+

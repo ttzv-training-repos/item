@@ -43,9 +43,11 @@ class TemplatesController < ApplicationController
   end
 
   def destroy
-    Template.find(params[:id]).destroy
-    respond_to do |format|
-      format.js { flash_ajax_notice("Template deleted") }
+    @template = Template.find(params[:id])
+    if @template.destroy
+      flash.now[:notice] = "Template deleted"
+    else
+      flash.now[:alert] = @template.errors
     end
   end
 
