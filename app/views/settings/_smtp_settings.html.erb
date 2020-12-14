@@ -1,22 +1,48 @@
-<h1>SMTP Settings</h1>
 <%= form_with(model: @smtp_setting, url: update_smtp_settings_path) do |f| %>
+<div class="form-group">  
     <%= f.label :sender %>
-    <%= f.text_field :sender %>
+    <%= f.text_field :sender, class: "form-control" %>
+</div>
+<div class="form-group"> 
     <%= f.label :address %>
-    <%= f.text_field :address %>
+    <%= f.text_field :address, class: "form-control" %>
+</div>
+
+<div class="form-group"> 
     <%= f.label :port %>
-    <%= f.text_field :port %>
+    <%= f.text_field :port, class: "form-control" %>
+</div>
+
+<div class="form-group"> 
     <%= f.label :domain %>
-    <%= f.text_field :domain %>
+    <%= f.text_field :domain, class: "form-control" %>
+</div>
+
+<div class="form-group"> 
     <%= f.label :user_name %>
-    <%= f.text_field :user_name %>
+    <%= f.text_field :user_name, class: "form-control" %>
+</div>
+
+<div class="form-group"> 
     <%= f.label :password %>
-    <%= f.password_field :password, value: @pwd_val %>
+    <%= f.password_field :password, value: @pwd_val, class: "form-control" %>
+</div>
+
+<div class="form-check"> 
+    <%= f.check_box :store_password, class: "form-check-input" %>
     <%= f.label :store_password %>
-    <%= f.check_box :store_password %>
+</div>
+
+<div class="form-group"> 
     <%= f.label :authentication %>
-    <%= f.text_field :authentication %>
+    <%= f.text_field :authentication, class: "form-control" %>
+</div>
+    
+<div class="form-check"> 
+    <%= f.check_box :tls, class: "form-check-input" %>
     <%= f.label :tls %>
-    <%= f.check_box :tls %>
+</div>
+
     <%= f.submit %>
+
 <% end %>

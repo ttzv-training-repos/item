@@ -1,21 +1,23 @@
-<%= link_to 'Run Office Autobinder', autobind_path %>
-<br>
-<%= link_to 'Sync LDAP', sync_ldap_path %>
+<div class="overflow-auto h-90">
 
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Content</th>
-            <th>Type</th>
-            <th>Status</th>
-            <th>Status content</th>
-            <th>Date</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @sent_items.each do |item| %>
+    <%= link_to 'Run Office Autobinder', autobind_path %>
+    <br>
+    <%= link_to 'Sync LDAP', sync_ldap_path %>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Status content</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @sent_items.each do |item| %>
             <tr>
                 <td><%=item.id%></td>
                 <td><%=item.title%></td>
@@ -24,10 +26,37 @@
                 <td><%=item.status%></td>
                 <td><%=item.status_content%></td>
                 <td><%=item.created_at%></td>
-            <% end %>
-        </tr>
-    </tbody>
-</table>
-
-<%= render partial: 'smtp_settings' %>
-
+                <% end %>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="card">
+        <div class="card-header">
+            Mailer settings
+        </div>
+        <div class="card-body">
+            <%= render partial: 'smtp_settings' %>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="card-header">
+            LDAP connection settings
+        </div>
+        <div class="card-body">
+            
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="card-header">
+            Other application settings
+        </div>
+        <div class="card-body">
+            
+        </div>
+    </div>
+    
+    
+</div>
