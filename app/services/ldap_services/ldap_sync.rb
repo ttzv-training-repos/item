@@ -9,8 +9,10 @@ module LdapServices
     def sync
       AdUser.destroy_all
       @all_users = @ldapconn.all_users
-      @all_users.each do |user| 
-        AdUser.create(LdapUser.tohash(user))
+      AdUser.transaction do
+        @all_users.each do |user| 
+          AdUser.create(LdapUser.tohash(user))
+        end
       end
       true
     end

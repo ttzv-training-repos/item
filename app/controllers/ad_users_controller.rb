@@ -21,7 +21,7 @@ class AdUsersController < ApplicationController
         "name_2"
       ]
     })
-    @users = AdUser.joins(:office).select(builder.selected_data)
+    @users = AdUser.left_outer_joins(:office).select(builder.selected_data)
     @users = [@users] unless @users.is_a?(ActiveRecord::Relation)
     @headers = builder.localized_hash(:en)
   end

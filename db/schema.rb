@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_10_101713) do
+ActiveRecord::Schema.define(version: 2020_12_15_141652) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -65,8 +65,8 @@ ActiveRecord::Schema.define(version: 2020_12_10_101713) do
     t.text "description"
     t.string "distinguishedname"
     t.string "instancetype"
-    t.date "whencreated"
-    t.date "whenchanged"
+    t.datetime "whencreated"
+    t.datetime "whenchanged"
     t.string "displayname"
     t.string "usncreated"
     t.string "memberof"
@@ -77,23 +77,23 @@ ActiveRecord::Schema.define(version: 2020_12_10_101713) do
     t.string "badpwdcount"
     t.string "codepage"
     t.string "countrycode"
-    t.date "badpasswordtime"
-    t.date "lastlogoff"
-    t.date "lastlogon"
+    t.datetime "badpasswordtime"
+    t.datetime "lastlogoff"
+    t.datetime "lastlogon"
     t.string "logonhours"
-    t.date "pwdlastset"
+    t.datetime "pwdlastset"
     t.string "primarygroupid"
     t.string "objectsid"
     t.string "admincount"
-    t.date "accountexpires"
+    t.datetime "accountexpires"
     t.string "logoncount"
     t.string "samaccountname"
     t.string "samaccounttype"
-    t.date "lockouttime"
+    t.datetime "lockouttime"
     t.string "objectcategory"
     t.string "iscriticalsystemobject"
     t.string "dscorepropagationdata"
-    t.date "lastlogontimestamp"
+    t.datetime "lastlogontimestamp"
     t.string "msds-supportedencryptiontypes"
     t.string "mail"
     t.string "userprincipalname"
