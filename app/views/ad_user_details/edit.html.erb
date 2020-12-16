@@ -1,12 +1,5 @@
-<%= form_for [@ad_user, @ad_user_detail], :url => ad_user_ad_user_details_path do |detail| %>
-  <ul>
-  <% @ad_user_detail.errors.full_messages.each do |error| %>
-    <li><%= error %></li>
-  <% end %>
-  </ul>
-  <% unless @ad_user.office.nil? %>
-    <p><%= @ad_user.office.name %>, <%= @ad_user.office.name_2 %></p>
-  <% end %>
+<h5 class="pt-1"><%= @ad_user.displayname %></h5>
+<%= form_with model: @ad_user_detail, :url => ad_user_ad_user_details_path do |detail| %>
   <div class="form-group">
     <%= detail.label :office_id %><br />
     <%= detail.collection_select :office_id, Office.all, :id, :display_office_info, { include_blank: true }, { class: "custom-select" }%>
@@ -15,7 +8,33 @@
     <%= detail.label :position %><br />
     <%= detail.text_field :position, class: "form-control" %>
   </div>
+  <div class="form-group">
+    <%= detail.label :phonenumber %><br />
+    <%= detail.text_field :phonenumber, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= detail.label :phonenumber_2 %><br />
+    <%= detail.text_field :phonenumber_2, class: "form-control" %>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <td>Key</td>
+        <td>Value</td>
+      </tr>
+    </thead>
+    <tbody>
+    
+      <% @storage.each do |key, value| %>
+        <tr>
+          <td><%= key %></td>
+          <td><%= value %></td>
+        </tr>
+      <% end %>
+      
+    </tbody>
+  </table>
   <p>
-  <%= detail.submit "Save", class: "btn btn-primary" %>
+    <%= detail.submit "Save", class: "btn btn-primary" %>
   </p>
 <% end %>

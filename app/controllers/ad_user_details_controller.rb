@@ -6,6 +6,7 @@ class AdUserDetailsController < ApplicationController
 
   def edit
     @ad_user_detail = AdUserDetail.find_or_create_by(ad_user_id: params[:ad_user_id])
+    @storage = @ad_user_detail.storage_json
     @ad_user = @ad_user_detail.ad_user
   end
 
