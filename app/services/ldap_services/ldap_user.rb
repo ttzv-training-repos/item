@@ -103,7 +103,7 @@ module LdapServices
     end
 
     def self.reformat_guid!(sid)
-      UUIDTools::UUID.parse_hexdigest(sid)
+      UUIDTools::UUID.parse_hexdigest(sid).to_s
     end
 
   end

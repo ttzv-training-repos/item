@@ -30,7 +30,6 @@ class MailsController < ApplicationController
       #                 .deliver_now
       progress = ((i+1) / messages.length.to_f * 100).to_i
       ActionCable.server.broadcast("progress_bar_mails", {progress: progress})
-      sleep 1
     end
     flash.now[:notice] = "All messages sent succesfully"
   end
