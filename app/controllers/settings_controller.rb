@@ -5,6 +5,7 @@ class SettingsController < ApplicationController
   def index
     @sent_items = SentItem.all
     @smtp_setting = current_user.smtp_setting
+    @current_user_can_send_gmail = current_user.can_send_gmail?
     @smtp_setting = SmtpSetting.new if @smtp_setting.nil?
     @pwd_val = @smtp_setting.password_def_value(cookies[:smtp_password])
   end
@@ -49,6 +50,13 @@ class SettingsController < ApplicationController
       @smtp_setting.update(hash)
     else
       @smtp_setting = current_user.create_smtp_setting(hash)
+    end
+  end
+
+  def update_gmail_authorization
+    use_gmail_api = params[:gmail_api]
+    if use_gmail_api and not current_user.can_send_gmail?
+      redirect_to user_google_oauth2_omniauth_authorize_path(scope: 'gmail.send', include_granted_scopes: true)
     end
   end
 

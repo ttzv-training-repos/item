@@ -1,48 +1,55 @@
-<%= form_with(model: @smtp_setting, url: update_smtp_settings_path) do |f| %>
-<div class="form-group">  
-    <%= f.label :sender %>
-    <%= f.text_field :sender, class: "form-control" %>
-</div>
-<div class="form-group"> 
-    <%= f.label :address %>
-    <%= f.text_field :address, class: "form-control" %>
-</div>
-
-<div class="form-group"> 
-    <%= f.label :port %>
-    <%= f.text_field :port, class: "form-control" %>
-</div>
-
-<div class="form-group"> 
-    <%= f.label :domain %>
-    <%= f.text_field :domain, class: "form-control" %>
-</div>
-
-<div class="form-group"> 
-    <%= f.label :user_name %>
-    <%= f.text_field :user_name, class: "form-control" %>
-</div>
-
-<div class="form-group"> 
-    <%= f.label :password %>
-    <%= f.password_field :password, value: @pwd_val, class: "form-control" %>
-</div>
-
-<div class="form-check"> 
-    <%= f.check_box :store_password, class: "form-check-input" %>
-    <%= f.label :store_password %>
-</div>
-
-<div class="form-group"> 
-    <%= f.label :authentication %>
-    <%= f.text_field :authentication, class: "form-control" %>
-</div>
+<%= form_with(url: update_gmail_authorization_path, local: true) do |f| %>
+    <div class="form-check">
+        <%= check_box_tag :gmail_api, @current_user_can_send_gmail, @current_user_can_send_gmail, class: "form-check-input" %> 
+        <%= label_tag :gmail_api, "Use Gmail API"%>
+    </div>
+    <%= submit_tag "Update", class: "btn btn-primary", id: "gmailApiSubmit" %>    
+<% end %>
     
-<div class="form-check"> 
-    <%= f.check_box :tls, class: "form-check-input" %>
-    <%= f.label :tls %>
-</div>
-
-    <%= f.submit %>
-
+<%= form_with(model: @smtp_setting, url: update_smtp_settings_path, id: "smtpSettingsForm") do |f| %>
+    <div class="form-group">  
+        <%= f.label :sender %>
+        <%= f.text_field :sender, class: "form-control" %>
+    </div>
+    <div class="form-group"> 
+        <%= f.label :address %>
+        <%= f.text_field :address, class: "form-control" %>
+    </div>
+    
+    <div class="form-group"> 
+        <%= f.label :port %>
+        <%= f.text_field :port, class: "form-control" %>
+    </div>
+    
+    <div class="form-group"> 
+        <%= f.label :domain %>
+        <%= f.text_field :domain, class: "form-control" %>
+    </div>
+    
+    <div class="form-group"> 
+        <%= f.label :user_name %>
+        <%= f.text_field :user_name, class: "form-control" %>
+    </div>
+    
+    <div class="form-group"> 
+        <%= f.label :password %>
+        <%= f.password_field :password, value: @pwd_val, class: "form-control" %>
+    </div>
+    
+    <div class="form-check"> 
+        <%= f.check_box :store_password, class: "form-check-input" %>
+        <%= f.label :store_password %>
+    </div>
+    
+    <div class="form-group"> 
+        <%= f.label :authentication %>
+        <%= f.text_field :authentication, class: "form-control" %>
+    </div>
+    
+    <div class="form-check"> 
+        <%= f.check_box :tls, class: "form-check-input" %>
+        <%= f.label :tls %>
+    </div>
+    
+    <%= f.submit "Update", class: "btn btn-primary" %> 
 <% end %>

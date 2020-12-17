@@ -40,6 +40,7 @@ Rails.application.routes.draw do
     post '/',  to: 'settings#process_request'
     post '/update_smtp_settings', to: 'settings#update_smtp_settings'
     patch '/update_smtp_settings', to: 'settings#update_smtp_settings'
+    post '/update_gmail_authorization', to: 'settings#update_gmail_authorization'
   end
 
   scope 'item/mails' do

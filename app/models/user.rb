@@ -33,7 +33,6 @@ class User < ApplicationRecord
 
     if user
       user.update(google_client: client.to_json)
-    else
       user = User.create(name: data['name'],
           email: data['email'],
           password: Devise.friendly_token[0,20],
@@ -43,6 +42,18 @@ class User < ApplicationRecord
       )
     end
     user
+  end
+
+  def scope(scope=nil)
+    return self.oauth_scope if scope.nil?
+    if !self.oauth_scope.include?(scope)
+      self.update(oauth_scope: scope)
+    end
+    self.oauth_scope
+  end
+
+  def can_send_gmail?
+    self.oauth_scope.include?("gmail.send")
   end
 
   private
