@@ -26,6 +26,12 @@ class AdUsersController < ApplicationController
     @headers = builder.localized_hash(:en)
   end
 
-  
+  def new
+    @ad_user = AdUser.new
+  end
+
+  def create
+    AdUser.create(ad_user_params)
+  end
 
 end

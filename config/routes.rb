@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   get 'item', to: 'item#index'
   scope '/item' do
-    resources :ad_users, only: [:index] do
+    resources :ad_users do
       resource :ad_user_details
     end
     resources :user_holders, only: [:index]

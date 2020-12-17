@@ -1,3 +1,36 @@
-<% form_with model: @ad_user, url: new_ad_user_path do |u| %>
-
+<h1>Add new AD User</h1>
+<%= form_with model: @ad_user, url: new_ad_user_path do |u| %>
+    <div class="form-group">
+        <%= u.label :objectguid %>
+        <%= u.text_field :objectguid, class: "form-control", required: true %>
+    </div>
+    <div class="form-group">
+        <%= u.label :objectsid %>
+        <%= u.text_field :objectsid, class: "form-control" %>
+    </div>
+        <div class="form-group">
+        <%= u.label :givenname, "Givenname (First name)" %>
+        <%= u.text_field :givenname, class: "form-control" %>
+    </div>
+    <div class="form-group">
+        <%= u.label :sn, "Sn (Last name)" %>
+        <%= u.text_field :sn, class: "form-control" %>
+    </div>
+    <div class="form-group">
+        <%= u.label :name %>
+        <%= u.text_field :name, class: "form-control" %>
+    </div>
+    <div class="form-group">
+        <%= u.label :samaccountname %>
+        <%= u.text_field :samaccountname, class: "form-control" %>
+    </div>
+    <div class="form-group">
+        <%= u.label :distinguishedname %>
+        <%= u.text_field :distinguishedname, class: "form-control" %>
+    </div>
+    <div class="form-group">
+        <%= u.label :mail %>
+        <%= u.text_field :mail, class: "form-control" %>
+    </div>
+    <%= u.submit %>
 <% end %>
