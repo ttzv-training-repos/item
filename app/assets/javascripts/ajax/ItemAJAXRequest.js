@@ -52,4 +52,15 @@ class ItemAJAXRequest {
             }
         });
     }
+
+    static sendCartRequest(data){
+        return $.ajax({
+            type: "POST",
+            url: "/item/user_holders",
+            data: data,
+            success: function(data){
+                console.log("cart");   
+            }
+        });
+    }
 }

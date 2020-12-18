@@ -41,15 +41,6 @@ function handleDeselection(params) {
     sendCartRequest(data);
 }
 
-function sendCartRequest(data){
-    $.post("/item/user_holders", data,
-        function (data, textStatus, jqXHR) {
-        handleResponse(data);
-        },
-        "json"
-    );
-}
-
 function guids(selectedData){
     const GUID_INDEX = 0;
     let guidsAry = [];

@@ -51,7 +51,7 @@
                 <div class="card-header">
                     Other application settings
                 </div>
-                <div class="card-body">
+                <div class="card-body d-flex flex-column">
                     <%= render partial: 'application_settings' %>
                     <%= link_to 'Run Office Autobinder', autobind_path, class: "btn btn-primary mb-1" %>
                     <%= link_to 'Force LDAP Sync', sync_ldap_path, class: "btn btn-primary" %>
