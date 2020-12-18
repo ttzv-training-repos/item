@@ -48,4 +48,12 @@ class Itemtag < ApplicationRecord
     tag_value
   end
 
+  def store?(template=nil)
+    return self.store_value if template.nil?
+    tag_custom_mask = TemplateTagging.find_by(
+      template_id: template.id,
+      itemtag_id: self.id
+    ).tag_custom_mask.store_value
+  end
+
 end

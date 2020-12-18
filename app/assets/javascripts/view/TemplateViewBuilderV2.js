@@ -117,18 +117,41 @@ class TemplateViewBuilderV2{
 
     templateInput(name){
         let label = name.split('-')[2];
-        return `
-                <div class="form__group field">
-                    <input type="input" class="form__field" name="${name}" id="${name}" placeholder="${label}" required>
-                    <label for="${name}" class="form__label">${label}</label>
-                </div>
-            `;
+        let inputGroup = document.createElement("div");
+        let input = document.createElement("input");
+        input.type = "input";
+        input.classList = "form-control";
+        input.id = name;
+        input.name = name;
+        input.placeholder = label;
+        input.required = true;
+        inputGroup.classList = "input-group mb-3";
+        inputGroup.appendChild(input);
+
+        return inputGroup;
+    }
+
+    inputAppendix(){
+        let appendix = document.createElement("div");
+        appendix.classList = "input-group-append";
+        
+        let content = document.createElement("div");
+        content.classList = "input-group-text";
+        content.title = "This value will be stored";
+        
+        let saveIcon = document.createElement("i");
+        saveIcon.classList = "fas fa-save";
+        content.appendChild(saveIcon);
+        appendix.appendChild(content);
+        return appendix;
     }
 
     renderInputsForTemplateTags(tags){
         this.$inputsArea.html('')
         tags.forEach(tag => {
-            this.$inputsArea.append(this.templateInput(tag.name));
+            let tagInput = this.templateInput(tag.name);
+            if(tag.store_value) tagInput.append(this.inputAppendix());
+            this.$inputsArea.append(tagInput);
             let $input = $(`#${tag.name}`);
             $input.val(this.getCurrentMessageTagValue(tag.name));
             this.updateTemplatePreview($input);

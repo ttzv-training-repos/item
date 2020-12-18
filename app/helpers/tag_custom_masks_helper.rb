@@ -4,7 +4,8 @@ module TagCustomMasksHelper
 
   def mask_params
     params.require(:tag_custom_mask).permit(:value,
-                                            :use)
+                                            :use,
+                                            :store_value)
   end
 
   def available_attributes

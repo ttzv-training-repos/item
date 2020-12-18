@@ -30,7 +30,6 @@ class TagCustomMasksController < ApplicationController
     ) 
     @tag_custom_mask = tagging.tag_custom_mask
     if @tag_custom_mask.nil?
-      p mask_params
      @tag_custom_mask = tagging.create_tag_custom_mask(mask_params)
     end
 

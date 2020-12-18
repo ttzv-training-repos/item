@@ -46,7 +46,8 @@ module TemplatesHelper
         name: itemtag.name, 
         override_default_mask: override?(template, itemtag),
         default_mask_values: mask_values(itemtag),
-        custom_mask_values: mask_values(itemtag, template.id) 
+        custom_mask_values: mask_values(itemtag, template.id),
+        store_value: store_value?(template, itemtag)
       }
     end
   end
@@ -99,6 +100,15 @@ module TemplatesHelper
     return false if tagging.nil?
     return false if tagging.tag_custom_mask.nil?
     tagging.tag_custom_mask.use
+  end
+
+  def store_value?(template, itemtag)
+    tcm = TemplateTagging.find_by(
+      template_id: template.id,
+      itemtag_id: itemtag.id
+    ).tag_custom_mask
+    return tcm.store_value if tcm
+    false
   end
 
 end

@@ -11,10 +11,13 @@ class Mail extends Message{
 
     getJson(){
         return {
+            user_id: this.user.ad_users_id,
             recipient: this.user.ad_users_mail,
+            template_id: this.template.id,
             name: this.template.name,
             subject: this.template.title,
-            content: this.content
+            content: this.content,
+            tagMap: Object.fromEntries(this.tagMap)
         }
     }
 

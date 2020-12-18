@@ -1,6 +1,8 @@
 class AdUser < ApplicationRecord
+  after_create :ensure_has_detail
   has_one :ad_user_detail, dependent: :destroy
   has_one :office, :through => :ad_user_detail
+
 
   def get_attr(column, table)
     return self[column] if table == "ad_users"
@@ -40,6 +42,15 @@ class AdUser < ApplicationRecord
   def self.guid_array(collection)
     collection.map do |el|
       el[:objectguid]
+    end
+  end
+
+  def ensure_has_detail
+    if self.ad_user_detail.nil?
+      self.create_ad_user_detail(office_id: 5) 
+      # I couldn't find a way to keep Office associated with AdUser through AdUserDetail model and be able to 
+      # create AdUserDetail records independently from Office, so on creation I decided to bind to dummy office record
+      # where all values are nil
     end
   end
 

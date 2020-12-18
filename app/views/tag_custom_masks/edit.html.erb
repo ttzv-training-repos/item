@@ -125,7 +125,9 @@
                     <%= tcm.text_area :value, style: 'width: 100%' %><br>
                     <%= tcm.label :use, 'Override default mask' %>
                     <%= tcm.check_box :use %><br>
-                    <%= tcm.submit %>
+                    <%= tcm.label :store_value, 'Store value' %>
+                    <%= tcm.check_box :store_value %><br>
+                    <%= tcm.submit nil, class:"btn btn-primary" %>
                 <% end %>
                 <span>Preview</span>
                 <br>
