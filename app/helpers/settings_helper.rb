@@ -14,4 +14,15 @@ module SettingsHelper
     )
   end
 
+  def ldap_params
+    params.require(:ldap_setting).permit(
+      :host,
+      :base,
+      :port,
+      :login,
+      :password,
+      :default
+    )
+  end
+
 end

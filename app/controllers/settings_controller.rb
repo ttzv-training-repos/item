@@ -7,7 +7,11 @@ class SettingsController < ApplicationController
     @smtp_setting = current_user.smtp_setting
     @smtp_setting = SmtpSetting.new if @smtp_setting.nil?
     @current_user_can_send_gmail = current_user.can_send_gmail?
-    @pwd_val = @smtp_setting.password_def_value(cookies[:smtp_password])
+    @pwd_val_smtp = @smtp_setting.password_def_value(cookies[:smtp_password])
+
+    @ldap_setting = current_user.ldap_setting
+    @ldap_setting = LdapSetting.new if @ldap_setting.nil?
+    @pwd_val_ldap = @ldap_setting.password_def_value
   end
 
   def run_autobinder
@@ -71,9 +75,26 @@ class SettingsController < ApplicationController
   end
 
   def sync_ldap
-    ldap_sync = LdapServices::LdapSync.new(LdapServices::LdapConn.new)
-    ldap_sync.sync
+    AdUser.synchronize_with_ldap(
+      LdapServices::LdapConn.new(
+        LdapSetting.default)
+      )
     redirect_to(ad_users_path)
+  end
+
+  def update_ldap_settings
+    ldap_setting = current_user.ldap_setting
+    ldap_setting = current_user.create_ldap_setting if ldap_setting.nil?
+    if ldap_params[:default] == "1"
+      LdapSetting.all.update(default: false)
+    end
+    hash = ldap_params
+    hash.delete(:password) if hash[:password] == MASKED_PASSWORD
+    ldap_setting.update(hash)
+  end
+
+  def update_app_settings
+
   end
 
 end

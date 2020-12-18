@@ -91,3 +91,6 @@ default_itemtag_seed = [
 
 Itemtag.destroy_all
 default_itemtag_seed.each { |entry| Itemtag.create(entry) }
+
+#dummy Office record
+Office.create

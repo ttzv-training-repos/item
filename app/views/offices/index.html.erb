@@ -1,13 +1,96 @@
 <h1>All Offices</h1>
+<div class="scrollable-custom">
 
-<ul id="offices">
-  <% @offices.each do |office| %>
-    <li>
-      <%=office.values_to_s %>
-      <%= link_to 'Edit', edit_office_path(office) %>
-      <%= link_to 'Delete', office_path(office), method: :delete, data: {confirm: 'Are you sure you want to delete this record?'} %>
-    </li>
-  <% end %>
-</ul>
+  <table class="table">
+    <thead>
+      <tr>
+        <td>
+          Name
+        </td>
+        <td>
+          Name cont.
+        </td>
+        <td>
+          Location
+        </td>
+        <td>
+          Location cont.
+        </td>
+        <td>
+          Postal code
+        </td>
+        <td>
+          Phone Number
+        </td>
+        <td>
+          Phone Number II
+        </td>
+        <td>
+          Fax number
+        </td>
+        <td>
+          Fax number II
+        </td>
+        <td>
+          Optional info
+        </td>
+        <td>
+          Optional info cont.
+        </td>
+        <td>
+          
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <% @offices.each do |office| %>
+      <tr>
+        <td>
+          <%= office.name %>
+        </td>
+        <td>
+          <%= office.name_2 %>
+        </td>
+        <td>
+          <%= office.location %>
+        </td>
+        <td>
+          <%= office.location_2 %>
+        </td>
+        <td>
+          <%= office.postalcode %>
+        </td>
+        <td>
+          <%= office.phonenumber %>
+        </td>
+        <td>
+          <%= office.phonenumber_2 %>
+        </td>
+        <td>
+          <%= office.fax %>
+        </td>
+        <td>
+          <%= office.fax_2 %>
+        </td>
+        <td>
+          <%= office.opt_info %>
+        </td>
+        <td>
+          <%= office.opt_info_2 %>
+        </td>
+        <td class="d-flex justify-content-between">
+          <%= link_to(edit_office_path(office), class: "btn btn-primary mx-1" ) do %>
+          <i class="fa fa-edit"></i>
+          <% end %>
+          <%= link_to(office_path(office), method: :delete, class: "btn btn-primary", data: {confirm: 'Are you sure you want to delete this record?'} ) do %> 
+          <i class="fa fa-trash"></i>
+          <% end %>           
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'Add new office', new_office_path %>
+  <%= link_to 'Add new office', new_office_path, class: "btn btn-primary" %>
+</div>

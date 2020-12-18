@@ -1,0 +1,27 @@
+<%= form_with(model: @ldap_setting, url: update_ldap_settings_path, class: "form") do |s| %>
+    <div class="form-group">
+        <%= s.label :host %>
+        <%= s.text_field :host, class:"form-control" %>
+    </div>
+    <div class="form-group">
+        <%= s.label :base %>
+        <%= s.text_field :base, class:"form-control" %>
+    </div>
+    <div class="form-group">
+        <%= s.label :port %>
+        <%= s.text_field :port, class:"form-control" %>
+    </div>
+    <div class="form-group">
+        <%= s.label :login %>
+        <%= s.text_field :login, class:"form-control" %>
+    </div>
+    <div class="form-group">
+        <%= s.label :password %>
+        <%= s.password_field :password, value: @pwd_val_ldap, class: "form-control" %>
+    </div>
+    <div class="form-group-check">
+        <%= s.check_box :default, class: "form-ckeck" %>
+        <%= s.label :default, "Set as application-wide default" %>
+    </div>
+    <%= s.submit "Update", class:"btn btn-primary" %>
+<% end %>

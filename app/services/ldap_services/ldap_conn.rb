@@ -1,32 +1,27 @@
 module LdapServices
   class LdapConn
 
-    def initialize
-      connect
+    def initialize(config_hash=nil)
+      connect(config_hash)
     end
 
-    def configure(settings)
-      @settings = settings
-      self
-    end
-
-    def connect
-      if @settings.nil?
-        user_config = JSON.parse(File.read("config/secrets/userconfig.json"), {:symbolize_names => true})
-        @settings = {
-          :host => user_config[:host], #use IP address if name cant be resolved
-          :base => user_config[:base],
-          :port => user_config[:port],
-          :auth => {
-            :method => :simple,
-            :username => user_config[:login],
-            :password => user_config[:password]
-          }
-        }
+    def connect(config_hash=nil)
+      if config_hash.nil?
+        ldap_config = JSON.parse(File.read("config/secrets/userconfig.json"), {:symbolize_names => true})
       else
-        @settings = settings
-      end 
-      ActiveDirectory::Base.setup(@settings)
+        ldap_config = config_hash
+      end
+      settings = {
+        :host => ldap_config[:host], #use IP address if name cant be resolved
+        :base => ldap_config[:base],
+        :port => ldap_config[:port],
+        :auth => {
+          :method => :simple,
+          :username => ldap_config[:login],
+          :password => ldap_config[:password]
+        }
+      } 
+      ActiveDirectory::Base.setup(settings)
     end
 
     def all_users

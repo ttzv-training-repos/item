@@ -47,7 +47,8 @@ class AdUser < ApplicationRecord
 
   def ensure_has_detail
     if self.ad_user_detail.nil?
-      self.create_ad_user_detail(office_id: 5) 
+      dummy_office = Office.find_by(name: nil)
+      self.create_ad_user_detail(office_id: dummy_office.id) 
       # I couldn't find a way to keep Office associated with AdUser through AdUserDetail model and be able to 
       # create AdUserDetail records independently from Office, so on creation I decided to bind to dummy office record
       # where all values are nil

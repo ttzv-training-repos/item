@@ -58,8 +58,10 @@ function guids(selectedData){
 }
 
 function handleResponse(response){
-    console.log(response);
-    User.all = response.data;
-    User.current = response.data[0];
-    updateHolder(response.data);
+    if (response){
+        console.log(response);
+        User.all = response.data;
+        User.current = response.data[0];
+        updateHolder(response.data);
+    }
 }
