@@ -5,10 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2, :ldap]
 
-  has_one :setting, dependent: :destroy
   has_one :smtp_setting, dependent: :destroy
   has_many :user_holders, dependent: :destroy
-  has_one :employee
+  has_one :employee, dependent: :destroy
+  has_many :signatures, dependent: :destroy
 
   after_create :create_employee_if_not_exist
 
@@ -45,10 +45,26 @@ class User < ApplicationRecord
     user
   end
 
+  def scope(scope=nil)
+    return self.oauth_scope if scope.nil?
+    self.update(oauth_scope: scope) if update_scope?
+    self.oauth_scope
+  end
+
+  def can_send_gmail?
+    self.oauth_scope.include?("gmail.send")
+  end
+
   private
 
   def create_employee_if_not_exist
     self.create_employee if self.employee.nil?
+  end
+
+  def update_scope?
+    return false if self.can_send_gmail? and self.use_gmail_api
+    return false if not self.can_send_gmail? and not self.use_gmail_api
+    return true
   end
 
 
