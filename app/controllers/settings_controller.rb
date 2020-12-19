@@ -12,6 +12,10 @@ class SettingsController < ApplicationController
     @ldap_setting = current_user.ldap_setting
     @ldap_setting = LdapSetting.new if @ldap_setting.nil?
     @pwd_val_ldap = @ldap_setting.password_def_value
+
+    @sms_setting = current_user.sms_setting
+    @sms_setting = SmsSetting.new if @sms_setting.nil?
+    @pwd_val_sms = @sms_setting.password_def_value(nil, :token)
   end
 
   def run_autobinder
@@ -86,7 +90,7 @@ class SettingsController < ApplicationController
     ldap_setting = current_user.ldap_setting
     ldap_setting = current_user.create_ldap_setting if ldap_setting.nil?
     if ldap_params[:default] == "1"
-      LdapSetting.all.update(default: false)
+      LdapSetting.where.not(id: ldap_setting.id).update(default: false)
     end
     hash = ldap_params
     hash.delete(:password) if hash[:password] == MASKED_PASSWORD
@@ -95,6 +99,17 @@ class SettingsController < ApplicationController
 
   def update_app_settings
 
+  end
+
+  def update_sms_settings
+    sms_setting = current_user.sms_setting
+    sms_setting = current_user.create_sms_setting if sms_setting.nil?
+    if sms_params[:default] == "1"
+      SmsSetting.where.not(id: sms_setting.id).update(default: false)
+    end
+    hash = sms_params
+    hash.delete(:token) if hash[:token] == MASKED_PASSWORD
+    sms_setting.update(hash)
   end
 
 end

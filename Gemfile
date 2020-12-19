@@ -84,6 +84,7 @@ gem 'omniauth-ldap'
 #zip gem to pack multiple files before download
 gem 'rubyzip'
 
-
+#smsApi gem https://github.com/ruby-logic/smsapi-client
+gem 'smsapi-client', '~> 1.0'
 
 

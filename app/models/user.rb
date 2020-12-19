@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:google_oauth2, :ldap]
 
   has_one :smtp_setting, dependent: :destroy
+  has_one :sms_setting, dependent: :destroy
   has_one :ldap_setting, dependent: :destroy
   has_many :user_holders, dependent: :destroy
   has_one :employee, dependent: :destroy

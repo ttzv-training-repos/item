@@ -25,4 +25,12 @@ module SettingsHelper
     )
   end
 
+  def sms_params
+    params.require(:sms_setting).permit(
+      :token,
+      :sender_name,
+      :default
+    )
+  end
+
 end

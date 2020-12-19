@@ -44,6 +44,8 @@ Rails.application.routes.draw do
     patch '/update_ldap_settings', to: 'settings#update_ldap_settings'
     post '/update_app_settings', to: 'settings#update_app_settings'
     patch '/update_app_settings', to: 'settings#update_app_settings'
+    post '/update_sms_settings', to: 'settings#update_sms_settings'
+    patch '/update_sms_settings', to: 'settings#update_sms_settings'
     post '/update_gmail_authorization', to: 'settings#update_gmail_authorization'
   end
 
