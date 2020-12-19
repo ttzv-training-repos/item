@@ -1,0 +1,15 @@
+<%= form_with(model: @sms_setting, url: update_sms_settings_path, class: "form") do |s| %>
+    <div class="form-group">
+        <%= s.label :token %>
+        <%= s.password_field :token, value: @pwd_val_sms, class: "form-control" %>
+    </div>
+    <div class="form-group">
+        <%= s.label :sender_name %>
+        <%= s.text_field :sender_name, class:"form-control" %>
+    </div>
+    <div class="form-group-check">
+        <%= s.check_box :default, class: "form-ckeck" %>
+        <%= s.label :default, "Set as application-wide default" %>
+    </div>
+    <%= s.submit "Update", class:"btn btn-primary" %>
+<% end %>
