@@ -13,6 +13,7 @@ class Mail extends Message{
         return {
             user_id: this.user.ad_users_id,
             recipient: this.user.ad_users_mail,
+            phone_number: this.user.ad_user_details_phonenumber,
             template_id: this.template.id,
             name: this.template.name,
             subject: this.template.title,

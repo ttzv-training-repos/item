@@ -23,12 +23,12 @@ $(document).ready( function () {
 
         if( $('body').attr('class') === 'sms_gateway index'){
             ItemAJAXRequest.templateData({requestFor: "sms"}).done(function buildTemplateView(data){
-                templateViewBuilder = new TemplateViewBuilderV2(data.template_data);
+                templateViewBuilder = new TemplateViewBuilderV2(data.template_data, "sms");
                 templateViewBuilder.build();
                 $('.tmsg-list').toggleClass('invisible');
             });
             $('#send-request').click(() => {
-                ItemAJAXRequest.sendSms();
+                ItemAJAXRequest.sendSMS();
             });
         }
 

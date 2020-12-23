@@ -1,18 +1,19 @@
 class TemplateViewBuilderV2{
-    constructor(templateData){
+    constructor(templateData, view=null){
         if (!templateData) throw new Error("Template Data cannot be null, failed to create object") 
         this._templateData = templateData;
         this._recipients = new Array();
         this._selectedTemplates = new Array();
         this.queryTemplateViewElements();
         this.noSelectedTemplates = 0;
+        this.view = view;
     }
 
     queryTemplateViewElements(){
         this.$inputSender = $('#sender');
         this.$buttonDropdownMenu = $('#buttonDropdownMenu');
         this.$buttonAddRecipient = $('#buttonAddRecipient');
-        this.$inputEmailAddress = $('#inputEmailAddress');
+        this.$inputRecipientAddress = $('#inputRecipientAddress');
         this.$inputsArea = $('#inputsArea')
         this.$title = $('#title');
         this.$content = $('#content')
@@ -186,46 +187,51 @@ class TemplateViewBuilderV2{
 
     handleNewRecipient(){
         this.$buttonAddRecipient.on('click',() => {
-            if(this.$inputEmailAddress[0].checkValidity() 
-            && this.$inputEmailAddress.val().length > 0){
-                let mail = this.$inputEmailAddress.val();
-                this.addNewRecipient(mail);
-                this.$inputEmailAddress.val('');
+            if(this.$inputRecipientAddress[0].checkValidity() 
+            && this.$inputRecipientAddress.val().length > 0){
+                let address = this.$inputRecipientAddress.val();
+                let user = User.create({});
+                if (this.view === "sms") {
+                    user.ad_user_details_phonenumber = address;
+                } else {
+                    user.ad_users_mail = address;
+                }
+                this.addNewRecipient(user);
+                this.$inputRecipientAddress.val('');
             }
         })
     }
 
-    addNewRecipient(mail){
-        if(!this._recipients.includes(mail)){
-            if (!User.all.map(u => u.ad_users_mail).includes(mail)){
-                let user = {ad_users_mail: mail}
-                User.all.push(user)
-                User.current = user
+    addNewRecipient(user){
+        let address = this.getRecipientAddress(user);
+        if(!this._recipients.includes(address)){
+            if (!this.containsRecipient(user)){
+                User.all.push(user);
+                User.current = user;
                 this.handleMessageContainer(this._selectedTemplates, [User.current], 'add')
             }
-                this._recipients.push(mail);
-                $('#recipientsDropdown').append(this.buildDropdownItem(mail));
-                $('#recipients-no').text(this._recipients.length);
+            this._recipients.push(address);
+            $('#recipientsDropdown').append(this.buildDropdownItem(user));
+            $('#recipients-no').text(this._recipients.length);
         }
     }
     
-    buildDropdownItem(content){
+    buildDropdownItem(user){
         let dropdownItem = document.createElement('div');
         dropdownItem.classList.add("dropdown-item");
-        dropdownItem.textContent = content;
+        let title = user.ad_users_displayname;
+        if (title) dropdownItem.title = title;
+        dropdownItem.textContent = this.getRecipientAddress(user);
         dropdownItem.addEventListener('click', () => {
-            User.current = User.all.filter(u => u.ad_users_mail == content)[0];
+            User.current = user;
             if (Template.current) this.renderInputsForTemplateTags(Template.current.tags);
-            //if (Template.current) this.handleTemplatePreview(Template.current);
-            //this.updateInputValues();
         })
         return dropdownItem;
     }
 
     updateRecipientsDropdown(){
         User.all.forEach(user => {
-            let mail = user.ad_users_mail;
-            this.addNewRecipient(mail);
+            this.addNewRecipient(user);
         });
     }
 
@@ -235,4 +241,20 @@ class TemplateViewBuilderV2{
         });
     }
 
+    getRecipientAddress(user){
+        if (this.view === "sms"){
+            return user.ad_user_details_phonenumber;
+        } else {
+            return user.ad_users_mail;
+        }
+    }
+
+    // todo: implement comparator in User object
+    containsRecipient(user){
+        if (this.view === "sms"){
+            return User.all.map(u => u.ad_user_details_phonenumber).includes(user.ad_user_details_phonenumber)
+        } else {
+            return User.all.map(u => u.ad_users_mail).includes(user.ad_users_mail)
+        }
+    }
 }

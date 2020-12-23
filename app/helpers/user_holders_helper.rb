@@ -11,7 +11,8 @@ module UserHoldersHelper
       "sn"
       ],
       ad_user_details: [
-        "position"
+        "position",
+        "phonenumber"
       ],
       offices: [
         "name",
