@@ -10,5 +10,10 @@ class Office < ApplicationRecord
     values_to_s
   end
 
+  #skips dummy office
+  def self.selectable
+    Office.where.not(name: nil)
+  end
+
 
 end

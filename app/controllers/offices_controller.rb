@@ -1,7 +1,7 @@
 class OfficesController < ApplicationController
   include OfficesHelper
   def index
-    @offices = Office.all
+    @offices = Office.selectable
   end
 
   def new

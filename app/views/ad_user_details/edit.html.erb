@@ -2,7 +2,7 @@
 <%= form_with model: @ad_user_detail, :url => ad_user_ad_user_details_path do |detail| %>
   <div class="form-group">
     <%= detail.label :office_id %><br />
-    <%= detail.collection_select :office_id, Office.all, :id, :display_office_info, { include_blank: true }, { class: "custom-select" }%>
+    <%= detail.collection_select :office_id, Office.selectable, :id, :display_office_info, { include_blank: true }, { class: "custom-select" }%>
   </div>  
   <div class="form-group">
     <%= detail.label :position %><br />
