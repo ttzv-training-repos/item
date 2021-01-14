@@ -1,10 +1,10 @@
 <h1>Edit Template</h1>
 <%= render partial: 'template_form' %>
-
-<div id="tagSelectionArea">
+<hr>
+<div id="tagSelectionArea" class="pt-1">
   <%= render partial: 'itemtags/tag_selection' %>
 </div>
-<div class="dropdown py-1">
+<div class="dropdown py-1 d-flex justify-content-end">
   <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
     Add new tag
   </button>
@@ -12,6 +12,7 @@
     <%= render partial: 'itemtags/tag_form' %>
   </div>
 </div>
+
 
 
 

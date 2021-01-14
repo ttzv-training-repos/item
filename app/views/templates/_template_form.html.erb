@@ -22,7 +22,7 @@
     <%= t.label :template_content, "Content" %>
     <textarea name="template[content]" id="template_content" class="form-control" required><%= @template_content %></textarea>
   </div>
-  <%= t.submit %>
+  <%= t.submit nil, class: "btn btn-primary" %>
 <% end %>
 
 

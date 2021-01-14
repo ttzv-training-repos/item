@@ -21,24 +21,24 @@ $('#users-clear').click(handleDeselection)
 
 function handleSelection(params) {
     let selectedData = $dataTable.rows({selected: true}).data();
-    action = "select"
-    data = {
+    ItemAJAXRequest.sendCartRequest({
         cart_request: {
-            action: action,
+            action: "select",
             data: guids(selectedData)
         }
-    };
-    sendCartRequest(data);
+    }).done(function proceed(response){
+        updateHolder(response.data);
+    });
 }
 function handleDeselection(params) {
-    action = "clear"
-    data = {
+    ItemAJAXRequest.sendCartRequest({
         cart_request: {
-            action: action,
+            action: "clear",
             data: null
         }
-    };
-    sendCartRequest(data);
+    }).done(function proceed(response){
+        updateHolder(response.data);
+    });
 }
 
 function guids(selectedData){
