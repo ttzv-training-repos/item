@@ -7,6 +7,9 @@ class MaskBuilder{
         this.allInputHandler();
         this.updatePreviewRequestParams();
         this.newMaskGroupHandler();
+        this.disableAll(
+            this.getAllInputs()
+        );
     }
 
     queryElements(){
@@ -22,6 +25,7 @@ class MaskBuilder{
         $("#accordion").change((e) => {
             this.setMaskHashParams(e.target);
             this.updateMaskValue();
+            this.disableEnableRelatedElements(e.target);
         });
     }
 
@@ -48,6 +52,7 @@ class MaskBuilder{
                 this.maskHash[group][action][param] = inputValue;
             }
         } else if (param === "attribute"){
+            if(inputValue === "null") inputValue = document.getElementById(`attribute${this.getGroupStr(group)}`).value;
             this.maskHash[group][param] = inputValue;
         }
     }
@@ -92,7 +97,7 @@ class MaskBuilder{
             $("#accordion").append(this.cloneMaskGroup());
             this.groupCount += 1;
         }
-        let inputs = document.querySelectorAll("select, [data-mask-action][data-mask-param]");
+        let inputs = this.getAllInputs();
         inputs.forEach(i => {
             let group = this.getGroup(i);
             let maskAction = i.dataset.maskAction;
@@ -174,6 +179,14 @@ class MaskBuilder{
         }
     }
 
+    getGroupStr(groupNo){
+        if (groupNo === 0){
+            return '';
+        } else {
+            return `_${groupNo}`;
+        }
+    }
+
     deleteGroup(group){
         $(`#maskGroup_${group}`).remove();
         this.maskHash.splice(group, 1);
@@ -187,6 +200,45 @@ class MaskBuilder{
         btn.insertAdjacentHTML('beforeend', '<i class="fa fa-trash" aria-hidden="true"></i>');
         btn.addEventListener('click', () => this.deleteGroup(group));
         return btn;
+    }
+
+    disable(_element){
+        _element.disabled = true;
+    }
+
+    enable(_element){
+        _element.disabled = false;
+    }
+
+    disableAll(_elements){
+        _elements.forEach(el => this.disable(el));
+    }
+
+    enableAll(_elements){
+        _elements.forEach(el => this.enable(el));
+    }
+
+    getAllInputs(){
+        return document.querySelectorAll("select, [data-mask-action][data-mask-param]");
+    }
+
+    disableEnableRelatedElements(targetElement){
+        console.log(targetElement);
+        let group = this.getGroup(targetElement);
+        let groupStr = this.getGroupStr(group);
+        if (targetElement.id.includes("attributeSelect") || targetElement.id.includes("attributePassword")){
+            let enableAttributeSelect = !targetElement.id.includes("attributeSelect");
+            let attributeSelect = document.getElementById(`attribute${groupStr}`)
+            attributeSelect.disabled = enableAttributeSelect;
+        }
+        if(targetElement.id === `attribute${groupStr}`){
+            let currentGroupElements = [...this.getAllInputs()].filter(el => this.getGroup(el) === group && el.id !== `attribute${groupStr}`);
+            if (targetElement.value){
+                this.enableAll(currentGroupElements);
+            } else {
+                this.disableAll(currentGroupElements);
+            }
+        }
     }
 
 }

@@ -7,14 +7,14 @@
                     <a class="btn collapsed py-0" type="button" data-toggle="collapse" data-target="#collapse">Group #</a>
                 </div>
                 <div id="collapse" class="collapse hide">
-                    <div class="card-body">
+                    <div class="card-body text-center">
+                        <input type="radio" name="attributeRadioGroup" id="attributeSelect" data-mask-param="attribute" value="null">
+                        <label for="attributeSelect">Attribute</label>
+                        <br>
+                        <input type="radio" name="attributeRadioGroup" id="attributePassword" data-mask-param="attribute" value="generate_password">
+                        <label for="attributePassword">Password</label>
                         <table class="table">
                             <tbody>
-                                <tr>
-                                    <td class="text-center" colspan="2">
-                                        Attribute
-                                    </td>
-                                </tr>
                                 <tr>
                                     <td class="text-center" colspan="2">
                                         <%= select_tag( :attribute, options_for_select(available_attributes), data:{'mask-param' => 'attribute'}, include_blank: true)%>
