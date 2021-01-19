@@ -18,9 +18,12 @@ class TagCustomMasksController < ApplicationController
       itemtag_id: params[:itemtag_id]
     ).tag_custom_mask
       @tag_custom_mask.update(mask_params)
-      flash_ajax_notice("Succesfully updated custom mask")
-
-    #redirect_to edit_template_path(params[:template_id])
+      @preview = preview(
+        params[:itemtag_id],
+        params[:template_id],
+        params[:ad_users_id]
+        )
+      flash.now[:notice] = "Succesfully updated custom mask"
   end
 
   def create
@@ -32,15 +35,20 @@ class TagCustomMasksController < ApplicationController
     if @tag_custom_mask.nil?
      @tag_custom_mask = tagging.create_tag_custom_mask(mask_params)
     end
+    @preview = preview(
+      params[:itemtag_id],
+      params[:template_id],
+      params[:ad_users_id]
+      )
 
-    redirect_to edit_template_path(params[:template_id])
+    flash.now[:notice] = "Succesfully created custom mask"
   end
 
-  def preview
-    itemtag = Itemtag.find(params_for_preview[:itemtag_id])
-    template_id = params_for_preview[:template_id]
-    ad_user_id = params_for_preview[:ad_users_id]
-    @preview = itemtag.apply_mask(ad_user_id, template_id)
+  private 
+
+  def preview(itemtag_id, template_id, ad_user_id)
+    itemtag = Itemtag.find(itemtag_id)
+    itemtag.apply_mask(ad_user_id, template_id)
   end
 
 end

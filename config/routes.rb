@@ -23,9 +23,7 @@ Rails.application.routes.draw do
     resources :mails, only: [:index]
     resources :templates do
       resources :itemtags, only: [:index, :edit, :destroy] do
-        resource :tag_custom_mask do
-          get :preview, on: :member
-        end
+        resource :tag_custom_mask
       end
       post '/tag_edit', to: 'templates#tag_edit', as: 'tag_edit'
     end

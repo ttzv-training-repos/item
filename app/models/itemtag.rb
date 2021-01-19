@@ -35,15 +35,19 @@ class Itemtag < ApplicationRecord
 
     tag_value = String.new
     mask_hash.each do |hash|
-      table, attribute = hash[:attribute].split("#")
-      init_val = user.get_attr(attribute, table).to_s
-      methods = hash.keys - [:attribute]
-      masked_tag = Parsers::MaskApplier.new(init_val)
+      if hash[:attribute] == "generate_password"
+        tag_value = Passgen::generate(length: 10, symbols: true)
+      else  
+        table, attribute = hash[:attribute].split("#")
+        init_val = user.get_attr(attribute, table).to_s
+        methods = hash.keys - [:attribute]
+        masked_tag = Parsers::MaskApplier.new(init_val)
         methods.each do |m|
           options = hash[m]
           masked_tag.send(m, options)
         end
-      tag_value += masked_tag.text  
+        tag_value += masked_tag.text  
+      end 
     end
     tag_value
   end

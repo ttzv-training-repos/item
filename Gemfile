@@ -87,4 +87,7 @@ gem 'rubyzip'
 #smsApi gem https://github.com/ruby-logic/smsapi-client
 gem 'smsapi-client', '~> 1.0'
 
+# Passgen https://github.com/cryptice/Passgen
+gem 'passgen'
+
 

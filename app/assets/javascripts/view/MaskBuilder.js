@@ -7,9 +7,7 @@ class MaskBuilder{
         this.allInputHandler();
         this.updatePreviewRequestParams();
         this.newMaskGroupHandler();
-        this.disableAll(
-            this.getAllInputs()
-        );
+        // this.disableAll(this.getAllInputs());
     }
 
     queryElements(){
@@ -66,9 +64,9 @@ class MaskBuilder{
     }
 
     updatePreviewRequestParams(){
-        let remoteLink = $("#getPreview")[0];
-        remoteLink.addEventListener("ajax:before", function () {
-            remoteLink.dataset.params = `ad_users_id=${User.current.ad_users_id}`;
+        let hiddenAdUsersIdParam = $("#ad_users_id")[0];
+        $("#maskForm")[0].addEventListener("ajax:before", function () {
+            hiddenAdUsersIdParam.value = User.current.ad_users_id;
         });
     }
 
@@ -223,7 +221,7 @@ class MaskBuilder{
     }
 
     disableEnableRelatedElements(targetElement){
-        console.log(targetElement);
+        //console.log(targetElement);
         let group = this.getGroup(targetElement);
         let groupStr = this.getGroupStr(group);
         if (targetElement.id.includes("attributeSelect") || targetElement.id.includes("attributePassword")){
