@@ -1,6 +1,6 @@
 $('.tmsg-list').toggleClass('invisible');
 let templateViewBuilder = null;
-let messageContainer = new PreparedMessageContainer('temporary@mail');
+let messageContainer = new PreparedMessageContainer();
 
 $(document).ready( function () { 
     ItemAJAXRequest.sendCartRequest({

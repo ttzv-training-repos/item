@@ -5,6 +5,7 @@ class TemplateViewBuilderV2{
         this._recipients = new Array();
         this._selectedTemplates = new Array();
         this.queryTemplateViewElements();
+        messageContainer.sender = this.$inputSender.val();
         this.noSelectedTemplates = 0;
         this.view = view;
     }

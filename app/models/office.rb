@@ -15,5 +15,8 @@ class Office < ApplicationRecord
     Office.where.not(name: nil)
   end
 
+  def self.dummy
+    Office.find_by(name: nil)
+  end
 
 end

@@ -1,8 +1,7 @@
 class PreparedMessageContainer{
 
-    constructor(sender){
+    constructor(){
         this.preparedMessages = new Array();
-        this._sender = sender;
     }
 
     addMessage(mail){
