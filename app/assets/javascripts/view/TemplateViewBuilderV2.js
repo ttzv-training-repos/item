@@ -209,7 +209,7 @@ class TemplateViewBuilderV2{
             if (!this.containsRecipient(user)){
                 User.all.push(user);
                 User.current = user;
-                this.handleMessageContainer(this._selectedTemplates, [User.current], 'add')
+                this.handleMessageContainer(this._selectedTemplates, [User.current], 'add');
             }
             this._recipients.push(address);
             $('#recipientsDropdown').append(this.buildDropdownItem(user));
@@ -222,7 +222,9 @@ class TemplateViewBuilderV2{
         dropdownItem.classList.add("dropdown-item");
         let title = user.ad_users_displayname;
         if (title) dropdownItem.title = title;
-        dropdownItem.textContent = this.getRecipientAddress(user);
+        let address = this.getRecipientAddress(user);
+        if (!address) address = "Missing";
+        dropdownItem.textContent = address + ` (${title})`;
         dropdownItem.addEventListener('click', () => {
             User.current = user;
             if (Template.current) this.renderInputsForTemplateTags(Template.current.tags);
