@@ -1,5 +1,5 @@
 <h1>Add new AD User</h1>
-<%= form_with model: @ad_user, url: new_ad_user_path do |u| %>
+<%= form_with model: @ad_user, local: true do |u| %>
     <div class="form-group">
         <%= u.label :objectguid %>
         <%= u.text_field :objectguid, class: "form-control", required: true %>

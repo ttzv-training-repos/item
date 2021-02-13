@@ -1,5 +1,5 @@
 class AdUsersController < ApplicationController
-
+  include AdUsersHelper
   def index
     builder = AdUserServices::TableQueryBuilder.new({
       ad_users: [
@@ -31,7 +31,11 @@ class AdUsersController < ApplicationController
   end
 
   def create
-    AdUser.create(ad_user_params)
+    ad_user_hash = ad_user_params
+    ad_user_hash.merge!(displayname: "#{ad_user_hash[:givenname]} #{ad_user_hash[:sn]}")
+
+    AdUser.create(ad_user_hash)
+    redirect_to ad_users_path
   end
 
 end

@@ -1,35 +1,39 @@
 <div class="container">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <td>Id</td>
-                <td>Title</td>
-                <td>Type</td>
-                <td>Content</td>
-                <td>Status</td>
-                <td>Date</td>
-            </tr>
-        </thead>
-        <tbody>
-            <% SentItem.all.each do |si| %>
-                <tr>
-                    <td><%= si.id %></td>
-                    <td><%= si.title %></td>
-                    <td><%= si.item_type %></td>
-                    <td><%= si.status %></td>
-                    <td><%= si.content %></td>
-                    <td><%= si.date %></td>
-                </tr>
-            <% end %>
-        </tbody>
-    </table>
+    <div class="card">
+        <div class="card-header text-center">
+            <h5>Items log</h5>
+        </div>
+        <div class="card-body">
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>Title</td>
+                        <td>Type</td>
+                        <td>Content</td>
+                        <td>Status</td>
+                        <td>Date</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% SentItem.all.each do |si| %>
+                    <tr>
+                        <td><%= si.id %></td>
+                        <td><%= si.title %></td>
+                        <td><%= si.item_type %></td>
+                        <td><%= si.status %></td>
+                        <td><%= si.content %></td>
+                        <td><%= si.date %></td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 
-<% @users.each do |user| %>
-    <%= link_to user.email, become_user_path(user.id) %>
-    <%= link_to "EDIT", edit_employee_path(user.employee) %>
-    <br>
-<% end %>
+<!-- <%= render partial: 'user_selection' %> -->
 

@@ -54,7 +54,8 @@ class User < ApplicationRecord
   end
 
   def can_send_gmail?
-    self.oauth_scope.include?("gmail.send")
+    return false if self.oauth_scope.nil?
+    return self.oauth_scope.include?("gmail.send")
   end
 
   private
