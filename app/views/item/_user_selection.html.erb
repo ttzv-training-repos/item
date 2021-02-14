@@ -1,5 +1,3 @@
-<% @users.each do |user| %>
-    <%= link_to user.email, become_user_path(user.id) %>
-    <%= link_to "EDIT", edit_employee_path(user.employee) %>
-    <br>
+<% if User.guest %>
+    <%= link_to "Guest sign in", become_user_path(User.guest.id), class: "btn btn-primary" %>
 <% end %>

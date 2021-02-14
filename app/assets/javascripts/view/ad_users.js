@@ -1,12 +1,12 @@
-var $dataTable = null;
 $(document).ready( function () {
     console.log("start drawing table")
-    $dataTable = $( "#ad_users" ).DataTable({
-        select: true,
-        "scrollX": true,
-        "scrollY":        "60vh",
-        "scrollCollapse": true,
-        "paging":         false
+    $( "#ad_users" ).DataTable({
+        select:             true,
+        "scrollX":          true,
+        "scrollY":          "60vh",
+        "scrollCollapse":   true,
+        "paging":           false,
+        "autoWidth":        false
     });
 });
 

@@ -102,6 +102,7 @@ class SettingsController < ApplicationController
   end
 
   def update_sms_settings
+    #check if new token
     sms_setting = current_user.sms_setting
     sms_setting = current_user.create_sms_setting if sms_setting.nil?
     if sms_params[:default] == "1"

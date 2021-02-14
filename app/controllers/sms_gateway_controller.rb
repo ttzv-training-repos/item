@@ -1,6 +1,7 @@
 class SmsGatewayController < ApplicationController
   include SmsGatewayHelper
   require 'smsapi'
+  before_action :authenticate_user!
 
   def index
     sms_setting = current_user.sms_setting

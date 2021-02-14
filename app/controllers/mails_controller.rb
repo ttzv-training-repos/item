@@ -1,5 +1,6 @@
 class MailsController < ApplicationController
   include MailsHelper
+  before_action :authenticate_user!
   
   def index
     @templates = Template.where(category: "mail")

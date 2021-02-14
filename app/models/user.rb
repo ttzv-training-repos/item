@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :omniauthable, omniauth_providers: [:google_oauth2, :ldap]
+         :omniauthable, omniauth_providers: [:google_oauth2]
 
   has_one :smtp_setting, dependent: :destroy
   has_one :sms_setting, dependent: :destroy
@@ -56,6 +56,11 @@ class User < ApplicationRecord
   def can_send_gmail?
     return false if self.oauth_scope.nil?
     return self.oauth_scope.include?("gmail.send")
+  end
+
+  #for guest user - heroku preview
+  def self.guest
+      User.find_by(email: "itemwebapp@gmail.com")
   end
 
   private

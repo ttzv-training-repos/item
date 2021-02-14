@@ -282,17 +282,6 @@ Devise.setup do |config|
                   access_type: 'offline', 
                   prompt: 'consent'
 
-  config.omniauth :ldap,
-                  :title => "My LDAP", 
-                  :host => '10.101.10.1',
-                  :port => 389,
-                  :method => :plain,
-                  :base => 'dc=intridea, dc=com',
-                  :uid => 'sAMAccountName',
-                  :name_proc => Proc.new {|name| name.gsub(/@.*$/,'')},
-                  :bind_dn => 'default_bind_dn'
-
-
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

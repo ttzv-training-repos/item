@@ -1,5 +1,6 @@
 class SignaturesController < ApplicationController
   require 'zip'
+  before_action :authenticate_user!
 
   def index
     @templates = Template.where(category: "signature")
