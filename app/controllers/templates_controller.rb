@@ -89,12 +89,27 @@ class TemplatesController < ApplicationController
 
   def upload
     uploaded_files = params[:templates]
-    uploaded_files.each do |file|
-      process_template(file, params[:category])
+    if files_validated?(uploaded_files)
+      uploaded_files.each do |file|
+        process_template(file, params[:category])
+      end
+      respond_to do |format|
+        format.js {render inline: "location.reload();" }
+      end
+    else
+      flash_ajax_alert ("File type must be HTML and maximum 5 files can be uploaded at once");
     end
-    respond_to do |format|
-      format.js {render inline: "location.reload();" }
+  end
+
+  private
+
+  def files_validated?(files)
+    return false if files.nil?
+    return false if files.length > 5
+    files.each do |file|
+      return false unless file.content_type === "text/html"
     end
+    true
   end
 
   
