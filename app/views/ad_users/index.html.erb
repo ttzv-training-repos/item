@@ -1,12 +1,14 @@
 <h1>All Active Directory Users</h1>
 
-<%= link_to "Add User", new_ad_user_path, class: "btn btn-primary" %>
+<%= link_to "Add User", new_ad_user_path, class: "btn btn-primary" %> <br>
+<div class="mt-1">
+    <button class="btn btn-primary" id="users-select">Select Users</button>
+    <button class="btn btn-primary" id="users-clear">Deselect all Users</button>
+</div>
 
 <%= render partial: 'ad_user_edit_modal' %>
 
 <progress id="usersTablePrg" class="pure-material-progress-circular"></progress>
 <div id= "usersTableArea" class="opaque">
     <%= render partial: 'ad_users_table' %>
-    <button class="btn btn-primary" id="users-select">Select Users</button>
-    <button class="btn btn-primary" id="users-clear">Deselect all Users</button>
 </div>

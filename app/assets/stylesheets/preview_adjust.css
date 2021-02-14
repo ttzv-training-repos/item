@@ -1,0 +1,4 @@
+.preview-adjust{
+    max-height: 85vh!important;
+    overflow: auto !important;
+}

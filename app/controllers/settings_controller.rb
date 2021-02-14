@@ -1,9 +1,9 @@
 class SettingsController < ApplicationController
   include SettingsHelper
   before_action :authenticate_user!
+  before_action :not_available, only: [:sync_ldap, :update_gmail_authorization, :update_ldap_settings, :update_sms_settings ]
 
   def index
-    @sent_items = SentItem.all
     @smtp_setting = current_user.smtp_setting
     @smtp_setting = SmtpSetting.new if @smtp_setting.nil?
     @current_user_can_send_gmail = current_user.can_send_gmail?
@@ -20,7 +20,7 @@ class SettingsController < ApplicationController
 
   def run_autobinder
     AdUserServices::UserOfficeBinder.new.run
-    redirect_to ad_users_path
+    flash_ajax_notice("Autobind finished, check Users list")
   end
 
   def process_request
@@ -111,6 +111,12 @@ class SettingsController < ApplicationController
     hash = sms_params
     hash.delete(:token) if hash[:token] == MASKED_PASSWORD
     sms_setting.update(hash)
+  end
+
+  private
+
+  def not_available
+    flash_ajax_alert("Not available in preview")
   end
 
 end

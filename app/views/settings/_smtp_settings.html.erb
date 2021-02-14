@@ -1,4 +1,4 @@
-<%= form_with(url: update_gmail_authorization_path, local: true) do |f| %>
+<%= form_with(url: update_gmail_authorization_path) do |f| %>
     <div class="form-check">
         <%= check_box_tag :use_gmail_api, true, @current_user_can_send_gmail, class: "form-check-input" %> 
         <%= label_tag :use_gmail_api, "Use Gmail API"%>
@@ -37,8 +37,9 @@
     </div>
     
     <div class="form-check"> 
-        <%= f.check_box :store_password, class: "form-check-input" %>
+        <%= f.check_box :store_password, class: "form-check-input", disabled: true %>
         <%= f.label :store_password %>
+        <small class="form-text text-muted">Disabled in preview version. Password will be preserved in current session.</small>
     </div>
     
     <div class="form-group"> 

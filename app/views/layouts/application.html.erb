@@ -75,7 +75,8 @@
                 </li>
             </ul>
         </nav>
-        <div class="container-fluid h-100">       
+            <%= render partial: 'shared/preview_banner' %>  
+        <div class="container-fluid h-100 preview-adjust">     
             <%= yield %>
             <%= notice %>
             <%= alert %>
