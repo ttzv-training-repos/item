@@ -1,56 +1,54 @@
-<div class="overflow-auto h-75">
+<div class="overflow-auto h-75 px-5 border">
   <%= form_for(@office) do |o| %>
     <ul>
     <% @office.errors.full_messages.each do |error| %>
       <li><%= error %></li>
     <% end %>
     </ul>
-    <p>
+    <div class="form-group">
       <%= o.label :name %><br />
-      <%= o.text_field :name %>
-    </p>
-    <p>
+      <%= o.text_field :name, class: "form-control" %>
+    </div>
+    <div class="form-group">
       <%= o.label :name_2 %><br />
-      <%= o.text_field :name_2 %>
-    </p>
-    <p>
+      <%= o.text_field :name_2, class: "form-control" %>
+    </div>
+    <div class="form-group">
       <%= o.label :location %><br />
-      <%= o.text_field :location %>
-    </p>
-    <p>
+      <%= o.text_field :location, class: "form-control" %>
+    </div>
+    <div class="form-group">
       <%= o.label :location_2 %><br />
-      <%= o.text_field :location_2 %>
-    </p>
-    <p>
+      <%= o.text_field :location_2, class: "form-control" %>
+    </div>
+    <div class="form-group">
       <%= o.label :postalcode %><br />
-      <%= o.text_field :postalcode %>
-    </p>
-    <p>
+      <%= o.text_field :postalcode, class: "form-control" %>
+    </div>
+    <div class="form-group">
       <%= o.label :phonenumber %><br />
-      <%= o.text_field :phonenumber %>
-    </p>
-    <p>
+      <%= o.text_field :phonenumber, class: "form-control" %>
+    </div>
+    <div class="form-group">
       <%= o.label :phonenumber_2 %><br />
-      <%= o.text_field :phonenumber_2 %>
-    </p>
-    <p>
+      <%= o.text_field :phonenumber_2, class: "form-control" %>
+    </div>
+    <div class="form-group">
       <%= o.label :fax %><br />
-      <%= o.text_field :fax %>
-    </p>
-    <p>
+      <%= o.text_field :fax, class: "form-control" %>
+    </div>
+    <div class="form-group">
       <%= o.label :fax_2 %><br />
-      <%= o.text_field :fax_2 %>
-    </p>
-    <p>
+      <%= o.text_field :fax_2, class: "form-control" %>
+    </div>
+    <div class="form-group">
       <%= o.label :opt_info %><br />
-      <%= o.text_field :opt_info %>
-    </p>
-    <p>
+      <%= o.text_field :opt_info, class: "form-control" %>
+    </div>
+    <div class="form-group">
       <%= o.label :opt_info_2 %><br />
-      <%= o.text_field :opt_info_2 %>
-    </p>
-    <p>
-      <%= o.submit %>
-    </p>
+      <%= o.text_field :opt_info_2, class: "form-control" %>
+    </div>
+    <%= o.submit %>
   <% end %>
 </div>

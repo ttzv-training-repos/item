@@ -1,6 +1,7 @@
+var $dataTable = null;
 $(document).ready( function () {
     console.log("start drawing table")
-    $( "#ad_users" ).DataTable({
+    $dataTable = $( "#ad_users" ).DataTable({
         select:             true,
         "scrollX":          true,
         "scrollY":          "60vh",
