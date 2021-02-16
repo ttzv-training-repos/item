@@ -75,11 +75,11 @@
                 </li>
             </ul>
         </nav>
-            <%= render partial: 'shared/preview_banner' %>  
-        <div class="container-fluid h-100 preview-adjust">     
-            <%= yield %>
-            <%= notice %>
-            <%= alert %>
+        <%= render partial: 'shared/preview_banner' %>  
+        <div class="alert-info text-center mt-1"><%= notice %></div>  
+        <div class="alert-danger text-center mt-1"><%= alert %></div>
+        <div class="container-fluid h-100 preview-adjust">   
+            <%= yield %>       
             <div class="alert alert-info fixed-bottom position-absolute" id="flashNotice" style="display: none;"></div>
             <div class="alert alert-warning fixed-bottom position-absolute" id="flashAlert" style="display: none;"></div>
             <%= javascript_include_tag 'application' %>
