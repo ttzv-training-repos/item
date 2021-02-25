@@ -1,15 +1,15 @@
 module TemplatesHelper
 
-  def template_content(template_name)
-    template_name.template_file.open { |f| File.read(f) }
-  end
-
   def template_params
     params.require(:template).permit(:name, :category, :title, :content)
   end
 
-  def params_nocontent(hash)
-    hash.to_h.filter { |h| h != "content" }
+  def secure_template_hash(hash)
+    item_scrubber = Scrubbers::ItemScrubber.new
+    item_scrubber.itemtag_list = @template.itemtags.pluck(:name)
+    html_content = Loofah.fragment(hash[:content]).scrub!(item_scrubber)
+    hash[:content] = html_content.to_s
+    hash
   end
 
   def create_and_associate_nonexistent_tags(template_content, template_id)
@@ -27,19 +27,14 @@ module TemplatesHelper
     parser = Parsers::ItemtagParser.new(File.read(file))
     title = parser.value(Parsers::ItemtagParser.MAIL_TOPIC_TAG)
     title = title[0][0] unless title.empty?
-    p title
     parser.destroy_tag_with_content(Parsers::ItemtagParser.MAIL_TOPIC_TAG)
-    File.open(file.tempfile, 'w') { |f| f.write(parser.template) }
-    template.update(title: title)
-    template.template_file.purge if template.template_file.attached?
-    template.template_file.attach(file)
+    template.update(title: title, content: parser.template)
     associate_tags(template, parser)
   end
 
   #returns values of tags after mask application for currently held users
   #will use default Itemtag mask if template_id is not provided
   #returned object is a hash
-  
   def itemtags_hash(template)
     template.itemtags.map do |itemtag|
        a = {id: itemtag.id, 
@@ -62,7 +57,7 @@ module TemplatesHelper
           id: t.id,
           name: t.name,
           title: t.title,
-          content: template_content(t),
+          content: t.content,
           tags: itemtags_hash(t)
         }
       })

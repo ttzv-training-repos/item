@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_19_101113) do
+ActiveRecord::Schema.define(version: 2021_02_23_201408) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -261,6 +264,7 @@ ActiveRecord::Schema.define(version: 2020_12_19_101113) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "title"
+    t.text "content"
     t.index ["name"], name: "index_templates_on_name", unique: true
   end
 

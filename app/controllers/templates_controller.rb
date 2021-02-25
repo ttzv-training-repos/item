@@ -19,29 +19,14 @@ class TemplatesController < ApplicationController
   
   def edit
     @template = Template.find(params[:id])
-    @template_content = @template.template_file.open { |f| File.read(f) }
+    @template_content = @template.content
     @type_list = Template.type_list
     @template_tags = @template.itemtags
     @available_tags = Itemtag.all.filter{ |tag| !@template_tags.include? tag}
     @itemtag = Itemtag.new #to render new tag form
   end
   
-  def create
-    @template = Template.new(params_nocontent(template_params))
-    if @template.save
-      @template.template_file.attach(
-        io: StringIO.new(template_params[:content]),
-        filename: template_params[:name] + '.html'
-      )
-      create_and_associate_nonexistent_tags(template_params[:content], @template.id)
-      respond_to do |format|
-        format.js { flash_ajax_notice("Template created") }
-      end
-    else
-      
-    end
-  end
-
+  
   def destroy
     @template = Template.find(params[:id])
     if @template.destroy
@@ -51,22 +36,31 @@ class TemplatesController < ApplicationController
     end
   end
 
+  def create
+    @template = Template.new(secure_template_hash(template_params))
+    if @template.save
+      create_and_associate_nonexistent_tags(template_params[:content], @template.id)
+      respond_to do |format|
+        format.js { flash_ajax_notice("Template created") }
+      end
+    else
+      respond_to do |format|
+        format.js { flash_ajax_notice(@template.errors.full_messages) }
+      end
+    end
+  end
+  
   def update
     @template = Template.find(params[:id])
-    @template.update(
-      params_nocontent(template_params)
-      )
-
-    create_and_associate_nonexistent_tags(template_params[:content], @template.id)
-
-    filename = @template.template_file.filename.to_s
-    @template.template_file.purge
-    @template.template_file.attach(
-      io: StringIO.new(template_params[:content]),
-      filename: filename
-      )
-    respond_to do |format|
-      format.js { flash_ajax_notice("Template updated") }
+    if @template.update(secure_template_hash(template_params))
+      create_and_associate_nonexistent_tags(template_params[:content], @template.id)
+      respond_to do |format|
+        format.js { flash_ajax_notice("Template updated") }
+      end
+    else
+      respond_to do |format|
+        format.js { flash_ajax_notice(@template.errors.full_messages) }
+      end
     end
   end
 

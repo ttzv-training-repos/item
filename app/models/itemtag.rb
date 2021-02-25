@@ -62,4 +62,6 @@ class Itemtag < ApplicationRecord
     self.store_value || tagging.tag_custom_mask.store_value
   end
 
+
+  
 end
