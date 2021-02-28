@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   protected
   
   def google_auth_client
+    return nil if current_user.google_client.nil?
     authorizer = UserServices::UserAuthorizer.new(current_user)
     client = authorizer.client
   end

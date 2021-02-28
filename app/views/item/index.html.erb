@@ -1,12 +1,12 @@
 <div class="container">
-
+    <%= render partial: 'sent_item_modal' %>
     <div class="card mt-5">
         <div class="card-header text-center">
             <h5>Items log</h5>
         </div>
         <div class="card-body">
             
-            <table class="table">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <td>#</td>
@@ -14,15 +14,17 @@
                         <td>Type</td>
                         <td>Content</td>
                         <td>Status</td>
+                        <td>Status message</td>
                         <td>Date</td>
                     </tr>
                 </thead>
                 <tbody>
                     <% SentItem.all.each do |si| %>
-                    <tr>
+                    <tr data-toggle="modal" data-target="#sentItemModal">
                         <td><%= si.id %></td>
                         <td><%= si.title %></td>
                         <td><%= si.item_type %></td>
+                        <td>content</td>
                         <td><%= si.status %></td>
                         <td><%= si.content %></td>
                         <td><%= si.created_at %></td>

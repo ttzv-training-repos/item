@@ -21,19 +21,36 @@ class MailsController < ApplicationController
     sender = request_data[:sender]
     messages = request_data[:messages].values
     messages.each.with_index do |m, i|
-      # TemplateMailer.with(
-      #   user: current_user, 
-      #   password: cookies[:smtp_password],
-      #   client: google_auth_client
-      # ).template_mail(recipients: m["recipient"],
-      #                 subject: m["subject"],
-      #                 body_html: m["content"])
-      #                 .deliver_now
-      progress = ((i+1) / messages.length.to_f * 100).to_i
-      ActionCable.server.broadcast("progress_bar_mails", {progress: progress})
-      sleep 1
+      puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+      puts cookies[:smtp_password]
+      puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+      begin
+        TemplateMailer.with(
+          user: current_user, 
+          password: cookies[:smtp_password],
+          client: google_auth_client
+        ).template_mail(recipients: m["recipient"],
+                        subject: m["subject"],
+                        body_html: m["content"]
+                        ).deliver_now
+        progress = ((i+1) / messages.length.to_f * 100).to_i
+        ActionCable.server.broadcast("progress_bar_mails", {progress: progress})
+        status = true
+        status_content = "Message was delivered to selected recipient."
+      rescue => exception
+        puts exception
+        status = false
+        status_content = exception
+      end
       store_itemtag_values(m[:tagMap], m[:template_id], m[:user_id] )
+      SentItem.create({
+        title: m["subject"],
+        item_type: "Mail",
+        status: status,
+        content: m["content"],
+        status_content: status_content  
+      })
     end
-    flash.now[:notice] = "All messages sent succesfully"
+    flash.now[:notice] = "Task finished"
   end
 end

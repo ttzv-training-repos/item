@@ -25,6 +25,7 @@ class TemplateMailer < ApplicationMailer
     body_html = options[:body_html]
 
     mail_hash = {
+      from: "itemwebapp@gmail.com",
       to: recipients,
       subject: subject,
       content_type: 'text/html; charset=UTF-8',
@@ -36,6 +37,8 @@ class TemplateMailer < ApplicationMailer
         client: params[:client]
       }
       mail_hash[:delivery_method] = :gmail_adapter
+    else
+      config(params[:user], params[:password])
     end
 
     mail(mail_hash)
