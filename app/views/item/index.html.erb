@@ -10,24 +10,16 @@
                 <thead>
                     <tr>
                         <td>#</td>
-                        <td>Title</td>
-                        <td>Type</td>
                         <td>Content</td>
-                        <td>Status</td>
-                        <td>Status message</td>
                         <td>Date</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <% SentItem.all.each do |si| %>
+                    <% SentItemGroup.all.each_with_index do |sig, i| %>
                     <tr data-toggle="modal" data-target="#sentItemModal">
-                        <td><%= si.id %></td>
-                        <td><%= si.title %></td>
-                        <td><%= si.item_type %></td>
-                        <td>content</td>
-                        <td><%= si.status %></td>
-                        <td><%= si.content %></td>
-                        <td><%= si.created_at %></td>
+                        <td><%= i+1 %></td>
+                        <td><%= sig.sent_items.length %> Items</td>
+                        <td><%= sig.created_at %></td>
                     </tr>
                     <% end %>
                 </tbody>

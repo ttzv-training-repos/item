@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_23_201408) do
+ActiveRecord::Schema.define(version: 2021_02_28_181152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -186,6 +186,11 @@ ActiveRecord::Schema.define(version: 2021_02_23_201408) do
     t.string "location_2"
   end
 
+  create_table "sent_item_groups", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "sent_items", force: :cascade do |t|
     t.string "title"
     t.string "item_type"
@@ -194,6 +199,8 @@ ActiveRecord::Schema.define(version: 2021_02_23_201408) do
     t.text "status_content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "sent_item_group_id", null: false
+    t.index ["sent_item_group_id"], name: "index_sent_items_on_sent_item_group_id"
   end
 
   create_table "signatures", force: :cascade do |t|
@@ -298,6 +305,7 @@ ActiveRecord::Schema.define(version: 2021_02_23_201408) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "ad_user_details", "offices"
   add_foreign_key "holiday_requests", "employees"
+  add_foreign_key "sent_items", "sent_item_groups"
   add_foreign_key "signatures", "users"
   add_foreign_key "tag_custom_masks", "template_taggings"
   add_foreign_key "template_taggings", "itemtags"

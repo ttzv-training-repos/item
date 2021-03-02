@@ -17,6 +17,7 @@ class SmsGatewayController < ApplicationController
   end
 
   def send_request
+    sent_item_group = SentItemGroup.create
     request_data = sms_params
     sender = request_data[:sender]
     messages = request_data[:messages].values
@@ -39,7 +40,7 @@ class SmsGatewayController < ApplicationController
         status_content = exception
       end
       store_itemtag_values(m[:tagMap], m[:template_id], m[:user_id] )
-      SentItem.create({
+      sent_item_group.sent_items.create({
         title: m["name"],
         tiem_type: "SMS",
         status: status,

@@ -17,13 +17,11 @@ class MailsController < ApplicationController
   # messages => recipient
   #             content
   def send_request
+    sent_item_group = SentItemGroup.create
     request_data = mail_params
     sender = request_data[:sender]
     messages = request_data[:messages].values
     messages.each.with_index do |m, i|
-      puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-      puts cookies[:smtp_password]
-      puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
       begin
         TemplateMailer.with(
           user: current_user, 
@@ -43,7 +41,7 @@ class MailsController < ApplicationController
         status_content = exception
       end
       store_itemtag_values(m[:tagMap], m[:template_id], m[:user_id] )
-      SentItem.create({
+      sent_item_group.sent_items.create({
         title: m["subject"],
         item_type: "Mail",
         status: status,
