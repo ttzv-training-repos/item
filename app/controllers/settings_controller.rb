@@ -1,7 +1,6 @@
 class SettingsController < ApplicationController
   include SettingsHelper
   before_action :authenticate_user!
-  before_action :not_available, only: [:sync_ldap, :update_gmail_authorization, :update_ldap_settings, :update_sms_settings ]
 
   def index
     @smtp_setting = current_user.smtp_setting
