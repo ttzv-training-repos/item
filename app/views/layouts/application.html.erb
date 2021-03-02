@@ -74,11 +74,10 @@
                     </div>
                 </li>
             </ul>
-        </nav>
-        <%= render partial: 'shared/preview_banner' %>  
+        </nav> 
         <div class="alert-info text-center mt-1"><%= notice %></div>  
         <div class="alert-danger text-center mt-1"><%= alert %></div>
-        <div class="container-fluid h-100 preview-adjust">   
+        <div class="container-fluid h-100">   
             <%= yield %>       
             <div class="alert alert-info fixed-bottom position-absolute" id="flashNotice" style="display: none;"></div>
             <div class="alert alert-warning fixed-bottom position-absolute" id="flashAlert" style="display: none;"></div>
