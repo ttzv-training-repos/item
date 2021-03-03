@@ -6,7 +6,11 @@ module TemplatesHelper
 
   def secure_template_hash(hash)
     item_scrubber = Scrubbers::ItemScrubber.new
-    item_scrubber.itemtag_list = @template.itemtags.pluck(:name)
+    if @template 
+      item_scrubber.itemtag_list = @template.itemtags.pluck(:name)
+    else
+      item_scrubber.itemtag_list = Itemtag.all.pluck(:name)
+    end
     html_content = Loofah.fragment(hash[:content]).scrub!(item_scrubber)
     hash[:content] = html_content.to_s
     hash

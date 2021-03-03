@@ -15,6 +15,7 @@ module MailsHelper
 
   def store_itemtag_values(tag_map, template_id, ad_user_id)
     template = Template.find(template_id.to_i)
+    return if tag_map.nil?
     tag_map.each do |tag_name, value|
       storage_key = "#{template.name} #{tag_name.split("-")[1..-1].join(" ")}"
       itemtag = Itemtag.find_by(name: tag_name)
