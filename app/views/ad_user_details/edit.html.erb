@@ -34,7 +34,9 @@
       
     </tbody>
   </table>
-  <p>
-    <%= detail.submit "Save", class: "btn btn-primary" %>
-  </p>
+    <div class="modal-footer">
+      <%= detail.submit "Save", class: "btn btn-primary" %>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div>
+
 <% end %>
