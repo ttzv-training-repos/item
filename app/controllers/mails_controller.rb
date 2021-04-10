@@ -11,13 +11,9 @@ class MailsController < ApplicationController
     end
   end
 
-  # JSON name - message_request
-  # Keys:
-  # sender
-  # messages => recipient
-  #             content
+
   def send_request
-    sent_item_group = SentItemGroup.create
+    sent_item_group = SentItemGroup.new
     request_data = mail_params
     sender = request_data[:sender]
     messages = request_data[:messages].values
@@ -36,19 +32,29 @@ class MailsController < ApplicationController
         status = true
         status_content = "Message was delivered to selected recipient."
       rescue => exception
-        puts exception
         status = false
         status_content = exception
       end
-      store_itemtag_values(m[:tagMap], m[:template_id], m[:user_id] )
+      sent_item_group.save if sent_item_group.id.nil?
       sent_item_group.sent_items.create({
         title: m["subject"],
         item_type: "Mail",
         status: status,
         content: m["content"],
-        status_content: status_content  
-      })
+        status_content: status_content 
+        })
+        store_itemtag_values(m[:tagMap], m[:template_id], m[:user_id] ) if status
     end
-    flash.now[:notice] = "Task finished"
+
+    task_status = sent_item_group.sent_items.all.map {|i| i.status }.uniq
+    task_status_messages = sent_item_group.sent_items.all.map {|i| i.status_content }.uniq
+    if task_status.length == 1 and task_status.first
+      flash.now[:notice] = "Task finished succesfully"
+    elsif task_status.length == 2
+      flash.now[:alert] = "Finished with errors:\n #{task_status_messages.join("\n")}"
+    else
+      flash.now[:alert] = "Failed with errors:\n #{task_status_messages.join("\n")}"
+    end
+
   end
 end

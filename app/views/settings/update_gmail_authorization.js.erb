@@ -1,0 +1,4 @@
+<%= render partial: 'shared/notification'%>
+<% if @authorizeToGmailApi %>
+  window.location='<%= user_google_oauth2_omniauth_authorize_path(scope: 'gmail.send', include_granted_scopes: true) %>';
+<% end %>

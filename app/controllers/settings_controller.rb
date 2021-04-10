@@ -59,22 +59,21 @@ class SettingsController < ApplicationController
       @smtp_setting = current_user.create_smtp_setting(hash)
     end
 
+    flash.now[:notice] = "Updated SMTP settings"
+
     if current_user.can_send_gmail?
       current_user.update(use_gmail_api: false)
-      redirect_to user_google_oauth2_omniauth_authorize_path
-    else
-      redirect_to settings_path
     end
+
+    @redirect = current_user.can_send_gmail?
+
   end
 
   def update_gmail_authorization
     use_gmail_api = params[:use_gmail_api]
     current_user.update(use_gmail_api: use_gmail_api)
-    if use_gmail_api == "true" and !current_user.can_send_gmail?
-      redirect_to user_google_oauth2_omniauth_authorize_path(scope: 'gmail.send', include_granted_scopes: true)
-    else
-      redirect_to settings_path
-    end
+    flash.now[:notice] = "Redirecting"
+    @authorizeToGmailApi = use_gmail_api == "true" and !current_user.can_send_gmail?
   end
 
   def sync_ldap
@@ -94,6 +93,7 @@ class SettingsController < ApplicationController
     hash = ldap_params
     hash.delete(:password) if hash[:password] == MASKED_PASSWORD
     ldap_setting.update(hash)
+    flash_ajax_notice "Settings updated"
   end
 
   def update_app_settings
@@ -110,6 +110,7 @@ class SettingsController < ApplicationController
     hash = sms_params
     hash.delete(:token) if hash[:token] == MASKED_PASSWORD
     sms_setting.update(hash)
+    flash_ajax_notice "Settings updated"
   end
 
   private

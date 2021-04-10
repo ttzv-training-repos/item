@@ -1,0 +1,8 @@
+<%# this is purposefully assigned to js variable first (using text block)
+    to avoid js breaking when content of notification has newline
+    templating engine inserts newline in actual js effectively making it broken %>
+<% if flash.now[:notice] %>
+    <%= render partial: 'shared/notice'%>
+<% elsif flash.now[:alert]%>
+    <%= render partial: 'shared/alert'%>
+<% end %>

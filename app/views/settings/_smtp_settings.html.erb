@@ -1,12 +1,16 @@
-<%= form_with(url: update_gmail_authorization_path, local: true) do |f| %>
+<%= form_with(url: update_gmail_authorization_path, id: "gmailApiForm") do |f| %>
     <div class="form-check">
         <%= check_box_tag :use_gmail_api, true, @current_user_can_send_gmail, class: "form-check-input" %> 
         <%= label_tag :use_gmail_api, "Use Gmail API"%>
     </div>
     <%= submit_tag "Update", class: "btn btn-primary", id: "gmailApiSubmit" %>    
+ 
 <% end %>
+
+
     
-<%= form_with(model: @smtp_setting, url: update_smtp_settings_path, id: "smtpSettingsForm", local: true) do |f| %>
+<%= form_with(model: @smtp_setting, url: update_smtp_settings_path, id: "smtpSettingsForm") do |f| %>
+   <hr>
     <div class="form-group">  
         <%= f.label :sender %>
         <%= f.text_field :sender, class: "form-control" %>
