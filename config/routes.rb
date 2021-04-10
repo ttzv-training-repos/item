@@ -1,5 +1,6 @@
 # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
+
   resources :inboxes
   resources :holidays, only: [:index]
   resources :holiday_requests
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
 
   get 'item', to: 'item#index'
   scope '/item' do
+    resources :sent_items, only: [:index, :show]
     resources :ad_users do
       resource :ad_user_details
     end
