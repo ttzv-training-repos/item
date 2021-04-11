@@ -13,7 +13,8 @@ class MailsController < ApplicationController
 
 
   def send_request
-    sent_item_group = SentItemGroup.new
+    creator = current_user.name.nil? ? current_user.email : current_user.name 
+    sent_item_group = SentItemGroup.new(creator: creator)
     request_data = mail_params
     sender = request_data[:sender]
     messages = request_data[:messages].values
@@ -41,13 +42,15 @@ class MailsController < ApplicationController
         item_type: "Mail",
         status: status,
         content: m["content"],
-        status_content: status_content 
+        status_content: status_content,
+        recipients: m["recipient"],
+        fields: m[:tagMap].to_json
         })
         store_itemtag_values(m[:tagMap], m[:template_id], m[:user_id] ) if status
     end
 
-    task_status = sent_item_group.sent_items.all.map {|i| i.status }.uniq
-    task_status_messages = sent_item_group.sent_items.all.map {|i| i.status_content }.uniq
+    task_status = sent_item_group.sent_items.all.pluck(:status).uniq
+    task_status_messages = sent_item_group.sent_items.all.pluck(:status_content).uniq
     if task_status.length == 1 and task_status.first
       flash.now[:notice] = "Task finished succesfully"
     elsif task_status.length == 2

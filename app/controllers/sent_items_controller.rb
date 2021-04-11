@@ -13,10 +13,13 @@ class SentItemsController < ApplicationController
         length: sent_items.length,
         date: group.created_at,
         type: type,
+        creator: group.creator,
         items: sent_items.map do |item|
             {
               id: item.id,
               title: item.title,
+              recipients: item.recipients,
+              fields: item.fields,
               status: item.status ? "Success" : "Error",
               status_content: item.status_content
             }

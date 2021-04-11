@@ -1,7 +1,7 @@
-var $dataTable = null;
+var $adUsersDataTable = null;
 $(document).ready( function () {
     console.log("start drawing table")
-    $dataTable = $( "#ad_users" ).DataTable({
+    $adUsersDataTable = $( "#ad_users" ).DataTable({
         select:             true,
         "scrollX":          true,
         "scrollY":          "60vh",
@@ -21,7 +21,7 @@ $('#users-select').click(handleSelection)
 $('#users-clear').click(handleDeselection)
 
 function handleSelection(params) {
-    let selectedData = $dataTable.rows({selected: true}).data();
+    let selectedData = $adUsersDataTable.rows({selected: true}).data();
     ItemAJAXRequest.sendCartRequest({
         cart_request: {
             action: "select",

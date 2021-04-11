@@ -1,13 +1,16 @@
 <div class="container my-5 ">
     <%= render partial: 'sent_item_modal' %>
-    <input type="text" id="detailSearch">
+    <div class="form-group">    
+        <input type="text" class="form-control" id="detailSearch" placeholder="Search">
+    </div>
     <table class="table table-hover" id="itemsLogTable">
         <thead>
             <tr>
                 <th></th>
-                <td>Items</td>
-                <td>Type</td>
-                <td>Date</td>
+                <th>Items</th>
+                <th>Type</th>
+                <th>Creator</th>
+                <th>Date</th>
             </tr>
         </thead>
     </table>

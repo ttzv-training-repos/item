@@ -7,8 +7,37 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body text-center">
+      <div class="modal-body">
         <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        <div class="d-none" id="modalContent">
+          <div class="row">
+            <div class="col-lg-8">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Message content</h5>
+                  <hr>
+                  <div class="card-text" id="itemContent"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Recipient</h5>
+                  <hr>
+                  <div id="itemRecipient" class="card-text"></div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Fields</h5>
+                  <hr>
+                  <div id="itemFields" class="card-text"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary">Resend</button>

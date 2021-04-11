@@ -80,5 +80,18 @@ tr.shown td.details-control {
   }
 //  
 
+//fix hover effect on datatable's row children (disable it)
+
+table.dataTable tr.shown + tr:hover{
+  background-color: transparent;
+}
+
+table.dataTable tr.shown + tr thead > tr:hover{
+  background-color: transparent;
+}
+
+
+//
+
 
 
