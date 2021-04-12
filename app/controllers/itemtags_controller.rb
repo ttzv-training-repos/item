@@ -20,6 +20,7 @@ class ItemtagsController < ApplicationController
     hash = itemtag_params
     hash[:name] = generate_tag(@template.category, hash[:display_name])
     hash[:display_name] = generate_displayname(hash[:display_name])
+    hash[:item_type] = @template.category
     @itemtag = Itemtag.new(hash)
     begin
       if @itemtag.save

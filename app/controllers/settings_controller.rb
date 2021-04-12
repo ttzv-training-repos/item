@@ -77,11 +77,19 @@ class SettingsController < ApplicationController
   end
 
   def sync_ldap
-    AdUser.synchronize_with_ldap(
-      LdapServices::LdapConn.new(
-        LdapSetting.default)
-      )
-    redirect_to(ad_users_path)
+    begin
+      AdUser.synchronize_with_ldap(
+        LdapServices::LdapConn.new(
+          LdapSetting.default)
+        )
+    rescue => exception
+      error = exception.message
+    end
+      if error
+        flash.now[:alert] = error
+      else
+        flash.now[:notice] = "Success"
+      end
   end
 
   def update_ldap_settings
