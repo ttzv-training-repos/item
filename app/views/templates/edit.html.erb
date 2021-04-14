@@ -1,17 +1,16 @@
-<h1>Edit Template</h1>
-<%= render partial: 'template_form' %>
-<hr>
-<div id="tagSelectionArea" class="pt-1">
-  <%= render partial: 'itemtags/tag_selection' %>
-</div>
-<div class="dropdown py-1 d-flex justify-content-end">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-    Add new tag
-  </button>
-  <div class="dropdown-menu" id="tagNewFormDropdown">
-    <%= render partial: 'itemtags/tag_form' %>
-  </div>
-</div>
+
+
+    <div class="templateEditWrapper">
+        <div class="templateEditForm">
+            <%= render partial: 'template_form' %>
+        </div>
+        <div class="sidebarFields">
+            <div class="btn" id="toggleFieldsSidebar"><i class="fas fa-chevron-left"></i></div>
+            <%= render partial: 'template_fields' %>
+        </div>
+    </div>
+
+
 
 
 

@@ -1,12 +1,12 @@
-<div class="row">
-  <div class="col-sm">
-    <h5 class="text-center">Tags in use</h5>
+<div class="d-flex flex-column">
+  <div class="">
+    <div class="text-center">Fields in use</div>
     <div id="selectedTags">
       <%= render partial: 'itemtags/tag_list', locals: {tags: @template_tags, associated: true } %>
     </div>
   </div>
-  <div class="col-sm">
-    <h5 class="text-center">Available tags</h5>
+  <div class="pt-2">
+    <div class="text-center">Available fields</div>
     <div id="availableTags">
       <%= render partial: 'itemtags/tag_list', locals: {tags: @available_tags, associated: false } %>
     </div>

@@ -20,3 +20,26 @@ function initializeTagPopovers() {
     });
 }
 
+function initFieldsSidebar(){
+    const $width = $(window).width();
+    const $sidebar = $('.sidebarFields');
+    const $toggleBtn = $('#toggleFieldsSidebar');
+    const shouldBeOpen = localStorage.getItem("fieldsSidebarActive");
+    if($width <= 992 && shouldBeOpen === "true"){
+        $sidebar.toggleClass('show');
+        $toggleBtn.html('<i class="fas fa-chevron-right"></i>')
+    }
+    $toggleBtn.on('click', () => {
+        if($width <= 992){
+            $sidebar.toggleClass('show');
+            const visible = $('.sidebarFields').hasClass('show')
+            localStorage.setItem("fieldsSidebarActive", visible);
+            visible ?
+             $toggleBtn.html('<i class="fas fa-chevron-right"></i>') :
+              $toggleBtn.html('<i class="fas fa-chevron-left"></i>');
+        }
+    });
+}
+
+ initFieldsSidebar();
+
