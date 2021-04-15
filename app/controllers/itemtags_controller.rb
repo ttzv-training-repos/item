@@ -34,7 +34,7 @@ class ItemtagsController < ApplicationController
       end
     end
     @template_tags = @template.itemtags
-    @available_tags = Itemtag.all.filter{ |tag| !@template_tags.include? tag }
+    @available_tags = available_tags_for(@template)
   end
 
   def update
@@ -55,7 +55,7 @@ class ItemtagsController < ApplicationController
       end
     end
     @template_tags = @template.itemtags
-    @available_tags = Itemtag.all.filter{ |tag| !@template_tags.include? tag }
+    @available_tags = available_tags_for(@template)
   end
 
   def destroy
@@ -65,7 +65,7 @@ class ItemtagsController < ApplicationController
       flash.now[:notice] = "Tag deleted"
     end
     @template_tags = @template.itemtags
-    @available_tags = Itemtag.all.filter{ |tag| !@template_tags.include? tag }
+    @available_tags = available_tags_for(@template)
   end
 
 

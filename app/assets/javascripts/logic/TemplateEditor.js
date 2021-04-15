@@ -8,14 +8,11 @@ class TemplateEditor{
         this.selectElements();
         this.handleListsAction();
         this.stopDropdownFormPropagation();
-        this.handleUpdatePreview();
-        this.updatePreview();
     }
 
     selectElements(){
         this.selectedTagList = document.getElementById('selectedTags');
         this.$templateTextArea = $('#template_content');
-        this.$contentPreview = $('#content_preview');
     }
 
     handleListsAction(){
@@ -42,15 +39,5 @@ class TemplateEditor{
             event.stopPropagation();
             console.log(event);
         });
-    }
-
-    handleUpdatePreview(){
-        this.$templateTextArea.on('change input',() => {
-            this.updatePreview();
-        })
-    }
-
-    updatePreview(){
-        this.$contentPreview.html( $.parseHTML( this.$templateTextArea.val() ) );
     }
 }

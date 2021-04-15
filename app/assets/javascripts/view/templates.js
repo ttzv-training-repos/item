@@ -6,6 +6,21 @@ if( $('body').attr('class') == 'templates edit'){
     initializeTagPopovers();
 }
 
+this.$templateTextArea = $('#template_content');
+this.$contentPreview = $('#content_preview');
+
+//update preview
+this.$templateTextArea.on('change input',() => {
+    this.updatePreview();
+});
+
+function updatePreview(){
+    this.$contentPreview.html( $.parseHTML( this.$templateTextArea.val() ) );
+}
+
+updatePreview();
+//
+
 function hideOldTagPopovers() {
     $('#tagSelectionArea').on('ajax:beforeSend', function (event) {
         console.log("before send")

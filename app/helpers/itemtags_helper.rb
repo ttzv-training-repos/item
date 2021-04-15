@@ -17,4 +17,8 @@ module ItemtagsHelper
     name.strip.capitalize
   end
 
+  def available_tags_for(template)
+    Itemtag.where(item_type: template.category).filter{ |tag| !template.itemtags.include? tag }
+  end
+
 end
