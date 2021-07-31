@@ -32,7 +32,7 @@ development:
   username: postgres
 
   # The password associated with the postgres role (username).
-  password: <%= ENV['ITEM_DEV_DATABASE_PASSWORD'] %>
+  password: <%= ENV.fetch("ITEM_DEV_DATABASE_PASSWORD") %>
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -59,7 +59,7 @@ test:
   <<: *default
   database: item_test
   username: postgres
-  password: <%= ENV['ITEM_TEST_DATABASE_PASSWORD'] %>
+  password: <%= ENV.fetch("ITEM_TEST_DATABASE_PASSWORD") %>
   host: localhost
 
 # As with config/credentials.yml, you never want to store sensitive information,
@@ -85,6 +85,3 @@ test:
 production:
   <<: *default
   database: item_production
-  username: postgres
-  password: <%= ENV['ITEM_DATABASE_PASSWORD'] %>
-  host: localhost
