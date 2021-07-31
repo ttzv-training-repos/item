@@ -54,7 +54,12 @@
                         <div class="dropdown-item d-flex justify-content-center">
                             <div class="py-3 d-flex flex-column align-items-center">
                                 <% if user_signed_in? %>
+                                <% picture = current_user.picture %>
+                                <% if picture.nil? %>
+                                    <i class="fas fa-user"></i>
+                                <% else %>
                                     <img src="<%= current_user.picture %>" alt="" srcset="" class="profile-img">
+                                <% end %>
                                     <div class="pb-3"><%= current_user.name %></div>
                                     <%= link_to 'Log out', destroy_user_session_path, :method => :delete, class: "btn btn-primary" %>
                                 <% else %>

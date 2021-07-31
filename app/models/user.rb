@@ -21,7 +21,7 @@ class User < ApplicationRecord
   def picture
     return picture_local if picture_local.present?
     return picture_google if picture_google.present?
-    return ''
+    return nil
   end
 
   def self.from_omniauth(access_token)
