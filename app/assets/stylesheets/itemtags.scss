@@ -1,3 +1,26 @@
 // Place all the styles related to the itemtags controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+#tagSelectionArea{
+    font-size: .75em;
+    
+
+    .field{
+        padding:0;
+    }
+
+    .btn{
+        background-color: transparent;
+        padding:0;
+        transition: color .25s ease;
+    }
+    
+    .btn:hover{
+        background-color: #59a9ff;
+    }
+
+    i{
+        color: black;
+        font-size: 1em;
+    }
+}

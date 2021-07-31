@@ -14,7 +14,7 @@ class TemplatesController < ApplicationController
     @template.category = params[:category]
     @type_list = Template.type_list
     @template_tags = @template.itemtags
-    @available_tags = Itemtag.all
+    @available_tags = Itemtag.where(item_type: @template.category)
   end
   
   def edit
@@ -22,7 +22,7 @@ class TemplatesController < ApplicationController
     @template_content = @template.content
     @type_list = Template.type_list
     @template_tags = @template.itemtags
-    @available_tags = Itemtag.all.filter{ |tag| !@template_tags.include? tag}
+    @available_tags = Itemtag.where(item_type: @template.category).filter{ |tag| !@template_tags.include? tag}
     @itemtag = Itemtag.new #to render new tag form
   end
   
@@ -78,7 +78,7 @@ class TemplatesController < ApplicationController
     end
     @template = Template.find(params[:template_id])
     @template_tags = @template.itemtags
-    @available_tags = Itemtag.all.filter{ |tag| !@template_tags.include? tag }
+    @available_tags = Itemtag.where(item_type: @template.category).filter{ |tag| !@template_tags.include? tag }
   end
 
   def upload

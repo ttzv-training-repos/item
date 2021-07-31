@@ -1,0 +1,12 @@
+
+<div id="tagSelectionArea" class="pt-1">
+  <%= render partial: 'itemtags/tag_selection' %>
+</div>
+<div class="dropdown py-1 d-flex justify-content-center">
+  <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+    Add new tag
+  </button>
+  <div class="dropdown-menu" id="tagNewFormDropdown">
+    <%= render partial: 'itemtags/tag_form' %>
+  </div>
+</div>

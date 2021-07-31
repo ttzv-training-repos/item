@@ -1,9 +1,9 @@
 <ul class="list-group">
     <% tags.each do |tag| %>
-        <li class="list-group-item d-flex justify-content-between align-items-center" data-tag-name="<%= tag.name %>" data-tag-id="<%= tag.id %>" data-toggle="popover" title=<%= tag.display_name %> data-content="<%= tag.description %> Inserts: <%= tag.name %>">
+        <li class="list-group-item d-flex justify-content-between align-items-center field" data-tag-name="<%= tag.name %>" data-tag-id="<%= tag.id %>" data-toggle="popover" title=<%= tag.display_name %> data-content="<%= tag.description %> Inserts: <%= tag.name %>">
             <div class="d-flex">
                 <div class="dropdown">
-                    <div class="btn btn-primary mx-1" data-toggle="dropdown">
+                    <div class="btn " data-toggle="dropdown">
                         <i class="fas fa-edit"></i>
                     </div>
                     <div class="dropdown-menu">
@@ -11,18 +11,18 @@
                     </div>
                 </div>
                 <% if associated %>
-                    <%= link_to edit_template_itemtag_tag_custom_mask_path(@template.id, tag.id), class: "btn btn-primary mx-1" do%> 
+                    <%= link_to edit_template_itemtag_tag_custom_mask_path(@template.id, tag.id), class: "btn" do%> 
                         <i class="fas fa-mask"></i>
                     <% end %>
                 <% end %>
-                <%= link_to itemtag_path(tag, template_id: @template.id), data: {remote: true, confirm:"Confirm to delete"}, method: "delete", class: "btn btn-primary mx-1" do %>
+                <%= link_to itemtag_path(tag, template_id: @template.id), data: {remote: true, confirm:"Confirm to delete"}, method: "delete", class: "btn mx-1" do %>
                     <i class="fas fa-trash"></i>
                 <% end %>
             </div>
 
             <%= tag.display_name %>  
 
-            <%= link_to( template_tag_edit_path(@template, tag_id: tag.id, associate: !associated), {data: {remote: true}, class: "btn btn-primary", method: "post"} ) do %>  
+            <%= link_to( template_tag_edit_path(@template, tag_id: tag.id, associate: !associated), {data: {remote: true}, class: "btn ", method: "post"} ) do %>  
                 <% if associated %>
                     <i class="fas fa-minus"></i>
                 <% else %>

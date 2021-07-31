@@ -1,18 +1,15 @@
-<%= form_with model: @itemtag, class: "px-4 py-3", id: "tagNewForm" do |i|%>
+<%= form_with model: @itemtag, class: "p-1", id: "tagNewForm" do |i|%>
     <% if @template %>
         <%= hidden_field_tag :template_id, @template.id %>
     <% end %>
     <div class="form-group">
-        <%= i.label :display_name %>
-        <%= i.text_field :display_name, class:"form-control form-control-sm", required: true, pattern: "\\w+" %>
+        <%= i.text_field :display_name, class:"form-control form-control-sm", required: true, pattern: "\\w+", placeholder: "Name" %>
     </div>
     <div class="form-group">
-        <%= i.label :description %>
-        <%= i.text_field :description, class:"form-control form-control-sm" %>
+        <%= i.text_field :description, class:"form-control form-control-sm", placeholder: "Description" %>
     </div>
     <div class="form-group">
-        <%= i.label :default_value_mask %>
-        <%= i.text_field :default_value_mask, class:"form-control form-control-sm" %>
+        <%= i.text_field :default_value_mask, class:"form-control form-control-sm", placeholder: "Mask" %>
     </div>
     <div class="form-check">
         <%= i.check_box :store_value, class:"form-check-input" %>

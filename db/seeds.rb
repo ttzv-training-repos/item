@@ -84,9 +84,9 @@ localized_headers(ad_user_detail_header_seed_hash).each { |entry| AdUserDetailHe
 localized_headers(office_header_seed_hash).each { |entry| OfficeHeader.create(entry)}
 
 default_itemtag_seed = [
-  [name: "itemtag-mail-topic", display_name: "Topic", description: "Message topic - applies only to mail"],
-  [name: "itemtag-mail-login", display_name: "Login", description: "Login tag"],
-  [name: "itemtag-mail-password", display_name: "Password", description: "Password tag"],
+  [name: "itemtag-mail-topic", display_name: "Topic", field_type: :mail, description: "Message topic - applies only to mail"],
+  [name: "itemtag-mail-login", display_name: "Login", field_type: :mail, description: "Login tag"],
+  [name: "itemtag-mail-password", display_name: "Password", field_type: :mail, description: "Password tag"],
 ]
 
 Itemtag.destroy_all

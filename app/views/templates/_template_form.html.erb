@@ -18,9 +18,17 @@
       <%= t.text_field :title, class: "form-control" %>
     </div>
   </div>
-  <div class="form-group">
-    <%= t.label :template_content, "Content" %>
-    <textarea name="template[content]" id="template_content" class="form-control" required><%= @template_content %></textarea>
+  <%= t.label :template_content, "Content" %>
+  <div class="row">      
+    <div class="form-group col-md">
+      <textarea name="template[content]" id="template_content" class="form-control" required><%= @template_content %></textarea>
+    </div>
+    <div class="col-md">
+      <div class="card">
+        <div class="card-body" id="content_preview">
+        </div>
+      </div>
+    </div>
   </div>
   <%= t.submit nil, class: "btn btn-primary" %>
 <% end %>
