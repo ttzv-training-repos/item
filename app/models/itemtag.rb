@@ -37,7 +37,7 @@ class Itemtag < ApplicationRecord
     mask_hash.each do |hash|
       if hash[:attribute] == "generate_password"
         tag_value = Passgen::generate(length: 10, symbols: true)
-      else  
+      elsif !hash[:attribute].nil?
         table, attribute = hash[:attribute].split("#")
         init_val = user.get_attr(attribute, table).to_s
         methods = hash.keys - [:attribute]
